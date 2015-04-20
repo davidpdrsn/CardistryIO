@@ -8,4 +8,10 @@ FactoryGirl.define do
     name "Sybil"
     user
   end
+
+  factory :video do
+    name "Classic"
+    description "A video I made"
+    url "https://www.youtube.com/watch?v=W799NKLEz8s"
+  end
 end

@@ -1,0 +1,9 @@
+%h1= @video.name
+= simple_format @video.description
+
+%div
+  %iframe{ src: "https://www.youtube.com/embed/W799NKLEz8s", |
+           frameborder: 0, |
+           width: 500, |
+           height: 300, |
+           allowfullscreen: true }

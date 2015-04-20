@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
   gravtastic
 
   has_many :moves
+  has_many :videos
 end
