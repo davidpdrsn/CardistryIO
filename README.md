@@ -39,6 +39,8 @@ programming in style.
 ### MVP
 
 - [ ] Move appearances
+- [ ] Uniqueness validation of move names
+- [ ] Uniqueness validation of video names
 - [ ] Approving of videos
 - [ ] Edit moves
 - [ ] Edit videos

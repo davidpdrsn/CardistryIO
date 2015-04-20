@@ -1,6 +1,20 @@
 %h1= @video.name
 = simple_format @video.description
 
+%p
+  - if @video.appearances.present?
+    Moves in this video
+    %ul
+      %li
+        - @video.appearances.each do |appearance|
+          = link_to appearance.move_name, appearance.move
+          = TimeFormatter.new(appearance.minutes, appearance.seconds).format
+  - else
+    No move appearances added
+
+- if current_user == @video.user
+  %p= link_to "Edit move appearances", edit_appearances_video_path(@video)
+
 %div
   %iframe{ src: @video.url, |
            frameborder: 0, |

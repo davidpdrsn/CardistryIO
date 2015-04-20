@@ -14,3 +14,7 @@
 .main-content {
   @include outer-container;
 }
+
+.video-appearances .fields .field:only-child button {
+  display: none;
+}
