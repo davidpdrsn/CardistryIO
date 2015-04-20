@@ -1,0 +1,10 @@
+%nav.main-nav
+  = link_to "Home", root_path
+  = link_to "All moves", all_moves_path
+
+  - if signed_in?
+    = link_to "My moves", moves_path
+    = link_to "Create move", new_move_path
+    = link_to "Sign out", sign_out_path, method: :delete
+  - else
+    = link_to "Sign up", sign_up_path
