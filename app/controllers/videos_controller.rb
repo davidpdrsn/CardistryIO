@@ -10,7 +10,9 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = Video.find(params[:id])
+    @video = EmbeddableVideo.new(
+      Video.find(params[:id])
+    )
   end
 
   def new
