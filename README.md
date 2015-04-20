@@ -1,6 +1,7 @@
 # CardistryIO
 
 [![Build Status](https://travis-ci.org/davidpdrsn/CardistryIO.svg)](https://travis-ci.org/davidpdrsn/CardistryIO)
+[![Code Climate](https://codeclimate.com/github/davidpdrsn/CardistryIO/badges/gpa.svg)](https://codeclimate.com/github/davidpdrsn/CardistryIO)
 
 ## Getting Started
 
