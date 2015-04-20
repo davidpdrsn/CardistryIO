@@ -1,11 +1,11 @@
-# Omglol
+# Omglol (working title)
 
 ## Getting Started
 
 After you have cloned this repo, run this setup script to set up your machine
 with the necessary dependencies to run and test this app:
 
-    % ./bin/setup
+    ./bin/setup
 
 It assumes you have a machine equipped with Ruby, Postgres, etc. If not, set up
 your machine with [this script].
@@ -14,7 +14,7 @@ your machine with [this script].
 
 After setting up, you can run the application using [foreman]:
 
-    % foreman start
+    foreman start
 
 If you don't have `foreman`, see [Foreman's install instructions][foreman]. It
 is [purposefully excluded from the project's `Gemfile`][exclude].
@@ -27,6 +27,13 @@ is [purposefully excluded from the project's `Gemfile`][exclude].
 Use the following guides for getting things done, programming well, and
 programming in style.
 
-* [Protocol](http://github.com/thoughtbot/guides/blob/master/protocol)
-* [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
-* [Style](http://github.com/thoughtbot/guides/blob/master/style)
+- [Protocol](http://github.com/thoughtbot/guides/blob/master/protocol)
+- [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
+- [Style](http://github.com/thoughtbot/guides/blob/master/style)
+
+## TODOS
+
+- [ ] Description of moves
+- [ ] Comments on moves
+- [ ] Videos of moves (embedding from YouTube)
+- [ ] Likes of moves
