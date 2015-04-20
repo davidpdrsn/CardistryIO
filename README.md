@@ -36,7 +36,15 @@ programming in style.
 
 ## TODOS
 
-- [ ] Description of moves
-- [ ] Comments on moves
+### MVP
+
+- [x] Description of moves
 - [ ] Videos of moves (embedding from YouTube)
+- [ ] Comments on moves
+- [ ] Performance videos
+- [ ] Comments on performance videos
+
+### Later
+
 - [ ] Likes of moves
+- [ ] Ideas
