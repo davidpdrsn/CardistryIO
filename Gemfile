@@ -27,6 +27,7 @@ gem "unicorn"
 gem "clearance"
 gem "figaro"
 gem "haml-rails"
+gem "gravtastic"
 
 group :development do
   gem "spring"
