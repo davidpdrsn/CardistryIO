@@ -10,10 +10,10 @@
     = csrf_meta_tags
 
   %body{:class => body_class}
-    - if signed_in?
-      = current_user.email
-
     = render "flashes"
     = render "nav"
-    = yield
+
+    %div.main-content
+      = yield
+
     = render "javascript"

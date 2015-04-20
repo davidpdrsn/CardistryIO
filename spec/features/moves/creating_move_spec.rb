@@ -7,10 +7,12 @@ feature "creating move" do
     visit root_path(as: user)
     click_link "Create move"
     fill_in "Name", with: "Sybil"
+    fill_in "Description", with: "Old school"
     click_button "Create Move"
 
     expect(page).to have_content "Move created"
     expect(page).to have_content "Sybil"
+    expect(page).to have_content "Old school"
   end
 
   scenario "creates invalid move" do
@@ -27,16 +29,17 @@ feature "creating move" do
     visit root_path(as: user)
     click_link "My moves"
 
-    expect(page).to have_css :a, text: "Sybil"
+    expect(page).to have_content "Sybil"
   end
 
   scenario "sees all moves" do
+    user = create :user, first_name: "David", last_name: "Pedersen"
     create :move, name: "Mocking Bird"
     create :move, name: "Sybil", user: user
     visit root_path(as: user)
     click_link "All moves"
 
-    expect(page).to have_css :a, text: "Sybil"
+    expect(page).to have_css :a, "Sybil by David Pedersen"
     expect(page).to have_css :a, text: "Mocking Bird"
   end
 

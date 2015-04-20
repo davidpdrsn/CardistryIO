@@ -2,7 +2,12 @@ class MovesController < ApplicationController
   before_filter :require_login, only: [:new, :create, :index]
 
   def all_moves
-    @moves = Move.all
+    @moves = Move.all.map do |move|
+      MoveWithUser.new(
+        move: move,
+        user: UserWithName.new(move.user),
+      )
+    end
   end
 
   def index
@@ -18,7 +23,7 @@ class MovesController < ApplicationController
   end
 
   def create
-    move_params = params.require(:move).permit(:name)
+    move_params = params.require(:move).permit(:name, :description)
     @move = current_user.moves.new(move_params)
 
     if @move.save

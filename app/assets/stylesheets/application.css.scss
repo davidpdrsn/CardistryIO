@@ -6,3 +6,11 @@
 @import "neat";
 @import "base/base";
 @import "refills/flashes";
+
+.main-nav {
+  @include outer-container;
+}
+
+.main-content {
+  @include outer-container;
+}
