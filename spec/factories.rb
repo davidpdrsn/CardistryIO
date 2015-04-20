@@ -10,7 +10,7 @@ FactoryGirl.define do
   end
 
   factory :video do
-    name "Classic"
+    sequence(:name) { |n| "Classic #{n}" }
     description "A video I made"
     url "https://www.youtube.com/watch?v=W799NKLEz8s"
   end

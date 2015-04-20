@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update]
 
-  resources :videos, only: [:show, :new, :create]
+  resources :videos, only: [:index, :show, :new, :create]
+  get "all_videos", to: "videos#all_videos"
 
   root to: "welcome#index"
 end

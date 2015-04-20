@@ -1,5 +1,13 @@
 class VideosController < ApplicationController
-  before_filter :require_login, only: [:new, :create]
+  before_filter :require_login, only: [:index, :new, :create]
+
+  def all_videos
+    @videos = Video.all
+  end
+
+  def index
+    @videos = current_user.videos
+  end
 
   def show
     @video = Video.find(params[:id])

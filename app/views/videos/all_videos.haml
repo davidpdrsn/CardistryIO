@@ -1,0 +1,6 @@
+- if @videos.present?
+  - @videos.each do |video|
+    %ul
+      %li= link_to video.name, video
+- else
+  There are no videos, yet

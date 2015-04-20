@@ -43,6 +43,8 @@ programming in style.
 - [ ] Comments on moves
 - [ ] Performance videos
 - [ ] Comments on performance videos
+- [ ] Google analytics
+- [ ] Some sort of design
 
 ### Later
 
