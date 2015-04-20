@@ -38,13 +38,19 @@ programming in style.
 
 ### MVP
 
-- [x] Description of moves
-- [ ] Videos of moves (embedding from YouTube)
+- [ ] Move appearances
+- [ ] Approving of videos
+- [ ] Edit moves
+- [ ] Edit videos
+- [ ] Delete moves
+- [ ] Delete videos
 - [ ] Comments on moves
-- [ ] Performance videos
 - [ ] Comments on performance videos
-- [ ] Google analytics
 - [ ] Some sort of design
+
+- [x] Description of moves
+- [x] Videos of moves (embedding from YouTube)
+- [x] Google analytics
 
 ### Later
 
