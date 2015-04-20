@@ -1,4 +1,4 @@
-# Omglol (working title)
+# CardistryIO (working title)
 
 ## Getting Started
 

@@ -1,5 +1,5 @@
 common: &default_settings
-  app_name: "omglol"
+  app_name: "cardistryio"
   audit_log:
     enabled: false
   browser_monitoring:
@@ -30,5 +30,5 @@ production:
   monitor_mode: true
 staging:
   <<: *default_settings
-  app_name: "omglol (Staging)"
+  app_name: "cardistryio (Staging)"
   monitor_mode: true
