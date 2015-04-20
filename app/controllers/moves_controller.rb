@@ -1,4 +1,6 @@
 class MovesController < ApplicationController
+  before_filter :require_login, only: [:new, :create, :index]
+
   def all_moves
     @moves = Move.all
   end
@@ -17,9 +19,14 @@ class MovesController < ApplicationController
 
   def create
     move_params = params.require(:move).permit(:name)
-    @move = Move.new(move_params)
-    @move.user = current_user
-    @move.save
-    redirect_to @move, notice: "Move created"
+    @move = current_user.moves.new(move_params)
+
+    if @move.save
+      flash.notice = "Move created"
+      redirect_to @move
+    else
+      flash.alert = "There were errors"
+      render :new
+    end
   end
 end

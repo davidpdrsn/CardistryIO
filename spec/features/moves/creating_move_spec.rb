@@ -3,7 +3,7 @@ require "rails_helper"
 feature "creating move" do
   let(:user) { create :user }
 
-  scenario "sees the move" do
+  scenario "creates the move" do
     visit root_path(as: user)
     click_link "Create move"
     fill_in "Name", with: "Sybil"
@@ -11,6 +11,15 @@ feature "creating move" do
 
     expect(page).to have_content "Move created"
     expect(page).to have_content "Sybil"
+  end
+
+  scenario "creates invalid move" do
+    visit root_path(as: user)
+    click_link "Create move"
+    fill_in "Name", with: ""
+    click_button "Create Move"
+
+    expect(page).to have_content "can't be blank"
   end
 
   scenario "sees users moves" do
