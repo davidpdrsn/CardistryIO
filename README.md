@@ -1,4 +1,6 @@
-# CardistryIO (working title)
+# CardistryIO
+
+[![Build Status](https://travis-ci.org/davidpdrsn/CardistryIO.svg)](https://travis-ci.org/davidpdrsn/CardistryIO)
 
 ## Getting Started
 
