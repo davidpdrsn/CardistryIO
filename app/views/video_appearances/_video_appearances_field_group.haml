@@ -1,7 +1,10 @@
 %div.field
   = label_tag :move_name do
     Move name
-    = text_field_tag :move_name, appearance.move_name, name: "move_names[]", class: "move-name"
+    = select_tag :move_name,
+        options_for_select(Move.all.map { |move| [move.name, move.name] },
+                           appearance.move_name),
+        name: "move_names[]"
 
   = label_tag :minutes do
     Minutes
