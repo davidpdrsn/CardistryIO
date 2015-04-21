@@ -1,10 +1,12 @@
 %div.field
   = label_tag :move_name do
     Move name
-    = select_tag :move_name,
-        options_for_select(Move.all.map { |move| [move.name, move.name] },
-                           appearance.move_name),
-        name: "move_names[]"
+    %div
+      = select_tag :move_name,
+          options_for_select(Move.all.map { |move| [move.name, move.name] },
+                             appearance.move_name),
+          name: "move_names[]",
+          class: "chosen-select"
 
   = label_tag :minutes do
     Minutes
