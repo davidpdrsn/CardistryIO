@@ -21,15 +21,26 @@ feature "appearances" do
     expect(page).to have_content "01:23"
   end
 
-  scenario "specifying that a move appears in a video"
+  scenario "shows current appearances" do
+    move = create :move, user: user
+    video = create :video, user: user
+    create :appearance, video: video, move: move, minutes: 1, seconds: 1
 
-  scenario "shows current appearances"
+    visit root_path(as: user)
+    click_link "My videos"
+    click_link video.name
+    click_link "Edit move appearances"
+
+    expect(page).to have_css "input.move-name[value='#{move.name}']"
+  end
 
   scenario "search as you type for moves"
 
   scenario "remove all video appearances"
 
   scenario "show video on edit page, as reference"
+
+  scenario "specifying that a move appears in a video"
 
   scenario "can only edit move appearances if owns the video" do
     move = create :move, user: user

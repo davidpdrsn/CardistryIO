@@ -15,4 +15,11 @@ FactoryGirl.define do
     url "https://www.youtube.com/watch?v=W799NKLEz8s"
     user
   end
+
+  factory :appearance do
+    video
+    move
+    minutes 1
+    seconds 2
+  end
 end
