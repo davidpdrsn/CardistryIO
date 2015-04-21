@@ -12,5 +12,9 @@ Rails.application.routes.draw do
   end
   get "all_videos", to: "videos#all_videos"
 
+  scope :api, module: :api do
+    get "search/moves", to: "searches#moves"
+  end
+
   root to: "welcome#index"
 end

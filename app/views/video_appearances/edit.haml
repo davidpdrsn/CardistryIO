@@ -1,20 +1,38 @@
 = form_tag update_appearances_video_path, method: :patch, class: "video-appearances" do
   %div.fields
-    %div.field
-      = label_tag :move_name do
-        Move name
-        = text_field_tag :move_name, "", name: "move_names[]"
+    - if @video.appearances.present?
+      - @video.appearances.each do |appearance|
+        %div.field
+          = label_tag :move_name do
+            Move name
+            = text_field_tag :move_name, appearance.move_name, name: "move_names[]", class: "move-name"
 
-      = label_tag :minutes do
-        Minutes
-        = text_field_tag :minutes, "", name: "minutes[]"
+          = label_tag :minutes do
+            Minutes
+            = text_field_tag :minutes, appearance.minutes, name: "minutes[]"
 
-      = label_tag :seconds do
-        Seconds
-        = text_field_tag :seconds, "", name: "seconds[]"
+          = label_tag :seconds do
+            Seconds
+            = text_field_tag :seconds, appearance.seconds, name: "seconds[]"
 
-      %button{type: "button", class: "video-appearances-remove"}
-        Remove
+          %button{type: "button", class: "video-appearances-remove"}
+            Remove
+    - else
+      %div.field
+        = label_tag :move_name do
+          Move name
+          = text_field_tag :move_name, "", name: "move_names[]", class: "move-name"
+
+        = label_tag :minutes do
+          Minutes
+          = text_field_tag :minutes, "", name: "minutes[]"
+
+        = label_tag :seconds do
+          Seconds
+          = text_field_tag :seconds, "", name: "seconds[]"
+
+        %button{type: "button", class: "video-appearances-remove"}
+          Remove
 
   %button{type: "button", class: "video-appearances-add"}
     Add

@@ -2,6 +2,12 @@ flip = (f) -> (x, y) -> f(y, x)
 
 # TODO: Somehow test this
 $ ->
+  $(document).on "click", ".video-appearances-move-add", (e) ->
+    e.preventDefault()
+    text = $(this).text()
+    label = $(this).parents("label")
+    label.find("input").val(text)
+
   $(document).on "click", ".video-appearances-add", ->
     last = $(this).parents("form").find(".field").last()
     clone = last.clone()

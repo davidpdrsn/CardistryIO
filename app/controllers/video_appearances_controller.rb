@@ -3,6 +3,7 @@ class VideoAppearancesController < ApplicationController
   before_filter :has_access, only: [:edit, :update]
 
   def edit
+    @video = Video.find(params[:id])
   end
 
   def update
