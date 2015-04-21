@@ -27,6 +27,10 @@ feature "appearances" do
 
   scenario "search as you type for moves"
 
+  scenario "remove all video appearances"
+
+  scenario "show video on edit page, as reference"
+
   scenario "can only edit move appearances if owns the video" do
     move = create :move, user: user
     video = create :video, user: user
