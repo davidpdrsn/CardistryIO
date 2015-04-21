@@ -50,7 +50,18 @@ feature "appearances" do
     expect(page).to have_content "No move appearances added"
   end
 
-  scenario "show video on edit page, as reference"
+  scenario "show video on edit page, as reference" do
+    move = create :move, user: user
+    video = create :video, user: user
+    create :appearance, video: video, move: move, minutes: 1, seconds: 1
+
+    visit root_path(as: user)
+    click_link "My videos"
+    click_link video.name
+    click_link "Edit move appearances"
+
+    expect(page).to have_css "iframe"
+  end
 
   scenario "specifying that a move appears in a video"
 

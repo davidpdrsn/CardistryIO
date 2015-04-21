@@ -12,4 +12,6 @@
   %div.submit
     = submit_tag "Submit"
 
+  = render partial: "videos/embed_video", locals: { video: @video }
+
   = button_to "Delete all appearances", destroy_appearances_video_path, method: :delete

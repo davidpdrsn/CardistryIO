@@ -15,9 +15,4 @@
 - if current_user == @video.user
   %p= link_to "Edit move appearances", edit_appearances_video_path(@video)
 
-%div
-  %iframe{ src: @video.url, |
-           frameborder: 0, |
-           width: 500, |
-           height: 300, |
-           allowfullscreen: true }
+= render partial: "embed_video", locals: { video: @video }
