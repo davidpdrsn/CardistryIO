@@ -40,4 +40,32 @@ describe VideoAppearancesController do
       expect(response.status).to eq 302
     end
   end
+
+  describe "#destroy" do
+    let(:video) { create :video }
+
+    it "destroys all appearances" do
+      video = create :video
+      move = create :move, user: video.user
+      create :appearance, video: video, move: move, minutes: 1, seconds: 1
+
+      sign_in_as video.user
+      delete :destroy, id: video.id
+
+      expect(video.appearances).to eq []
+      expect(controller).to redirect_to video
+      expect(controller).to set_flash[:notice]
+    end
+
+    it "only allows editing of own videos" do
+      sign_in_as create(:user)
+      delete :destroy, id: video.id
+      expect(response.status).to eq 302
+    end
+
+    it "requires authentication" do
+      delete :destroy, id: video.id
+      expect(response.status).to eq 302
+    end
+  end
 end

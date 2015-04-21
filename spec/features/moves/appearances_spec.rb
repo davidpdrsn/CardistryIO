@@ -36,7 +36,19 @@ feature "appearances" do
 
   scenario "search as you type for moves"
 
-  scenario "remove all video appearances"
+  scenario "remove all video appearances" do
+    move = create :move, user: user
+    video = create :video, user: user
+    create :appearance, video: video, move: move, minutes: 1, seconds: 1
+
+    visit root_path(as: user)
+    click_link "My videos"
+    click_link video.name
+    click_link "Edit move appearances"
+    click_button "Delete all appearances"
+
+    expect(page).to have_content "No move appearances added"
+  end
 
   scenario "show video on edit page, as reference"
 

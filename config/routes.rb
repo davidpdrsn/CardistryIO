@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     member do
       get "edit_appearances", to: "video_appearances#edit", as: "edit_appearances"
       patch "edit_appearances", to: "video_appearances#update", as: "update_appearances"
+      delete "destroy_appearances", to: "video_appearances#destroy", as: "destroy_appearances"
     end
   end
   get "all_videos", to: "videos#all_videos"

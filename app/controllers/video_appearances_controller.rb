@@ -1,6 +1,6 @@
 class VideoAppearancesController < ApplicationController
   before_filter :require_login
-  before_filter :has_access, only: [:edit, :update]
+  before_filter :has_access, only: [:edit, :update, :destroy]
 
   def edit
     @video = Video.find(params[:id])
@@ -21,6 +21,13 @@ class VideoAppearancesController < ApplicationController
       flash.alert = "Error"
       render :edit
     end
+  end
+
+  def destroy
+    video = Video.find(params[:id])
+    video.appearances.destroy_all
+    flash.notice = "Deleted"
+    redirect_to video
   end
 
   private
