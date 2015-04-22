@@ -2,4 +2,8 @@
   = f.input :name
   = f.input :description
   = f.input :url, label: "YouTube URL"
-  = f.button :submit
+  %div
+    = f.button :submit
+  %p
+    %small
+      Video will have to be approved by an admin before it'll appear on the site
