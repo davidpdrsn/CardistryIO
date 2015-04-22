@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :moves, only: [:index, :show, :new, :create]
+  resources :moves, only: [:index, :show, :new, :create, :destroy]
   get "all_moves", to: "moves#all_moves"
 
   resources :users, only: [:show, :edit, :update]

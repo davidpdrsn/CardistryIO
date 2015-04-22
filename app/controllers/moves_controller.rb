@@ -1,5 +1,5 @@
 class MovesController < ApplicationController
-  before_filter :require_login, only: [:new, :create, :index]
+  before_filter :require_login, only: [:new, :create, :index, :destroy]
 
   def all_moves
     @moves = Move.all.map do |move|
@@ -33,5 +33,18 @@ class MovesController < ApplicationController
       flash.alert = "There were errors"
       render :new
     end
+  end
+
+  def destroy
+    move = Move.find(params[:id])
+
+    if current_user == move.user
+      move.destroy
+      flash.notice = "Move deleted"
+    else
+      flash.alert = "Can only delete you own moves"
+    end
+
+    redirect_to root_path
   end
 end

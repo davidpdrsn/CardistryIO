@@ -44,4 +44,32 @@ describe MovesController do
       expect(response.status).to eq 302
     end
   end
+
+  describe "#destroy" do
+    it "deletes the move" do
+      move = create :move
+      sign_in_as(move.user)
+
+      expect {
+        delete :destroy, id: move.id
+      }.to change { Move.all.count }.by -1
+    end
+
+    it "only allows deletion of own moves" do
+      user = create :user
+      move = create :move
+      sign_in_as(user)
+
+      expect {
+        delete :destroy, id: move.id
+      }.not_to change { Move.all.count }
+
+      expect(controller).to set_flash[:alert]
+    end
+
+    it "requires authentication" do
+      delete :destroy, id: 1337
+      expect(response.status).to eq 302
+    end
+  end
 end

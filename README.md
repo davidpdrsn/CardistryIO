@@ -38,15 +38,15 @@ programming in style.
 
 ### MVP
 
+- [ ] Delete videos
 - [ ] Edit moves
 - [ ] Edit videos
-- [ ] Delete moves
-- [ ] Delete videos
 - [ ] Comments on moves
 - [ ] Comments on performance videos
 - [ ] Some sort of design
 - [ ] Specifying that a move appears in a video
 
+- [x] Delete moves
 - [x] Approving of videos
 - [x] Uniqueness validation of move names
 - [x] Uniqueness validation of video names

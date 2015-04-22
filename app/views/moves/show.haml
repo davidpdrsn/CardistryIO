@@ -1,2 +1,5 @@
 %h1= @move.name
 = simple_format @move.description
+
+- if current_user == @move.user
+  = button_to "Delete move", @move, method: :delete
