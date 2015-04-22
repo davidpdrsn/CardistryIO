@@ -5,6 +5,9 @@
   = link_to "All moves", all_moves_path
   = link_to "All videos", all_videos_path
 
+  - if current_user.admin?
+    = link_to "Approve videos", approve_videos_path
+
   - if signed_in?
     = link_to "My moves", moves_path
     = link_to "My videos", videos_path

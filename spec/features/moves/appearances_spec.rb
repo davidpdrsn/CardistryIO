@@ -5,7 +5,7 @@ feature "appearances" do
 
   scenario "making a video contain move appearances" do
     move = create :move, user: user
-    video = create :video, user: user
+    video = create :video, user: user, approved: true
 
     visit root_path(as: user)
     click_link "My videos"
@@ -23,7 +23,7 @@ feature "appearances" do
 
   scenario "remove all video appearances" do
     move = create :move, user: user
-    video = create :video, user: user
+    video = create :video, user: user, approved: true
     create :appearance, video: video, move: move, minutes: 1, seconds: 1
 
     visit root_path(as: user)
@@ -37,7 +37,7 @@ feature "appearances" do
 
   scenario "show video on edit page, as reference" do
     move = create :move, user: user
-    video = create :video, user: user
+    video = create :video, user: user, approved: true
     create :appearance, video: video, move: move, minutes: 1, seconds: 1
 
     visit root_path(as: user)
@@ -50,7 +50,7 @@ feature "appearances" do
 
   scenario "can only edit move appearances if owns the video" do
     move = create :move, user: user
-    video = create :video, user: user
+    video = create :video, user: user, approved: true
 
     visit video_path(video)
 

@@ -1,0 +1,7 @@
+- if @videos.present?
+  - @videos.each do |video|
+    = render partial: "videos/embed_video", locals: { video: video }
+    = button_to "Approve", approve_video_path(video), method: :post
+    = button_to "Disapprove", disapprove_video_path(video), method: :delete
+- else
+  There are no videos to approve

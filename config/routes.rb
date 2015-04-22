@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   end
   get "all_videos", to: "videos#all_videos"
 
+  get "/admin/approve_videos", to: "admin/approve_videos#new", as: "approve_videos"
+  post "/admin/approve_videos/:id", to: "admin/approve_videos#create", as: "approve_video"
+  delete "/admin/approve_videos/:id", to: "admin/approve_videos#destroy", as: "disapprove_video"
+
   scope :api, module: :api do
     get "search/moves", to: "searches#moves"
   end

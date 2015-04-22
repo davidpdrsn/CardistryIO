@@ -8,6 +8,22 @@ describe VideosController do
     end
   end
 
+  describe "#show" do
+    it "shows the video" do
+      video = create :video, approved: true
+      get :show, id: video.id
+
+      expect(response.status).to eq 200
+    end
+
+    it "redirects if video isn't approved" do
+      video = create :video, approved: false
+      get :show, id: video.id
+
+      expect(response.status).to eq 302
+    end
+  end
+
   describe "#new" do
     it "requires authentication" do
       get :new, video: {}

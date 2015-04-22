@@ -23,3 +23,17 @@
 .chosen-select {
   width: 100%;
 }
+
+.main-nav {
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ccc;
+
+  a {
+    display: block;
+  }
+}
+
+ul li {
+  list-style-type: disc;
+}

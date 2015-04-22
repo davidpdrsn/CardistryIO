@@ -10,6 +10,15 @@ feature "adding performance videos" do
     fill_in "Description", with: "A video I made"
     click_button "Create Video"
 
+    admin = create :user, admin: true
+    visit root_path(as: admin)
+    click_link "Approve videos"
+    click_button "Approve"
+
+    visit root_path(as: user)
+    click_link "My videos"
+    click_link "Classic"
+
     expect(page).to have_content "Classic"
     expect(page).to have_content "A video I made"
   end

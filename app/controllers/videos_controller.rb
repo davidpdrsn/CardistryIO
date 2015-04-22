@@ -2,17 +2,22 @@ class VideosController < ApplicationController
   before_filter :require_login, only: [:index, :new, :create]
 
   def all_videos
-    @videos = Video.all
+    @videos = AllVideos.new
   end
 
   def index
-    @videos = current_user.videos
+    @videos = UserVideos.new(current_user)
   end
 
   def show
     @video = EmbeddableVideo.new(
       Video.find(params[:id])
     )
+
+    unless @video.approved?
+      flash.alert = "Video not yet approved"
+      redirect_to root_path
+    end
   end
 
   def new

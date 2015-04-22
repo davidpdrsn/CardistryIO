@@ -1,5 +1,6 @@
 - if @moves.present?
-  - @moves.each do |move|
-    = link_to move.name, move
+  %ul
+    - @moves.each do |move|
+      %li= link_to move.name, move
 - else
   There are no moves, yet

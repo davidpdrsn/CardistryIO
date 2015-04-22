@@ -4,4 +4,10 @@ class Video < ActiveRecord::Base
 
   belongs_to :user
   has_many :appearances
+
+  scope :unapproved, -> { where(approved: false) }
+
+  def approve!
+    update!(approved: true)
+  end
 end
