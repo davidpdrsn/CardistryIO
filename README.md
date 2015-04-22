@@ -39,12 +39,12 @@ programming in style.
 ### MVP
 
 - [ ] Link to the videos a move appears in
-- [ ] Edit moves
-- [ ] Edit videos
 - [ ] Comments on moves
 - [ ] Comments on performance videos
 - [ ] Some sort of design
 
+- [x] Edit moves
+- [x] Edit videos
 - [x] Delete videos
 - [x] Delete moves
 - [x] Approving of videos
