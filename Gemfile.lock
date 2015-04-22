@@ -146,8 +146,6 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (5.0.3)
-      railties (>= 3.2.16)
     json (1.8.2)
     kgio (2.9.3)
     launchy (2.4.3)
@@ -314,7 +312,6 @@ DEPENDENCIES
   high_voltage
   i18n-tasks
   jquery-rails
-  jquery-ui-rails
   launchy
   neat (~> 1.7.0)
   newrelic_rpm (>= 3.9.8)
