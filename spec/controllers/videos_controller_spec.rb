@@ -91,4 +91,49 @@ describe VideosController do
       expect(controller).to set_flash[:alert]
     end
   end
+
+  describe "#edit" do
+    it "requires authentication" do
+      get :edit, id: 1337
+      expect(response.status).to eq 302
+    end
+
+    it "only the user to edit their own videos" do
+      sign_in_as(create :user)
+      get :edit, id: create(:video).id
+      expect(response.status).to eq 302
+    end
+  end
+
+  describe "#update" do
+    it "updates the video" do
+      video = create :video, name: "Mocking Bird"
+      sign_in_as(video.user)
+
+      patch :update, id: video.id, video: { name: "Sybil" }
+
+      expect(Video.find(video.id).name).to eq "Sybil"
+    end
+
+    it "doesn't update the video if its invalid" do
+      video = create :video, name: "Mocking Bird"
+      sign_in_as(video.user)
+
+      patch :update, id: video.id, video: { name: nil }
+
+      expect(Video.find(video.id).name).to eq "Mocking Bird"
+      expect(controller).to render_template :new
+    end
+
+    it "requires authentication" do
+      patch :update, id: 1337
+      expect(response.status).to eq 302
+    end
+
+    it "only the user to edit their own videos" do
+      sign_in_as(create :user)
+      patch :update, id: create(:video).id
+      expect(response.status).to eq 302
+    end
+  end
 end

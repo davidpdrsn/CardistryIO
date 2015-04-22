@@ -18,4 +18,5 @@
 = render partial: "embed_video", locals: { video: @video }
 
 - if @video.user == current_user
+  = button_to "Edit", edit_video_path(@video), method: :get
   = button_to "Delete video", @video, method: :delete
