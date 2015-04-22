@@ -1,6 +1,9 @@
 - if @videos.present?
   - @videos.each do |video|
     = render partial: "videos/embed_video", locals: { video: video }
+    %h1= video.name
+    = simple_format video.description
+    = link_to UserWithName.new(video.user).name, video.user
     = button_to "Approve", approve_video_path(video), method: :post
     = button_to "Disapprove", disapprove_video_path(video), method: :delete
 - else
