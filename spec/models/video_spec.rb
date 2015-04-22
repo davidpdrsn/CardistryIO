@@ -30,4 +30,13 @@ describe Video do
       expect(video.approved?).to eq true
     end
   end
+
+  it "destroys appearances when its destroyed" do
+    video = create :video
+    create :appearance, video: video
+
+    video.destroy
+
+    expect(Appearance.count).to eq 0
+  end
 end

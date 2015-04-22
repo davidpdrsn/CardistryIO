@@ -38,7 +38,6 @@ programming in style.
 
 ### MVP
 
-- [ ] Delete videos
 - [ ] Edit moves
 - [ ] Edit videos
 - [ ] Comments on moves
@@ -46,6 +45,7 @@ programming in style.
 - [ ] Some sort of design
 - [ ] Specifying that a move appears in a video
 
+- [x] Delete videos
 - [x] Delete moves
 - [x] Approving of videos
 - [x] Uniqueness validation of move names

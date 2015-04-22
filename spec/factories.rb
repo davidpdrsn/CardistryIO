@@ -5,7 +5,7 @@ FactoryGirl.define do
   end
 
   factory :move do
-    name "Sybil"
+    sequence(:name) { |n| "Sybil #{n}" }
     user
   end
 

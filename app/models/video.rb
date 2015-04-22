@@ -3,7 +3,7 @@ class Video < ActiveRecord::Base
   validates :url, presence: true
 
   belongs_to :user
-  has_many :appearances
+  has_many :appearances, dependent: :destroy
 
   scope :unapproved, -> { where(approved: false) }
 
