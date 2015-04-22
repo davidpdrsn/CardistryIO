@@ -11,7 +11,7 @@
   - if signed_in?
     = link_to "My moves", moves_path
     = link_to "My videos", videos_path
-    = link_to "Create move", new_move_path
+    = link_to "Add move", new_move_path
     = link_to "Submit video", new_video_path
     = link_to UserWithName.new(current_user).name, current_user
     = link_to "Sign out", sign_out_path, method: :delete

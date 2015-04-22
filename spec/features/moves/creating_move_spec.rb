@@ -5,10 +5,10 @@ feature "creating move" do
 
   scenario "creates the move" do
     visit root_path(as: user)
-    click_link "Create move"
+    click_link "Add move"
     fill_in "Name", with: "Sybil"
     fill_in "Description", with: "Old school"
-    click_button "Create Move"
+    click_button "Add move"
 
     expect(page).to have_content "Move created"
     expect(page).to have_content "Sybil"
@@ -17,9 +17,9 @@ feature "creating move" do
 
   scenario "creates invalid move" do
     visit root_path(as: user)
-    click_link "Create move"
+    click_link "Add move"
     fill_in "Name", with: ""
-    click_button "Create Move"
+    click_button "Add move"
 
     expect(page).to have_content "can't be blank"
   end
@@ -46,7 +46,7 @@ feature "creating move" do
   scenario "can't create without being logged in" do
     visit root_path
 
-    expect(page).not_to have_css :a, text: "Create move"
+    expect(page).not_to have_css :a, text: "Add move"
     expect(page).not_to have_css :a, text: "My moves"
   end
 end
