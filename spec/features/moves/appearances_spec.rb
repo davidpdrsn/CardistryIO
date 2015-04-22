@@ -19,6 +19,12 @@ feature "appearances" do
     expect(page).to have_content "Moves in this video"
     expect(page).to have_content move.name
     expect(page).to have_content "01:23"
+
+    click_link move.name
+
+    expect(page).to have_content "Appears in"
+    expect(page).to have_content video.name
+    expect(page).to have_content "01:23"
   end
 
   scenario "remove all video appearances" do

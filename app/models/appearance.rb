@@ -6,4 +6,5 @@ class Appearance < ActiveRecord::Base
   validates :video_id, presence: true
 
   delegate :name, to: :move, prefix: true
+  delegate :name, to: :video, prefix: true
 end

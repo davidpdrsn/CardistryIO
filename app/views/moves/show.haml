@@ -1,6 +1,18 @@
 %h1= @move.name
 = simple_format @move.description
 
+%p
+  - if @move.appearances.present?
+    Appears in
+    %ul
+      %li
+        - @move.appearances.each do |appearance|
+          = link_to appearance.video_name, appearance.video
+          = TimeFormatter.new(appearance.minutes, appearance.seconds).format
+  - else
+    Doesn't appear in any videos
+
+
 - if current_user == @move.user
   = button_to "Edit", edit_move_path(@move), method: :get
   = button_to "Delete move", @move, method: :delete
