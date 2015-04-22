@@ -3,7 +3,7 @@
     Move name
     %div
       = select_tag :move_name,
-          options_for_select(Move.all.map { |move| [move.name, move.name] },
+          options_for_select(Move.all.map { |move| ["#{move.name} by #{UserWithName.new(move.user).name}", move.name] },
                              appearance.move_name),
           name: "move_names[]",
           class: "chosen-select"
