@@ -38,12 +38,12 @@ programming in style.
 
 ### MVP
 
+- [ ] Link to the videos a move appears in
 - [ ] Edit moves
 - [ ] Edit videos
 - [ ] Comments on moves
 - [ ] Comments on performance videos
 - [ ] Some sort of design
-- [ ] Specifying that a move appears in a video
 
 - [x] Delete videos
 - [x] Delete moves
@@ -57,5 +57,7 @@ programming in style.
 
 ### Later
 
-- [ ] Likes of moves
+- [ ] Specifying that a move appears in a video
+- [ ] Rate videos
+- [ ] Rate moves
 - [ ] Ideas
