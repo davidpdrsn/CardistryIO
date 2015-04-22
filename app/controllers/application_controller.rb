@@ -7,4 +7,9 @@ class ApplicationController < ActionController::Base
   def current_user
     super || NullUser.new
   end
+
+  rescue_from ActiveRecord::RecordNotFound do
+    flash.alert = "Page not found"
+    redirect_to root_path
+  end
 end

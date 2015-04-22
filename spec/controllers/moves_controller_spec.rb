@@ -72,4 +72,49 @@ describe MovesController do
       expect(response.status).to eq 302
     end
   end
+
+  describe "#edit" do
+    it "requires authentication" do
+      get :edit, id: 1337
+      expect(response.status).to eq 302
+    end
+
+    it "only the user to edit their own moves" do
+      sign_in_as(create :user)
+      get :edit, id: create(:move).id
+      expect(response.status).to eq 302
+    end
+  end
+
+  describe "#update" do
+    it "updates the move" do
+      move = create :move, name: "Mocking Bird"
+      sign_in_as(move.user)
+
+      patch :update, id: move.id, move: { name: "Sybil" }
+
+      expect(Move.find(move.id).name).to eq "Sybil"
+    end
+
+    it "doesn't update the move if its invalid" do
+      move = create :move, name: "Mocking Bird"
+      sign_in_as(move.user)
+
+      patch :update, id: move.id, move: { name: nil }
+
+      expect(Move.find(move.id).name).to eq "Mocking Bird"
+      expect(controller).to render_template :new
+    end
+
+    it "requires authentication" do
+      patch :update, id: 1337
+      expect(response.status).to eq 302
+    end
+
+    it "only the user to edit their own moves" do
+      sign_in_as(create :user)
+      patch :update, id: create(:move).id
+      expect(response.status).to eq 302
+    end
+  end
 end

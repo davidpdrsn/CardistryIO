@@ -1,4 +1,1 @@
-= simple_form_for @move do |f|
-  = f.input :name
-  = f.input :description
-  = f.button :submit, "Add move"
+= render partial: "form", locals: { move: @move, text: "Add move" }

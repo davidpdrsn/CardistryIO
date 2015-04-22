@@ -2,4 +2,5 @@
 = simple_format @move.description
 
 - if current_user == @move.user
+  = button_to "Edit", edit_move_path(@move), method: :get
   = button_to "Delete move", @move, method: :delete

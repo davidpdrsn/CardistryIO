@@ -1,5 +1,6 @@
 class MovesController < ApplicationController
-  before_filter :require_login, only: [:new, :create, :index, :destroy]
+  before_filter :require_login, only: [:new, :create, :index,
+                                       :destroy, :edit, :update]
 
   def all_moves
     @moves = Move.all.map do |move|
@@ -23,7 +24,6 @@ class MovesController < ApplicationController
   end
 
   def create
-    move_params = params.require(:move).permit(:name, :description)
     @move = current_user.moves.new(move_params)
 
     if @move.save
@@ -35,16 +35,32 @@ class MovesController < ApplicationController
     end
   end
 
-  def destroy
-    move = Move.find(params[:id])
+  def edit
+    @move = current_user.moves.find(params[:id])
+  end
 
-    if current_user == move.user
-      move.destroy
-      flash.notice = "Move deleted"
+  def update
+    @move = current_user.moves.find(params[:id])
+
+    if @move.update(move_params)
+      flash.notice = "Updated"
+      redirect_to @move
     else
-      flash.alert = "Can only delete you own moves"
+      flash.alert = "There were errors"
+      render :new
     end
+  end
 
+  def destroy
+    move = current_user.moves.find(params[:id])
+    move.destroy
+    flash.notice = "Move deleted"
     redirect_to root_path
+  end
+
+  private
+
+  def move_params
+    params.require(:move).permit(:name, :description)
   end
 end
