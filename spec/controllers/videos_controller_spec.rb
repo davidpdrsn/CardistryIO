@@ -40,6 +40,9 @@ describe VideosController do
         expect {
           post :create, video: attributes_for(:video)
         }.to change { Video.count }.by 1
+
+        expect(controller).to set_flash[:notice]
+        expect(controller).to redirect_to root_path
       end
 
       it "doesn't create it if its invalid" do

@@ -28,8 +28,8 @@ class VideosController < ApplicationController
     video_params = params.require(:video).permit(:name, :description, :url)
     @video = current_user.videos.new(video_params)
     if @video.save
-      flash.notice = "Video created"
-      redirect_to @video
+      flash.notice = "Video created, will appear once it was been approved"
+      redirect_to root_path
     else
       flash.alert = "There were errors"
       render :new
