@@ -36,9 +36,11 @@ describe VideosController do
       it "creates the video" do
         user = create :user
         sign_in_as user
+        attributes = attributes_for(:video)
+        attributes.delete(:approved)
 
         expect {
-          post :create, video: attributes_for(:video)
+          post :create, video: attributes
         }.to change { Video.count }.by 1
 
         expect(controller).to set_flash[:notice]
@@ -58,6 +60,35 @@ describe VideosController do
     it "requires authentication" do
       post :create, video: {}
       expect(response.status).to eq 302
+    end
+  end
+
+  describe "#destroy" do
+    it "deletes the video" do
+      video = create :video
+      sign_in_as(video.user)
+
+      expect {
+        delete :destroy, id: video.id
+      }.to change { Video.count }.by -1
+
+      expect(controller).to set_flash[:notice]
+    end
+
+    it "requires authentication" do
+      delete :destroy, id: 1337
+      expect(response.status).to eq 302
+    end
+
+    it "requires the user to own the video" do
+      video = create :video
+      sign_in_as(create :user)
+
+      expect {
+        delete :destroy, id: video.id
+      }.not_to change { Video.count }
+
+      expect(controller).to set_flash[:alert]
     end
   end
 end

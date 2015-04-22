@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_filter :require_login, only: [:index, :new, :create]
+  before_filter :require_login, only: [:index, :new, :create, :destroy]
 
   def all_videos
     @videos = AllVideos.new
@@ -34,5 +34,18 @@ class VideosController < ApplicationController
       flash.alert = "There were errors"
       render :new
     end
+  end
+
+  def destroy
+    video = Video.find(params[:id])
+
+    if current_user == video.user
+      video.destroy
+      flash.notice = "Video deleted"
+    else
+      flash.alert = "Can only delete your own videos"
+    end
+
+    redirect_to root_path
   end
 end

@@ -16,3 +16,6 @@
   %p= link_to "Edit move appearances", edit_appearances_video_path(@video)
 
 = render partial: "embed_video", locals: { video: @video }
+
+- if @video.user == current_user
+  = button_to "Delete video", @video, method: :delete

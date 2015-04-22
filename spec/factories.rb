@@ -14,6 +14,7 @@ FactoryGirl.define do
     description "A video I made"
     url "https://www.youtube.com/watch?v=W799NKLEz8s"
     user
+    approved true
   end
 
   factory :appearance do
