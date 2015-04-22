@@ -21,8 +21,6 @@ feature "appearances" do
     expect(page).to have_content "01:23"
   end
 
-  scenario "search as you type for moves"
-
   scenario "remove all video appearances" do
     move = create :move, user: user
     video = create :video, user: user
@@ -49,8 +47,6 @@ feature "appearances" do
 
     expect(page).to have_css "iframe"
   end
-
-  scenario "specifying that a move appears in a video"
 
   scenario "can only edit move appearances if owns the video" do
     move = create :move, user: user

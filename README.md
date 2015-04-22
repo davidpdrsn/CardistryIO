@@ -38,7 +38,6 @@ programming in style.
 
 ### MVP
 
-- [ ] Move appearances
 - [ ] Uniqueness validation of move names
 - [ ] Uniqueness validation of video names
 - [ ] Approving of videos
@@ -49,7 +48,9 @@ programming in style.
 - [ ] Comments on moves
 - [ ] Comments on performance videos
 - [ ] Some sort of design
+- [ ] Specifying that a move appears in a video
 
+- [x] Move appearances
 - [x] Description of moves
 - [x] Videos of moves (embedding from YouTube)
 - [x] Google analytics
