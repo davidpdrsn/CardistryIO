@@ -36,7 +36,7 @@ programming in style.
 
 ## TODOS
 
-### MVP
+### Most important
 
 - [ ] Link to the videos a move appears in
 - [ ] Comments on moves
