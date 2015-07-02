@@ -1,7 +1,16 @@
 FactoryGirl.define do
   factory :user do
-    sequence(:email) { |n| "bob-#{n}@example.com" }
+    sequence(:email) { |n| "kevin-#{n}@example.com" }
     password "secret"
+    first_name "Kevin"
+    last_name "Ho"
+  end
+
+  factory :comment do
+    content "Not bad"
+    user
+    commentable_id { |comment| create(:move).id }
+    commentable_type "Move"
   end
 
   factory :move do

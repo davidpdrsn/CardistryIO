@@ -38,10 +38,10 @@ programming in style.
 
 ### Most important
 
-- [ ] Comments on moves
-- [ ] Comments on performance videos
+- [ ] Comments on videos
 - [ ] Some sort of design
 
+- [x] Comments on moves
 - [x] Link to the videos a move appears in
 - [x] Edit moves
 - [x] Edit videos
