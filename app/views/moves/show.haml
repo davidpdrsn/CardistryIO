@@ -16,13 +16,5 @@
   = button_to "Edit", edit_move_path(@move), method: :get
   = button_to "Delete move", @move, method: :delete
 
-%div.comments
-  = render @move.comments
-
-%div.add_comment
-  %button{ "data-behavior": "show-comment-form" } Add comment
-
-  %div.add_comment_form.hide
-    = simple_form_for [@move, Comment.new] do |f|
-      = f.input :content
-      = f.submit "Submit comment"
+%div.comments= render @move.comments
+= render partial: "comments/form", locals: { commentable: @move }

@@ -1,0 +1,8 @@
+- if signed_in?
+  %div.add_comment
+    %button{ "data-behavior": "show-comment-form" } Add comment
+
+    %div.add_comment_form.hide
+      = simple_form_for [commentable, Comment.new] do |f|
+        = f.input :content
+        = f.submit "Submit comment"

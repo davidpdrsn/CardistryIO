@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "making comments" do
   context "on moves" do
-    scenario "valid comment", :js do
+    scenario "valid comment" do
       text = "Really awesome dude"
       move = create :move, user: user
 
@@ -16,7 +16,7 @@ feature "making comments" do
       expect(page).to have_css(".comments", text: text)
     end
 
-    scenario "invalid comment", :js do
+    scenario "invalid comment" do
       move = create :move, user: user
 
       visit move_path(move, as: user)
@@ -36,6 +36,15 @@ feature "making comments" do
       visit move_path(move, as: user)
 
       expect(page).to have_css(".comment", text: user.first_name)
+    end
+
+    scenario "doesn't show form if not logged in" do
+      comment = create :comment
+      move = comment.commentable
+
+      visit move_path(move)
+
+      expect(page).to_not have_css(".add_comment_form")
     end
   end
 
