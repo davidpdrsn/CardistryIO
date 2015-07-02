@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
 
   resources :videos, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
+    resources :comments, only: [:create]
+
     member do
       get "edit_appearances", to: "video_appearances#edit", as: "edit_appearances"
       patch "edit_appearances", to: "video_appearances#update", as: "update_appearances"

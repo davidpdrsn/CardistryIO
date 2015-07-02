@@ -4,6 +4,7 @@ class Video < ActiveRecord::Base
 
   belongs_to :user
   has_many :appearances, dependent: :destroy
+  has_many :comments, as: :commentable
 
   scope :unapproved, -> { where(approved: false) }
 

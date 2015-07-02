@@ -20,3 +20,6 @@
 - if @video.user == current_user
   = button_to "Edit", edit_video_path(@video), method: :get
   = button_to "Delete video", @video, method: :delete
+
+%div.comments= render @video.comments
+= render partial: "comments/form", locals: { commentable: @video }

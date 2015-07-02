@@ -4,7 +4,7 @@ feature "making comments" do
   context "on moves" do
     scenario "valid comment" do
       text = "Really awesome dude"
-      move = create :move, user: user
+      move = create :move
 
       visit move_path(move, as: user)
       within ".add_comment" do
@@ -17,7 +17,7 @@ feature "making comments" do
     end
 
     scenario "invalid comment" do
-      move = create :move, user: user
+      move = create :move
 
       visit move_path(move, as: user)
       within ".add_comment" do
@@ -45,6 +45,24 @@ feature "making comments" do
       visit move_path(move)
 
       expect(page).to_not have_css(".add_comment_form")
+    end
+  end
+
+  context "on videos" do
+    # So much of the code is shared that more testing shouldn't be necessary
+
+    scenario "valid comment" do
+      text = "Really awesome dude"
+      video = create :video
+
+      visit video_path(video, as: user)
+      within ".add_comment" do
+        click_button "Add comment"
+        fill_in "Content", with: text
+        click_button "Submit comment"
+      end
+
+      expect(page).to have_css(".comments", text: text)
     end
   end
 
