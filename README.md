@@ -38,11 +38,11 @@ programming in style.
 
 ### Most important
 
-- [ ] Link to the videos a move appears in
 - [ ] Comments on moves
 - [ ] Comments on performance videos
 - [ ] Some sort of design
 
+- [x] Link to the videos a move appears in
 - [x] Edit moves
 - [x] Edit videos
 - [x] Delete videos
