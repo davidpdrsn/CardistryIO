@@ -29,6 +29,11 @@ gem "figaro"
 gem "haml-rails"
 gem "gravtastic"
 gem "active_model_serializers"
+gem "capistrano"
+gem "capistrano-bundler"
+gem "capistrano-rails"
+gem "capistrano-rbenv"
+gem "capistrano-passenger"
 
 group :development do
   gem "spring"
