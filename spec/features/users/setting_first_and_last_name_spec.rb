@@ -2,10 +2,9 @@ require "rails_helper"
 
 feature "setting first and last name" do
   scenario "sets first and last name" do
-    user = create :user, first_name: nil, last_name: nil
+    user = create :user, first_name: "foo", last_name: "bar"
 
-    visit root_path(as: user)
-    click_link user.email
+    visit user_path(user, as: user)
     click_link "Edit"
     fill_in "First name", with: "Dave"
     fill_in "Last name", with: "Buck"

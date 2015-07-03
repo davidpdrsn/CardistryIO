@@ -3,6 +3,11 @@ class User < ActiveRecord::Base
   include Clearance::User
   include Gravtastic
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
+  validates :encrypted_password, presence: true
+
   gravtastic
 
   has_many :moves

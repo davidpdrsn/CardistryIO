@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
+  resources :passwords, controller: "clearance/passwords", only: [:create, :new]
+  resource :session, controller: "clearance/sessions", only: [:create]
+
+  resources :users, only: [:show, :edit, :update, :create] do
+    resource :password,
+      controller: "clearance/passwords",
+      only: [:create, :edit, :update]
+  end
+
+  get "/sign_in", to: "clearance/sessions#new", as: "sign_in"
+  delete "/sign_out", to: "clearance/sessions#destroy", as: "sign_out"
+  get "/sign_up", to: "clearance/users#new", as: "sign_up"
+
   resources :moves, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
     resources :comments, only: [:create]
   end
   get "all_moves", to: "moves#all_moves"
-
-  resources :users, only: [:show, :edit, :update]
 
   resources :videos, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
     resources :comments, only: [:create]
