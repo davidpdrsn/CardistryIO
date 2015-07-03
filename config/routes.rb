@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     resource :password,
       controller: "clearance/passwords",
       only: [:create, :edit, :update]
+
+    member do
+      post :make_admin
+    end
   end
 
   get "/sign_in", to: "clearance/sessions#new", as: "sign_in"

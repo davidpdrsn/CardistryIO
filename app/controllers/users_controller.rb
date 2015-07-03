@@ -1,5 +1,5 @@
 class UsersController < Clearance::UsersController
-  before_filter :require_login, only: [:edit, :update]
+  before_filter :require_login, only: [:edit, :update, :make_admin]
   before_filter :has_access, only: [:edit, :update]
 
   def show
@@ -18,7 +18,20 @@ class UsersController < Clearance::UsersController
     redirect_to @user
   end
 
+  def make_admin
+    user = User.find(params[:id])
+    ensure_user_is_admin!(user)
+    user.update!(admin: true)
+  end
+
   private
+
+  def ensure_user_is_admin!(user)
+    unless user.admin
+      flash.alert = "Only admins can make new admins"
+      redirect_to root_path
+    end
+  end
 
   def has_access
     if current_user.id != params[:id].to_i

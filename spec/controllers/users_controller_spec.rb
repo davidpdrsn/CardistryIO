@@ -34,4 +34,31 @@ describe UsersController do
       expect(response.status).to eq 302
     end
   end
+
+  describe "#make_admin" do
+    it "requires authentication" do
+      post :make_admin, id: 1
+
+      expect(response.status).to eq 302
+    end
+
+    it "requires current_user to be an admin" do
+      bob = create :user, admin: false
+      sign_in_as bob
+      post :make_admin, id: bob.id
+
+      expect(response.status).to eq 302
+    end
+
+    it "promotes normal users to admin users" do
+      bob = create :user, admin: false
+      alice = create :user, admin: true
+      sign_in_as alice
+
+      post :make_admin, id: bob.id
+      bob.reload
+
+      expect(bob.admin).to eq true
+    end
+  end
 end
