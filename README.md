@@ -39,8 +39,8 @@ programming in style.
 ### Most important
 
 - [ ] Convert rest of the forms to use simple form
-- [ ] Convert all views to haml
 
+- [x] Convert all views to haml
 - [x] Write tests for all model associations
 - [x] user#update sad path seems to be missing
 - [x] Comments on moves
