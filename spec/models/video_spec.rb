@@ -1,12 +1,13 @@
 require "rails_helper"
 
 describe Video do
+  it { should belong_to :user }
+  it { should have_many :appearances }
+  it { should have_many :comments }
+
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of :name }
   it { should validate_presence_of :url }
-
-  it { should belong_to :user }
-  it { should have_many :appearances }
 
   it "is not approved by default" do
     video = Video.new
