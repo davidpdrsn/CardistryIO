@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   scope :api, module: :api do
     get "search/moves", to: "searches#moves"
+    post "videos/:id/approve", to: "videos#approve"
+    get "videos/unapproved", to: "videos#unapproved"
   end
 
   root to: "welcome#index"
