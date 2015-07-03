@@ -40,6 +40,7 @@ programming in style.
 
 - [ ] Convert rest of the forms to use simple form
 
+- [x] Make footer
 - [x] Convert all views to haml
 - [x] Write tests for all model associations
 - [x] user#update sad path seems to be missing

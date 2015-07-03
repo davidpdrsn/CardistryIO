@@ -12,8 +12,16 @@
   @include outer-container;
 }
 
+.main-footer,
 .main-content {
   @include outer-container;
+}
+
+.main-footer {
+  margin-top: 2rem;
+  font-size: .8rem;
+  color: $medium-gray;
+  text-align: center;
 }
 
 .video-appearances .fields .field:only-child button {
