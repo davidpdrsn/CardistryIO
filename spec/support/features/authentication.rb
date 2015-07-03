@@ -1,9 +1,9 @@
 module Features
   def sign_up(options = {})
-    email = options[:email] || "kevin@example.com"
-    password = options[:password] || "passwordlol"
-    first_name = options[:first_name] || "Kevin"
-    last_name = options[:last_name] || "Ho"
+    email = options.fetch(:email, "kevin@example.com")
+    password = options.fetch(:password, "passwordlol")
+    first_name = options.fetch(:first_name, "Kevin")
+    last_name = options.fetch(:last_name, "Ho")
 
     visit root_path
     click_link "Sign up"

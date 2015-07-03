@@ -10,6 +10,12 @@ feature "signing in" do
     expect(page).to have_content "Kevin Ho"
   end
 
+  scenario "user signs up with invalid data" do
+    sign_up email: ""
+
+    expect(page).to have_content "is invalid"
+  end
+
   scenario "user signs in" do
     create :user, email: "bob@example.com", password: "secret"
     visit root_path
