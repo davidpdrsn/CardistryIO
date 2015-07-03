@@ -13,9 +13,13 @@ class UsersController < Clearance::UsersController
   def update
     @user = User.find(params[:id])
     user_params = params.require(:user).permit(:first_name, :last_name)
-    @user.update(user_params)
-    flash.notice = "Updated"
-    redirect_to @user
+    if @user.update(user_params)
+      flash.notice = "Updated"
+      redirect_to @user
+    else
+      flash.alert = "Not updated"
+      render :edit
+    end
   end
 
   def make_admin

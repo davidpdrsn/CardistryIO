@@ -33,6 +33,17 @@ describe UsersController do
 
       expect(response.status).to eq 302
     end
+
+    it "redirects if update failed" do
+      bob = create :user, first_name: "Bob"
+      sign_in_as bob
+
+      patch :update, id: bob.id, user: { first_name: "" }
+      bob.reload
+
+      expect(bob.first_name).to eq "Bob"
+      expect(controller).to set_flash[:alert]
+    end
   end
 
   describe "#make_admin" do
