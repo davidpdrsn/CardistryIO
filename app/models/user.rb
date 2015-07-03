@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
   has_many :comments
 
   use UserWithName, for: :name
+
+  def to_param
+    "#{id}-#{first_name}-#{last_name}"
+  end
 end
