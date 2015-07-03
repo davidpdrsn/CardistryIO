@@ -38,10 +38,12 @@ programming in style.
 
 ### Most important
 
-- [ ] Comments on videos
-- [ ] Some sort of design
+- [ ] Convert rest of the forms to use simple form
+- [ ] Convert all views to haml
+- [ ] Write tests for all model associations
 
 - [x] Comments on moves
+- [x] Comments on videos
 - [x] Link to the videos a move appears in
 - [x] Edit moves
 - [x] Edit videos
