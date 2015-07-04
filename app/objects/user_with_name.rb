@@ -6,4 +6,8 @@ class UserWithName < SimpleDelegator
       email
     end
   end
+
+  def name_for_select
+    "#{name} (#{email})"
+  end
 end

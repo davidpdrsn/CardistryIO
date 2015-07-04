@@ -22,6 +22,34 @@ describe VideosController do
 
       expect(response.status).to eq 302
     end
+
+    it "doesn't show private videos" do
+      video = create :video, approved: true, private: true
+
+      get :show, id: video.id
+
+      expect(response.status).to eq 302
+    end
+
+    it "shows private videos to the user who owns it" do
+      video = create :video, approved: true, private: true
+      sign_in_as video.user
+
+      get :show, id: video.id
+
+      expect(response.status).to eq 200
+    end
+
+    it "shows private videos shared with current_user" do
+      alice = create :user
+      video = create :video, approved: true, private: true
+      Sharing.create!(video: video, user: alice)
+      sign_in_as alice
+
+      get :show, id: video.id
+
+      expect(response.status).to eq 200
+    end
   end
 
   describe "#new" do

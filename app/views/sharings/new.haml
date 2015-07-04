@@ -1,0 +1,6 @@
+= simple_form_for [@sharing.video, @sharing] do |f|
+  %div.field
+    = f.input :user, collection: User.all, label_method: :name_for_select, input_html: { class: "chosen-select" }
+
+  %div.field
+    = f.submit "Share"

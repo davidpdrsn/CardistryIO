@@ -40,4 +40,23 @@ describe Video do
 
     expect(Appearance.count).to eq 0
   end
+
+  describe ".approved" do
+    it "returns all approved videos" do
+      video = create :video, approved: true
+      create :video, approved: false
+
+      expect(Video.approved).to eq [video]
+    end
+  end
+
+  describe ".all_public" do
+    it "returns approved and non-private videos" do
+      video = create :video, approved: true
+      create :video, approved: true, private: true
+      create :video, approved: false
+
+      expect(Video.all_public).to eq [video]
+    end
+  end
 end

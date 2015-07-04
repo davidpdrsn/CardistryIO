@@ -40,6 +40,8 @@ programming in style.
 
 - [ ] Convert rest of the forms to use simple form
 
+- [x] Private videos
+- [x] Share private videos with other users
 - [x] Make footer
 - [x] Convert all views to haml
 - [x] Write tests for all model associations

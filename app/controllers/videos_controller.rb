@@ -1,5 +1,7 @@
 class VideosController < ApplicationController
-  before_filter :require_login, only: [:index, :new, :create, :destroy, :edit, :update]
+  before_filter :require_login, only: [:index, :new,
+                                       :create, :destroy,
+                                       :edit, :update]
 
   def all_videos
     @videos = AllVideos.new
@@ -14,8 +16,14 @@ class VideosController < ApplicationController
       Video.find(params[:id])
     )
 
-    unless @video.approved?
-      flash.alert = "Video not yet approved"
+    policy = SharingPolicy::Viewing.new(
+      video: @video,
+      viewing_user: current_user
+    )
+    violation = policy.check_for_violation
+
+    if violation.policy_violated?
+      flash.alert = violation.message
       redirect_to root_path
     end
   end
@@ -67,6 +75,6 @@ class VideosController < ApplicationController
   private
 
   def video_params
-    params.require(:video).permit(:name, :description, :url)
+    params.require(:video).permit(:name, :description, :url, :private)
   end
 end

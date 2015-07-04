@@ -45,4 +45,18 @@ describe UserWithName do
       expect(user_with_name.name).to eq "bob@example.com"
     end
   end
+
+  describe "#name_for_select" do
+    it "combines the name and email" do
+      user = double(
+        "user",
+        first_name: "Dave",
+        last_name: "Buck",
+        email: "dave@example.com",
+      )
+      user_with_name = UserWithName.new(user)
+
+      expect(user_with_name.name_for_select).to eq "Dave Buck (dave@example.com)"
+    end
+  end
 end

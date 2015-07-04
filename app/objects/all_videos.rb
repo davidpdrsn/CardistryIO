@@ -2,16 +2,12 @@ class AllVideos
   include Enumerable
 
   def each(&block)
-    approved_videos.each(&block)
+    Video.all_public.each(&block)
   end
 
   def present?
-    approved_videos.present?
+    Video.all_public.present?
   end
 
   private
-
-  def approved_videos
-    Video.where(approved: true)
-  end
 end

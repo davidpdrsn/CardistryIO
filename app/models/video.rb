@@ -6,6 +6,8 @@ class Video < ActiveRecord::Base
   has_many :appearances, dependent: :destroy
   has_many :comments, as: :commentable
 
+  scope :all_public, -> { approved.where(private: false) }
+  scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where(approved: false) }
 
   def approve!

@@ -21,8 +21,9 @@ Rails.application.routes.draw do
   end
   get "all_moves", to: "moves#all_moves"
 
-  resources :videos, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
+  resources :videos do
     resources :comments, only: [:create]
+    resources :sharings, only: [:new, :create]
 
     member do
       get "edit_appearances", to: "video_appearances#edit", as: "edit_appearances"
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
     end
   end
   get "all_videos", to: "videos#all_videos"
+  get "videos_shared_with_you", to: "sharings#index", as: "shared_videos"
 
   get "/admin/approve_videos", to: "admin/approve_videos#new", as: "approve_videos"
   post "/admin/approve_videos/:id", to: "admin/approve_videos#create", as: "approve_video"
