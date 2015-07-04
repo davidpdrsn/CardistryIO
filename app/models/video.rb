@@ -5,6 +5,7 @@ class Video < ActiveRecord::Base
   belongs_to :user
   has_many :appearances, dependent: :destroy
   has_many :comments, as: :commentable
+  has_many :sharings
 
   scope :all_public, -> { approved.where(private: false) }
   scope :approved, -> { where(approved: true) }

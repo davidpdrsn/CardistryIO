@@ -38,6 +38,7 @@ programming in style.
 
 ### Most important
 
+- [ ] Refactor policies to be composed of sub policies, makes things more modular and reduces duplication
 - [ ] Convert rest of the forms to use simple form
 
 - [x] Private videos

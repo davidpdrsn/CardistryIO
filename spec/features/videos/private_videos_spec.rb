@@ -38,4 +38,26 @@ feature "private videos" do
     expect(page).to have_content private_video.name
     expect(page).not_to have_content another_private_video.name
   end
+
+  scenario "unsharing video" do
+    bob = create :user
+    private_video = create :video, user: bob, approved: true, private: true
+    alice = create :user
+    Sharing.create!(user: alice, video: private_video)
+
+    visit video_path(private_video, as: bob)
+    click_link "Edit sharing"
+    click_button "Remove"
+
+    visit shared_videos_path(as: alice)
+    expect(page).to_not have_content private_video.name
+  end
+
+  scenario "can only delete shares, if there are any" do
+    bob = create :user
+    private_video = create :video, user: bob, approved: true, private: true
+
+    visit video_path(private_video, as: bob)
+    expect(page).not_to have_content "Edit sharing"
+  end
 end

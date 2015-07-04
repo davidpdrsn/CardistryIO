@@ -4,6 +4,7 @@ describe Video do
   it { should belong_to :user }
   it { should have_many :appearances }
   it { should have_many :comments }
+  it { should have_many :sharings }
 
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of :name }

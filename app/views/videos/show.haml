@@ -22,9 +22,11 @@
   = button_to "Edit", edit_video_path(@video), method: :get
   = button_to "Delete video", @video, method: :delete
 
--# TODO: Test this
-- if @video.private? && @video.user == current_user
-  = link_to "Share video", new_video_sharing_path(@video)
+  - if @video.private?
+    = link_to "Share video", new_video_sharing_path(@video)
+
+    - if @video.sharings.present?
+      = link_to "Edit sharing", edit_video_sharings_path(@video)
 
 %div.comments= render @video.comments
 = render partial: "comments/form", locals: { commentable: @video }

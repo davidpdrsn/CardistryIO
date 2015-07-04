@@ -23,7 +23,11 @@ Rails.application.routes.draw do
 
   resources :videos do
     resources :comments, only: [:create]
-    resources :sharings, only: [:new, :create]
+    resources :sharings, only: [:new, :create, :destroy] do
+      collection do
+        get "edit", to: "sharings#edit", as: "edit"
+      end
+    end
 
     member do
       get "edit_appearances", to: "video_appearances#edit", as: "edit_appearances"

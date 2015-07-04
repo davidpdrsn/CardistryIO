@@ -1,5 +1,5 @@
 class SharingsController < ApplicationController
-  before_filter :require_login, only: [:index, :new, :create]
+  before_filter :require_login, only: [:index, :new, :edit, :create, :destroy]
 
   def index
     @videos = Sharing.videos_shared_with_user(current_user)
@@ -20,7 +20,7 @@ class SharingsController < ApplicationController
     user = User.find(params.require(:sharing).permit(:user)[:user])
     video = Video.find(params.require(:video_id))
 
-    ensure_video_is_sharable_by_currrent_user(video) do
+    check_policy(SharingPolicy::Creation, video: video, sharing_user: current_user) do
       Sharing.find_or_create_by!(user_id: user.id, video_id: video.id)
 
       flash.notice = "Video shared with #{user.name}"
@@ -28,13 +28,27 @@ class SharingsController < ApplicationController
     end
   end
 
+  def edit
+    video = Video.find(params[:video_id])
+
+    check_policy(SharingPolicy::Edit, video: video, user: current_user) do
+      @sharings = Sharing.where(video: video)
+    end
+  end
+
+  def destroy
+    video = Video.find(params[:video_id])
+
+    check_policy(SharingPolicy::Destroy, video: video, user: current_user) do
+      Sharing.find(params[:id]).destroy
+      redirect_to video
+    end
+  end
+
   private
 
-  def ensure_video_is_sharable_by_currrent_user(video)
-    policy = SharingPolicy::Creation.new(
-      video: video,
-      sharing_user: current_user
-    )
+  def check_policy(policy_factory, args)
+    policy = policy_factory.new(args)
     violation = policy.check_for_violation
 
     if violation.policy_violated?
