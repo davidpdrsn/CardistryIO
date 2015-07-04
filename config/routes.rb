@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     get "search/moves", to: "searches#moves"
     post "videos/:id/approve", to: "videos#approve"
     get "videos/unapproved", to: "videos#unapproved"
+    delete "videos/:id", to: "videos#destroy"
   end
 
   root to: "welcome#index"
