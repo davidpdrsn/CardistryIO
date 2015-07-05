@@ -49,6 +49,7 @@ programming in style.
 - [ ] Refactor policies to be composed of sub policies, makes things more modular and reduces duplication
 - [ ] Update email, username, password
 - [ ] Show link to users instagram profile on `users#show`, if they have an instagram username configured
+- [ ] Set users instagram username when they authenticate with instagram the first time, not when adding new video
 
 - [x] Approving of videos
 - [x] Comments on moves
