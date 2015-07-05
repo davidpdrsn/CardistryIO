@@ -49,5 +49,8 @@ Rails.application.routes.draw do
     delete "videos/:id", to: "videos#destroy"
   end
 
+  get "instagram", to: "instagram#index"
+  get "instagram/oauth/callback", to: "instagram#callback"
+
   root to: "welcome#index"
 end
