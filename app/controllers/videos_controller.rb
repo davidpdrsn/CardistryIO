@@ -14,7 +14,6 @@ class VideosController < ApplicationController
   def show
     model = Video.find(params[:id])
 
-    # DUP: 134523451
     @video = EmbeddableVideo.new(model)
 
     policy = SharingPolicy::Viewing.new(
@@ -30,7 +29,7 @@ class VideosController < ApplicationController
   end
 
   def new
-    new_video_params = params.permit(:url, :instagram_id)
+    new_video_params = params.permit(:url, :instagram_id, :description)
     @video = Video.new(new_video_params)
   end
 
