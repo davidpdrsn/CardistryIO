@@ -42,8 +42,10 @@ class EmbeddableVideo < SimpleDelegator
 
   def initialize(model)
     obj = if model.from_instagram?
-            client = InstagramIO::Client.unauthenticated_client
-            instagram_video = InstagramIO::InstagramVideo.new_from_model(model, client)
+            instagram_module = InstagramWrapperFactory.call
+
+            client = instagram_module::Client.unauthenticated_client
+            instagram_video = instagram_module::InstagramVideo.new_from_model(model, client)
             DelegationChain.new(model, instagram_video)
           else
             model
