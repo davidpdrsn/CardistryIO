@@ -15,7 +15,7 @@ class VideosController < ApplicationController
     model = Video.find(params[:id])
 
     # DUP: 134523451
-    @video = EmbeddableVideo.new(model, session)
+    @video = EmbeddableVideo.new(model)
 
     policy = SharingPolicy::Viewing.new(
       video: @video,

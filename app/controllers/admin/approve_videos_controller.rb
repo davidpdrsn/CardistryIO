@@ -4,10 +4,7 @@ module Admin
     before_filter :is_admin?
 
     def new
-      @videos = DecoratedCollection.new(
-        Video.unapproved,
-        CurriedDecorator.new(EmbeddableVideo, session)
-      )
+      @videos = DecoratedCollection.new(Video.unapproved, EmbeddableVideo)
     end
 
     def create

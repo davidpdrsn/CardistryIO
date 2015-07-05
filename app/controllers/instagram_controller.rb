@@ -3,7 +3,7 @@ class InstagramController < ApplicationController
 
   def index
     if InstagramIO::Auth.authorized?(session)
-      client = InstagramIO::Client.new(session)
+      client = InstagramIO::Client.authenticated_client(session)
       @videos = client.videos
     else
       redirect_to InstagramIO::Auth.authorize_url(callback_url)

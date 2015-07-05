@@ -40,13 +40,9 @@ class EmbeddableVideo < SimpleDelegator
     /instagram/ => InstagramVideo,
   }
 
-  def initialize(model, session = nil)
+  def initialize(model)
     obj = if model.from_instagram?
-            if session.nil?
-              raise ArgumentError.new("Cannot fetch instagram video without session")
-            end
-
-            client = InstagramIO::Client.new(session)
+            client = InstagramIO::Client.unauthenticated_client
             instagram_video = InstagramIO::InstagramVideo.new_from_model(model, client)
             DelegationChain.new(model, instagram_video)
           else
