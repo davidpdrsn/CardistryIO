@@ -1,4 +1,7 @@
-%ul
-  - @videos.each do |video|
-    %li
-      = link_to video.name, video
+- if @videos.present?
+  %ul
+    - @videos.each do |video|
+      %li
+        = link_to video.name, video
+- else
+  No videos shared with you yet

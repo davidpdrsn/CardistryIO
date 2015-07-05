@@ -34,7 +34,8 @@ feature "private videos" do
     select alice.email, from: "User"
     click_button "Share"
 
-    visit shared_videos_path(as: alice)
+    visit root_path(as: alice)
+    click_link "Videos shared with you"
     expect(page).to have_content private_video.name
     expect(page).not_to have_content another_private_video.name
   end
