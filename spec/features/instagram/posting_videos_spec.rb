@@ -44,4 +44,28 @@ feature "posting videos from instagram" do
 
     expect(page).to have_content "Edited video"
   end
+
+  scenario "it assigns the users instagram_username if he doesn't have one" do
+    bob = create :user, instagram_username: nil
+    visit root_path(as: bob)
+    click_link "Submit videos from Instagram"
+    click_link "Share on CardistryIO"
+    fill_in "Name", with: "Instagram video"
+    click_button "Submit video"
+
+    bob.reload
+    expect(bob.instagram_username).to eq "kevho"
+  end
+
+  scenario "it doesn't change a users existing instagram username" do
+    bob = create :user, instagram_username: "bob"
+    visit root_path(as: bob)
+    click_link "Submit videos from Instagram"
+    click_link "Share on CardistryIO"
+    fill_in "Name", with: "Instagram video"
+    click_button "Submit video"
+
+    bob.reload
+    expect(bob.instagram_username).to eq "bob"
+  end
 end

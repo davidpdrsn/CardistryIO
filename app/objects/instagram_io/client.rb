@@ -39,7 +39,19 @@ module InstagramIO
         end
       end
 
+      def user
+        WrappedUser.new(client.user)
+      end
+
       private
+
+      class WrappedUser
+        pattr_initialize :user
+
+        def username
+          user.username
+        end
+      end
 
       def exists_already?(media)
         ::Video.where(instagram_id: media.id).present?

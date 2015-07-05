@@ -35,6 +35,7 @@ class VideosController < ApplicationController
 
   def create
     @video = current_user.videos.new(video_params)
+    possibly_add_instagram_username
     if @video.save
       flash.notice = "Video created, will appear once it was been approved"
       redirect_to root_path
@@ -83,5 +84,14 @@ class VideosController < ApplicationController
       :private,
       :instagram_id,
     )
+  end
+
+  def possibly_add_instagram_username
+    instagram_module = InstagramWrapperFactory.call
+
+    if instagram_module::Auth.authorized?(session) && current_user.instagram_username.nil?
+      client = instagram_module::Client.authenticated_client(session)
+      current_user.update!(instagram_username: client.user.username)
+    end
   end
 end

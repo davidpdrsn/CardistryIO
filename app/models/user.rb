@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :encrypted_password, presence: true
   validates :username, presence: true, uniqueness: true
+  validates :instagram_username, uniqueness: true
 
   gravtastic
 

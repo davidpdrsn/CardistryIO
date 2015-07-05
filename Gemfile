@@ -4,6 +4,7 @@ ruby "2.2.2"
 
 gem "active_model_serializers"
 gem "airbrake"
+gem "attr_extras"
 gem "autoprefixer-rails"
 gem "bourbon", "~> 4.2.0"
 gem "capistrano"

@@ -43,6 +43,7 @@ GEM
       builder
       multi_json
     arel (6.0.0)
+    attr_extras (4.4.0)
     autoprefixer-rails (5.2.1)
       execjs
       json
@@ -326,6 +327,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   airbrake
+  attr_extras
   autoprefixer-rails
   awesome_print
   bourbon (~> 4.2.0)
