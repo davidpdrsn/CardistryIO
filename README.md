@@ -38,6 +38,13 @@ programming in style.
 
 ### Most important
 
+- [ ] Instagram integration
+- [ ] Rate videos
+- [ ] Rate moves
+- [ ] Add types to videos: Performance, tutorial, move showcase, idea
+- [ ] Notifications when your video is approved
+- [ ] Notifications when someone comments on one of your videos
+- [ ] Notifications when someone shares a video with you
 - [ ] Refactor policies to be composed of sub policies, makes things more modular and reduces duplication
 - [ ] Convert rest of the forms to use simple form
 
@@ -65,6 +72,5 @@ programming in style.
 ### Later
 
 - [ ] Specifying that a move appears in a video
-- [ ] Rate videos
-- [ ] Rate moves
 - [ ] Ideas
+- [ ] @mention people in comments/descriptions (might require adding usernames)
