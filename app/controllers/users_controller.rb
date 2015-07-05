@@ -12,7 +12,9 @@ class UsersController < Clearance::UsersController
 
   def update
     @user = User.find(params[:id])
-    user_params = params.require(:user).permit(:first_name, :last_name)
+    # TODO: This should probably be tied together with the params that are
+    #       allowed to set during #create
+    user_params = params.require(:user).permit(:first_name, :last_name, :instagram_username)
     if @user.update(user_params)
       flash.notice = "Updated"
       redirect_to @user
@@ -44,6 +46,10 @@ class UsersController < Clearance::UsersController
     end
   end
 
+  # FIXME: It requires changing a few methods to add new fields to the user
+  #        and seing as this is something that I do quite often in the 
+  #        early stages, this should be refactored and the duplication
+  #        should be removed
   def permit_params
     params.require(:user).permit(
       :first_name,
