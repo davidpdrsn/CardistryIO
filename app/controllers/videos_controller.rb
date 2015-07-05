@@ -12,9 +12,10 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = EmbeddableVideo.new(
-      Video.find(params[:id])
-    )
+    model = Video.find(params[:id])
+
+    # DUP: 134523451
+    @video = EmbeddableVideo.new(model, session)
 
     policy = SharingPolicy::Viewing.new(
       video: @video,
@@ -29,7 +30,8 @@ class VideosController < ApplicationController
   end
 
   def new
-    @video = Video.new
+    new_video_params = params.permit(:url, :instagram_id)
+    @video = Video.new(new_video_params)
   end
 
   def create
@@ -75,6 +77,12 @@ class VideosController < ApplicationController
   private
 
   def video_params
-    params.require(:video).permit(:name, :description, :url, :private)
+    params.require(:video).permit(
+      :name,
+      :description,
+      :url,
+      :private,
+      :instagram_id,
+    )
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704165047) do
+ActiveRecord::Schema.define(version: 20150705114349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,8 +81,9 @@ ActiveRecord::Schema.define(version: 20150704165047) do
     t.text    "description"
     t.string  "url"
     t.integer "user_id"
-    t.boolean "approved",    default: false
-    t.boolean "private",     default: false
+    t.boolean "approved",     default: false
+    t.boolean "private",      default: false
+    t.string  "instagram_id"
   end
 
 end

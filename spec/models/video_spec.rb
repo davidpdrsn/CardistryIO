@@ -60,4 +60,22 @@ describe Video do
       expect(Video.all_public).to eq [video]
     end
   end
+
+  describe "#from_instagram?" do
+    it "returns true if the video is from instagram" do
+      url = "https://scontent.cdninstagram.com/hphotos-xaf1/t50.2886-16/11243245_1599951966956675_1378908578_s.mp4"
+
+      video = Video.new(url: url)
+
+      expect(video.from_instagram?).to eq true
+    end
+
+    it "returns false if it ins't from instagram" do
+      url = "https://www.youtube.com/watch?v=p2H5YVfZVFw"
+
+      video = Video.new(url: url)
+
+      expect(video.from_instagram?).to eq false
+    end
+  end
 end

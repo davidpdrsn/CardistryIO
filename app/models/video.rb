@@ -14,4 +14,8 @@ class Video < ActiveRecord::Base
   def approve!
     update!(approved: true)
   end
+
+  def from_instagram?
+    url.include?("instagram")
+  end
 end

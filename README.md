@@ -38,37 +38,38 @@ programming in style.
 
 ### Most important
 
-- [ ] Instagram integration
-- [ ] Fail gracefully for unsupported video host
-- [ ] Rate videos
-- [ ] Rate moves
 - [ ] Add types to videos: Performance, tutorial, move showcase, idea
-- [ ] Notifications when your video is approved
+- [ ] Convert rest of the forms to use simple form
+- [ ] Fail gracefully for unsupported video host
 - [ ] Notifications when someone comments on one of your videos
 - [ ] Notifications when someone shares a video with you
+- [ ] Notifications when your video is approved
+- [ ] Rate moves
+- [ ] Rate videos
 - [ ] Refactor policies to be composed of sub policies, makes things more modular and reduces duplication
-- [ ] Convert rest of the forms to use simple form
 
-- [x] Private videos
-- [x] Share private videos with other users
-- [x] Make footer
-- [x] Convert all views to haml
-- [x] Write tests for all model associations
-- [x] user#update sad path seems to be missing
+- [x] Approving of videos
 - [x] Comments on moves
 - [x] Comments on videos
-- [x] Link to the videos a move appears in
+- [x] Convert all views to haml
+- [x] Delete moves
+- [x] Delete videos
+- [x] Description of moves
+- [x] Don't show instagram videos that are already on the site
 - [x] Edit moves
 - [x] Edit videos
-- [x] Delete videos
-- [x] Delete moves
-- [x] Approving of videos
+- [x] Google analytics
+- [x] Instagram integration
+- [x] Link to the videos a move appears in
+- [x] Make footer
+- [x] Move appearances
+- [x] Private videos
+- [x] Share private videos with other users
 - [x] Uniqueness validation of move names
 - [x] Uniqueness validation of video names
-- [x] Move appearances
-- [x] Description of moves
 - [x] Videos of moves (embedding from YouTube)
-- [x] Google analytics
+- [x] Write tests for all model associations
+- [x] user#update sad path seems to be missing
 
 ### Later
 

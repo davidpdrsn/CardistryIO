@@ -26,12 +26,34 @@ class EmbeddableVideo < SimpleDelegator
     end
   end
 
+  class InstagramVideo < Base
+    def url
+      video.url
+    end
+  end
+
   class UnsupportedHost < RuntimeError; end
 
   CONFIG = {
     /vimeo/ => VimeoVideo,
     /youtube/ => YouTubeVideo,
+    /instagram/ => InstagramVideo,
   }
+
+  def initialize(model, session = nil)
+    obj = if model.from_instagram?
+            if session.nil?
+              raise ArgumentError.new("Cannot fetch instagram video without session")
+            end
+
+            client = InstagramIO::Client.new(session)
+            instagram_video = InstagramIO::InstagramVideo.new_from_model(model, client)
+            DelegationChain.new(model, instagram_video)
+          else
+            model
+          end
+    super(obj)
+  end
 
   def url
     host = URI.parse(__getobj__.url).host

@@ -6,7 +6,7 @@ feature "adding performance videos" do
     visit root_path(as: user)
     click_link "Submit video"
     fill_in "Name", with: "Classic"
-    fill_in "YouTube URL", with: "https://www.youtube.com/watch?v=W799NKLEz8s"
+    fill_in "URL", with: "https://www.youtube.com/watch?v=W799NKLEz8s"
     fill_in "Description", with: "A video I made"
     click_button "Submit video"
 

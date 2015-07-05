@@ -1,0 +1,7 @@
+%div.instagram_video{ style: "margin-bottom: 2rem" }
+  %div
+    = video.caption
+
+  = render partial: "videos/embed_video", locals: { video: video }
+
+  = link_to "Share on CardistryIO", new_video_path(url: video.url, instagram_id: video.id)

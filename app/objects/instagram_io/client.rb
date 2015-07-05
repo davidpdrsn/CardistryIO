@@ -14,11 +14,29 @@ module InstagramIO
         @client = client
       end
 
-      def user_recent_media
-        @client.user_recent_media
+      def videos
+        @client.user_recent_media.reduce([]) do |acc, media|
+          if is_video?(media) && !exists_already?(media)
+            acc + [InstagramVideo.new(media)]
+          else
+            acc
+          end
+        end
+      end
+
+      def find(id)
+        client.media_item(id)
       end
 
       private
+
+      def exists_already?(media)
+        ::Video.where(instagram_id: media.id).present?
+      end
+
+      def is_video?(media)
+        media.type == "video"
+      end
 
       attr_reader :client
     end

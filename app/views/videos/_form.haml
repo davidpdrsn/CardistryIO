@@ -2,6 +2,7 @@
   = f.input :name
   = f.input :description
   = f.input :private
-  = f.input :url, label: "URL", hint: "URLs from YouTube and Vimeo are supported"
+  = f.input :url, label: "URL", hint: "URLs from YouTube, Vimeo, and Instagram are supported"
+  = f.input :instagram_id, as: :hidden
   %div
     = f.button :submit, text

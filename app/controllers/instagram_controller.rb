@@ -1,8 +1,10 @@
 class InstagramController < ApplicationController
+  before_filter :require_login, only: [:index, :callback, :create]
+
   def index
     if InstagramIO::Auth.authorized?(session)
       client = InstagramIO::Client.new(session)
-      render json: client.user_recent_media.as_json
+      @videos = client.videos
     else
       redirect_to InstagramIO::Auth.authorize_url
     end
