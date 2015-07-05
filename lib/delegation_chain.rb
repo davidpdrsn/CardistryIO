@@ -11,6 +11,10 @@ class DelegationChain
     first_responder(name).present?
   end
 
+  def to_param
+    first_responder(:to_param).to_param
+  end
+
   private
 
   attr_reader :objs

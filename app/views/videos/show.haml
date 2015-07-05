@@ -20,7 +20,7 @@
 - if @video.user == current_user
   -# TODO: Make this a link
   = button_to "Edit", edit_video_path(@video), method: :get
-  = button_to "Delete video", @video, method: :delete
+  = button_to "Delete video", video_path(@video), method: :delete
 
   - if @video.private?
     = link_to "Share video", new_video_sharing_path(@video)
