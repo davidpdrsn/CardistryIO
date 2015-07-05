@@ -51,6 +51,7 @@ class UsersController < Clearance::UsersController
       :email,
       :password,
       :username,
+      :instagram_username,
     )
   end
 
@@ -61,6 +62,7 @@ class UsersController < Clearance::UsersController
     first_name = user_params.delete(:first_name)
     last_name = user_params.delete(:last_name)
     username = user_params.delete(:username)
+    instagram_username = user_params.delete(:instagram_username)
 
     Clearance.configuration.user_model.new(user_params).tap do |user|
       user.email = email
@@ -68,6 +70,7 @@ class UsersController < Clearance::UsersController
       user.first_name = first_name
       user.last_name = last_name
       user.username = username
+      user.instagram_username = instagram_username
     end
   end
 end

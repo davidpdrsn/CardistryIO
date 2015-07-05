@@ -84,4 +84,5 @@ class VideosController < ApplicationController
       :instagram_id,
     )
   end
+
 end

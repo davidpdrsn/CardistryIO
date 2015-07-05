@@ -5,6 +5,7 @@ FactoryGirl.define do
     sequence(:username) { |n| "visualmadness-#{n}" }
     first_name "Kevin"
     last_name "Ho"
+    sequence(:instagram_username) { |n| "kevho-#{n}" }
   end
 
   factory :comment do

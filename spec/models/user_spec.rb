@@ -19,6 +19,14 @@ describe User do
     end.to raise_error(ActiveRecord::RecordInvalid)
   end
 
+  it "validates uniquess of instagram_username" do
+    bob = create :user
+
+    expect do
+      create :user, instagram_username: bob.instagram_username
+    end.to raise_error(ActiveRecord::RecordInvalid)
+  end
+
   it "is not admin by default" do
     expect(User.new.admin?).to eq false
   end

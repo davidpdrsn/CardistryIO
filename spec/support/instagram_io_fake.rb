@@ -14,6 +14,10 @@ module InstagramIOFake
       new
     end
 
+    def user
+      InstagramIOFake::InstagramUser.new
+    end
+
     def videos
       [
         InstagramIOFake::InstagramVideo.new(
@@ -67,5 +71,11 @@ module InstagramIOFake
     private
 
     attr_reader :options
+  end
+
+  class InstagramUser
+    def username
+      "kevho"
+    end
   end
 end
