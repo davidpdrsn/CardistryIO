@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :email, presence: true
   validates :encrypted_password, presence: true
+  validates :username, presence: true, uniqueness: true
 
   gravtastic
 
@@ -18,6 +19,6 @@ class User < ActiveRecord::Base
   use UserWithName, for: :name_for_select
 
   def to_param
-    "#{id}-#{first_name}-#{last_name}"
+    "#{id}-#{username}"
   end
 end

@@ -2,12 +2,23 @@ require "rails_helper"
 
 feature "signing in" do
   scenario "user signs up" do
-    sign_up email: "bob@example.com", first_name: "Kevin", last_name: "Ho"
+    sign_up(
+      email: "bob@example.com",
+      username: "visualmadness",
+      first_name: "Kevin",
+      last_name: "Ho",
+    )
 
     expect(page).to_not have_content "Sign in"
     expect(page).to_not have_content "Sign up"
     expect(page).to have_content "Sign out"
     expect(page).to have_content "Kevin Ho"
+
+    user = User.last
+    expect(user.email).to eq "bob@example.com"
+    expect(user.username).to eq "visualmadness"
+    expect(user.first_name).to eq "Kevin"
+    expect(user.last_name).to eq "Ho"
   end
 
   scenario "user signs up with invalid data" do

@@ -31,7 +31,7 @@ feature "private videos" do
     visit video_path(private_video, as: bob)
     click_link "Share video"
     # TODO: Show users avatar is the select
-    select alice.email, from: "User"
+    select alice.username, from: "User"
     click_button "Share"
 
     visit root_path(as: alice)
