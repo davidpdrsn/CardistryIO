@@ -1,6 +1,14 @@
 = simple_form_for @user do |f|
-  = f.input :first_name
-  = f.input :last_name
-  = f.button :submit
+  %div.field
+    = f.input :first_name
+
+  %div.field
+    = f.input :last_name
+
+  %div.field
+    = f.input :instagram_username
+
+  %div.field
+    = f.button :submit
 
 Change your profile picture with <a href="https://gravatar.com">Gravatar</a>
