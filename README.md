@@ -39,6 +39,7 @@ programming in style.
 ### Most important
 
 - [ ] Instagram integration
+- [ ] Fail gracefully for unsupported video host
 - [ ] Rate videos
 - [ ] Rate moves
 - [ ] Add types to videos: Performance, tutorial, move showcase, idea
