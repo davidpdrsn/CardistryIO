@@ -4,4 +4,4 @@
 
   = render partial: "videos/embed_video", locals: { video: video }
 
-  = link_to "Share on CardistryIO", new_video_path(description: video.caption, url: video.url, instagram_id: video.id)
+  = link_to "Share on CardistryIO", new_video_path(description: video.caption, url: video.url, instagram_id: video.instagram_id)

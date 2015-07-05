@@ -13,7 +13,7 @@ module InstagramIO
       @video = video
     end
 
-    def id
+    def instagram_id
       video.id
     end
 
