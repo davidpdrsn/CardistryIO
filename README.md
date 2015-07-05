@@ -47,6 +47,8 @@ programming in style.
 - [ ] Rate moves
 - [ ] Rate videos
 - [ ] Refactor policies to be composed of sub policies, makes things more modular and reduces duplication
+- [ ] Update email, username, password
+- [ ] Show link to users instagram profile on `users#show`, if they have an instagram username configured
 
 - [x] Approving of videos
 - [x] Comments on moves
