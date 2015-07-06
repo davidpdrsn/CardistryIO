@@ -78,4 +78,30 @@ describe Video do
       expect(video.from_instagram?).to eq false
     end
   end
+
+  describe "validating video host" do
+    describe "when it is valid" do
+      it "instagram" do
+        expect_valid_host("https://www.instagram.com/watch?v=W799NKLEz8s")
+      end
+
+      it "youtube" do
+        expect_valid_host("https://www.youtube.com/watch?v=W799NKLEz8s")
+      end
+
+      it "vimeo" do
+        expect_valid_host("https://www.vimeo.com/watch?v=W799NKLEz8s")
+      end
+    end
+
+    it "not valid otherwise" do
+      video = build :video, url: "example.com"
+      expect(video).not_to be_valid
+    end
+
+    def expect_valid_host(url)
+      video = build :video, url: url
+      expect(video).to be_valid
+    end
+  end
 end

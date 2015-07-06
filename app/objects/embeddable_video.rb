@@ -34,11 +34,9 @@ class EmbeddableVideo < SimpleDelegator
 
   class UnsupportedHost < RuntimeError; end
 
-  CONFIG = {
-    /vimeo/ => VimeoVideo,
-    /youtube/ => YouTubeVideo,
-    /instagram/ => InstagramVideo,
-  }
+  def self.host_supported?(url)
+    CONFIG.keys.any? { |regex| url.match(regex) }
+  end
 
   def initialize(model)
     obj = if model.from_instagram?
@@ -64,4 +62,12 @@ class EmbeddableVideo < SimpleDelegator
 
     raise UnsupportedHost
   end
+
+  private
+
+  CONFIG = {
+    /vimeo/ => VimeoVideo,
+    /youtube/ => YouTubeVideo,
+    /instagram/ => InstagramVideo,
+  }
 end

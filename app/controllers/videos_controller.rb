@@ -29,6 +29,7 @@ class VideosController < ApplicationController
   end
 
   def new
+    params.delete(:as)
     new_video_params = params.permit(:url, :instagram_id, :description)
     @video = Video.new(new_video_params)
   end
