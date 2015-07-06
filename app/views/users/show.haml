@@ -1,5 +1,10 @@
 = image_tag @user.gravatar_url
 
+-# TODO: Add rest of user info
+%dl
+  %dt Instagram username
+  %dd= @user.instagram_username
+
 - if current_user == @user
   = link_to "Edit", edit_user_path(@user)
 
