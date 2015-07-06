@@ -5,7 +5,6 @@ module Features
     password = options.fetch(:password, "passwordlol")
     first_name = options.fetch(:first_name, "Kevin")
     last_name = options.fetch(:last_name, "Ho")
-    instagram_username = options.fetch(:instagram_username, "Ho")
 
     visit root_path
     click_link "Sign up"
@@ -14,7 +13,6 @@ module Features
     fill_in "Username", with: username
     fill_in "First name", with: first_name
     fill_in "Last name", with: last_name
-    fill_in "Instagram username", with: instagram_username
     click_button "Sign up"
   end
 end

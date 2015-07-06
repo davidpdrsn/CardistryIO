@@ -7,7 +7,6 @@ feature "signing in" do
       username: "visualmadness",
       first_name: "Kevin",
       last_name: "Ho",
-      instagram_username: "kevho",
     )
 
     expect(page).to_not have_content "Sign in"
@@ -20,7 +19,6 @@ feature "signing in" do
     expect(user.username).to eq "visualmadness"
     expect(user.first_name).to eq "Kevin"
     expect(user.last_name).to eq "Ho"
-    expect(user.instagram_username).to eq "kevho"
   end
 
   scenario "user signs up with invalid data" do
