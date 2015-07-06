@@ -1,0 +1,15 @@
+%div.ratings
+  %p
+    Average rating:
+    = rateable.average_rating
+
+  %p
+    Total ratings:
+    = rateable.ratings.count
+
+  - if signed_in? && !current_user.already_rated?(rateable, type: key.to_s.gsub("_id", ""))
+    = button_to "1/5: No good", ratings_path, method: :post, params: { key => rateable.id, rating: 1 }
+    = button_to "2/5: Ok", ratings_path, method: :post, params: { key => rateable.id, rating: 2 }
+    = button_to "3/5: Ok", ratings_path, method: :post, params: { key => rateable.id, rating: 3 }
+    = button_to "4/5: Ok", ratings_path, method: :post, params: { key => rateable.id, rating: 4 }
+    = button_to "5/5: Inhuman", ratings_path, method: :post, params: { key => rateable.id, rating: 5 }

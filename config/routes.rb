@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   end
   get "all_moves", to: "moves#all_moves"
 
+  post "/rating", to: "ratings#create", as: "ratings"
+
   resources :videos do
     resources :comments, only: [:create]
     resources :sharings, only: [:new, :create, :destroy] do

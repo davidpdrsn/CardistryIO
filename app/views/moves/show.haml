@@ -1,6 +1,8 @@
 %h1= @move.name
 = simple_format @move.description
 
+= render partial: "shared/ratings", locals: { key: :move_id, rateable: @move }
+
 %p
   - if @move.appearances.present?
     Appears in

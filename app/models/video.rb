@@ -8,6 +8,7 @@ class Video < ActiveRecord::Base
   belongs_to :user
   has_many :appearances, dependent: :destroy
   has_many :comments, as: :commentable
+  has_many :ratings, as: :rateable
   has_many :sharings
 
   scope :all_public, -> { approved.where(private: false) }
@@ -15,6 +16,7 @@ class Video < ActiveRecord::Base
   scope :unapproved, -> { where(approved: false) }
 
   use VideoWithUrlHint, for: :url_hint
+  use WithRatingStats, for: :average_rating
 
   def approve!
     update!(approved: true)

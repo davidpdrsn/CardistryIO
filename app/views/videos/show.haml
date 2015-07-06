@@ -1,6 +1,8 @@
 %h1= @video.name
 = simple_format @video.description
 
+= render partial: "shared/ratings", locals: { key: :video_id, rateable: @video }
+
 %p
   - if @video.appearances.present?
     Moves in this video

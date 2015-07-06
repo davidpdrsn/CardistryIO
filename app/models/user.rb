@@ -15,11 +15,19 @@ class User < ActiveRecord::Base
   has_many :moves
   has_many :videos
   has_many :comments
+  has_many :ratings
 
   use UserWithName, for: :name
   use UserWithName, for: :name_for_select
 
   def to_param
     "#{id}-#{username}"
+  end
+
+  def already_rated?(rateable, type:)
+    ratings.where(
+      rateable_id: rateable.id,
+      rateable_type: type.to_s.titleize,
+    ).present?
   end
 end
