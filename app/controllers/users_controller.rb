@@ -12,8 +12,6 @@ class UsersController < Clearance::UsersController
 
   def update
     @user = User.find(params[:id])
-    # TODO: This should probably be tied together with the params that are
-    #       allowed to set during #create
     user_params = params.require(:user).permit(:first_name, :last_name, :instagram_username)
     if @user.update(user_params)
       flash.notice = "Updated"
@@ -46,12 +44,8 @@ class UsersController < Clearance::UsersController
     end
   end
 
-  # FIXME: It requires changing a few methods to add new fields to the user
-  #        and seing as this is something that I do quite often in the 
-  #        early stages, this should be refactored and the duplication
-  #        should be removed
-  def permit_params
-    params.require(:user).permit(
+  def user_from_params
+    user_params = params.require(:user).permit(
       :first_name,
       :last_name,
       :email,
@@ -59,24 +53,6 @@ class UsersController < Clearance::UsersController
       :username,
       :instagram_username,
     )
-  end
-
-  def user_from_params
-    user_params = params[:user] || Hash.new
-    email = user_params.delete(:email)
-    password = user_params.delete(:password)
-    first_name = user_params.delete(:first_name)
-    last_name = user_params.delete(:last_name)
-    username = user_params.delete(:username)
-    instagram_username = user_params.delete(:instagram_username)
-
-    Clearance.configuration.user_model.new(user_params).tap do |user|
-      user.email = email
-      user.password = password
-      user.first_name = first_name
-      user.last_name = last_name
-      user.username = username
-      user.instagram_username = instagram_username
-    end
+    Clearance.configuration.user_model.new(user_params)
   end
 end
