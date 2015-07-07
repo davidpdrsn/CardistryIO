@@ -7,14 +7,14 @@ Rails.application.routes.draw do
       controller: "clearance/passwords",
       only: [:create, :edit, :update]
 
-    resources :notifications, only: [:index] do
-      collection do
-        post :mark_all_read
-      end
-    end
-
     member do
       post :make_admin
+    end
+  end
+
+  resources :notifications, only: [:index] do
+    collection do
+      post :mark_all_read
     end
   end
 

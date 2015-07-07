@@ -21,7 +21,7 @@ feature "notifications from comments" do
     bob = create :user
     create :notification, user: bob
 
-    visit user_notifications_path(bob, as: bob)
+    visit notifications_path(as: bob)
     click_button "Mark all read"
     visit root_path(as: bob)
 
@@ -31,7 +31,7 @@ feature "notifications from comments" do
   scenario "can't mark all read when there are none" do
     bob = create :user
 
-    visit user_notifications_path(bob, as: bob)
+    visit notifications_path(as: bob)
 
     expect(page).not_to have_button "Mark all read"
   end
