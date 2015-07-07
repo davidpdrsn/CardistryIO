@@ -1,0 +1,10 @@
+- if @notifications.present?
+  %div
+    = button_to "Mark all read", mark_all_read_user_notifications_path(@user), method: :post
+
+  %ul
+    - @notifications.each do |notification|
+      %li
+        = notification.text
+- else
+  You have no notifications

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :videos
   has_many :comments
   has_many :ratings
+  has_many :notifications
 
   use UserWithName, for: :name_for_select
 
@@ -26,5 +27,9 @@ class User < ActiveRecord::Base
       rateable_id: rateable.id,
       rateable_type: type.to_s.titleize,
     ).present?
+  end
+
+  def new_notifications
+    notifications.where(seen: false)
   end
 end

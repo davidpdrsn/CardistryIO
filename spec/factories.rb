@@ -32,4 +32,15 @@ FactoryGirl.define do
     minutes 1
     seconds 2
   end
+
+  factory :notification do
+    user
+    association :type, factory: :notification_type
+    association :subject, factory: :video
+    association :actor, factory: :user
+  end
+
+  factory :notification_type do
+    name "factory-notification-type"
+  end
 end

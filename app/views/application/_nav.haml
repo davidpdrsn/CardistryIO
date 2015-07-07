@@ -2,6 +2,10 @@
   %h1
     = link_to "CardistryIO", root_path
 
+  - if signed_in?
+    = link_to "Notifications (#{current_user.new_notifications.count})",
+        user_notifications_path(current_user)
+
   = link_to "All moves", all_moves_path
   = link_to "All videos", all_videos_path
 

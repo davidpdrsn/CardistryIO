@@ -5,6 +5,7 @@ describe User do
   it { should have_many :videos }
   it { should have_many :comments }
   it { should have_many :ratings }
+  it { should have_many :notifications }
 
   it { should validate_presence_of :email }
   it { should validate_presence_of :encrypted_password }
@@ -53,6 +54,16 @@ describe User do
       another_video = create :video
 
       expect(bob.already_rated?(another_video, type: "Video")).to eq false
+    end
+  end
+
+  describe "#new_notifications" do
+    it "returns the unseen notifications" do
+      bob = create :user
+      notification = create :notification, seen: false, user: bob
+      create :notification, seen: true, user: bob
+
+      expect(bob.new_notifications).to eq [notification]
     end
   end
 end

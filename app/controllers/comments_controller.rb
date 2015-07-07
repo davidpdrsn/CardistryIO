@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
     comment.user = current_user
 
     if comment.save
+      create_notification(commentable)
       flash.notice = "Comment added"
       redirect_to commentable
     else
@@ -23,6 +24,19 @@ class CommentsController < ApplicationController
       Move.find(params[:move_id])
     else
       Video.find(params[:video_id])
+    end
+  end
+
+  private
+
+  def create_notification(subject)
+    unless subject.user == current_user
+      Notification.create!(
+        user: subject.user,
+        type: NotificationType.comment,
+        actor: current_user,
+        subject: subject,
+      )
     end
   end
 end
