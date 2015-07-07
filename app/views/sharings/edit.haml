@@ -1,4 +1,4 @@
 - @sharings.each do |sharing|
   %div
-    = link_to sharing.user.name, sharing.user
+    = link_to sharing.user.username, sharing.user
     = button_to "Remove", video_sharing_path(sharing.video, sharing), method: :delete, data: { confirm: "Sure?" }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706212810) do
+ActiveRecord::Schema.define(version: 20150707212046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,21 @@ ActiveRecord::Schema.define(version: 20150706212810) do
     t.integer "user_id"
   end
 
+  create_table "notification_types", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "subject_id"
+    t.string   "subject_type"
+    t.integer  "type_id"
+    t.integer  "actor_id"
+    t.boolean  "seen",         default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.integer  "rating"
     t.integer  "rateable_id"
@@ -77,8 +92,6 @@ ActiveRecord::Schema.define(version: 20150706212810) do
     t.string   "encrypted_password", limit: 128,                 null: false
     t.string   "confirmation_token", limit: 128
     t.string   "remember_token",     limit: 128,                 null: false
-    t.string   "first_name"
-    t.string   "last_name"
     t.boolean  "admin",                          default: false
     t.string   "username"
     t.string   "instagram_username"

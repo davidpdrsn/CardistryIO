@@ -33,13 +33,13 @@ feature "creating move" do
   end
 
   scenario "sees all moves" do
-    user = create :user, first_name: "David", last_name: "Pedersen"
+    user = create :user, username: "davidpdrsn"
     create :move, name: "Mocking Bird"
     create :move, name: "Sybil", user: user
     visit root_path(as: user)
     click_link "All moves"
 
-    expect(page).to have_css :a, "Sybil by David Pedersen"
+    expect(page).to have_css :a, "Sybil by davidpdrsn"
     expect(page).to have_css :a, text: "Mocking Bird"
   end
 

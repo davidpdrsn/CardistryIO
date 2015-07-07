@@ -6,6 +6,6 @@ class MoveWithUser < SimpleDelegator
   end
 
   def name
-    "#{@move.name} by #{@user.name}"
+    "#{@move.name} by #{@user.username}"
   end
 end

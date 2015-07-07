@@ -3,8 +3,6 @@ FactoryGirl.define do
     sequence(:email) { |n| "kevin-#{n}@example.com" }
     password "secret"
     sequence(:username) { |n| "visualmadness-#{n}" }
-    first_name "Kevin"
-    last_name "Ho"
     sequence(:instagram_username) { |n| "kevho-#{n}" }
   end
 

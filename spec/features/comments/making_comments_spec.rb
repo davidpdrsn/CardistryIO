@@ -35,7 +35,7 @@ feature "making comments" do
 
       visit move_path(move, as: user)
 
-      expect(page).to have_css(".comment", text: user.first_name)
+      expect(page).to have_css(".comment", text: user.username)
     end
 
     scenario "doesn't show form if not logged in" do

@@ -35,13 +35,13 @@ describe UsersController do
     end
 
     it "redirects if update failed" do
-      bob = create :user, first_name: "Bob"
+      bob = create :user, username: "Bob"
       sign_in_as bob
 
-      patch :update, id: bob.id, user: { first_name: "" }
+      patch :update, id: bob.id, user: { username: "" }
       bob.reload
 
-      expect(bob.first_name).to eq "Bob"
+      expect(bob.username).to eq "Bob"
       expect(controller).to set_flash[:alert]
     end
   end

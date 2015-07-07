@@ -23,7 +23,7 @@ class SharingsController < ApplicationController
     check_policy(SharingPolicy::Creation, video: video, sharing_user: current_user) do
       Sharing.find_or_create_by!(user_id: user.id, video_id: video.id)
 
-      flash.notice = "Video shared with #{user.name}"
+      flash.notice = "Video shared with #{user.username}"
       redirect_to video
     end
   end

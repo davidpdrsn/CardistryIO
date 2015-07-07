@@ -3,7 +3,7 @@
     = render partial: "videos/embed_video", locals: { video: video }
     %h1= video.name
     = simple_format video.description
-    = link_to UserWithName.new(video.user).name, video.user
+    = link_to video.user.username, video.user
     = button_to "Approve", approve_video_path(video), method: :post
     = button_to "Disapprove", disapprove_video_path(video), method: :delete
 - else
