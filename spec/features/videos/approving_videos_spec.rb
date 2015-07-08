@@ -35,18 +35,4 @@ feature "approving videos" do
 
     expect(page).not_to have_content video.name
   end
-
-  scenario "the user gets a notification" do
-    admin = create :user, admin: true
-    video = create :video, approved: false
-
-    visit root_path(as: admin)
-
-    click_link "Approve videos"
-    click_button "Approve"
-
-    visit root_path(as: video.user)
-
-    expect(page).to have_content "Notifications (1)"
-  end
 end

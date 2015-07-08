@@ -19,7 +19,7 @@ describe Notification do
           subject: commentable,
         ).text
 
-        expect(text).to eq "New comment on #{commentable.name} by #{bob.username}"
+        expect(text).to eq "New comment on #{commentable.name} by @#{bob.username}"
       end
     end
 
@@ -52,7 +52,7 @@ describe Notification do
           subject: relationship,
         ).text
 
-        expect(text).to eq "#{alice.username} started following you"
+        expect(text).to eq "@#{alice.username} started following you"
       end
     end
   end

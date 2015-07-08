@@ -14,7 +14,7 @@ feature "notifications from comments" do
     visit root_path(as: bob)
     click_link "Notifications (1)"
 
-    expect(page).to have_content "New comment on #{video.name} by #{alice.username}"
+    expect(page).to have_content "New comment on #{video.name} by @#{alice.username}"
   end
 
   scenario "marking all notifications as seen" do

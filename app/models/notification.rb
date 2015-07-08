@@ -7,11 +7,11 @@ class Notification < ActiveRecord::Base
   def text
     case type.name
     when "comment"
-      "New comment on #{subject.name} by #{actor.username}"
+      "New comment on #{subject.name} by @#{actor.username}"
     when "video_approved"
       "Your video #{subject.name} has been approved"
     when "new_follower"
-      "#{actor.username} started following you"
+      "@#{actor.username} started following you"
     else
       fail "Unknown notification type"
     end
