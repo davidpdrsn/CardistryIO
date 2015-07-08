@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  USERNAME_REGEX = /[a-zA-Z0-9_-]+/
+
   extend DecoratorDelegateMethods
   include Clearance::User
   include Gravtastic
@@ -58,7 +60,7 @@ class User < ActiveRecord::Base
   private
 
   def format_of_username
-    if username.present? && !username.match(/^[a-zA-Z0-9_-]+$/)
+    if username.present? && !username.match(/^#{USERNAME_REGEX}$/)
       errors.add(
         :username,
         "can only contain letters, numbers, dashes, and underscores"
