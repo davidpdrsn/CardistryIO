@@ -6,6 +6,7 @@ describe User do
   it { should have_many :comments }
   it { should have_many :ratings }
   it { should have_many :notifications }
+  it { should have_many :relationships }
 
   it { should validate_presence_of :email }
   it { should validate_presence_of :encrypted_password }
@@ -64,6 +65,61 @@ describe User do
       create :notification, seen: true, user: bob
 
       expect(bob.new_notifications).to eq [notification]
+    end
+  end
+
+  describe "#follow!" do
+    it "follows a user" do
+      bob = create :user
+      alice = create :user
+
+      bob.follow!(alice)
+
+      expect(bob.follows?(alice)).to eq true
+    end
+
+    it "doesn't follow a user twice" do
+      bob = create :user
+      alice = create :user
+
+      2.times { bob.follow!(alice) }
+
+      expect(Relationship.count).to eq 1
+    end
+  end
+
+  describe "#following" do
+    it "returns the users following" do
+      bob = create :user
+      alice = create :user
+      create :user
+
+      bob.follow!(alice)
+
+      expect(bob.following.map(&:id)).to eq [alice.id]
+    end
+  end
+
+  describe "#unfollow!" do
+    it "unfollows the user" do
+      bob = create :user
+      alice = create :user
+
+      bob.follow!(alice)
+      bob.unfollow!(alice)
+
+      expect(bob.following).to eq []
+    end
+  end
+
+  describe "#followers" do
+    it "returns the user's followers" do
+      bob = create :user
+      alice = create :user
+
+      bob.follow!(alice)
+
+      expect(alice.followers).to eq [bob]
     end
   end
 end

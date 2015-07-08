@@ -1,0 +1,6 @@
+- if @user.followers.present?
+  %ul
+    - @user.followers.each do |user|
+      %li= link_to user.username, user
+- else
+  No followers

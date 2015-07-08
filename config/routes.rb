@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
     member do
       post :make_admin
+      post :follow, to: "relationships#create"
+      delete :follow, to: "relationships#destroy"
+      get :following, to: "relationships#following"
+      get :followers, to: "relationships#followers"
     end
   end
 
