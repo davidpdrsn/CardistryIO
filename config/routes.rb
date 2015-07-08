@@ -22,15 +22,18 @@ Rails.application.routes.draw do
   delete "/sign_out", to: "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up", to: "clearance/users#new", as: "sign_up"
 
-  resources :moves, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
+  concern :comments do
     resources :comments, only: [:create, :edit, :update]
   end
+
+  concern :ratings do
+    resources :ratings, only: [:create]
+  end
+
+  resources :moves, only: [:index, :show, :new, :create, :destroy, :edit, :update], concerns: [:comments, :ratings]
   get "all_moves", to: "moves#all_moves"
 
-  post "/rating", to: "ratings#create", as: "ratings"
-
-  resources :videos do
-    resources :comments, only: [:create, :edit, :update]
+  resources :videos, concerns: [:comments, :ratings] do
     resources :sharings, only: [:new, :create, :destroy] do
       collection do
         get "edit", to: "sharings#edit", as: "edit"
