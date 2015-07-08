@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :encrypted_password, presence: true
   validates :username, presence: true, uniqueness: true
   validates :instagram_username, uniqueness: true
+  validate :format_of_username
 
   gravtastic
 
@@ -52,5 +53,16 @@ class User < ActiveRecord::Base
 
   def unfollow!(user)
     relationships.find_by!(followee: user).destroy!
+  end
+
+  private
+
+  def format_of_username
+    if username.present? && !username.match(/^[a-zA-Z0-9_-]+$/)
+      errors.add(
+        :username,
+        "can only contain letters, numbers, dashes, and underscores"
+      )
+    end
   end
 end

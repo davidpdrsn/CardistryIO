@@ -122,4 +122,24 @@ describe User do
       expect(alice.followers).to eq [bob]
     end
   end
+
+  describe "validation of username" do
+    it "is valid when it only contains alphanumeric characters and -_" do
+      bob = build :user, username: "bob-123__"
+
+      expect(bob).to be_valid
+    end
+
+    it "cannot contain spaces" do
+      bob = build :user, username: "bob 123"
+
+      expect(bob).not_to be_valid
+    end
+
+    it "cannot contain funky characters" do
+      bob = build :user, username: "bob:&^!%@&#^D"
+
+      expect(bob).not_to be_valid
+    end
+  end
 end
