@@ -24,8 +24,9 @@ feature "notifications from comments" do
     visit notifications_path(as: bob)
     click_button "Mark all read"
     visit root_path(as: bob)
+    click_link "Notifications (0)"
 
-    expect(page).to have_content "Notifications (0)"
+    expect(page).to have_content "You have no notifications"
   end
 
   scenario "can't mark all read when there are none" do
