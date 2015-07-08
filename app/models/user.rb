@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   use UserWithName, for: :name_for_select
 
   def to_param
-    "#{id}-#{username}"
+    "#{id}-#{username.parameterize}"
   end
 
   def already_rated?(rateable, type:)
