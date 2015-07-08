@@ -9,4 +9,8 @@ class Move < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   use WithRatingStats, for: :average_rating
+
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
 end
