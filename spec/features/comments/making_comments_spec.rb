@@ -46,6 +46,48 @@ feature "making comments" do
 
       expect(page).to_not have_css(".add_comment_form")
     end
+
+    scenario "editing comments" do
+      comment = create :comment, content: "Old text"
+      move = comment.commentable
+
+      visit move_path(move, as: comment.user)
+      within ".comments" do
+        click_link "Edit"
+      end
+      fill_in "Content", with: "new text"
+      click_button "Update Comment"
+
+      expect(page).to have_css(".comment", text: "new text")
+    end
+
+    scenario "can't edit other users comments" do
+      comment = create :comment
+      move = comment.commentable
+
+      visit move_path(move)
+
+      expect(page).not_to have_content "Edit"
+    end
+
+    scenario "shows when the comment was last updated" do
+      comment = create :comment
+      comment.update!(content: "hi!")
+      move = comment.commentable
+
+      visit move_path(move, as: move.user)
+
+      expect(page).to have_content "Updated"
+    end
+
+    scenario "doesn't show a time stamp for comments that aren't updated" do
+      comment = create :comment
+      move = comment.commentable
+
+      visit move_path(move, as: move.user)
+
+      expect(page).not_to have_content "Updated"
+    end
   end
 
   context "on videos" do

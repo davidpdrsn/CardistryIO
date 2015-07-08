@@ -1,0 +1,4 @@
+%div.add_comment_form
+  = simple_form_for [@comment.commentable, @comment] do |f|
+    = f.input :content
+    = f.submit

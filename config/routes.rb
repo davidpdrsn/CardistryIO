@@ -23,14 +23,14 @@ Rails.application.routes.draw do
   get "/sign_up", to: "clearance/users#new", as: "sign_up"
 
   resources :moves, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :edit, :update]
   end
   get "all_moves", to: "moves#all_moves"
 
   post "/rating", to: "ratings#create", as: "ratings"
 
   resources :videos do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :edit, :update]
     resources :sharings, only: [:new, :create, :destroy] do
       collection do
         get "edit", to: "sharings#edit", as: "edit"
