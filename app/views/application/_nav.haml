@@ -1,6 +1,6 @@
-%nav.main-nav
-  %h1
-    = link_to "CardistryIO", root_path
+%div.main-nav
+  -# %h1
+  -# = link_to "CardistryIO", root_path
 
   - if signed_in?
     = link_to "Notifications (#{current_user.new_notifications.count})",

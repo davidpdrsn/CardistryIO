@@ -3,12 +3,121 @@
 @import "chosen";
 @import "normalize-rails";
 @import "bourbon";
-@import "base/grid-settings";
+//@import "base/grid-settings";
 @import "neat";
 @import "base/base";
 @import "refills/flashes";
 
-.main-nav {
+
+
+
+
+
+// Variables
+$layout-border-color: #F6F6F6;
+$main-red: #FB3640;
+
+// Some resets
+* { margin: 0; }
+html, body { height: 100%; font-family: $helvetica; }
+
+
+
+
+
+.outer-container {                    // Page wrapper
+  @include outer-container(1440px);
+
+  height: 100%;
+  min-height: 100%;                   // Hacky stuff for sticky footer (https://css-tricks.com/snippets/css/sticky-footer/)
+  margin-bottom: -278px;
+
+  &:after {
+    content: "";
+    display: block;
+  }
+
+  header {
+    @include span-columns(12);
+    height: 95px;
+    border-bottom: 2px solid $layout-border-color;
+
+    .main-logo {
+      float: left;
+    }
+
+    .button-bar {
+      height: 95px;
+      float: right;
+      width: 30%;
+      @include display(flex);
+      @include flex-direction(column);
+      @include justify-content(center);
+      resize: vertical;
+      overflow: auto;
+    }
+  }
+
+  nav {
+    @include span-columns(3, block-collapse);
+    height: 100%;
+    border-right: 2px solid $layout-border-color;
+    margin: 0;
+    padding: 25px 0 0 18px;
+
+    a {
+      display: block;
+    }
+  }
+
+  section {
+    @include span-columns(9);
+    margin: 0;
+    background: #FCFCFC;
+    height: 100%;
+    padding: 25px 50px 50px 65px;
+  }
+
+  footer {
+    @include span-columns(12);
+    height: 278px;
+    border-top: 2px solid $layout-border-color;
+    background: #282828 url('footer-texture.png') repeat-x;
+    color: #fff;
+    text-align: center;
+    padding-top: 30px;
+  }
+}
+
+@mixin pill-button {
+  @include border-top-radius(44px);
+  @include border-bottom-radius(44px);
+  text-align: center;
+  height: 40%;
+  padding: 7px;
+  min-width: 20%;
+  color: #fff;
+  resize: vertical;
+  float: left;
+}
+.pill-button-filled {
+  @include pill-button;
+  background-color: $main-red;
+}
+.pill-button-outline {
+  @include pill-button;
+  border: 1px solid $main-red;
+  background-color: #fff;
+  color: $main-red;
+}
+
+
+
+
+
+
+
+/* .main-nav {
   @include outer-container;
 }
 
@@ -44,4 +153,4 @@
 
 ul li {
   list-style-type: disc;
-}
+} */

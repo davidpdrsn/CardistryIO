@@ -13,12 +13,34 @@
 
   %body{:class => body_class}
     = render "flashes"
-    = render "nav"
+    -# = render "nav"
 
-    %div.main-content
+    %div.outer-container
+
+      %header
+        = link_to image_tag("logo.svg", :class => "main-logo"), root_path
+        -# %div.button-bar
+          %div.pill-button-filled
+            Upload
+          %div.pill-button-outline
+            Notifications
+          %div.pill-button-outline
+            Profile
+
+      %nav
+        = render "nav"
+
+      %section
+        = yield
+
+      %footer
+        Created by David Pedersen and Ben Dobos | Open source on <a href="https://github.com/davidpdrsn/CardistryIO">GitHub</a> | Send me an <a href="mailto:david.pdrsn@gmail.com">email</a>
+
+
+    -# %div.main-content
       = yield
 
-    %footer.main-footer
+    -# %footer.main-footer
       Created by David Pedersen and Ben Dobos | Open source on <a href="https://github.com/davidpdrsn/CardistryIO">GitHub</a> | Send me an <a href="mailto:david.pdrsn@gmail.com">email</a>
 
     = render "javascript"
