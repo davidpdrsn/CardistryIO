@@ -68,6 +68,34 @@ describe User do
     end
   end
 
+  describe "#follows?" do
+    it "returns true if the user is following" do
+      bob = create :user
+      alice = create :user
+
+      bob.follow!(alice)
+
+      expect(bob.follows?(alice)).to eq true
+    end
+
+    it "returns false if the user is not following" do
+      bob = create :user
+      alice = create :user
+
+      expect(bob.follows?(alice)).to eq false
+    end
+
+    it "returns false if the user has unfollowed" do
+      bob = create :user
+      alice = create :user
+
+      bob.follow!(alice)
+      bob.unfollow!(alice)
+
+      expect(bob.follows?(alice)).to eq false
+    end
+  end
+
   describe "#follow!" do
     it "follows a user" do
       bob = create :user
@@ -85,6 +113,38 @@ describe User do
       2.times { bob.follow!(alice) }
 
       expect(Relationship.count).to eq 1
+    end
+
+    it "reuses old relationships" do
+      bob = create :user
+      alice = create :user
+
+      bob.follow!(alice)
+      bob.unfollow!(alice)
+      expect(Relationship.count).to eq 1
+
+      bob.follow!(alice)
+      expect(Relationship.count).to eq 1
+    end
+
+    it "returns a new relationship the first time" do
+      bob = create :user
+      alice = create :user
+
+      relationship = bob.follow!(alice)
+
+      expect(relationship.new?).to eq true
+    end
+
+    it "returns and old relationship the subsequent times" do
+      bob = create :user
+      alice = create :user
+
+      bob.follow!(alice)
+      bob.unfollow!(alice)
+      relationship = bob.follow!(alice)
+
+      expect(relationship.new?).to eq false
     end
   end
 
@@ -116,8 +176,11 @@ describe User do
     it "returns the user's followers" do
       bob = create :user
       alice = create :user
+      cindy = create :user
 
       bob.follow!(alice)
+      cindy.follow!(alice)
+      cindy.unfollow!(alice)
 
       expect(alice.followers).to eq [bob]
     end

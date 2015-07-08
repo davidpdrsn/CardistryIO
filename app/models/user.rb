@@ -38,23 +38,37 @@ class User < ActiveRecord::Base
   end
 
   def follow!(user)
-    relationships.find_or_create_by!(followee: user)
+    if relationships.where(followee: user, active: true).blank?
+      klass = if relationships.where(followee: user, active: false).present?
+                OldRelationship
+              else
+                NewRelationship
+              end
+
+      relationship = relationships.find_or_create_by!(followee: user)
+      relationship.make_active!
+      klass.new(relationship)
+    end
   end
 
   def follows?(user)
-    relationships.where(followee: user).present?
+    relationships.where(followee: user, active: true).present?
   end
 
   def following
-    User.find(relationships.pluck(:followee_id))
+    ids = relationships.where(active: true).pluck(:followee_id)
+    User.find(ids)
   end
 
   def followers
-    User.find(Relationship.where(followee_id: self.id).pluck(:follower_id))
+    ids = Relationship
+      .where(followee_id: self.id, active: true)
+      .pluck(:follower_id)
+    User.find(ids)
   end
 
   def unfollow!(user)
-    relationships.find_by!(followee: user).destroy!
+    relationships.find_by!(followee: user).make_inactive!
   end
 
   private
@@ -65,6 +79,26 @@ class User < ActiveRecord::Base
         :username,
         "can only contain letters, numbers, dashes, and underscores"
       )
+    end
+  end
+
+  class RelationshipsWithAge < SimpleDelegator
+    class << self
+      def method_missing(name, *args, &block)
+        Relationship.send(name, *args, &block)
+      end
+    end
+  end
+
+  class NewRelationship < RelationshipsWithAge
+    def new?
+      true
+    end
+  end
+
+  class OldRelationship < RelationshipsWithAge
+    def new?
+      false
     end
   end
 end

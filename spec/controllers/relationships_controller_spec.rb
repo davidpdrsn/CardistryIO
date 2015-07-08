@@ -27,6 +27,18 @@ describe RelationshipsController do
         post :create, id: alice.id
       end.to change { Notification.count }
     end
+
+    it "doesn't create duplicate notifications" do
+      bob = create :user
+      alice = create :user
+      sign_in_as bob
+
+      post :create, id: alice.id
+      delete :destroy, id: alice.id
+      post :create, id: alice.id
+
+      expect(Notification.count).to eq 1
+    end
   end
 
   describe "#destroy" do
