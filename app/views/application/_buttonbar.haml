@@ -1,0 +1,23 @@
+%div.button-bar
+  %div.pill-button-filled
+    Upload
+
+  - if signed_in?
+    = link_to notifications_path do
+      %div.pill-button-outline
+        Notifications (#{current_user.new_notifications.count})
+
+
+
+  - if signed_in?
+    = link_to current_user do
+      %div.pill-button-outline
+        %span{:style => "background: url(#{current_user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
+        = current_user.username
+  - else
+    = link_to sign_in_path do
+      %div.pill-button-outline
+        Sign in
+    = link_to sign_up_path do
+      %div.pill-button-outline
+        Sign up

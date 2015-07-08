@@ -13,19 +13,12 @@
 
   %body{:class => body_class}
     = render "flashes"
-    -# = render "nav"
 
     %div.outer-container
 
       %header
         = link_to image_tag("logo.svg", :class => "main-logo"), root_path
-        -# %div.button-bar
-          %div.pill-button-filled
-            Upload
-          %div.pill-button-outline
-            Notifications
-          %div.pill-button-outline
-            Profile
+        = render "buttonbar"
 
       %nav
         = render "nav"

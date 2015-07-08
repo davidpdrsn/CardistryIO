@@ -1,0 +1,41 @@
+@mixin pill-button {
+  @include border-top-radius(44px);
+  @include border-bottom-radius(44px);
+  text-align: center;
+  height: 40%;
+  padding: 7px 15px 7px 15px;
+  color: #fff;
+  resize: vertical;
+  float: right;
+  margin-right: 10px;
+  display: inline-block;
+
+  a {
+    display: block;
+  }
+  span {
+    padding-left: 18px;
+    margin-right: 5px;
+    @include border-top-radius(10px);
+    @include border-bottom-radius(10px);
+  }
+}
+.pill-button-filled {
+  @include pill-button;
+  background-color: $main-red;
+
+  &:hover {
+    background-color: $main-red-hover;
+  }
+}
+.pill-button-outline {
+  @include pill-button;
+  border: 1px solid $main-red;
+  background-color: #fff;
+  color: $main-red;
+
+  &:hover {
+    border-color: $main-red-hover;
+    color: $main-red-hover;
+  }
+}
