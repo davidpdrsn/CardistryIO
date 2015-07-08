@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "videos/all_videos.haml" do
+describe "videos/all.haml" do
   it "shows the videos" do
     video = build_stubbed :video
     assign :videos, [video]

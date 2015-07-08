@@ -40,13 +40,16 @@ Rails.application.routes.draw do
       end
     end
 
+    collection do
+      get "all"
+    end
+
     member do
       get "edit_appearances", to: "video_appearances#edit", as: "edit_appearances"
       patch "edit_appearances", to: "video_appearances#update", as: "update_appearances"
       delete "destroy_appearances", to: "video_appearances#destroy", as: "destroy_appearances"
     end
   end
-  get "all_videos", to: "videos#all_videos"
   get "videos_shared_with_you", to: "sharings#index", as: "shared_videos"
 
   get "/admin/approve_videos", to: "admin/approve_videos#new", as: "approve_videos"
