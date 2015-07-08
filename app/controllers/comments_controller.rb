@@ -53,14 +53,7 @@ class CommentsController < ApplicationController
   end
 
   def create_notification(subject)
-    unless subject.user == current_user
-      Notification.create!(
-        user: subject.user,
-        type: NotificationType.comment,
-        actor: current_user,
-        subject: subject,
-      )
-    end
+    Notifier.new(subject.user).comment(subject: subject, actor: current_user)
   end
 
   def ensure_user_made_comment(comment)

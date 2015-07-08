@@ -10,6 +10,7 @@ module Admin
     def create
       video = Video.find(params[:id])
       video.approve!
+      Notifier.new(video.user).video_approved(subject: video, actor: current_user)
       redirect_to approve_videos_path
     end
 
