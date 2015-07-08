@@ -6,6 +6,7 @@ describe NotificationType do
   [
     :comment,
     :video_approved,
+    :new_follower,
   ].each do |type_name|
     describe ".#{type_name}" do
       it "returns a #{type_name} type" do

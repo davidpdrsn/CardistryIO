@@ -17,6 +17,16 @@ describe RelationshipsController do
 
       expect(bob.follows?(alice)).to eq true
     end
+
+    it "creates notifications" do
+      bob = create :user
+      alice = create :user
+      sign_in_as bob
+
+      expect do
+        post :create, id: alice.id
+      end.to change { Notification.count }
+    end
   end
 
   describe "#destroy" do

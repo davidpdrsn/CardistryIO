@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :encrypted_password, presence: true
   validates :username, presence: true, uniqueness: true
-  validates :instagram_username, uniqueness: true
+  validates :instagram_username, uniqueness: true, allow_nil: true
   validate :format_of_username
 
   gravtastic

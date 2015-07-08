@@ -3,7 +3,8 @@ class RelationshipsController < ApplicationController
 
   def create
     user = User.find(params[:id])
-    current_user.follow!(user)
+    relationship = current_user.follow!(user)
+    Notifier.new(user).new_follower(subject: relationship, actor: current_user)
     flash.notice = "Now following #{user.username}"
     redirect_to user
   end
