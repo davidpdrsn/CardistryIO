@@ -206,6 +206,8 @@ GEM
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     rack (1.6.4)
+    rack-mini-profiler (0.9.6)
+      rack (>= 1.1.3)
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-timeout (0.2.4)
@@ -361,6 +363,7 @@ DEPENDENCIES
   normalize-rails (~> 3.0.0)
   pg
   pry-rails
+  rack-mini-profiler
   rack-timeout
   rails (= 4.2.2)
   recipient_interceptor

@@ -37,6 +37,8 @@ gem "title"
 gem "uglifier"
 gem "unicorn"
 
+gem "rack-mini-profiler"
+
 group :development do
   gem "spring"
   gem "spring-commands-rspec"
