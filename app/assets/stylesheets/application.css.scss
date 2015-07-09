@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 @import "chosen";
+@import "bootstrap-dropdown";
 @import "normalize-rails";
 @import "bourbon";
 //@import "base/grid-settings";
@@ -14,12 +15,8 @@
 * { margin: 0; }
 html, body { height: 100%; font-family: $helvetica; }
 
-
-
-
-
 .outer-container {                    // Page wrapper
-  @include outer-container(1440px);
+  @include outer-container(100%);
 
   height: 100%;
   min-height: 100%;                   // Hacky stuff for sticky footer (https://css-tricks.com/snippets/css/sticky-footer/)
@@ -47,8 +44,11 @@ html, body { height: 100%; font-family: $helvetica; }
       @include display(flex);
       @include align-items(center);
       @include justify-content(flex-end);
-      overflow: auto;
       padding-right: 8px;
+
+      //.dropdown-menu {
+      //  display: none;
+      //}
     }
   }
 
@@ -115,7 +115,6 @@ html, body { height: 100%; font-family: $helvetica; }
     }
   }
 }
-
 
 
 

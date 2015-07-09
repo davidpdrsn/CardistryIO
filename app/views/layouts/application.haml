@@ -8,6 +8,7 @@
     %title= title
     %link{href: "http://vjs.zencdn.net/4.12/video-js.css", rel: "stylesheet"}
     %script{src: "http://vjs.zencdn.net/4.12/video.js"}
+
     = stylesheet_link_tag :application, media: "all"
     = csrf_meta_tags
 
@@ -27,39 +28,7 @@
         = yield
 
       %footer
-        %div.footer-links
-          %ul
-            %li
-              %h3 Community
-            %li
-              Your Feed
-            %li
-              Your Stuff
-            %li
-              Chat
-
-          %ul
-            %li
-              %h3 Media
-            %li
-              Videos
-            %li
-              Moves
-            %li
-              Ideas
-
-          %ul
-            %li
-              %h3 Support
-            %li
-              Report a bug
-            %li
-              Contact
-            %li
-              FAQ
-
-        %div.credits
-          Created by David Pedersen and Ben Dobos | Open source on <a href="https://github.com/davidpdrsn/CardistryIO">GitHub</a>
+        = render "footer"
 
 
     -# %div.main-content
