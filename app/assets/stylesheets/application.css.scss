@@ -8,6 +8,7 @@
 @import "neat";
 @import "base/base";
 @import "refills/flashes";
+@import "ionicons/ionicons";
 
 @import "buttons";
 
@@ -46,9 +47,7 @@ html, body { height: 100%; font-family: $helvetica; }
       @include justify-content(flex-end);
       padding-right: 8px;
 
-      //.dropdown-menu {
-      //  display: none;
-      //}
+
     }
   }
 

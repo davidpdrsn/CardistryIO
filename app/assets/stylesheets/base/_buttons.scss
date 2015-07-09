@@ -20,8 +20,8 @@ button {
 
   &:hover,
   &:focus {
-    background-color: darken($action-color, 15%);
-    color: #fff;
+    // background-color: darken($action-color, 15%);
+    //color: #fff;
   }
 
   &:disabled {

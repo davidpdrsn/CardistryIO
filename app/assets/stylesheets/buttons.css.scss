@@ -1,8 +1,11 @@
+button:hover {
+  background-color: none;
+}
 @mixin pill-button {
   @include border-top-radius(44px);
   @include border-bottom-radius(44px);
   text-align: center;
-  height: 40%;
+  height: 44px;
   padding: 10px 15px 10px 15px;
   color: #fff;
   resize: vertical;
@@ -18,6 +21,13 @@
     margin-right: 5px;
     @include border-top-radius(10px);
     @include border-bottom-radius(10px);
+  }
+  .icon {
+    font-size: 180%;
+    vertical-align: middle;
+  }
+  .ion-arrow-down-b {
+    font-size: 0.8em;
   }
 }
 .pill-button-filled {
