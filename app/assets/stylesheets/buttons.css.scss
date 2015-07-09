@@ -12,6 +12,7 @@ button:hover {
   float: right;
   margin-right: 10px;
   display: inline-block;
+  font-weight: normal;
 
   a {
     display: block;
@@ -37,6 +38,9 @@ button:hover {
   &:hover {
     background-color: $main-red-hover;
   }
+  &:focus {
+    background-color: $main-blue;
+  }
 }
 .pill-button-outline {
   @include pill-button;
@@ -47,5 +51,9 @@ button:hover {
   &:hover {
     border-color: $main-red-hover;
     color: $main-red-hover;
+  }
+  &:focus {
+    border-color: $main-blue;
+    color: $main-blue;
   }
 }
