@@ -78,7 +78,7 @@ html, body { height: 100%; font-family: $helvetica; }
           width:0;
 
           top:-20px; /* value = - border-top-width - border-bottom-width */
-          right:15px; /* controls horizontal position */
+          right:12px; /* controls horizontal position */
           bottom:auto;
           left:auto;
           border-width:0 13px 10px; /* vary these values to change the angle of the vertex */
@@ -126,10 +126,42 @@ html, body { height: 100%; font-family: $helvetica; }
     height: 100%;
     border-right: 2px solid $layout-border-color;
     margin: 0;
-    padding: 25px 0 0 18px;
+    padding: 25px 0 0 0;
 
     a {
       display: block;
+    }
+
+    .main-nav {
+      li {
+        height: 44px;
+        line-height: 44px;
+        font-size: 110%;
+        padding-left: 15px;
+
+        i {
+          float: left;
+          margin-right: 15px;
+        }
+      }
+      hr {
+        border-bottom: 2px solid $layout-border-color;
+        margin: 5px 0 5px 0;
+      }
+    }
+    .nav-item {
+      a {
+        color: #373737;
+      }
+    }
+    .active-nav-item {
+      border-left: 3px solid $main-red;
+      background-color: #FCFCFC;
+      color: $main-red;
+
+      a {
+
+      }
     }
   }
 
