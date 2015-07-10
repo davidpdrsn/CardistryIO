@@ -123,6 +123,20 @@ html, body { height: 100%; font-family: $helvetica; }
             @include border-bottom-radius(40px);
           }
         }
+        .mark-as-read-button {
+          background-color: $main-blue;
+          border-bottom: none;
+          text-align: center;
+          font-size: 115%;
+          font-weight: bold;
+
+          a {
+            color: #fff;
+          }
+          &:hover {
+            background-color: $medium-blue;
+          }
+        }
       }
     }
   }

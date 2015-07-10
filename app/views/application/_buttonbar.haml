@@ -37,20 +37,29 @@
   - if signed_in?
     // = link_to notifications_path do
     %div.dropdown
-      %button.pill-button-outline.dropdown-toggle{:id => "notifications-button", :data => {:toggle => "dropdown"}, :href => "#"}
-        %i.icon.ion-android-notifications
-        -#Notifications (#{current_user.new_notifications.count})
+      - if current_user.new_notifications.present?
+        %button.pill-button-new-notification.dropdown-toggle{:id => "notifications-button", :data => {:toggle => "dropdown"}, :href => "#"}
+          %i.icon.ion-android-notifications
+      - else
+        %button.pill-button-outline.dropdown-toggle{:id => "notifications-button", :data => {:toggle => "dropdown"}, :href => "#"}
+          %i.icon.ion-android-notifications
+
       %ul.dropdown-menu.dropdown-menu-right{:aria => {:labelledby => "notifications-button"}}
         %li.notification-header
           %span.notification-count
             #{current_user.new_notifications.count}
           new notifications
-          %li
-            %span.dropdown-button-title
-              - if @notifications.present?
-                - @notifications.each do |notification|
-                  %li
+
+          - if current_user.new_notifications.present?
+            - current_user.notifications.each do |notification|
+              %li
+                =link_to "#" do
+                  %span.dropdown-button-title
                     = notification.text
+        -if current_user.new_notifications.present?
+          %li.mark-as-read-button
+            =link_to mark_all_read_notifications_path, method: :post do
+              Mark all as read
 
 
 

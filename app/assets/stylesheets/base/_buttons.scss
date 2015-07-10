@@ -86,3 +86,12 @@ button {
     color: $main-blue;
   }
 }
+.pill-button-new-notification {
+  @include pill-button;
+  background-color: $main-blue;
+  border-color: none;
+
+  &:hover {
+    background-color: $medium-blue;
+  }
+}
