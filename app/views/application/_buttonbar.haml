@@ -45,6 +45,12 @@
           %span.notification-count
             #{current_user.new_notifications.count}
           new notifications
+          %li
+            %span.dropdown-button-title
+              - if @notifications.present?
+                - @notifications.each do |notification|
+                  %li
+                    = notification.text
 
 
 
