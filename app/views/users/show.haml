@@ -1,8 +1,9 @@
 = image_tag @user.gravatar_url
 
-%dl
-  %dt Instagram username
-  %dd= @user.instagram_username
+- if @user.instagram_username.present?
+  %p
+    On Instagram:
+    = link_to @user.instagram_username, "http://instagram.com/#{@user.instagram_username}"
 
 - if signed_in? && @user != current_user
   %div.follow_actions
