@@ -2,7 +2,7 @@ class MovesController < ApplicationController
   before_filter :require_login, only: [:new, :create, :index,
                                        :destroy, :edit, :update]
 
-  def all_moves
+  def all
     @moves = Move.all.map do |move|
       MoveWithUser.new(
         move: move,

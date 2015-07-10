@@ -4,4 +4,8 @@ class Comment < ActiveRecord::Base
 
   validates :content, presence: true
   validates :user_id, presence: true
+
+  def updated?
+    updated_at != created_at
+  end
 end

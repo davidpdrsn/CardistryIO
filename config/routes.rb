@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
     member do
       post :make_admin
+      post :follow, to: "relationships#create"
+      delete :follow, to: "relationships#destroy"
+      get :following, to: "relationships#following"
+      get :followers, to: "relationships#followers"
     end
   end
 
@@ -22,19 +26,29 @@ Rails.application.routes.draw do
   delete "/sign_out", to: "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up", to: "clearance/users#new", as: "sign_up"
 
-  resources :moves, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
-    resources :comments, only: [:create]
+  concern :comments do
+    resources :comments, only: [:create, :edit, :update]
   end
-  get "all_moves", to: "moves#all_moves"
 
-  post "/rating", to: "ratings#create", as: "ratings"
+  concern :ratings do
+    resources :ratings, only: [:create]
+  end
 
-  resources :videos do
-    resources :comments, only: [:create]
+  resources :moves, only: [:index, :show, :new, :create, :destroy, :edit, :update], concerns: [:comments, :ratings] do
+    collection do
+      get "all"
+    end
+  end
+
+  resources :videos, concerns: [:comments, :ratings] do
     resources :sharings, only: [:new, :create, :destroy] do
       collection do
         get "edit", to: "sharings#edit", as: "edit"
       end
+    end
+
+    collection do
+      get "all"
     end
 
     member do
@@ -43,7 +57,6 @@ Rails.application.routes.draw do
       delete "destroy_appearances", to: "video_appearances#destroy", as: "destroy_appearances"
     end
   end
-  get "all_videos", to: "videos#all_videos"
   get "videos_shared_with_you", to: "sharings#index", as: "shared_videos"
 
   get "/admin/approve_videos", to: "admin/approve_videos#new", as: "approve_videos"

@@ -3,7 +3,7 @@ class VideosController < ApplicationController
                                        :create, :destroy,
                                        :edit, :update]
 
-  def all_videos
+  def all
     @videos = AllVideos.new
   end
 

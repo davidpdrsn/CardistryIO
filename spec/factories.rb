@@ -41,6 +41,6 @@ FactoryGirl.define do
   end
 
   factory :notification_type do
-    name "factory-notification-type"
+    name "comment"
   end
 end

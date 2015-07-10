@@ -1,9 +1,8 @@
 class CommentsController < ApplicationController
-  before_filter :require_login, only: [:create]
+  before_filter :require_login, only: [:create, :update, :edit]
 
   def create
     commentable = find_commentable
-    comment_params = params.require(:comment).permit(:content)
     comment = commentable.comments.new(comment_params)
     comment.user = current_user
 
@@ -14,6 +13,26 @@ class CommentsController < ApplicationController
     else
       flash.alert = "Comment was invalid"
       redirect_to commentable
+    end
+  end
+
+  def edit
+    @comment = Comment.find(params[:id])
+    ensure_user_made_comment(@comment)
+  end
+
+  def update
+    commentable = find_commentable
+    @comment = Comment.find(params[:id])
+
+    ensure_user_made_comment(@comment) do
+      if @comment.update(comment_params)
+        flash.notice = "Comment updated"
+        redirect_to commentable
+      else
+        flash.alert = "Comment was invalid"
+        render :edit
+      end
     end
   end
 
@@ -29,14 +48,20 @@ class CommentsController < ApplicationController
 
   private
 
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
+
   def create_notification(subject)
-    unless subject.user == current_user
-      Notification.create!(
-        user: subject.user,
-        type: NotificationType.comment,
-        actor: current_user,
-        subject: subject,
-      )
+    Notifier.new(subject.user).comment(subject: subject, actor: current_user)
+  end
+
+  def ensure_user_made_comment(comment)
+    if comment.user == current_user
+      yield if block_given?
+    else
+      flash.alert = "You can only edit your own comments"
+      redirect_to comment.commentable
     end
   end
 end

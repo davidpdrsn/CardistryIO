@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   def index
     # TODO: Introduce facade
     @user = current_user
-    @notifications = current_user.notifications
+    @notifications = current_user.new_notifications
   end
 
   def mark_all_read

@@ -1,9 +1,18 @@
 = image_tag @user.gravatar_url
 
--# TODO: Add rest of user info
 %dl
   %dt Instagram username
   %dd= @user.instagram_username
+
+- if signed_in? && @user != current_user
+  %div.follow_actions
+    - if current_user.follows?(@user)
+      = button_to "Unfollow", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
+    - else
+      = button_to "Follow", follow_user_path(@user), method: :post, params: { user_id: @user.id }
+
+= link_to "Following", following_user_path(@user)
+= link_to "Followers", followers_user_path(@user)
 
 - if current_user == @user
   = link_to "Edit", edit_user_path(@user)

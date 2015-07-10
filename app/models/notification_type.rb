@@ -4,6 +4,8 @@ class NotificationType < ActiveRecord::Base
   class << self
     [
       :comment,
+      :video_approved,
+      :new_follower,
     ].each do |method|
       define_method(method) do
         find_or_create_by!(name: method.to_s)

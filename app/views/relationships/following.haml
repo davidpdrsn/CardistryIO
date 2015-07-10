@@ -1,0 +1,6 @@
+- if @user.following.present?
+  %ul
+    - @user.following.each do |user|
+      %li= link_to user.username, user
+- else
+  Not following anyone

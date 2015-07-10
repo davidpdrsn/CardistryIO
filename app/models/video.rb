@@ -18,6 +18,10 @@ class Video < ActiveRecord::Base
   use VideoWithUrlHint, for: :url_hint
   use WithRatingStats, for: :average_rating
 
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+
   def approve!
     update!(approved: true)
   end

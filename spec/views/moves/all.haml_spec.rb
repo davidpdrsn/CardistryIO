@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "moves/all_moves.haml" do
+describe "moves/all.haml" do
   it "shows when there are moves" do
     move = build_stubbed :move
     assign :moves, [move]

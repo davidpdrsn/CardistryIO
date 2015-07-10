@@ -5,6 +5,6 @@
   %ul
     - @notifications.each do |notification|
       %li
-        = notification.text
+        = link_mentions notification.text
 - else
   You have no notifications

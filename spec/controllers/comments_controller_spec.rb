@@ -60,4 +60,58 @@ describe CommentsController do
       expect(Notification.count).to eq 0
     end
   end
+
+  describe "#update" do
+    let(:move) { create :move }
+
+    it "updates comments" do
+      comment = create :comment, commentable: move, content: "old"
+      sign_in_as comment.user
+
+      expect do
+        patch(
+          :update,
+          comment: { content: "new" },
+          id: comment.id,
+          move_id: move.id,
+        )
+        comment.reload
+      end.to change { comment.content }.from("old").to("new")
+    end
+
+    it "requires authentication" do
+      patch(
+        :update,
+        comment: { content: "new" },
+        id: 123,
+        move_id: 123,
+      )
+
+      expect(response.status).to eq 302
+    end
+
+    it "only updates if changes are valid" do
+      comment = create :comment, commentable: move
+
+      expect do
+        patch :update, move_id: move.id, comment: { content: "" }, id: comment.id
+        comment.reload
+      end.to_not change { comment.content }
+    end
+
+    it "doesn't update other peoples comments" do
+      comment = create :comment, commentable: move, content: "old"
+      sign_in_as create(:user)
+
+      expect do
+        patch(
+          :update,
+          comment: { content: "new" },
+          id: comment.id,
+          move_id: move.id,
+        )
+        comment.reload
+      end.not_to change { comment.content }
+    end
+  end
 end
