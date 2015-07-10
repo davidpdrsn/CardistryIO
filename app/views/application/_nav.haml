@@ -7,28 +7,27 @@
         notifications_path
 
   %ul
-
-    %li.active-nav-item
+    %li.nav-item{:class => cp('moves')}
       %i.icon.ion-android-hand
       = link_to "Moves", all_moves_path
-    %li.nav-item
+    %li.nav-item{:class => cp('videos')}
       %i.icon.ion-ios-film
       = link_to "Videos", all_videos_path
 
     %hr.menu-divider
 
     - if signed_in?
-      %li.nav-item
+      %li.nav-item{:class => cp('videos_shared_with_you')}
         %i.icon.ion-android-share-alt
         = link_to "Videos shared with you", shared_videos_path
 
     - if current_user.admin?
-      %li.nav-item
+      %li.nav-item{:class => cp('approve_videos')}
         = link_to "Approve videos", approve_videos_path
 
 
-    - if signed_in?
-      %li.nav-item
+    -#- if signed_in?
+      %li.nav-item{:class => cp('moves')}
         %i.icon.ion-person
         = link_to "My moves", moves_path
       %li.nav-item
@@ -47,6 +46,6 @@
 
     %hr.menu-divider
 
-    %li.nav-item
+    %li.nav-item{:class => cp('pages/contact')}
       %i.icon.ion-paper-airplane
       = link_to "Contact", page_path("contact")
