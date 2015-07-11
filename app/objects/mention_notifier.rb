@@ -34,7 +34,7 @@ class MentionNotifier
     Notification.where(
       user: user,
       subject: subject,
-      type: NotificationType.mentioned,
+      notification_type: :mentioned,
       actor: subject.user,
     ).present?
   end

@@ -38,7 +38,7 @@ class Notifier
   def send_notification_without_checking_subject_actor_relationship(subject:, actor:, type:)
     Notification.create!(
       user: user_to_notify,
-      type: NotificationType.send(type),
+      notification_type: type,
       actor: actor,
       subject: subject,
     )

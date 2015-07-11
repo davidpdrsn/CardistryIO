@@ -2,10 +2,21 @@ class Notification < ActiveRecord::Base
   belongs_to :user
   belongs_to :subject, polymorphic: true
   belongs_to :actor, class_name: "User"
-  belongs_to :type, class_name: "NotificationType"
+
+  enum notification_type: [
+    :comment,
+    :video_approved,
+    :new_follower,
+    :video_shared,
+    :mentioned,
+  ]
+
+  def type
+    fail
+  end
 
   def text
-    text = case type.name
+    text = case notification_type
            when "comment"
              "New comment on #{subject.name} by @#{actor.username}"
            when "video_approved"
@@ -17,7 +28,7 @@ class Notification < ActiveRecord::Base
            when "mentioned"
              "@#{actor.username} mentioned you in a {{link}}"
            else
-             fail "No text for notifications of type #{type.name}"
+             fail "No text for notifications of type #{notification_type}"
            end
 
     StringWithPlaceholders.new(text)

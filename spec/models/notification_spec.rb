@@ -4,7 +4,6 @@ describe Notification do
   it { should belong_to :user }
   it { should belong_to :subject }
   it { should belong_to :actor }
-  it { should belong_to :type }
 
   describe "#text" do
     context "comment" do
@@ -14,7 +13,7 @@ describe Notification do
 
         text = Notification.create!(
           user: commentable.user,
-          type: NotificationType.comment,
+          notification_type: :comment,
           actor: bob,
           subject: commentable,
         ).text
@@ -30,7 +29,7 @@ describe Notification do
 
         text = Notification.create!(
           user: bob,
-          type: NotificationType.video_approved,
+          notification_type: :video_approved,
           actor: bob,
           subject: video,
         ).text
@@ -47,7 +46,7 @@ describe Notification do
 
         text = Notification.create!(
           user: bob,
-          type: NotificationType.new_follower,
+          notification_type: :new_follower,
           actor: alice,
           subject: relationship,
         ).text
