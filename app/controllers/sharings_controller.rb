@@ -21,10 +21,17 @@ class SharingsController < ApplicationController
     video = Video.find(params.require(:video_id))
 
     check_policy(SharingPolicy::Creation, video: video, sharing_user: current_user) do
-      Sharing.find_or_create_by!(user_id: user.id, video_id: video.id)
-
+      previous_share = Sharing.find_by(user_id: user.id, video_id: video.id)
+      maybe_create_and_notify(user, video, previous_share)
       flash.notice = "Video shared with #{user.username}"
       redirect_to video
+    end
+  end
+
+  def maybe_create_and_notify(user, video, previous_share)
+    if previous_share.blank?
+      Sharing.create!(user_id: user.id, video_id: video.id)
+      Notifier.new(user).video_shared(subject: video, actor: current_user)
     end
   end
 

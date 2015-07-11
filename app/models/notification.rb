@@ -12,8 +12,10 @@ class Notification < ActiveRecord::Base
       "Your video #{subject.name} has been approved"
     when "new_follower"
       "@#{actor.username} started following you"
+    when "video_shared"
+      "@#{actor.username} shared a video with you"
     else
-      fail "Unknown notification type"
+      fail "No text for notifications of type #{type.name}"
     end
   end
 

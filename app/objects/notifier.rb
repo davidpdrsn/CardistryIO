@@ -10,19 +10,38 @@ class Notifier
   end
 
   def new_follower(subject:, actor:)
-    send_notification(subject: SubjectRelationshipAdapter.new(subject), actor: actor, type: :new_follower)
+    send_notification(
+      subject: SubjectRelationshipAdapter.new(subject),
+      actor: actor,
+      type: :new_follower
+    )
+  end
+
+  def video_shared(subject:, actor:)
+    send_notification_without_checking_subject_actor_relationship(
+      subject: subject,
+      actor: actor,
+      type: :video_shared
+    )
   end
 
   private
 
-  def send_notification(subject:, actor:, type:)
-    return if subject.user == actor
-
+  def send_notification_without_checking_subject_actor_relationship(subject:, actor:, type:)
     Notification.create!(
       user: user_to_notify,
       type: NotificationType.send(type),
       actor: actor,
       subject: subject,
+    )
+  end
+
+  def send_notification(subject:, actor:, type:)
+    return if subject.user == actor
+    send_notification_without_checking_subject_actor_relationship(
+      subject: subject,
+      actor: actor,
+      type: type,
     )
   end
 

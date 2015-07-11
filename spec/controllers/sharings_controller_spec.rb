@@ -66,6 +66,17 @@ describe SharingsController do
         end
       end.to change { Sharing.count }.by(1)
     end
+
+    it "creates notifications" do
+      bob = create :user, username: "bob"
+      video = create :video, user: bob, private: true
+      alice = create :user, username: "alice"
+
+      sign_in_as bob
+      expect do
+        post :create, video_id: video.id, sharing: { user: alice.id }
+      end.to change { Notification.count }.by(1)
+    end
   end
 
   describe "#edit" do
