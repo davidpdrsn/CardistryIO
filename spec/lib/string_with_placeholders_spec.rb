@@ -10,6 +10,12 @@ describe StringWithPlaceholders do
   it "expands placeholders" do
     str = StringWithPlaceholders.new("name: {{name}}")
 
+    expect(str.expand(name: "bob")).to eq "name: bob"
+  end
+
+  it "expands placeholders with blocks" do
+    str = StringWithPlaceholders.new("name: {{name}}")
+
     expect(str.expand(name: ->() { "bob" })).to eq "name: bob"
   end
 
