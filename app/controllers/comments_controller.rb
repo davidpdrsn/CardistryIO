@@ -5,6 +5,9 @@ class CommentsController < ApplicationController
     commentable = find_commentable
     comment = commentable.comments.new(comment_params)
     comment.user = current_user
+    MentionNotifier.new(
+      MentionNotifier::CommentAdapter.new(comment)
+    ).check_for_mentions
 
     if comment.save
       create_notification(commentable)

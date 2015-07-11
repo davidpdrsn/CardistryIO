@@ -25,6 +25,14 @@ class Notifier
     )
   end
 
+  def mentioned(subject:, actor:)
+    send_notification_without_checking_subject_actor_relationship(
+      subject: subject,
+      actor: actor,
+      type: :mentioned
+    )
+  end
+
   private
 
   def send_notification_without_checking_subject_actor_relationship(subject:, actor:, type:)

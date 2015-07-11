@@ -3,73 +3,73 @@ require "rails_helper"
 describe LinkMentions do
   it "turns @mentions into links" do
     bob = create :user, username: "bob"
-    html = LinkMentions.new("hi @bob hi").link_mentions
+    html = html_with_mentions("hi @bob hi")
 
-    expect(Capybara.string(html)).to have_link "@bob"
+    expect_to_have_link html, "@bob"
   end
 
   it "works with ? after the @mention" do
     bob = create :user, username: "bob"
-    html = LinkMentions.new("hi @bob? hi").link_mentions
+    html = html_with_mentions("hi @bob? hi")
 
-    expect(Capybara.string(html)).to have_link "@bob"
+    expect_to_have_link html, "@bob"
     expect(html).to include("/users/#{bob.to_param}")
   end
 
   it "works with ! after the @mention" do
     bob = create :user, username: "bob"
-    html = LinkMentions.new("hi @bob! hi").link_mentions
+    html = html_with_mentions("hi @bob! hi")
 
-    expect(Capybara.string(html)).to have_link "@bob"
+    expect_to_have_link html, "@bob"
     expect(html).to include("/users/#{bob.to_param}")
     expect(html).not_to include("!<")
   end
 
   it "works with the @mention being the last word" do
     bob = create :user, username: "bob"
-    html = LinkMentions.new("hi @bob").link_mentions
+    html = html_with_mentions("hi @bob")
 
-    expect(Capybara.string(html)).to have_link "@bob"
+    expect_to_have_link html, "@bob"
     expect(html).to include("/users/#{bob.to_param}")
   end
 
   it "works with the mention the first word" do
     bob = create :user, username: "bob"
-    html = LinkMentions.new("@bob hi").link_mentions
+    html = html_with_mentions("@bob hi")
 
-    expect(Capybara.string(html)).to have_link "@bob"
+    expect_to_have_link html, "@bob"
     expect(html).to include("/users/#{bob.to_param}")
   end
 
   it "works with the mention the only word" do
     bob = create :user, username: "bob"
-    html = LinkMentions.new("@bob").link_mentions
+    html = html_with_mentions("@bob")
 
-    expect(Capybara.string(html)).to have_link "@bob"
+    expect_to_have_link html, "@bob"
     expect(html).to include("/users/#{bob.to_param}")
   end
 
   it "ignores users that don't exist" do
-    html = LinkMentions.new("@alice").link_mentions
+    html = html_with_mentions("@alice")
 
-    expect(Capybara.string(html)).not_to have_link "@alice"
+    expect_to_have_link html, "@alice", false
     expect(html).not_to include("href")
   end
 
   it "works with stuff in front of the mention" do
     bob = create :user, username: "bob"
-    html = LinkMentions.new("!@bob").link_mentions
+    html = html_with_mentions("!@bob")
 
-    expect(Capybara.string(html)).to have_link "@bob"
+    expect_to_have_link html, "@bob"
     expect(html).to include("/users/#{bob.to_param}")
     expect(html).to include("!<")
   end
 
   it "works stuff before and after the mention" do
     bob = create :user, username: "bob"
-    html = LinkMentions.new("!!@bob,").link_mentions
+    html = html_with_mentions("!!@bob,")
 
-    expect(Capybara.string(html)).to have_link "@bob"
+    expect_to_have_link html, "@bob"
     expect(html).to include("/users/#{bob.to_param}")
     expect(html).to include("!!<")
     expect(html).to include(">,")
@@ -78,11 +78,23 @@ describe LinkMentions do
   it "works with multiple mentions" do
     bob = create :user, username: "bob"
     alice = create :user, username: "alice"
-    html = LinkMentions.new("@bob, @alice").link_mentions
+    html = html_with_mentions("@bob, @alice")
 
-    expect(Capybara.string(html)).to have_link "@bob"
-    expect(Capybara.string(html)).to have_link "@alice"
+    expect_to_have_link html, "@bob"
+    expect_to_have_link html, "@alice"
     expect(html).to include("/users/#{bob.to_param}")
     expect(html).to include("/users/#{alice.to_param}")
+  end
+
+  def expect_to_have_link(html, text, negate = true)
+    if !negate
+      expect(Capybara.string(html)).not_to have_link text
+    else
+      expect(Capybara.string(html)).to have_link text
+    end
+  end
+
+  def html_with_mentions(text)
+    LinkMentions.new(text).link_mentions.html
   end
 end

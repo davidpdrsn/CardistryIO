@@ -27,6 +27,8 @@ class MovesController < ApplicationController
     @move = current_user.moves.new(move_params)
 
     if @move.save
+      MentionNotifier.new(@move).check_for_mentions
+
       flash.notice = "Move created"
       redirect_to @move
     else

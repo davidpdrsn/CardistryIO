@@ -2,9 +2,10 @@
   %div
     = button_to "Mark all read", mark_all_read_notifications_path, method: :post
 
-  %ul
+  %ul.notifications-list
     - @notifications.each do |notification|
       %li
-        = link_mentions notification.text
+        -# Its okay to call #html_safe here because nothing comes from the user
+        = link_mentions notification.text.expand(link: ->() { notification_subject_link(notification) }).html_safe
 - else
   You have no notifications

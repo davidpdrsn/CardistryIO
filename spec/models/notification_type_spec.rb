@@ -8,6 +8,7 @@ describe NotificationType do
     :video_approved,
     :new_follower,
     :video_shared,
+    :mentioned,
   ].each do |type_name|
     describe ".#{type_name}" do
       it "returns a #{type_name} type" do

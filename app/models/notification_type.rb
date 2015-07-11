@@ -7,6 +7,7 @@ class NotificationType < ActiveRecord::Base
       :video_approved,
       :new_follower,
       :video_shared,
+      :mentioned,
     ].each do |method|
       define_method(method) do
         find_or_create_by!(name: method.to_s)
