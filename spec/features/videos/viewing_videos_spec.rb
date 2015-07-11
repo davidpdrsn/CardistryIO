@@ -8,7 +8,7 @@ feature "viewing videos" do
     create :video, name: "Cardistry Con", approved: true
 
     visit root_path(as: user)
-    click_link "My videos"
+    click_link "Videos"
 
     expect(page).to have_content "Classic"
     expect(page).not_to have_content "Cardistry Con"
@@ -20,7 +20,7 @@ feature "viewing videos" do
     create :video, name: "Cardistry Con", approved: true
 
     visit root_path
-    click_link "All videos"
+    click_link "All Videos"
 
     expect(page).to have_content "Classic"
     expect(page).to have_content "Cardistry Con"
@@ -30,7 +30,7 @@ feature "viewing videos" do
     video = create :video, approved: false
 
     visit root_path
-    click_link "All videos"
+    click_link "Videos"
 
     expect(page).not_to have_content video.name
   end

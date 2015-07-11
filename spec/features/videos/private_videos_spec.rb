@@ -4,7 +4,9 @@ feature "private videos" do
   scenario "adding a private video" do
     bob = create :user
     visit root_path(as: bob)
-    click_link "Submit video"
+    within ".button-bar" do
+      click_link "Video"
+    end
     fill_in "Name", with: "Classic"
     fill_in "URL", with: "https://www.youtube.com/watch?v=W799NKLEz8s"
     fill_in "Description", with: "A video I made"

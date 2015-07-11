@@ -5,7 +5,9 @@ feature "creating move" do
 
   scenario "creates the move" do
     visit root_path(as: user)
-    click_link "Add move"
+    within "header .button-bar" do
+      click_link "Move"
+    end
     fill_in "Name", with: "Sybil"
     fill_in "Description", with: "Old school"
     click_button "Add move"
@@ -17,7 +19,9 @@ feature "creating move" do
 
   scenario "creates invalid move" do
     visit root_path(as: user)
-    click_link "Add move"
+    within "header .button-bar" do
+      click_link "Move"
+    end
     fill_in "Name", with: ""
     click_button "Add move"
 
@@ -27,7 +31,7 @@ feature "creating move" do
   scenario "sees users moves" do
     create :move, name: "Sybil", user: user
     visit root_path(as: user)
-    click_link "My moves"
+    click_link "Moves"
 
     expect(page).to have_content "Sybil"
   end
@@ -37,7 +41,7 @@ feature "creating move" do
     create :move, name: "Mocking Bird"
     create :move, name: "Sybil", user: user
     visit root_path(as: user)
-    click_link "All moves"
+    click_link "All Moves"
 
     expect(page).to have_css :a, "Sybil by davidpdrsn"
     expect(page).to have_css :a, text: "Mocking Bird"
@@ -46,7 +50,8 @@ feature "creating move" do
   scenario "can't create without being logged in" do
     visit root_path
 
-    expect(page).not_to have_css :a, text: "Add move"
-    expect(page).not_to have_css :a, text: "My moves"
+    within "header .button-bar" do
+      expect(page).not_to have_css :a, text: "Move"
+    end
   end
 end

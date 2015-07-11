@@ -4,7 +4,7 @@ feature "posting videos from instagram" do
   scenario "submitting a video and getting it approved" do
     bob = create :user
     visit root_path(as: bob)
-    click_link "Submit videos from Instagram"
+    click_link "Import from Instagram"
     click_link "Share on CardistryIO"
     fill_in "Name", with: "Instagram video"
     click_button "Submit video"
@@ -15,7 +15,7 @@ feature "posting videos from instagram" do
     click_button "Approve"
 
     visit root_path(as: bob)
-    click_link "My videos"
+    click_link "Videos"
     click_link "Instagram video"
 
     expect(page).to have_content "Instagram video"
@@ -25,7 +25,7 @@ feature "posting videos from instagram" do
   scenario "editing an instagram video" do
     bob = create :user
     visit root_path(as: bob)
-    click_link "Submit videos from Instagram"
+    click_link "Import from Instagram"
     click_link "Share on CardistryIO"
     fill_in "Name", with: "Instagram video"
     click_button "Submit video"
@@ -36,7 +36,7 @@ feature "posting videos from instagram" do
     click_button "Approve"
 
     visit root_path(as: bob)
-    click_link "My videos"
+    click_link "Videos"
     click_link "Instagram video"
     click_button "Edit"
     fill_in "Name", with: "Edited video"
@@ -48,7 +48,7 @@ feature "posting videos from instagram" do
   scenario "it assigns the users instagram_username if he doesn't have one" do
     bob = create :user, instagram_username: nil
     visit root_path(as: bob)
-    click_link "Submit videos from Instagram"
+    click_link "Import from Instagram"
     click_link "Share on CardistryIO"
     fill_in "Name", with: "Instagram video"
     click_button "Submit video"
@@ -60,7 +60,7 @@ feature "posting videos from instagram" do
   scenario "it doesn't change a users existing instagram username" do
     bob = create :user, instagram_username: "bob"
     visit root_path(as: bob)
-    click_link "Submit videos from Instagram"
+    click_link "Import from Instagram"
     click_link "Share on CardistryIO"
     fill_in "Name", with: "Instagram video"
     click_button "Submit video"

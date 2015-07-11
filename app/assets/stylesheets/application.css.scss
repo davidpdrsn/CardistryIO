@@ -1,14 +1,253 @@
 @charset "utf-8";
 
 @import "chosen";
+@import "bootstrap-dropdown";
 @import "normalize-rails";
 @import "bourbon";
-@import "base/grid-settings";
+//@import "base/grid-settings";
 @import "neat";
 @import "base/base";
 @import "refills/flashes";
+@import "ionicons/ionicons";
 
-.main-nav {
+
+// Some resets
+* { margin: 0; }
+html, body { height: 100%; font-family: $helvetica; }
+
+.outer-container {                    // Page wrapper
+  @include outer-container(100%);
+
+  height: 100%;
+  min-height: 100%;                   // Hacky stuff for sticky footer (https://css-tricks.com/snippets/css/sticky-footer/)
+  margin-bottom: -278px;
+  //border-left: 2px solid $layout-border-color;
+  //border-right: 2px solid $layout-border-color;
+
+  &:after {
+    content: "";
+    display: block;
+  }
+
+  header {
+    @include span-columns(12);
+    height: 95px;
+    border-bottom: 2px solid $layout-border-color;
+
+    .main-logo {
+      float: left;
+    }
+
+    .button-bar {
+      height: 95px;
+      float: right;
+      @include display(flex);
+      @include align-items(center);
+      @include justify-content(flex-end);
+      padding-right: 8px;
+
+      .dropdown-menu {
+        @include border-top-radius(3px);
+        @include border-bottom-radius(3px);
+        border: 1px solid $main-blue;
+        border-top-width: 10px;
+        margin-top: 17px;
+        padding: 0px;
+        word-wrap: break-word;
+
+        i {
+          float: left;
+          font-size: 200%;
+          margin-right: 20px;
+          color: $main-blue;
+        }
+        li {
+          border-bottom: 2px solid $layout-border-color;
+          padding: 10px 0 10px 0;
+
+          a:hover {
+            background: none;
+          }
+
+          &:hover {
+            background-color: #E2EDF2;
+          }
+        }
+
+        &:after {
+          content:"";
+          position:absolute;
+          border-style:solid;
+          border-color:$main-blue transparent;
+          /* reduce the damage in FF3.0 */
+          display:block;
+          width:0;
+
+          top:-20px; /* value = - border-top-width - border-bottom-width */
+          right:12px; /* controls horizontal position */
+          bottom:auto;
+          left:auto;
+          border-width:0 13px 10px; /* vary these values to change the angle of the vertex */
+        }
+        .dropdown-button-title {
+          font-size: 130%;
+          color: $main-blue;
+          display: block;
+        }
+        .dropdown-button-text {
+          color: $main-brown;
+          font-size: 80%;
+          display: block;
+        }
+        .notification-header {
+          background-color: $main-blue;
+          text-align: center;
+          color: #fff;
+          border-bottom: 10px solid $main-blue;
+          font-size: 115%;
+          padding-left: 10px;
+          padding-right: 10px;
+
+          &:hover {
+            background-color: $main-blue;
+          }
+          .notification-count {
+            background-color: $dark-blue;
+            padding: 0px 8px 0px 8px;
+            margin-bottom: 2px;
+            text-align: center;
+            display: inline-block;
+            font-weight: bold;
+            vertical-align: middle;
+            @include border-top-radius(40px);
+            @include border-bottom-radius(40px);
+          }
+        }
+        .mark-as-read-button {
+          background-color: $main-blue;
+          border-bottom: none;
+          text-align: center;
+          font-size: 115%;
+          font-weight: bold;
+
+          a {
+            color: #fff;
+          }
+          &:hover {
+            background-color: $medium-blue;
+          }
+        }
+      }
+    }
+  }
+
+  nav {
+    @include span-columns(3, block-collapse);
+    height: 100%;
+    border-right: 2px solid $layout-border-color;
+    margin: 0;
+    padding: 25px 0 0 0;
+
+    a {
+      display: block;
+    }
+
+    .main-nav {
+      li {
+        height: 50px;
+        line-height: 50px;
+        font-size: 120%;
+        padding-left: 15px;
+
+        i {
+          float: left;
+          margin-right: 15px;
+          font-size: 130%;
+        }
+      }
+      hr {
+        border-bottom: 2px solid $layout-border-color;
+        margin: 5px 0 5px 0;
+      }
+    }
+    .nav-item {
+      a {
+        color: #373737;
+      }
+    }
+    .active-nav-item {
+      border-left: 3px solid $main-red;
+      background-color: #FCFCFC;
+      color: $main-red;
+
+      a {
+        color: $main-red;
+      }
+    }
+  }
+
+  section {
+    @include span-columns(9);
+    margin: 0;
+    background: #FCFCFC;
+    height: 100%;
+    padding: 25px 50px 50px 65px;
+  }
+
+  footer {
+    @include span-columns(12, block-collapse);
+    height: 278px;
+    background: $main-brown url('footer-texture-brown.png') repeat-x;
+    color: #fff;
+    text-align: center;
+    padding-top: 50px;
+    border-top: 10px solid;
+    @include border-image(linear-gradient(90deg, $main-red, $main-blue) 100% 0 0 0);
+    border-image-repeat: stretch;
+    border-width: 7px 0 0 0;
+
+    .footer-links {
+      @include clearfix;
+      text-align: left;
+      @include shift(3);
+
+      ul {
+        @include span-columns(3);
+        @include clearfix;
+        @include omega(3n);
+        margin-bottom: 50px;
+      }
+
+      li {
+        line-height: 1.5em;
+        color: #a4a4a4;
+
+        h3 {
+          color: #fff;
+          font-size: 1em;
+          font-weight: 800;
+          margin-bottom: 1em;
+        }
+      }
+    }
+    .credits {
+      color: #a4a4a4;
+      max-width: 35em;
+      margin: 0 auto;
+    }
+  }
+}
+
+.screen-reader-text {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+
+
+
+/* .main-nav {
   @include outer-container;
 }
 
@@ -44,4 +283,4 @@
 
 ul li {
   list-style-type: disc;
-}
+} */

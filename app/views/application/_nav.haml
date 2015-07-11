@@ -1,30 +1,58 @@
-%nav.main-nav
-  %h1
-    = link_to "CardistryIO", root_path
+%div.main-nav
+  -# %h1
+  -# = link_to "CardistryIO", root_path
 
-  - if signed_in?
+  -#- if signed_in?
     = link_to "Notifications (#{current_user.new_notifications.count})",
         notifications_path
 
-  = link_to "All moves", all_moves_path
-  = link_to "All videos", all_videos_path
+  %ul
+    %li.nav-item{:class => current_path_class('moves/all')}
+      %i.icon.ion-android-hand
+      = link_to "All Moves", all_moves_path
+    %li.nav-item{:class => current_path_class('videos/all')}
+      %i.icon.ion-ios-film
+      = link_to "All Videos", all_videos_path
 
-  - if signed_in?
-    = link_to "Videos shared with you", shared_videos_path
+    %li.nav-item{:class => current_path_class('moves')}
+      %i.icon.ion-android-hand
+      = link_to "Moves", moves_path
+    %li.nav-item{:class => current_path_class('videos')}
+      %i.icon.ion-ios-film
+      = link_to "Videos", videos_path
 
-  - if current_user.admin?
-    = link_to "Approve videos", approve_videos_path
+    %hr.menu-divider
 
-  - if signed_in?
-    = link_to "My moves", moves_path
-    = link_to "My videos", videos_path
-    = link_to "Add move", new_move_path
-    = link_to "Submit video", new_video_path
-    = link_to "Submit videos from Instagram", instagram_path
-    = link_to current_user.username, current_user
-    = link_to "Sign out", sign_out_path, method: :delete
-  - else
-    = link_to "Sign in", sign_in_path
-    = link_to "Sign up", sign_up_path
+    - if signed_in?
+      %li.nav-item{:class => current_path_class('videos_shared_with_you')}
+        %i.icon.ion-android-share-alt
+        = link_to "Videos shared with you", shared_videos_path
 
-  = link_to "Contact", page_path("contact")
+    - if current_user.admin?
+      %li.nav-item{:class => current_path_class('/admin/approve_videos')}
+        = link_to "Approve videos", approve_videos_path
+
+
+    -#- if signed_in?
+      %li.nav-item{:class => current_path_class('moves')}
+        %i.icon.ion-person
+        = link_to "My moves", moves_path
+      %li.nav-item
+        %i.icon.ion-person
+        = link_to "My videos", videos_path
+      -# = link_to "Add move", new_move_path
+      -# = link_to "Submit video", new_video_path
+      -# = link_to "Submit videos from Instagram", instagram_path
+      -# = link_to current_user.username, current_user
+      -# = link_to "Sign out", sign_out_path, method: :delete
+    - else
+      %li.nav-item
+        = link_to "Sign in", sign_in_path
+      %li.nav-item
+        = link_to "Sign up", sign_up_path
+
+    %hr.menu-divider
+
+    %li.nav-item{:class => current_path_class('pages/contact')}
+      %i.icon.ion-paper-airplane
+      = link_to "Contact", page_path("contact")

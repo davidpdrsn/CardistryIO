@@ -20,12 +20,78 @@ button {
 
   &:hover,
   &:focus {
-    background-color: darken($action-color, 15%);
-    color: #fff;
+    // background-color: darken($action-color, 15%);
+    //color: #fff;
   }
 
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+}
+
+@mixin pill-button {
+  @include border-top-radius(44px);
+  @include border-bottom-radius(44px);
+  text-align: center;
+  height: 44px;
+  padding: 8px 15px 8px 15px;
+  color: #fff;
+  resize: vertical;
+  float: right;
+  margin-right: 10px;
+  display: inline-block;
+  font-weight: normal;
+
+  a {
+    display: block;
+  }
+  span {
+    padding-left: 18px;
+    margin-right: 5px;
+    @include border-top-radius(10px);
+    @include border-bottom-radius(10px);
+  }
+  .icon {
+    font-size: 180%;
+    vertical-align: middle;
+  }
+  .ion-arrow-down-b {
+    font-size: 0.8em;
+  }
+}
+.pill-button-filled {
+  @include pill-button;
+  background-color: $main-red;
+
+  &:hover {
+    background-color: $main-red-hover;
+  }
+  &:focus {
+    background-color: $main-blue;
+  }
+}
+.pill-button-outline {
+  @include pill-button;
+  border: 1px solid $main-red;
+  background-color: #fff;
+  color: $main-red;
+
+  &:hover {
+    border-color: $main-red-hover;
+    color: $main-red-hover;
+  }
+  &:focus {
+    border-color: $main-blue;
+    color: $main-blue;
+  }
+}
+.pill-button-new-notification {
+  @include pill-button;
+  background-color: $main-blue;
+  border-color: none;
+
+  &:hover {
+    background-color: $medium-blue;
   }
 }

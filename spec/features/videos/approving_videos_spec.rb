@@ -6,13 +6,13 @@ feature "approving videos" do
     video = create :video, approved: false
 
     visit root_path(as: admin)
-    click_link "All videos"
+    click_link "All Videos"
 
     expect(page).not_to have_content video.name
 
     click_link "Approve videos"
     click_button "Approve"
-    click_link "All videos"
+    click_link "All Videos"
 
     expect(page).to have_content video.name
   end
