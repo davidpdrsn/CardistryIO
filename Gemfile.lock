@@ -170,6 +170,7 @@ GEM
       faraday_middleware (>= 0.8, < 0.10)
       hashie (>= 0.4.0)
       multi_json (~> 1.0, >= 1.0.3)
+    ionicons-rails (2.0.0)
     jquery-rails (4.0.4)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -356,6 +357,7 @@ DEPENDENCIES
   high_voltage
   i18n-tasks
   instagram
+  ionicons-rails
   jquery-rails
   launchy
   neat (~> 1.7.0)
