@@ -83,6 +83,7 @@ class VideosController < ApplicationController
       :url,
       :private,
       :instagram_id,
+      :video_type,
     )
   end
 end

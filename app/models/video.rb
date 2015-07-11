@@ -1,8 +1,17 @@
 class Video < ActiveRecord::Base
   extend DecoratorDelegateMethods
 
+  enum video_type: [
+    :performance,
+    :tutorial,
+    :idea,
+    :move_showcase,
+    :other,
+  ]
+
   validates :name, presence: true, uniqueness: true
   validates :url, presence: true
+  validates :video_type, presence: true
   validate :video_host
 
   belongs_to :user

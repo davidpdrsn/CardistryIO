@@ -7,6 +7,7 @@ feature "posting videos from instagram" do
     click_link "Import from Instagram"
     click_link "Share on CardistryIO"
     fill_in "Name", with: "Instagram video"
+    select "Performance", from: "Type"
     click_button "Submit video"
 
     alice = create :user, admin: true
@@ -28,6 +29,7 @@ feature "posting videos from instagram" do
     click_link "Import from Instagram"
     click_link "Share on CardistryIO"
     fill_in "Name", with: "Instagram video"
+    select "Performance", from: "Type"
     click_button "Submit video"
 
     alice = create :user, admin: true
@@ -51,6 +53,7 @@ feature "posting videos from instagram" do
     click_link "Import from Instagram"
     click_link "Share on CardistryIO"
     fill_in "Name", with: "Instagram video"
+    select "Performance", from: "Type"
     click_button "Submit video"
 
     bob.reload
@@ -63,6 +66,7 @@ feature "posting videos from instagram" do
     click_link "Import from Instagram"
     click_link "Share on CardistryIO"
     fill_in "Name", with: "Instagram video"
+    select "Performance", from: "Type"
     click_button "Submit video"
 
     bob.reload

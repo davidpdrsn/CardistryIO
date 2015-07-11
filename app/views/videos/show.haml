@@ -1,6 +1,10 @@
 %h1= @video.name
 = simple_format link_mentions(@video.description)
 
+%p
+  Type:
+  = @video.video_type.humanize
+
 = render partial: "shared/ratings", locals: { key: :video_id, rateable: @video }
 
 %p

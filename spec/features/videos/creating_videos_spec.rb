@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "adding performance videos" do
+feature "creating videos" do
   scenario "adding video" do
     user = create :user
     visit root_path(as: user)
@@ -10,6 +10,7 @@ feature "adding performance videos" do
     fill_in "Name", with: "Classic"
     fill_in "URL", with: "https://www.youtube.com/watch?v=W799NKLEz8s"
     fill_in "Description", with: "A video I made"
+    select "Performance", from: "Type"
     click_button "Submit video"
 
     admin = create :user, admin: true
@@ -23,6 +24,7 @@ feature "adding performance videos" do
 
     expect(page).to have_content "Classic"
     expect(page).to have_content "A video I made"
+    expect(page).to have_content "Performance"
   end
 
   scenario "adding invalid video" do
