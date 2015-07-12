@@ -302,6 +302,7 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    stackprof (0.2.7)
     term-ansicolor (1.3.2)
       tins (~> 1.0)
     terminal-table (1.5.2)
@@ -390,6 +391,7 @@ DEPENDENCIES
   simplecov
   spring
   spring-commands-rspec
+  stackprof
   timecop
   title
   uglifier
