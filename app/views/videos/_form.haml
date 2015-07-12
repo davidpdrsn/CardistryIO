@@ -6,7 +6,7 @@
   = f.input :url, label: "URL", hint: video.url_hint
   = f.input :instagram_id, as: :hidden
 
-  = render partial: "shared/add_credits_fields"
+  = render partial: "shared/add_credits_fields", locals: { object: video }
 
   %div
     = f.button :submit, text

@@ -10,6 +10,6 @@ describe "searching for moves" do
 
     json = JSON.parse(response.body)
 
-    expect(json).to eq [{ "name" => "Mocking Bird" }]
+    expect(json).to eq [{ "name" => "Mocking Bird", "credits" => [] }]
   end
 end

@@ -25,6 +25,13 @@ class VideosController < ApplicationController
     if violation.policy_violated?
       flash.alert = violation.message
       redirect_to root_path
+    else
+      respond_to do |format|
+        format.html {}
+        format.json {
+          render json: @video, serializer: VideoSerializer, root: false
+        }
+      end
     end
   end
 
@@ -37,7 +44,7 @@ class VideosController < ApplicationController
   def create
     @video = current_user.videos.new(video_params)
 
-    ActiveRecord::Base.transaction do
+    @video.transaction do
       AddsCredits.new(@video).add_credits(params[:credits])
       @video.save!
       flash.notice = "Video created, will appear once it was been approved"
@@ -55,10 +62,14 @@ class VideosController < ApplicationController
   def update
     @video = current_user.videos.find(params[:id])
 
-    if @video.update(video_params)
-      flash.notice = "Video updated"
-      redirect_to @video
-    else
+    begin
+      @video.transaction do
+        @video.update!(video_params)
+        AddsCredits.new(@video).update_credits(params[:credits])
+        flash.notice = "Video updated"
+        redirect_to @video
+      end
+    rescue ActiveRecord::ActiveRecordError
       flash.alert = "There were errors"
       render :new
     end

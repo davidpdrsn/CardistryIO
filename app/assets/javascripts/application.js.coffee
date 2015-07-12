@@ -6,6 +6,7 @@
 #= require chosen
 #= require jquery.sayt
 #= require helpers
+#= require ajax_request
 #= require_tree .
 
 $ ->

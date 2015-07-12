@@ -1,6 +1,6 @@
 %div
   %p Add credits
-  %div.add-credits
+  %div.add-credits{"data-json-url": polymorphic_path([object], format: :json)}
     %label
       Username
       %input.credit-input{"data-behavior": "credit-user-search"}

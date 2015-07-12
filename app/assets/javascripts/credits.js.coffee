@@ -59,8 +59,20 @@ class Credit
     </span>
     """
 
+loadExistingCredits = (f) ->
+  el = $(".add-credits[data-json-url]")
+  return unless el.length > 0
+  url = el.attr("data-json-url")
+  request = new AjaxRequest(url)
+  request.run (json) -> f(json.credits)
+
 $ ->
   list = new DomList($(".credit-list"))
+
+  loadExistingCredits (users) ->
+    for user in users
+      credit = new Credit(user.username)
+      list.add(credit)
 
   addBehavior "add-credit", (event) ->
     event.preventDefault()

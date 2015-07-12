@@ -17,6 +17,13 @@ class MovesController < ApplicationController
 
   def show
     @move = Move.find(params[:id])
+
+    respond_to do |format|
+      format.html {}
+      format.json {
+        render json: @move, serializer: MoveSerializer, root: false
+      }
+    end
   end
 
   def new
@@ -46,10 +53,14 @@ class MovesController < ApplicationController
   def update
     @move = current_user.moves.find(params[:id])
 
-    if @move.update(move_params)
-      flash.notice = "Updated"
-      redirect_to @move
-    else
+    begin
+      @move.transaction do
+        @move.update!(move_params)
+        AddsCredits.new(@move).update_credits(params[:credits])
+        flash.notice = "Updated"
+        redirect_to @move
+      end
+    rescue ActiveRecord::ActiveRecordError
       flash.alert = "There were errors"
       render :new
     end

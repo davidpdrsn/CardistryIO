@@ -96,19 +96,21 @@ describe VideosController do
       attributes = attributes_for(:video)
       attributes.delete(:approved)
       bob = create :user, username: "bob"
-      alice = create :user, username: "alice"
+
+      creditor = instance_double("AddsCredits")
+      allow(creditor).to receive(:add_credits)
+        .with([bob.username])
+      allow(AddsCredits).to receive(:new).with(kind_of(Video))
+        .and_return(creditor)
 
       post(
         :create,
         video: attributes,
-        credits: [bob, alice].map(&:username)
+        credits: [bob.username]
       )
 
-      video = Video.last
-      expect(video.creditted_users.map(&:username))
-        .to eq [bob, alice].map(&:username)
-      expect(controller).to set_flash[:notice]
-      expect(controller).to redirect_to root_path
+      expect(creditor).to have_received(:add_credits)
+        .with([bob.username])
     end
 
     it "only creates the credits if the video is valid" do
@@ -120,13 +122,20 @@ describe VideosController do
       bob = create :user, username: "bob"
       alice = create :user, username: "alice"
 
-      expect do
-        post(
-          :create,
-          video: attributes,
-          credits: [bob, alice].map(&:username)
-        )
-      end.to_not change { Credit.count }
+      creditor = instance_double("AddsCredits")
+      allow(creditor).to receive(:add_credits)
+        .and_raise(ActiveRecord::ActiveRecordError)
+      allow(AddsCredits).to receive(:new).with(kind_of(Video))
+        .and_return(creditor)
+
+      post(
+        :create,
+        video: attributes,
+        credits: []
+      )
+
+      expect(controller).to render_template :new
+      expect(controller).to set_flash[:alert]
     end
   end
 
@@ -201,6 +210,50 @@ describe VideosController do
       sign_in_as(create :user)
       patch :update, id: create(:video).id
       expect(response.status).to eq 302
+    end
+
+    it "delegates to AddsCredits" do
+      video = create :video, name: "Mocking Bird"
+      sign_in_as(video.user)
+      bob = create :user, username: "bob"
+
+      creditor = instance_double("AddsCredits")
+      allow(creditor).to receive(:update_credits)
+        .with([bob.username])
+      allow(AddsCredits).to receive(:new).with(video)
+        .and_return(creditor)
+
+      patch(
+        :update,
+        id: video.id,
+        video: { name: "Sybil" },
+        credits: [bob.username],
+      )
+
+      expect(creditor).to have_received(:update_credits)
+        .with([bob.username])
+    end
+
+    it "keeps the credits if something goes wrong" do
+      video = create :video, name: "Mocking Bird"
+      sign_in_as(video.user)
+      bob = create :user, username: "bob"
+
+      creditor = instance_double("AddsCredits")
+      allow(creditor).to receive(:update_credits)
+        .and_raise(ActiveRecord::ActiveRecordError)
+      allow(AddsCredits).to receive(:new).with(video)
+        .and_return(creditor)
+
+      patch(
+        :update,
+        id: video.id,
+        video: { name: "Sybil" },
+        credits: [bob.username],
+      )
+
+      expect(controller).to set_flash[:alert]
+      expect(controller).to render_template :new
     end
   end
 end

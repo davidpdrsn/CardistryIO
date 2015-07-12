@@ -49,17 +49,21 @@ describe MovesController do
       sign_in_as user
       attributes = attributes_for(:move)
       bob = create :user, username: "bob"
-      alice = create :user, username: "alice"
+
+      creditor = instance_double("AddsCredits")
+      allow(creditor).to receive(:add_credits)
+        .with([bob.username])
+      allow(AddsCredits).to receive(:new).with(kind_of(Move))
+        .and_return(creditor)
 
       post(
         :create,
         move: attributes,
-        credits: [bob, alice].map(&:username)
+        credits: [bob.username]
       )
 
-      move = Move.last
-      expect(move.creditted_users.map(&:username))
-        .to eq [bob, alice].map(&:username)
+      expect(creditor).to have_received(:add_credits)
+        .with([bob.username])
     end
 
     it "only creates the credits if the move is valid" do
@@ -70,13 +74,20 @@ describe MovesController do
       bob = create :user, username: "bob"
       alice = create :user, username: "alice"
 
-      expect do
-        post(
-          :create,
-          move: attributes,
-          credits: [bob, alice].map(&:username)
-        )
-      end.to_not change { Credit.count }
+      creditor = instance_double("AddsCredits")
+      allow(creditor).to receive(:add_credits)
+        .and_raise(ActiveRecord::ActiveRecordError)
+      allow(AddsCredits).to receive(:new).with(kind_of(Move))
+        .and_return(creditor)
+
+      post(
+        :create,
+        move: attributes,
+        credits: []
+      )
+
+      expect(controller).to render_template :new
+      expect(controller).to set_flash[:alert]
     end
   end
 
@@ -150,6 +161,50 @@ describe MovesController do
       sign_in_as(create :user)
       patch :update, id: create(:move).id
       expect(response.status).to eq 302
+    end
+
+    it "delegates to AddsCredits" do
+      move = create :move, name: "Mocking Bird"
+      sign_in_as(move.user)
+      bob = create :user, username: "bob"
+
+      creditor = instance_double("AddsCredits")
+      allow(creditor).to receive(:update_credits)
+        .with([bob.username])
+      allow(AddsCredits).to receive(:new).with(move)
+        .and_return(creditor)
+
+      patch(
+        :update,
+        id: move.id,
+        move: { name: "Sybil" },
+        credits: [bob.username],
+      )
+
+      expect(creditor).to have_received(:update_credits)
+        .with([bob.username])
+    end
+
+    it "keeps the credits if something goes wrong" do
+      move = create :move, name: "Mocking Bird"
+      sign_in_as(move.user)
+      bob = create :user, username: "bob"
+
+      creditor = instance_double("AddsCredits")
+      allow(creditor).to receive(:update_credits)
+        .and_raise(ActiveRecord::ActiveRecordError)
+      allow(AddsCredits).to receive(:new).with(move)
+        .and_return(creditor)
+
+      patch(
+        :update,
+        id: move.id,
+        move: { name: "Sybil" },
+        credits: [bob.username],
+      )
+
+      expect(controller).to set_flash[:alert]
+      expect(controller).to render_template :new
     end
   end
 end
