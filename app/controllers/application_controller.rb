@@ -8,6 +8,13 @@ class ApplicationController < ActionController::Base
     super || NullUser.new
   end
 
+  before_filter :enable_rack_mini_profiler
+  def enable_rack_mini_profiler
+    if current_user.admin?
+      Rack::MiniProfiler.authorize_request
+    end
+  end
+
   def _buttonbar
     @user = current_user
     @notifications = current_user.notifications
