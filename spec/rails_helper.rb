@@ -21,5 +21,16 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 end
 
+Capybara::Webkit.configure do |config|
+  [
+    "https://www.youtube.com",
+    "https://secure.gravatar.com",
+    "http://vjs.zencdn.net",
+  ].each do |url|
+    config.block_url(url)
+  end
+end
+
+
 ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :webkit

@@ -1,5 +1,3 @@
-flip = (f) -> (x, y) -> f(y, x)
-
 # TODO: Somehow test this
 $ ->
   $(document).on "click", ".video-appearances-move-add", (e) ->

@@ -1,12 +1,12 @@
 require "rails_helper"
 
-describe Searcher do
+describe Searcher::Moves do
   it "returns the moves that match" do
     create :move, name: "Sybil"
     move = create :move, name: "Mocking Bird"
     create :move, name: "Jackson 5"
 
-    results = Searcher.new("Bird").find_results
+    results = Searcher::Moves.new("Bird").find_results
     expect(results).to eq [move]
   end
 
@@ -15,7 +15,7 @@ describe Searcher do
     move = create :move, name: "Mocking Bird"
     create :move, name: "Jackson 5"
 
-    results = Searcher.new("bird").find_results
+    results = Searcher::Moves.new("bird").find_results
     expect(results).to eq [move]
   end
 
@@ -24,7 +24,7 @@ describe Searcher do
     three = create :move, name: "Sybil z"
     two = create :move, name: "Sybil m"
 
-    results = Searcher.new("Sybil").find_results
+    results = Searcher::Moves.new("Sybil").find_results
     expect(results.map(&:id)).to eq [one, two, three].map(&:id)
   end
 end

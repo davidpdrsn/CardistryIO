@@ -6,6 +6,7 @@ describe Video do
   it { should have_many :comments }
   it { should have_many :sharings }
   it { should have_many :ratings }
+  it { should have_many :credits }
 
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of :name }

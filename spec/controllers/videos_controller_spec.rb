@@ -89,6 +89,45 @@ describe VideosController do
       post :create, video: {}
       expect(response.status).to eq 302
     end
+
+    it "creates the video with credits" do
+      user = create :user
+      sign_in_as user
+      attributes = attributes_for(:video)
+      attributes.delete(:approved)
+      bob = create :user, username: "bob"
+      alice = create :user, username: "alice"
+
+      post(
+        :create,
+        video: attributes,
+        credits: [bob, alice].map(&:username)
+      )
+
+      video = Video.last
+      expect(video.creditted_users.map(&:username))
+        .to eq [bob, alice].map(&:username)
+      expect(controller).to set_flash[:notice]
+      expect(controller).to redirect_to root_path
+    end
+
+    it "only creates the credits if the video is valid" do
+      user = create :user
+      sign_in_as user
+      attributes = attributes_for(:video)
+      attributes.delete(:name)
+      attributes.delete(:approved)
+      bob = create :user, username: "bob"
+      alice = create :user, username: "alice"
+
+      expect do
+        post(
+          :create,
+          video: attributes,
+          credits: [bob, alice].map(&:username)
+        )
+      end.to_not change { Credit.count }
+    end
   end
 
   describe "#destroy" do

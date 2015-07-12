@@ -18,6 +18,7 @@ class Video < ActiveRecord::Base
   has_many :appearances, dependent: :destroy
   has_many :comments, as: :commentable
   has_many :ratings, as: :rateable
+  has_many :credits, as: :creditable
   has_many :sharings
 
   scope :all_public, -> { approved.where(private: false) }
@@ -26,6 +27,10 @@ class Video < ActiveRecord::Base
 
   use VideoWithUrlHint, for: :url_hint
   use WithRatingStats, for: :average_rating
+
+  def creditted_users
+    credits.map(&:user)
+  end
 
   def to_param
     "#{id}-#{name.parameterize}"

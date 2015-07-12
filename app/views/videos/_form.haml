@@ -5,5 +5,14 @@
   = f.input :private
   = f.input :url, label: "URL", hint: video.url_hint
   = f.input :instagram_id, as: :hidden
+
+  %div
+    %p Add credits
+    %div.add-credits
+      %label
+        Username
+        %input.credit-input{"data-behavior": "credit-user-search"}
+      %div.credit-list
+
   %div
     = f.button :submit, text

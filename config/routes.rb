@@ -65,6 +65,8 @@ Rails.application.routes.draw do
 
   scope :api, module: :api do
     get "search/moves", to: "searches#moves"
+    get "search/users", to: "searches#users"
+
     post "videos/:id/approve", to: "videos#approve"
     get "videos/unapproved", to: "videos#unapproved"
     delete "videos/:id", to: "videos#destroy"

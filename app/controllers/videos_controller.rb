@@ -36,13 +36,25 @@ class VideosController < ApplicationController
 
   def create
     @video = current_user.videos.new(video_params)
-    if @video.save
+
+    ActiveRecord::Base.transaction do
+      create_credits(@video)
+      @video.save!
       flash.notice = "Video created, will appear once it was been approved"
       redirect_to root_path
-    else
-      flash.alert = "There were errors"
-      render :new
     end
+  rescue
+    flash.alert = "There were errors"
+    render :new
+  end
+
+  def create_credits(video)
+    return unless params[:credits].present?
+    credits = params[:credits].each_with_object([]) do |username, acc|
+      user = User.find_by!(username: username)
+      acc << Credit.create(user: user, creditable: @video)
+    end
+    @video.credits = credits
   end
 
   def edit
