@@ -32,7 +32,7 @@ gem "neat", "~> 1.7.0"
 gem "newrelic_rpm", ">= 3.9.8"
 gem "normalize-rails", "~> 3.0.0"
 gem "pg"
-gem "rack-mini-profiler"
+gem "rack-mini-profiler", require: false
 gem "rails", "4.2.2"
 gem "recipient_interceptor"
 gem "refills"
