@@ -1,6 +1,6 @@
 class VideoAppearancesController < ApplicationController
-  before_filter :require_login
-  before_filter :has_access, only: [:edit, :update, :destroy]
+  before_action :require_login
+  before_action :has_access, only: [:edit, :update, :destroy]
 
   def edit
     @video = EmbeddableVideo.new(

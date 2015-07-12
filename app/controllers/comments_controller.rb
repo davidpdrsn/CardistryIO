@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :require_login, only: [:create, :update, :edit]
+  before_action :require_login, only: [:create, :update, :edit]
 
   def create
     commentable = find_commentable

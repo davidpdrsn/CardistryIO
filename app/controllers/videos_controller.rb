@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_filter :require_login, only: [:index, :new,
+  before_action :require_login, only: [:index, :new,
                                        :create, :destroy,
                                        :edit, :update]
 

@@ -1,6 +1,6 @@
 class UsersController < Clearance::UsersController
-  before_filter :require_login, only: [:edit, :update, :make_admin]
-  before_filter :has_access, only: [:edit, :update]
+  before_action :require_login, only: [:edit, :update, :make_admin]
+  before_action :has_access, only: [:edit, :update]
 
   def show
     @user = User.find(params[:id])

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     super || NullUser.new
   end
 
-  before_filter :enable_rack_mini_profiler
+  before_action :enable_rack_mini_profiler
   def enable_rack_mini_profiler
     if current_user.admin?
       Rack::MiniProfiler.authorize_request
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  before_filter :prerelease_protection
+  before_action :prerelease_protection
   def prerelease_protection
     return unless Rails.env.production?
 

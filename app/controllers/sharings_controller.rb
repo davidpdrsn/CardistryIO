@@ -1,5 +1,5 @@
 class SharingsController < ApplicationController
-  before_filter :require_login, only: [:index, :new, :edit, :create, :destroy]
+  before_action :require_login, only: [:index, :new, :edit, :create, :destroy]
 
   def index
     @videos = Sharing.videos_shared_with_user(current_user)

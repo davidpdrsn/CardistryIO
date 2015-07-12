@@ -1,7 +1,7 @@
 module Admin
   class ApproveVideosController < ApplicationController
-    before_filter :require_login
-    before_filter :is_admin?
+    before_action :require_login
+    before_action :is_admin?
 
     def new
       @videos = DecoratedCollection.new(Video.unapproved, EmbeddableVideo)

@@ -1,6 +1,6 @@
 module Api
   class AdminController < Api::Controller
-    before_filter :require_authentication
+    before_action :require_authentication
 
     USERNAME = ENV.fetch("ADMIN_USERNAME")
     PASSWORD = ENV.fetch("ADMIN_PASSWORD")

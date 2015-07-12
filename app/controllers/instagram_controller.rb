@@ -1,5 +1,5 @@
 class InstagramController < ApplicationController
-  before_filter :require_login, only: [:index, :callback, :create]
+  before_action :require_login, only: [:index, :callback, :create]
 
   def index
     if instagram_module::Auth.authorized?(session)
