@@ -28,6 +28,7 @@ class Video < ActiveRecord::Base
   use VideoWithUrlHint, for: :url_hint
   use WithRatingStats, for: :average_rating
 
+  # TODO: Test this
   def creditted_users
     credits.map(&:user)
   end

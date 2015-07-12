@@ -1,6 +1,8 @@
 %h1= @move.name
 = simple_format link_mentions(@move.description)
 
+= render partial: "shared/show_credits", locals: { object: @move, name: "move" }
+
 = render partial: "shared/ratings", locals: { key: :move_id, rateable: @move }
 
 %p

@@ -43,6 +43,41 @@ describe MovesController do
       post :create
       expect(response.status).to eq 302
     end
+
+    it "creates the move with credits" do
+      user = create :user
+      sign_in_as user
+      attributes = attributes_for(:move)
+      bob = create :user, username: "bob"
+      alice = create :user, username: "alice"
+
+      post(
+        :create,
+        move: attributes,
+        credits: [bob, alice].map(&:username)
+      )
+
+      move = Move.last
+      expect(move.creditted_users.map(&:username))
+        .to eq [bob, alice].map(&:username)
+    end
+
+    it "only creates the credits if the move is valid" do
+      user = create :user
+      sign_in_as user
+      attributes = attributes_for(:move)
+      attributes.delete(:name)
+      bob = create :user, username: "bob"
+      alice = create :user, username: "alice"
+
+      expect do
+        post(
+          :create,
+          move: attributes,
+          credits: [bob, alice].map(&:username)
+        )
+      end.to_not change { Credit.count }
+    end
   end
 
   describe "#destroy" do

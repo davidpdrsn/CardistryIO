@@ -5,6 +5,7 @@ describe Move do
   it { should have_many :appearances }
   it { should have_many :comments }
   it { should have_many :ratings }
+  it { should have_many :credits }
 
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of :name }
@@ -16,5 +17,16 @@ describe Move do
     move.destroy
 
     expect(Appearance.count).to eq 0
+  end
+
+  describe "#creditted_users" do
+    it "returns the users who have gotten credit for that move" do
+      move = create :move
+      user = create :user, username: "bob"
+      create :user, username: "alice"
+      Credit.create!(creditable: move, user: user)
+
+      expect(move.creditted_users.map(&:username)).to eq [user.username]
+    end
   end
 end

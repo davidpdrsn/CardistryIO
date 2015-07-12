@@ -1,4 +1,5 @@
 = simple_form_for move do |f|
   = f.input :name
   = f.input :description
+  = render partial: "shared/add_credits_fields"
   = f.button :submit, text

@@ -16,6 +16,7 @@ FactoryGirl.define do
   factory :move do
     sequence(:name) { |n| "Sybil #{n}" }
     user
+    description "My favorite move"
   end
 
   factory :video do

@@ -26,15 +26,17 @@ class MovesController < ApplicationController
   def create
     @move = current_user.moves.new(move_params)
 
-    if @move.save
+    @move.transaction do
       MentionNotifier.new(@move).check_for_mentions
+      @move.save!
+      AddsCredits.new(@move).add_credits(params[:credits])
 
       flash.notice = "Move created"
       redirect_to @move
-    else
-      flash.alert = "There were errors"
-      render :new
     end
+  rescue ActiveRecord::ActiveRecordError
+    flash.alert = "There were errors"
+    render :new
   end
 
   def edit
