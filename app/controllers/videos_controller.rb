@@ -45,8 +45,8 @@ class VideosController < ApplicationController
     @video = current_user.videos.new(video_params)
 
     @video.transaction do
-      AddsCredits.new(@video).add_credits(params[:credits])
       @video.save!
+      AddsCredits.new(@video).add_credits(params[:credits])
       flash.notice = "Video created, will appear once it was been approved"
       redirect_to root_path
     end

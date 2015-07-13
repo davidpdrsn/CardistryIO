@@ -9,6 +9,7 @@ class Notification < ActiveRecord::Base
     :new_follower,
     :video_shared,
     :mentioned,
+    :new_credit,
   ]
 
   def type
@@ -27,6 +28,8 @@ class Notification < ActiveRecord::Base
              "@#{actor.username} shared a video with you"
            when "mentioned"
              "@#{actor.username} mentioned you in a {{link}}"
+           when "new_credit"
+             "@#{actor.username} credited you for his {{link}}"
            else
              fail "No text for notifications of type #{notification_type}"
            end

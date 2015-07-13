@@ -36,7 +36,8 @@ class MovesController < ApplicationController
     @move.transaction do
       MentionNotifier.new(@move).check_for_mentions
       @move.save!
-      AddsCredits.new(@move).add_credits(params[:credits])
+      users = AddsCredits.new(@move).add_credits(params[:credits])
+      notifier_users_of_new_credit(users, @move)
 
       flash.notice = "Move created"
       redirect_to @move
@@ -56,7 +57,8 @@ class MovesController < ApplicationController
     begin
       @move.transaction do
         @move.update!(move_params)
-        AddsCredits.new(@move).update_credits(params[:credits])
+        users = AddsCredits.new(@move).update_credits(params[:credits])
+        notifier_users_of_new_credit(users, @move)
         flash.notice = "Updated"
         redirect_to @move
       end
@@ -77,5 +79,11 @@ class MovesController < ApplicationController
 
   def move_params
     params.require(:move).permit(:name, :description)
+  end
+
+  def notifier_users_of_new_credit(users, move)
+    users.each do |user|
+      Notifier.new(user).new_credit(subject: move, actor: current_user)
+    end
   end
 end

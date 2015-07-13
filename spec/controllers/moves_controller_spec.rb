@@ -52,7 +52,7 @@ describe MovesController do
 
       creditor = instance_double("AddsCredits")
       allow(creditor).to receive(:add_credits)
-        .with([bob.username])
+        .with([bob.username]).and_return([])
       allow(AddsCredits).to receive(:new).with(kind_of(Move))
         .and_return(creditor)
 
@@ -170,7 +170,7 @@ describe MovesController do
 
       creditor = instance_double("AddsCredits")
       allow(creditor).to receive(:update_credits)
-        .with([bob.username])
+        .with([bob.username]).and_return([])
       allow(AddsCredits).to receive(:new).with(move)
         .and_return(creditor)
 

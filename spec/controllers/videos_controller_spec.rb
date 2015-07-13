@@ -83,59 +83,59 @@ describe VideosController do
           post :create, video: { name: "" }
         }.to change { Video.count }.by 0
       end
+
+      it "creates the video with credits" do
+        user = create :user
+        sign_in_as user
+        attributes = attributes_for(:video)
+        attributes.delete(:approved)
+        bob = create :user, username: "bob"
+
+        creditor = instance_double("AddsCredits")
+        allow(creditor).to receive(:add_credits)
+          .with([bob.username]).and_return([])
+        allow(AddsCredits).to receive(:new).with(kind_of(Video))
+          .and_return(creditor)
+
+        post(
+          :create,
+          video: attributes,
+          credits: [bob.username]
+        )
+
+        expect(creditor).to have_received(:add_credits)
+          .with([bob.username])
+      end
+
+      it "only creates the credits if the video is valid" do
+        user = create :user
+        sign_in_as user
+        attributes = attributes_for(:video)
+        attributes.delete(:name)
+        attributes.delete(:approved)
+        bob = create :user, username: "bob"
+        alice = create :user, username: "alice"
+
+        creditor = instance_double("AddsCredits")
+        allow(creditor).to receive(:add_credits)
+          .and_raise(ActiveRecord::ActiveRecordError)
+        allow(AddsCredits).to receive(:new).with(kind_of(Video))
+          .and_return(creditor)
+
+        post(
+          :create,
+          video: attributes,
+          credits: []
+        )
+
+        expect(controller).to render_template :new
+        expect(controller).to set_flash[:alert]
+      end
     end
 
     it "requires authentication" do
       post :create, video: {}
       expect(response.status).to eq 302
-    end
-
-    it "creates the video with credits" do
-      user = create :user
-      sign_in_as user
-      attributes = attributes_for(:video)
-      attributes.delete(:approved)
-      bob = create :user, username: "bob"
-
-      creditor = instance_double("AddsCredits")
-      allow(creditor).to receive(:add_credits)
-        .with([bob.username])
-      allow(AddsCredits).to receive(:new).with(kind_of(Video))
-        .and_return(creditor)
-
-      post(
-        :create,
-        video: attributes,
-        credits: [bob.username]
-      )
-
-      expect(creditor).to have_received(:add_credits)
-        .with([bob.username])
-    end
-
-    it "only creates the credits if the video is valid" do
-      user = create :user
-      sign_in_as user
-      attributes = attributes_for(:video)
-      attributes.delete(:name)
-      attributes.delete(:approved)
-      bob = create :user, username: "bob"
-      alice = create :user, username: "alice"
-
-      creditor = instance_double("AddsCredits")
-      allow(creditor).to receive(:add_credits)
-        .and_raise(ActiveRecord::ActiveRecordError)
-      allow(AddsCredits).to receive(:new).with(kind_of(Video))
-        .and_return(creditor)
-
-      post(
-        :create,
-        video: attributes,
-        credits: []
-      )
-
-      expect(controller).to render_template :new
-      expect(controller).to set_flash[:alert]
     end
   end
 
@@ -219,7 +219,7 @@ describe VideosController do
 
       creditor = instance_double("AddsCredits")
       allow(creditor).to receive(:update_credits)
-        .with([bob.username])
+        .with([bob.username]).and_return([])
       allow(AddsCredits).to receive(:new).with(video)
         .and_return(creditor)
 

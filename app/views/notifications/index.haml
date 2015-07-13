@@ -6,6 +6,6 @@
     - @notifications.each do |notification|
       %li
         -# Its okay to call #html_safe here because nothing comes from the user
-        = link_mentions notification.text.expand(link: ->() { notification_subject_link(notification) }).html_safe
+        = notification_text(notification)
 - else
   You have no notifications

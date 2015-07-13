@@ -12,6 +12,7 @@ module Admin
       video.approve!
       Notifier.new(video.user).video_approved(subject: video, actor: current_user)
       MentionNotifier.new(video).check_for_mentions
+      notify_users(video)
       redirect_to approve_videos_path
     end
 
@@ -26,6 +27,12 @@ module Admin
       unless current_user.admin?
         flash.alert = "Page not found"
         redirect_to root_path
+      end
+    end
+
+    def notify_users(video)
+      video.creditted_users.each do |user|
+        Notifier.new(user).new_credit(subject: video, actor: video.user)
       end
     end
   end

@@ -33,6 +33,14 @@ class Notifier
     )
   end
 
+  def new_credit(subject:, actor:)
+    send_notification_without_checking_subject_actor_relationship(
+      subject: subject,
+      actor: actor,
+      type: :new_credit
+    )
+  end
+
   private
 
   def send_notification_without_checking_subject_actor_relationship(subject:, actor:, type:)
