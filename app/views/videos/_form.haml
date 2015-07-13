@@ -3,7 +3,8 @@
   = f.input :description
   = f.input :video_type, label: "Type", prompt: "Pick a type", label_method: ->(x) { x.last.humanize }
   = f.input :private
-  = f.input :url, label: "URL", hint: video.url_hint
+  - if video.new_record?
+    = f.input :url, label: "URL", hint: video.url_hint
   = f.input :instagram_id, as: :hidden
 
   = render partial: "shared/add_credits_fields", locals: { object: video }

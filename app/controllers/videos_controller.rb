@@ -42,7 +42,7 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = current_user.videos.new(video_params)
+    @video = current_user.videos.new(strongify(create_params))
 
     @video.transaction do
       @video.save!
@@ -64,7 +64,7 @@ class VideosController < ApplicationController
 
     begin
       @video.transaction do
-        @video.update!(video_params)
+        @video.update!(strongify(update_params))
         users = AddsCredits.new(@video).update_credits(params[:credits])
         send_notifications(users, @video)
         flash.notice = "Video updated"
@@ -91,15 +91,22 @@ class VideosController < ApplicationController
 
   private
 
-  def video_params
-    params.require(:video).permit(
+  def strongify(permitted)
+    params.require(:video).permit(*permitted)
+  end
+
+  def create_params
+    update_params + [:url]
+  end
+
+  def update_params
+    [
       :name,
       :description,
-      :url,
       :private,
       :instagram_id,
       :video_type,
-    )
+    ]
   end
 
   def send_notifications(users, video)
