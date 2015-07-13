@@ -65,7 +65,8 @@ class VideosController < ApplicationController
     begin
       @video.transaction do
         @video.update!(video_params)
-        AddsCredits.new(@video).update_credits(params[:credits])
+        users = AddsCredits.new(@video).update_credits(params[:credits])
+        send_notifications(users, @video)
         flash.notice = "Video updated"
         redirect_to @video
       end
@@ -99,5 +100,11 @@ class VideosController < ApplicationController
       :instagram_id,
       :video_type,
     )
+  end
+
+  def send_notifications(users, video)
+    users.each do |user|
+      Notifier.new(user).new_credit(subject: @video, actor: @video.user)
+    end
   end
 end

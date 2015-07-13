@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "move" do
+feature "credits when adding video" do
   scenario "adding video", :js do
     user = create :user
     bob = create :user, username: "bob"
@@ -26,5 +26,25 @@ feature "move" do
 
     click_link "video"
     expect(page).to have_content "Classic"
+  end
+
+  scenario "updating video", :js do
+    bob = create :user, username: "bob"
+    video = create :video
+    video.credits.create(user: create(:user))
+    visit edit_video_path(video, as: video.user)
+    within ".add-credits" do
+      click_button "Remove"
+      fill_in "Username", with: "bob"
+      click_link "@bob"
+    end
+    click_button "Update video"
+
+    visit notifications_path(as: bob)
+
+    expect(page).to have_content "@#{video.user.username} credited you for his video"
+
+    click_link "video"
+    expect(page).to have_content video.name
   end
 end
