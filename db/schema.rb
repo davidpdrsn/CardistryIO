@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712143151) do
+ActiveRecord::Schema.define(version: 20150715203852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,9 +57,11 @@ ActiveRecord::Schema.define(version: 20150712143151) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "moves", force: :cascade do |t|
-    t.string  "name"
-    t.text    "description"
-    t.integer "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -113,14 +115,16 @@ ActiveRecord::Schema.define(version: 20150712143151) do
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
   create_table "videos", force: :cascade do |t|
-    t.string  "name"
-    t.text    "description"
-    t.string  "url"
-    t.integer "user_id"
-    t.boolean "approved",     default: false
-    t.boolean "private",      default: false
-    t.string  "instagram_id"
-    t.integer "video_type"
+    t.string   "name"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "user_id"
+    t.boolean  "approved",     default: false
+    t.boolean  "private",      default: false
+    t.string   "instagram_id"
+    t.integer  "video_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
