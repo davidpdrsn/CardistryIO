@@ -46,17 +46,16 @@ class User < ActiveRecord::Base
   end
 
   def follow!(user)
-    if relationships.where(followee: user, active: true).blank?
-      klass = if relationships.where(followee: user, active: false).present?
-                OldRelationship
-              else
-                NewRelationship
-              end
+    return unless relationships.where(followee: user, active: true).blank?
+    klass = if relationships.where(followee: user, active: false).present?
+              OldRelationship
+            else
+              NewRelationship
+            end
 
-      relationship = relationships.find_or_create_by!(followee: user)
-      relationship.make_active!
-      klass.new(relationship)
-    end
+    relationship = relationships.find_or_create_by!(followee: user)
+    relationship.make_active!
+    klass.new(relationship)
   end
 
   def follows?(user)
