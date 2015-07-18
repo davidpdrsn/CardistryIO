@@ -65,14 +65,14 @@ class User < ActiveRecord::Base
 
   def following
     ids = relationships.where(active: true).pluck(:followee_id)
-    User.find(ids)
+    User.where(id: ids)
   end
 
   def followers
     ids = Relationship
       .where(followee_id: self.id, active: true)
       .pluck(:follower_id)
-    User.find(ids)
+    User.where(id: ids)
   end
 
   def unfollow!(user)

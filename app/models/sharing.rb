@@ -8,7 +8,7 @@ class Sharing < ActiveRecord::Base
 
   def self.videos_shared_with_user(user)
     ids = Sharing.includes(:video).where(user: user).pluck(:video_id)
-    Video.find(ids)
+    Video.where(id: ids)
   end
 
   def self.video_shared_with_user?(video, user)
