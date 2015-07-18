@@ -42,4 +42,9 @@ FactoryGirl.define do
     association :subject, factory: :video
     association :actor, factory: :user
   end
+
+  factory :sharing do
+    user
+    video
+  end
 end
