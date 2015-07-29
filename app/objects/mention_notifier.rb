@@ -1,7 +1,7 @@
 class MentionNotifier
   pattr_initialize :subject
 
-  def check_for_mentions
+  def notify_mentioned_users
     html_with_mentions = LinkMentions.new(subject.description).link_mentions
     html_with_mentions.users_mentioned.each do |user|
       notify_of_mention(user, subject)

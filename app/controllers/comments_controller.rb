@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     comment.user = current_user
     MentionNotifier.new(
       MentionNotifier::CommentAdapter.new(comment)
-    ).check_for_mentions
+    ).notify_mentioned_users
 
     if comment.save
       create_notification(commentable)

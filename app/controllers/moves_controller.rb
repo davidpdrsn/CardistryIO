@@ -31,20 +31,27 @@ class MovesController < ApplicationController
   end
 
   def create
-    @move = current_user.moves.new(move_params)
+    mention_observer = MentionNotificationObserver.new
+    adds_credit_observer = AddsCreditObserver.new(params, current_user)
 
-    @move.transaction do
-      MentionNotifier.new(@move).check_for_mentions
-      @move.save!
-      users = AddsCredits.new(@move).add_credits(params[:credits])
-      notifier_users_of_new_credit(users, @move)
+    @move = ObservableRecord.new(
+      current_user.moves.new(move_params),
+      CompositeObserver.new([
+        mention_observer,
+        adds_credit_observer,
+      ]),
+    )
 
-      flash.notice = "Move created"
-      redirect_to @move
+    begin
+      @move.transaction do
+        @move.save!
+        flash.notice = "Move created"
+        redirect_to @move
+      end
+    rescue ActiveRecord::ActiveRecordError
+      flash.alert = "There were errors"
+      render :new
     end
-  rescue ActiveRecord::ActiveRecordError
-    flash.alert = "There were errors"
-    render :new
   end
 
   def edit
@@ -52,19 +59,21 @@ class MovesController < ApplicationController
   end
 
   def update
-    @move = current_user.moves.find(params[:id])
+    observer = AddsCreditObserver.new(params, current_user)
+    @move = ObservableRecord.new(
+      current_user.moves.find(params[:id]),
+      observer,
+    )
 
     begin
       @move.transaction do
         @move.update!(move_params)
-        users = AddsCredits.new(@move).update_credits(params[:credits])
-        notifier_users_of_new_credit(users, @move)
         flash.notice = "Updated"
         redirect_to @move
       end
     rescue ActiveRecord::ActiveRecordError
       flash.alert = "There were errors"
-      render :new
+      render :edit
     end
   end
 
@@ -81,9 +90,35 @@ class MovesController < ApplicationController
     params.require(:move).permit(:name, :description)
   end
 
-  def notifier_users_of_new_credit(users, move)
-    users.each do |user|
-      Notifier.new(user).new_credit(subject: move, actor: current_user)
+  class MentionNotificationObserver
+    def save!(move)
+      MentionNotifier.new(move).notify_mentioned_users
+    end
+  end
+
+  class AddsCreditObserver
+    pattr_initialize :params, :current_user
+
+    def save!(move)
+      find_users_with_credits_for(move, then: :add_credits)
+    end
+
+    def update!(move, _)
+      find_users_with_credits_for(move, then: :update_credits)
+    end
+
+    private
+
+    def find_users_with_credits_for(move, options)
+      method_name = options.fetch(:then)
+      users = AddsCredits.new(move).public_send(method_name, params[:credits])
+      notifier_users_of_new_credit(users, move)
+    end
+
+    def notifier_users_of_new_credit(users, move)
+      users.each do |user|
+        Notifier.new(user).new_credit(subject: move, actor: current_user)
+      end
     end
   end
 end

@@ -11,7 +11,7 @@ module Admin
       video = Video.find(params[:id])
       video.approve!
       Notifier.new(video.user).video_approved(subject: video, actor: current_user)
-      MentionNotifier.new(video).check_for_mentions
+      MentionNotifier.new(video).notify_mentioned_users
       notify_users(video)
       redirect_to approve_videos_path
     end

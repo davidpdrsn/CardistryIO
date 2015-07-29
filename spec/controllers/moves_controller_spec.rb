@@ -53,7 +53,7 @@ describe MovesController do
       creditor = instance_double("AddsCredits")
       allow(creditor).to receive(:add_credits)
         .with([bob.username]).and_return([])
-      allow(AddsCredits).to receive(:new).with(kind_of(Move))
+      allow(AddsCredits).to receive(:new).with(any_args)
         .and_return(creditor)
 
       post(
@@ -149,7 +149,7 @@ describe MovesController do
       patch :update, id: move.id, move: { name: nil }
 
       expect(Move.find(move.id).name).to eq "Mocking Bird"
-      expect(controller).to render_template :new
+      expect(controller).to render_template :edit
     end
 
     it "requires authentication" do
@@ -204,7 +204,7 @@ describe MovesController do
       )
 
       expect(controller).to set_flash[:alert]
-      expect(controller).to render_template :new
+      expect(controller).to render_template :edit
     end
   end
 end
