@@ -1,2 +1,6 @@
-- @feed.activities.each do |activity|
-  = activity.text
+- if @feed.activities.present?
+  %ul
+    - @feed.activities.each do |activity|
+      %li= activity.text
+- else
+  Empty feed, follow some people yo!

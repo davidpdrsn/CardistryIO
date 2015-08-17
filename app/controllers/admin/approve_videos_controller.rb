@@ -13,6 +13,7 @@ module Admin
       Notifier.new(video.user).video_approved(subject: video, actor: current_user)
       MentionNotifier.new(video).notify_mentioned_users
       notify_users(video)
+      create_activity(video)
       redirect_to approve_videos_path
     end
 
@@ -22,6 +23,10 @@ module Admin
     end
 
     private
+
+    def create_activity(video)
+      VideoActivityObserver.new(ActivityObserver.new).save(video)
+    end
 
     def is_admin?
       unless current_user.admin?
