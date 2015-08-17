@@ -16,6 +16,14 @@ ActiveRecord::Schema.define(version: 20160507012005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "activities", force: :cascade do |t|
+    t.integer  "subject_id"
+    t.string   "subject_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "appearances", force: :cascade do |t|
     t.integer "move_id"
     t.integer "video_id"

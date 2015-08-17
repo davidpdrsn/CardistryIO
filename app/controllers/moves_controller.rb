@@ -33,12 +33,14 @@ class MovesController < ApplicationController
   def create
     mention_observer = MentionNotificationObserver.new
     adds_credit_observer = AddsCreditObserver.new(params, current_user)
+    activity_observer = ActivityObserver.new
 
     @move = ObservableRecord.new(
       current_user.moves.new(move_params),
       CompositeObserver.new([
         mention_observer,
         adds_credit_observer,
+        activity_observer,
       ]),
     )
 
