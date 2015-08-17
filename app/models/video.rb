@@ -24,6 +24,7 @@ class Video < ApplicationRecord
   scope :all_public, -> { approved.where(private: false) }
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where(approved: false) }
+  scope :all_private, -> { where(private: true) }
 
   use VideoWithUrlHint, for: :url_hint
   use WithRatingStats, for: :average_rating

@@ -12,26 +12,20 @@ class VideosController < ApplicationController
   end
 
   def show
-    model = Video.find(params[:id])
+    # Return NullRelation from NullUser#videos to avoid conditional
+    model = if signed_in?
+              current_user.accessable_videos.find(params[:id])
+            else
+              Video.all_public.find(params[:id])
+            end
 
     @video = EmbeddableVideo.new(model)
 
-    policy = SharingPolicy::Viewing.new(
-      video: @video,
-      viewing_user: current_user
-    )
-    violation = policy.check_for_violation
-
-    if violation.policy_violated?
-      flash.alert = violation.message
-      redirect_to root_path
-    else
-      respond_to do |format|
-        format.html {}
-        format.json {
-          render json: @video, serializer: VideoSerializer, root: false
-        }
-      end
+    respond_to do |format|
+      format.html {}
+      format.json {
+        render json: @video, serializer: VideoSerializer, root: false
+      }
     end
   end
 

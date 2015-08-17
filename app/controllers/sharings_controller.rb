@@ -19,38 +19,25 @@ class SharingsController < ApplicationController
 
   def create
     user = User.find(params.require(:sharing).permit(:user)[:user])
-    video = Video.find(params.require(:video_id))
+    video = current_user.videos.all_private.find(params.require(:video_id))
 
-    check_policy(SharingPolicy::Creation, video: video, sharing_user: current_user) do
-      previous_share = Sharing.find_by(user_id: user.id, video_id: video.id)
-      maybe_create_and_notify(user, video, previous_share)
-      flash.notice = "Video shared with #{user.username}"
-      redirect_to video
-    end
-  end
-
-  def maybe_create_and_notify(user, video, previous_share)
-    if previous_share.blank?
-      Sharing.create!(user_id: user.id, video_id: video.id)
-      Notifier.new(user).video_shared(subject: video, actor: current_user)
-    end
+    previous_share = Sharing.find_by(user_id: user.id, video_id: video.id)
+    maybe_create_and_notify(user, video, previous_share)
+    flash.notice = "Video shared with #{user.username}"
+    redirect_to video
   end
 
   def edit
-    video = Video.find(params[:video_id])
+    video = current_user.videos.all_private.approved.find(params[:video_id])
 
-    check_policy(SharingPolicy::Edit, video: video, user: current_user) do
-      @sharings = Sharing.where(video: video)
-    end
+    @sharings = Sharing.where(video: video)
   end
 
   def destroy
-    video = Video.find(params[:video_id])
+    video = current_user.videos.find(params[:video_id])
 
-    check_policy(SharingPolicy::Destroy, video: video, user: current_user) do
-      Sharing.find(params[:id]).destroy
-      redirect_to video
-    end
+    Sharing.find(params[:id]).destroy
+    redirect_to video
   end
 
   private
@@ -69,5 +56,12 @@ class SharingsController < ApplicationController
 
   def video_owned_by_current_user?(video)
     video.user == current_user
+  end
+
+  def maybe_create_and_notify(user, video, previous_share)
+    if previous_share.blank?
+      Sharing.create!(user_id: user.id, video_id: video.id)
+      Notifier.new(user).video_shared(subject: video, actor: current_user)
+    end
   end
 end

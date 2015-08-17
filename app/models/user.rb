@@ -78,6 +78,13 @@ class User < ActiveRecord::Base
     relationships.find_by!(followee: user).make_inactive!
   end
 
+  def accessable_videos
+    own_videos = videos.pluck(:id)
+    public_videos = Video.all_public.pluck(:id)
+    shared_videos = Video.where(id: Sharing.where(user: self).pluck(:video_id)).pluck(:id)
+    Video.where(id: public_videos | shared_videos | own_videos)
+  end
+
   private
 
   def format_of_username

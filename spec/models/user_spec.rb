@@ -214,4 +214,42 @@ describe User do
       expect(User.without([bob]).pluck(:username)).to eq [alice.username]
     end
   end
+
+  describe "#accessable_videos" do
+    it "finds public videos" do
+      bob = create :user
+      video = create :video, private: false, approved: true
+
+      expect(bob.accessable_videos).to eq [video]
+    end
+
+    it "excludes private videos" do
+      bob = create :user
+      video = create :video, private: true, approved: true
+
+      expect(bob.accessable_videos).to eq []
+    end
+
+    it "includes private videos shared with the user" do
+      bob = create :user
+      video = create :video, private: true, approved: true
+      Sharing.create!(user: bob, video: video)
+
+      expect(bob.accessable_videos).to eq [video]
+    end
+
+    it "doesn't incluce unapproved videos" do
+      bob = create :user
+      video = create :video, private: false, approved: false
+
+      expect(bob.accessable_videos).to eq []
+    end
+
+    it "includes the users own private videos" do
+      bob = create :user
+      video = create :video, private: true, approved: true, user: bob
+
+      expect(bob.accessable_videos).to eq [video]
+    end
+  end
 end
