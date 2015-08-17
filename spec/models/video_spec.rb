@@ -107,4 +107,15 @@ describe Video do
       expect(video).to be_valid
     end
   end
+
+  describe "#creditted_users" do
+    it "returns the users creditted for the video" do
+      video = create :video
+      bob = create :user
+      alice = create :user
+      Credit.create!(creditable: video, user: bob)
+
+      expect(video.creditted_users).to eq [bob]
+    end
+  end
 end

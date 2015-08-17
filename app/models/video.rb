@@ -29,9 +29,8 @@ class Video < ApplicationRecord
   use VideoWithUrlHint, for: :url_hint
   use WithRatingStats, for: :average_rating
 
-  # TODO: Test this
   def creditted_users
-    credits.map(&:user)
+    User.where(id: credits.pluck(:user_id))
   end
 
   def to_param
