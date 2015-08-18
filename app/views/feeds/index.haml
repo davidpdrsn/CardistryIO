@@ -1,6 +1,19 @@
-- if @feed.activities.present?
-  %ul
-    - @feed.activities.each do |activity|
-      %li= activity.text
-- else
-  Empty feed, follow some people yo!
+- if @feed.today.present?
+  %div
+    %h3 Today
+    = render partial: "feeds/list", locals: { activities: @feed.today }
+
+- if @feed.yesterday.present?
+  %div
+    %h3 Yesterday
+    = render partial: "feeds/list", locals: { activities: @feed.yesterday }
+
+- if @feed.last_week.present?
+  %div
+    %h3 Last week
+    = render partial: "feeds/list", locals: { activities: @feed.last_week }
+
+- if @feed.older_than_one_week.present?
+  %div
+    %h3 Earlier
+    = render partial: "feeds/list", locals: { activities: @feed.older_than_one_week }

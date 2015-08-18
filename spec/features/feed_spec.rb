@@ -14,6 +14,8 @@ feature "feed" do
     visit root_path(as: bob)
 
     expect(page).to have_content "Sybil"
+    expect(page).to have_content "Today"
+    expect(page).not_to have_content "Last week"
   end
 
   scenario "with videos" do
