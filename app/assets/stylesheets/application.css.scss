@@ -177,7 +177,7 @@ html, body { height: 100%; font-family: $helvetica; }
     }
     .active-nav-item {
       border-left: 3px solid $main-red;
-      background-color: #FCFCFC;
+      background-color: $layout-content-bg-color;
       color: $main-red;
 
       a {
