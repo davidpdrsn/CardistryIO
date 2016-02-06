@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.2.2"
+ruby "2.3.0"
 
 gem "active_model_serializers"
 gem "airbrake"
@@ -33,7 +33,7 @@ gem "newrelic_rpm", ">= 3.9.8"
 gem "normalize-rails", "~> 3.0.0"
 gem "pg"
 gem "rack-mini-profiler", require: false
-gem "rails", "4.2.2"
+gem "rails", "4.2.5.1"
 gem "recipient_interceptor"
 gem "refills"
 gem "sass-rails", "~> 5.0"
