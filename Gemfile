@@ -27,6 +27,7 @@ gem "neat", "~> 1.7.0"
 gem "newrelic_rpm", ">= 3.9.8"
 gem "normalize-rails", "~> 3.0.0"
 gem "pg"
+gem "puma"
 gem "rack-mini-profiler", require: false
 gem "rails", "4.2.5.1"
 gem "recipient_interceptor"
@@ -67,4 +68,5 @@ end
 
 group :staging, :production do
   gem "rack-timeout"
+  gem "rails_12factor"
 end
