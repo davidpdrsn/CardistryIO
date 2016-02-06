@@ -19,6 +19,8 @@ module CardistryIO
   class Application < Rails::Application
     config.i18n.enforce_available_locales = true
 
+    config.assets.initialize_on_precompile = false
+
     config.generators do |generate|
       generate.helper false
       generate.javascript_engine false
