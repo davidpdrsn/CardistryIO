@@ -1,12 +1,12 @@
 @charset "utf-8";
 
 @import "chosen";
-@import "bootstrap-dropdown";
 @import "normalize-rails";
 @import "bourbon";
 //@import "base/grid-settings";
 @import "neat";
 @import "base/base";
+@import "bootstrap-dropdown";
 @import "refills/flashes";
 @import 'ionicons';
 
@@ -62,7 +62,7 @@ html, body { height: 100%; font-family: $helvetica; }
           color: $main-blue;
         }
         li {
-          border-bottom: 2px solid $layout-border-color;
+          border-bottom: 1px solid $layout-border-color;
           padding: 10px 0 10px 0;
 
           a:hover {
