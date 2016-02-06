@@ -32,7 +32,7 @@ html, body { height: 100%; font-family: $helvetica; }
   header {
     @include span-columns(12);
     height: 95px;
-    border-bottom: 2px solid $layout-border-color;
+    border-bottom: 1px solid $layout-border-color;
 
     .main-logo {
       float: left;
@@ -144,7 +144,7 @@ html, body { height: 100%; font-family: $helvetica; }
   nav {
     @include span-columns(3, block-collapse);
     height: 100%;
-    border-right: 2px solid $layout-border-color;
+    border-right: 1px solid $layout-border-color;
     margin: 0;
     padding: 25px 0 0 0;
 
@@ -166,7 +166,7 @@ html, body { height: 100%; font-family: $helvetica; }
         }
       }
       hr {
-        border-bottom: 2px solid $layout-border-color;
+        border-bottom: 1px solid $layout-border-color;
         margin: 5px 0 5px 0;
       }
     }
@@ -189,7 +189,7 @@ html, body { height: 100%; font-family: $helvetica; }
   section {
     @include span-columns(9);
     margin: 0;
-    background: #FCFCFC;
+    background: $layout-content-bg-color;
     height: 100%;
     padding: 25px 50px 50px 65px;
   }
