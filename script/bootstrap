@@ -1,0 +1,44 @@
+#!/bin/bash
+set -e
+
+# Set up Rails app. Run this script immediately after cloning the codebase.
+
+# Set up Ruby dependencies via Bundler
+if ! command -v docker-compose > /dev/null; then
+cat <<EOF
+  You'll need docker and docker-compose
+
+  If you're on OS X or Windows, install the docker tool belt: https://www.docker.com/docker-toolbox
+  Also remember to install docker-machine (only OS X and Windows)
+
+  If you're on Linux, check your package manager for docker and docker-compose
+EOF
+  exit
+fi
+
+# Build docker instance
+echo "---- Building docker image"
+docker-compose build
+
+# Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
+if [ ! -d .git/safe ]; then
+  echo "---- Making .git/safe hack"
+  mkdir .git/safe
+fi
+
+echo "---- Setting up development database"
+docker-compose run web bundle exec rake db:setup
+
+echo "---- Setting up test database"
+docker-compose run web bundle exec rake db:setup RAILS_ENV=test
+
+cat <<EOF
+
+All set!
+
+  Start the app with "docker-compose up"
+  When started you can connect at http://`docker-machine ip default`:3000
+
+  You should now be able to run the tests with "docker-compose run web bin/rspec"
+
+EOF

@@ -1,0 +1,14 @@
+db:
+  image: postgres:9.4
+  ports:
+    - "5432"
+web:
+  build: .
+  command: rails s -b 0.0.0.0 -p 3000
+  volumes:
+    - .:/app
+  stdin_open: true
+  ports:
+    - "3000:3000"
+  links:
+    - db
