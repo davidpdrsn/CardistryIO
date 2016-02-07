@@ -147,6 +147,7 @@ html, body { height: 100%; font-family: $helvetica; }
     border-right: 1px solid $layout-border-color;
     margin: 0;
     padding: 25px 0 0 0;
+    width: $nav-width;
 
     a {
       display: block;
@@ -195,6 +196,7 @@ html, body { height: 100%; font-family: $helvetica; }
     background: $layout-content-bg-color;
     height: 100%;
     padding: 25px 50px 50px 65px;
+    @include calc(width, '100% - #{$nav-width}');
   }
 
   footer {

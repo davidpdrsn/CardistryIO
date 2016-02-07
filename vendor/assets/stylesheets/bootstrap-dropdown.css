@@ -38,7 +38,12 @@
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  @include shadow-level(3);
+  @include shadow-level(2);
+  transition: box-shadow 0.5s;
+
+  &:hover {
+   @include shadow-level(3);
+  }
 }
 .dropdown-menu.pull-right {
   right: 0;
