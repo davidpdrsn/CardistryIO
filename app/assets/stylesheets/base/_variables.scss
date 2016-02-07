@@ -14,6 +14,9 @@ $base-border-radius: 3px;
 $base-spacing: $base-line-height * 1em;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
+$pill-height: 44px;
+$pill-border-radius: 44px;
+$pill-border-radius: 44px;
 $nav-width: 280px;
 
 // Colors
@@ -43,6 +46,8 @@ $action-color: $main-red;
 // Border
 $base-border-color: $light-gray;
 $base-border: 1px solid $base-border-color;
+$main-blue-border: 1px solid $main-blue;
+$main-red-border: 1px solid $main-red;
 
 // Forms
 $form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
