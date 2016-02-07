@@ -171,6 +171,9 @@ html, body { height: 100%; font-family: $helvetica; }
       }
     }
     .nav-item {
+      &:hover {
+        background: $main-blue-hover;
+      }
       a {
         color: #373737;
       }
