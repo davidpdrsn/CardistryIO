@@ -23,6 +23,7 @@ $mobile-large: new-breakpoint(max-width 768px 4);
   }
 
   nav.mobile {
+    display: block;
     position: fixed;
     bottom: 0;
     height: 58px;
