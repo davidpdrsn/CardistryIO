@@ -15,6 +15,9 @@ header {
     @include justify-content(flex-end);
   }
 
+  .mobile-search {
+    display: none;
+  }
   .search-field-container {
     @include vertical-center-container(left);
     margin-right: 10px;

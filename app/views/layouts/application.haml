@@ -21,11 +21,14 @@
         = render "header"
         = render "buttonbar"
 
-      %nav
-        = render "nav"
+      %nav.desktop
+        = render "nav_desktop"
 
       %section
         = yield
+
+      %nav.mobile
+        =render "nav_mobile"
 
       %footer
         = render "footer"
