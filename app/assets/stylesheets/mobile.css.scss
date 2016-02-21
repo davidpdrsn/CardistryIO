@@ -1,4 +1,4 @@
-$mobile-large: new-breakpoint(max-width 750px 4);
+$mobile-large: new-breakpoint(max-width 768px 4);
 
 @include media($mobile-large) {
   nav.desktop {
