@@ -1,0 +1,30 @@
+%ul
+  %li.mobile-nav-button{:class => current_path_class('/')}
+    = link_to root_path do
+      %i.icon.ion-ios-home
+      %span.icon-text
+        Home
+
+  %li.mobile-nav-button{:class => current_path_class('videos/all')}
+    = link_to all_videos_path do
+      %i.icon.ion-ios-film
+      %span.icon-text
+        Videos
+
+  %li.mobile-nav-button{:class => current_path_class('moves/all')}
+    = link_to all_moves_path do
+      %i.icon.ion-android-hand
+      %span.icon-text
+        Moves
+
+  %li.mobile-nav-button
+    %a
+      %i.icon.ion-android-notifications
+      %span.icon-text
+        Notifications
+
+  %li.mobile-nav-button
+    %a
+      %i.icon.ion-ios-more
+      %span.icon-text
+        More
