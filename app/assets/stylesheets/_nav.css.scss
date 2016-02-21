@@ -1,3 +1,7 @@
+nav.mobile {
+  display: none;
+}
+
 nav.desktop {
   @include span-columns(3, block-collapse);
   height: 100%;
