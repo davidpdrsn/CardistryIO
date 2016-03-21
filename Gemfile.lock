@@ -108,10 +108,6 @@ GEM
       delayed_job (>= 3.0, < 4.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    dotenv (2.0.2)
-    dotenv-rails (2.0.2)
-      dotenv (= 2.0.2)
-      railties (~> 4.0)
     easy_translate (0.5.0)
       json
       thread
@@ -238,11 +234,6 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.4)
-    rails_stdout_logging (0.0.3)
     railties (4.2.5.1)
       actionpack (= 4.2.5.1)
       activesupport (= 4.2.5.1)
@@ -356,7 +347,6 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   delayed_job_active_record
-  dotenv-rails
   email_validator
   enum_help
   factory_girl_rails
@@ -382,7 +372,6 @@ DEPENDENCIES
   rack-mini-profiler
   rack-timeout
   rails (= 4.2.5.1)
-  rails_12factor
   recipient_interceptor
   refills
   rspec-rails (~> 3.1.0)
