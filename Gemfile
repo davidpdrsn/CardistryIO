@@ -43,6 +43,7 @@ gem "capistrano"
 gem "capistrano-bundler"
 gem "capistrano-rails"
 gem "capistrano-rbenv"
+gem "capistrano-deploytags", "~> 1.0.0", require: false
 
 group :development do
   gem "spring"
