@@ -37,7 +37,12 @@ gem "simple_form"
 gem "stackprof"
 gem "title"
 gem "uglifier"
-gem "unicorn"
+gem "puma"
+
+gem "capistrano"
+gem "capistrano-bundler"
+gem "capistrano-rails"
+gem "capistrano-rbenv"
 
 group :development do
   gem "spring"
