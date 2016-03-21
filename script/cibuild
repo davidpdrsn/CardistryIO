@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+echo "--- Running the tests"
+bin/rspec
+
+echo "--- Running bundler-audit"
+bin/bundle-audit update
+bin/bundle-audit check
+
+echo "--- Running brake man"
+bin/brakeman --exit-on-warn

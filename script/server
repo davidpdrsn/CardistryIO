@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+
+rm -rf tmp/pids/server.pid
+
+# Log files can take up a lot of space, do reset these once in a while
+rm -rf log/development.log
+rm -rf log/test.log
+touch log/development.log
+touch log/test.log
+
+if [ $(uname) = "Darwin" ]; then
+  echo "---- Making sure docker-machine is running"
+  docker-machine start default || true
+
+  echo "---- Connecting to docker-machine"
+  eval $(docker-machine env default)
+fi
+
+docker-compose up $@

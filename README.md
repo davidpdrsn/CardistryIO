@@ -14,4 +14,4 @@ It requires that you have the [docker toolbox](https://www.docker.com/products/d
 
 After setting up, you can run the application using [foreman]:
 
-    docker-compose up
+    script/server

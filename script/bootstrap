@@ -1,19 +1,27 @@
 #!/bin/bash
 set -e
 
-# Set up Rails app. Run this script immediately after cloning the codebase.
-
-# Set up Ruby dependencies via Bundler
+# Make sure docker is installed
 if ! command -v docker-compose > /dev/null; then
 cat <<EOF
   You'll need docker and docker-compose
 
-  If you're on OS X or Windows, install the docker tool belt: https://www.docker.com/docker-toolbox
-  Also remember to install docker-machine (only OS X and Windows)
+  If you're on OS X or Windows
+    - Install the docker toolbox: https://www.docker.com/docker-toolbox
+    - Make sure you also install docker-machine
+    - When setup is completed make sure to start the app "Docker Quickstart Terminal". It will download and setup the default Docker VM for you
 
   If you're on Linux, check your package manager for docker and docker-compose
 EOF
   exit
+fi
+
+if [ $(uname) = "Darwin" ]; then
+  echo "---- Making sure docker-machine is running"
+  docker-machine start default || true
+
+  echo "---- Connecting to docker-machine"
+  eval $(docker-machine env default)
 fi
 
 # Build docker instance
@@ -26,11 +34,12 @@ if [ ! -d .git/safe ]; then
   mkdir .git/safe
 fi
 
-echo "---- Setting up development database"
-docker-compose run web bundle exec rake db:setup
-
-echo "---- Setting up test database"
-docker-compose run web bundle exec rake db:setup RAILS_ENV=test
+echo "---- Setting up databases"
+docker-compose run web bin/rake db:create RAILS_ENV=development
+docker-compose run web bin/rake db:create RAILS_ENV=test
+docker-compose run web bin/rake db:migrate RAILS_ENV=development
+docker-compose run web bin/rake db:migrate RAILS_ENV=test
+docker-compose run web bin/rake db:seed RAILS_ENV=development
 
 cat <<EOF
 
@@ -39,6 +48,10 @@ All set!
   Start the app with "docker-compose up"
   When started you can connect at http://`docker-machine ip default`:3000
 
+  If you wanna to work production data locally run "script/production-data-to-local"
+  This requires that you have access to Heroku, ask Planck about it
+
   You should now be able to run the tests with "docker-compose run web bin/rspec"
+  You can use script/production-data-to-local to pull down the production database
 
 EOF
