@@ -10,7 +10,7 @@ set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 set :rbenv_type, :system
-set :rbenv_path, "/home/cardistryio/.rbenv/versions"
+set :rbenv_path, "/home/cardistryio/.rbenv"
 set :rbenv_ruby, File.read(".ruby-version").strip
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
