@@ -1,5 +1,5 @@
 // Typography
-$base-font-family: $helvetica;
+$base-font-family: 'Open Sans', sans-serif;
 $heading-font-family: $base-font-family;
 
 // Font Sizes
@@ -28,6 +28,8 @@ $light-gray: #ddd;
 $layout-border-color: #D4D4D4;
 $layout-content-bg-color: #F6F6F6;
 
+$main-text: #1A1A1A;
+
 $main-red: #FB3640;
 $main-red-hover: #E8000C;
 
@@ -45,6 +47,7 @@ $action-color: $main-red;
 
 // Border
 $base-border-color: $light-gray;
+$base-border-radous: 4px;
 $base-border: 1px solid $base-border-color;
 $main-blue-border: 1px solid $main-blue;
 $main-red-border: 1px solid $main-red;

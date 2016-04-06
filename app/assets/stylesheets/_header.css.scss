@@ -7,12 +7,52 @@ header {
     float: left;
   }
 
-  .button-bar {
+  @mixin vertical-center-container($float-direction) {
     height: 95px;
-    float: right;
+    float: $float-direction;
     @include display(flex);
     @include align-items(center);
     @include justify-content(flex-end);
+  }
+
+  .mobile-search {
+    display: none;
+  }
+  .search-field-container {
+    @include vertical-center-container(left);
+    margin-right: 10px;
+    color: $main-red;
+    position: relative;
+
+    .search-field {
+      height: 44px;
+      border-radius: 44px;
+      border: 1px solid $main-red;
+      width: 170px;
+      padding-left: 40px;
+      padding-right: 20px;
+      outline: none;
+      transition: border-color 0.8s, color 0.8s;
+
+      &::placeholder {
+        color: $main-red;
+        transition: color 1s;
+      }
+
+      &:focus {
+        border-color: $main-blue;
+      }
+    }
+    .icon {
+      pointer-events: none;
+      position: absolute;
+      left: 0px;
+      @include padding(36px 0px 44px 20px);
+    }
+  }
+
+  .button-bar {
+    @include vertical-center-container(right);
     padding-right: 8px;
 
     .dropdown-menu {

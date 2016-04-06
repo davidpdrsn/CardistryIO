@@ -4,13 +4,44 @@ section {
   background: $layout-content-bg-color;
   height: 100%;
   padding: 25px 50px 50px 65px;
-  @include calc(width, '100% - #{$nav-width}');
+  @include calc(width, "100% - #{$nav-width}");
+
+  .profile-box {
+    background: #fff;
+    padding: 20px;
+    width: 100%;
+    @include border-top-radius($base-border-radius);
+    @include border-bottom-radius($base-border-radius);
+    @include shadow-level(1);
+    float: left;
+
+    .gravatar {
+      width: 100%;
+      height: auto;
+      @include border-top-radius(100%);
+      @include border-bottom-radius(100%);
+    }
+
+    .avatar {
+      width: 12%;
+      float: left;
+    }
+    .information {
+      width: 68%;
+      float: left;
+      @include padding(null 10px null 20px);
+    }
+    .relationships {
+      width: 20%;
+      float: left;
+    }
+  }
 }
 
 footer {
   @include span-columns(12, block-collapse);
   height: 278px;
-  background: $main-brown image-url('footer-texture-brown.png') repeat-x;
+  background: $main-brown image-url("footer-texture-brown.png") repeat-x;
   color: #fff;
   text-align: center;
   padding-top: 50px;

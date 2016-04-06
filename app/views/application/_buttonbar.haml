@@ -64,7 +64,9 @@
               Mark all as read
 
 
-
+  %div.search-field-container
+    %i.icon.ion-search
+    %input.search-field{:placeholder => "Search..."}
 
   - if signed_in?
     //= link_to current_user do
