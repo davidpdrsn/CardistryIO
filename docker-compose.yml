@@ -1,0 +1,20 @@
+db:
+  image: postgres:9.4
+  ports:
+    - "5432"
+web:
+  build: .
+  command: bin/rails s -b 0.0.0.0 -p 3000
+  volumes:
+    - .:/app
+  volumes_from:
+    - box
+  stdin_open: true
+  ports:
+    - "3000:3000"
+  links:
+    - db
+box:
+  image: busybox
+  volumes:
+    - /box
