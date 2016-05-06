@@ -30,7 +30,7 @@
 
     - if current_user.admin?
       %li.nav-item{:class => current_path_class('/admin/approve_videos')}
-        = link_to "Approve videos", approve_videos_path
+        = link_to "Approve videos (#{Video.unapproved.count})", approve_videos_path
 
 
     -#- if signed_in?

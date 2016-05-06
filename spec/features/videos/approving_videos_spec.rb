@@ -17,6 +17,15 @@ feature "approving videos" do
     expect(page).to have_content video.name
   end
 
+  scenario "shows number of unapproved videos" do
+    admin = create :user, admin: true
+    video = create :video, approved: false
+
+    visit root_path(as: admin)
+
+    expect(page).to have_link "Approve videos (1)"
+  end
+
   scenario "can't see link as non-admin" do
     user = create :user, admin: false
     visit root_path(as: user)
