@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "2.3.0"
 
 gem "active_model_serializers"
-gem "airbrake"
+gem "airbrake", "~> 5.2"
 gem "attr_extras"
 gem "autoprefixer-rails"
 gem "bourbon", "~> 4.2.0"
