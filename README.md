@@ -18,5 +18,5 @@ After setting up, you can run the application using [foreman]:
 
 ## Services
 
-[Airbrake](https://cardistryio.airbrake.io/projects/124012/activity): Errors
-[Skylight](https://www.skylight.io/app/applications/dKldsKzvUVNv/recent/5m/endpoints): Metrics
+- [Airbrake](https://cardistryio.airbrake.io/projects/124012/activity): Errors
+- [Skylight](https://www.skylight.io/app/applications/dKldsKzvUVNv/recent/5m/endpoints): Metrics
