@@ -7,6 +7,12 @@ gem "airbrake"
 gem "attr_extras"
 gem "autoprefixer-rails"
 gem "bourbon", "~> 4.2.0"
+gem "capistrano"
+gem "capistrano-bundler"
+gem "capistrano-deploytags", "~> 1.0.0", require: false
+gem "capistrano-rails"
+gem "capistrano-rails-console"
+gem "capistrano-rbenv"
 gem "clearance"
 gem "coffee-rails", "~> 4.1.0"
 gem "delayed_job_active_record"
@@ -37,13 +43,6 @@ gem "simple_form"
 gem "stackprof"
 gem "title"
 gem "uglifier"
-gem "puma"
-
-gem "capistrano"
-gem "capistrano-bundler"
-gem "capistrano-rails"
-gem "capistrano-rbenv"
-gem "capistrano-deploytags", "~> 1.0.0", require: false
 
 group :development do
   gem "spring"
