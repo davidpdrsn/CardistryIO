@@ -29,4 +29,10 @@ describe Move do
       expect(move.creditted_users.map(&:username)).to eq [user.username]
     end
   end
+
+  describe ".foreign_key" do
+    it "returns the foreign key used for this table" do
+      expect(Move.foreign_key).to eq "move_id"
+    end
+  end
 end

@@ -7,7 +7,7 @@
 
 = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
 
-= render partial: "shared/ratings", locals: { key: :video_id, rateable: @video }
+= render partial: "shared/ratings", locals: { rateable: @video }
 
 %p
   - if @video.appearances.present?

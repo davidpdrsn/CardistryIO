@@ -1,4 +1,4 @@
-class Move < ActiveRecord::Base
+class Move < ApplicationRecord
   extend DecoratorDelegateMethods
 
   belongs_to :user
