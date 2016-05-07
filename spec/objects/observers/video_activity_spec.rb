@@ -1,11 +1,11 @@
 require "rails_helper"
 
-describe VideoActivityObserver do
+describe Observers::VideoActivity do
   it "creates activities for the video" do
     observer = double(:observer)
     allow(observer).to receive(:save)
     video = double(:video, private?: false, approved?: true)
-    video_observer = VideoActivityObserver.new(observer)
+    video_observer = Observers::VideoActivity.new(observer)
 
     video_observer.save(video)
 
@@ -16,7 +16,7 @@ describe VideoActivityObserver do
     observer = double(:observer)
     allow(observer).to receive(:save)
     video = double(:video, private?: true, approved?: true)
-    video_observer = VideoActivityObserver.new(observer)
+    video_observer = Observers::VideoActivity.new(observer)
 
     video_observer.save(video)
 
@@ -27,7 +27,7 @@ describe VideoActivityObserver do
     observer = double(:observer)
     allow(observer).to receive(:save)
     video = double(:video, approved?: false, private?: false)
-    video_observer = VideoActivityObserver.new(observer)
+    video_observer = Observers::VideoActivity.new(observer)
 
     video_observer.save(video)
 

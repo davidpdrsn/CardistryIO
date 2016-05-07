@@ -1,4 +1,4 @@
-- if @feed.today.present?
+-if @feed.today.present?
   %div
     %h3 Today
     = render partial: "feeds/list", locals: { activities: @feed.today }

@@ -44,4 +44,14 @@ describe Feed do
 
     expect(items.map(&:name)).to eq [video.name]
   end
+
+  it "finds your activities" do
+    bob = create :user
+    video = create :video, name: "Classic", user: bob, approved: true
+    Activity.create!(user: bob, subject: video)
+
+    items = Feed.new(bob).activities
+
+    expect(items.map(&:name)).to eq [video.name]
+  end
 end

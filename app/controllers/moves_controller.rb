@@ -31,16 +31,12 @@ class MovesController < ApplicationController
   end
 
   def create
-    mention_observer = MentionNotificationObserver.new
-    adds_credit_observer = AddsCreditObserver.new(params, current_user)
-    activity_observer = ActivityObserver.new
-
     @move = ObservableRecord.new(
       current_user.moves.new(move_params),
       CompositeObserver.new([
-        mention_observer,
-        adds_credit_observer,
-        activity_observer,
+        Observers::NotifyMentions.new,
+        Observers::AddsCredit.new(params, current_user),
+        Observers::Activity.new,
       ]),
     )
 
@@ -61,7 +57,7 @@ class MovesController < ApplicationController
   end
 
   def update
-    observer = AddsCreditObserver.new(params, current_user)
+    observer = Observers::AddsCredit.new(params, current_user)
     @move = ObservableRecord.new(
       current_user.moves.find(params[:id]),
       observer,
@@ -90,37 +86,5 @@ class MovesController < ApplicationController
 
   def move_params
     params.require(:move).permit(:name, :description)
-  end
-
-  class MentionNotificationObserver
-    def save!(move)
-      MentionNotifier.new(move).notify_mentioned_users
-    end
-  end
-
-  class AddsCreditObserver
-    pattr_initialize :params, :current_user
-
-    def save!(move)
-      find_users_with_credits_for(move, then: :add_credits)
-    end
-
-    def update!(move, _)
-      find_users_with_credits_for(move, then: :update_credits)
-    end
-
-    private
-
-    def find_users_with_credits_for(move, options)
-      method_name = options.fetch(:then)
-      users = AddsCredits.new(move).public_send(method_name, params[:credits])
-      notifier_users_of_new_credit(users, move)
-    end
-
-    def notifier_users_of_new_credit(users, move)
-      users.each do |user|
-        Notifier.new(user).new_credit(subject: move, actor: current_user)
-      end
-    end
   end
 end
