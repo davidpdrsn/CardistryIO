@@ -8,7 +8,7 @@ class SharingsController < ApplicationController
   def new
     video = Video.find(params[:video_id])
 
-    if video_owned_by_current_user(video)
+    if video_owned_by_current_user?(video)
       @sharing = Sharing.new(video: video)
     else
       flash.alert = "You can't share videos you don't own"
@@ -66,7 +66,7 @@ class SharingsController < ApplicationController
     end
   end
 
-  def video_owned_by_current_user(video)
+  def video_owned_by_current_user?(video)
     video.user == current_user
   end
 end
