@@ -18,4 +18,8 @@ class Move < ApplicationRecord
   def creditted_users
     credits.map(&:user)
   end
+
+  def link_text
+    name
+  end
 end
