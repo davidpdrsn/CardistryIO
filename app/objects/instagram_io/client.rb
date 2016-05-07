@@ -30,7 +30,7 @@ module InstagramIO
 
     class AuthenticatedClient < UnauthenticatedClient
       def videos
-        client.user_recent_media.reduce([]) do |acc, media|
+        client.user_recent_media(count: 1000).reduce([]) do |acc, media|
           if is_video?(media) && !exists_already?(media)
             acc + [InstagramVideo.new(media)]
           else
