@@ -19,7 +19,7 @@
 .actions
   - if current_user == @move.user
     = button_to "Edit", edit_move_path(@move), method: :get
-    = button_to "Delete move", @move, method: :delete
+    = button_to "Delete move", @move, method: :delete, data: { confirm: "Sure?" }
 
 %div.comments= render @move.comments
 = render partial: "comments/form", locals: { commentable: @move }
