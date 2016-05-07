@@ -12,4 +12,15 @@ feature "editing profile" do
     expect(page).to have_content "davidpdrsn"
     expect(page).to have_content "kevho"
   end
+
+  scenario "sets biography" do
+    user = create :user, biography: "Nothing to see here"
+
+    visit user_path(user, as: user)
+    click_link "Edit"
+    fill_in "Biography", with: "New biography!"
+    click_button "Update User"
+
+    expect(page).to have_content "New biography!"
+  end
 end

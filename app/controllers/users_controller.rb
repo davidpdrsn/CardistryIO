@@ -12,7 +12,12 @@ class UsersController < Clearance::UsersController
 
   def update
     @user = User.find(params[:id])
-    user_params = params.require(:user).permit(:instagram_username, :username)
+    # TODO: Is username really required?!
+    user_params = params.require(:user).permit(
+      :instagram_username,
+      :username,
+      :biography,
+    )
     if @user.update(user_params)
       flash.notice = "Updated"
       redirect_to @user

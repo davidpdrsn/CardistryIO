@@ -1,5 +1,8 @@
 = image_tag @user.gravatar_url
 
+.user_biography
+  = simple_format @user.biography
+
 - if @user.instagram_username.present?
   %p
     On Instagram:
