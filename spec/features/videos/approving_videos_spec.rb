@@ -44,4 +44,19 @@ feature "approving videos" do
 
     expect(page).not_to have_content video.name
   end
+
+  scenario "finding mentions" do
+    admin = create :user, admin: true
+    video = create(
+      :video,
+      approved: false,
+      description: "Thanks to @#{admin.username}",
+    )
+
+    visit root_path(as: admin)
+
+    click_link "Approve videos"
+
+    expect(page).to have_link "@#{admin.username}"
+  end
 end
