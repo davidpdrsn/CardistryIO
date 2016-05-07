@@ -6,7 +6,7 @@ describe "searching for users" do
     user = create :user, username: "MockingBird"
     create :user, username: "Jackson5"
 
-    get "/api/search/users", query: "Bird"
+    get "/api/search/users", params: { query: "Bird" }
 
     json = JSON.parse(response.body)
 

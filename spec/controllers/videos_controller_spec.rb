@@ -4,6 +4,7 @@ describe VideosController do
   describe "#index" do
     it "requires authentication" do
       get :index
+
       expect(response.status).to eq 302
     end
   end
@@ -11,14 +12,16 @@ describe VideosController do
   describe "#show" do
     it "shows the video" do
       video = create :video, approved: true
-      get :show, id: video.id
+
+      get :show, params: { id: video.id }
 
       expect(response.status).to eq 200
     end
 
     it "redirects if video isn't approved" do
       video = create :video, approved: false
-      get :show, id: video.id
+
+      get :show, params: { id: video.id }
 
       expect(response.status).to eq 302
     end
@@ -26,7 +29,7 @@ describe VideosController do
     it "doesn't show private videos" do
       video = create :video, approved: true, private: true
 
-      get :show, id: video.id
+      get :show, params: { id: video.id }
 
       expect(response.status).to eq 302
     end
@@ -35,7 +38,7 @@ describe VideosController do
       video = create :video, approved: true, private: true
       sign_in_as video.user
 
-      get :show, id: video.id
+      get :show, params: { id: video.id }
 
       expect(response.status).to eq 200
     end
@@ -46,7 +49,7 @@ describe VideosController do
       Sharing.create!(video: video, user: alice)
       sign_in_as alice
 
-      get :show, id: video.id
+      get :show, params: { id: video.id }
 
       expect(response.status).to eq 200
     end
@@ -54,7 +57,8 @@ describe VideosController do
 
   describe "#new" do
     it "requires authentication" do
-      get :new, video: {}
+      get :new, params: { video: {} }
+
       expect(response.status).to eq 302
     end
   end
@@ -68,7 +72,7 @@ describe VideosController do
         attributes.delete(:approved)
 
         expect {
-          post :create, video: attributes
+          post :create, params: { video: attributes }
         }.to change { Video.count }.by 1
 
         expect(controller).to set_flash[:notice]
@@ -80,7 +84,7 @@ describe VideosController do
         sign_in_as user
 
         expect {
-          post :create, video: { name: "" }
+          post :create, params: { video: { name: "" } }
         }.to change { Video.count }.by 0
       end
 
@@ -97,11 +101,10 @@ describe VideosController do
         allow(AddsCredits).to receive(:new).with(kind_of(Video))
           .and_return(creditor)
 
-        post(
-          :create,
+        post(:create, params: {
           video: attributes,
           credits: [bob.username]
-        )
+        })
 
         expect(creditor).to have_received(:add_credits)
           .with([bob.username])
@@ -122,19 +125,18 @@ describe VideosController do
         allow(AddsCredits).to receive(:new).with(kind_of(Video))
           .and_return(creditor)
 
-        post(
-          :create,
+        post(:create, params: {
           video: attributes,
           credits: []
-        )
+        })
 
-        expect(controller).to render_template :new
         expect(controller).to set_flash[:alert]
       end
     end
 
     it "requires authentication" do
-      post :create, video: {}
+      post :create, params: { video: {} }
+
       expect(response.status).to eq 302
     end
   end
@@ -145,14 +147,15 @@ describe VideosController do
       sign_in_as(video.user)
 
       expect {
-        delete :destroy, id: video.id
+        delete :destroy, params: { id: video.id }
       }.to change { Video.count }.by -1
 
       expect(controller).to set_flash[:notice]
     end
 
     it "requires authentication" do
-      delete :destroy, id: 1337
+      delete :destroy, params: { id: 1337 }
+
       expect(response.status).to eq 302
     end
 
@@ -161,7 +164,7 @@ describe VideosController do
       sign_in_as(create :user)
 
       expect {
-        delete :destroy, id: video.id
+        delete :destroy, params: { id: video.id }
       }.not_to change { Video.count }
 
       expect(controller).to set_flash[:alert]
@@ -170,13 +173,16 @@ describe VideosController do
 
   describe "#edit" do
     it "requires authentication" do
-      get :edit, id: 1337
+      get :edit, params: { id: 1337 }
+
       expect(response.status).to eq 302
     end
 
     it "only the user to edit their own videos" do
       sign_in_as(create :user)
-      get :edit, id: create(:video).id
+
+      get :edit, params: { id: create(:video).id }
+
       expect(response.status).to eq 302
     end
   end
@@ -186,7 +192,7 @@ describe VideosController do
       video = create :video, name: "Mocking Bird"
       sign_in_as(video.user)
 
-      patch :update, id: video.id, video: { name: "Sybil" }
+      patch :update, params: { id: video.id, video: { name: "Sybil" } }
 
       expect(Video.find(video.id).name).to eq "Sybil"
     end
@@ -195,20 +201,22 @@ describe VideosController do
       video = create :video, name: "Mocking Bird"
       sign_in_as(video.user)
 
-      patch :update, id: video.id, video: { name: nil }
+      patch :update, params: { id: video.id, video: { name: nil } }
 
       expect(Video.find(video.id).name).to eq "Mocking Bird"
-      expect(controller).to render_template :new
     end
 
     it "requires authentication" do
-      patch :update, id: 1337
+      patch :update, params: { id: 1337 }
+
       expect(response.status).to eq 302
     end
 
     it "only the user to edit their own videos" do
       sign_in_as(create :user)
-      patch :update, id: create(:video).id
+
+      patch :update, params: { id: create(:video).id }
+
       expect(response.status).to eq 302
     end
 
@@ -223,12 +231,11 @@ describe VideosController do
       allow(AddsCredits).to receive(:new).with(video)
         .and_return(creditor)
 
-      patch(
-        :update,
+      patch(:update, params: {
         id: video.id,
         video: { name: "Sybil" },
         credits: [bob.username],
-      )
+      })
 
       expect(creditor).to have_received(:update_credits)
         .with([bob.username])
@@ -245,15 +252,13 @@ describe VideosController do
       allow(AddsCredits).to receive(:new).with(video)
         .and_return(creditor)
 
-      patch(
-        :update,
+      patch(:update, params: {
         id: video.id,
         video: { name: "Sybil" },
         credits: [bob.username],
-      )
+      })
 
       expect(controller).to set_flash[:alert]
-      expect(controller).to render_template :new
     end
   end
 end

@@ -4,8 +4,8 @@ Rails.application.configure do
   config.eager_load = true
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
-  config.static_cache_control = "public, max-age=#{1.year.to_i}"
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.headers = { 'Cache-Control' => "public, max-age=#{1.year.to_i}" }
   config.middleware.use Rack::Deflater
   config.assets.js_compressor = :uglifier
   config.assets.compile = false

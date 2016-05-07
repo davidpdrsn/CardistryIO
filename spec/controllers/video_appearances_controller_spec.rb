@@ -5,13 +5,16 @@ describe VideoAppearancesController do
 
   describe "#edit" do
     it "requires authentication" do
-      get :edit, id: video.id
+      get :edit, params: { id: video.id }
+
       expect(response.status).to eq 302
     end
 
     it "only allows editing of own videos" do
       sign_in_as create(:user)
-      get :edit, id: video.id
+
+      get :edit, params: { id: video.id }
+
       expect(response.status).to eq 302
     end
   end
@@ -23,20 +26,27 @@ describe VideoAppearancesController do
       allow(video_appearances).to receive(:save).and_return(false)
       allow(VideoAppearances).to receive(:new).and_return(video_appearances)
 
-      patch :update, id: video.id, move_names: ["no_there"], minutes: ["0"], seconds: ["12"]
+      patch(:update, params: {
+        id: video.id,
+        move_names: ["no_there"],
+        minutes: ["0"],
+        seconds: ["12"],
+      })
 
       expect(controller).to set_flash[:alert]
-      expect(controller).to render_template(:edit)
     end
 
     it "requires authentication" do
-      patch :update, id: video.id
+      patch :update, params: { id: video.id }
+
       expect(response.status).to eq 302
     end
 
     it "only allows editing of own videos" do
       sign_in_as create(:user)
-      patch :update, id: video.id
+
+      patch :update, params: { id: video.id }
+
       expect(response.status).to eq 302
     end
   end
@@ -50,7 +60,7 @@ describe VideoAppearancesController do
       create :appearance, video: video, move: move, minutes: 1, seconds: 1
 
       sign_in_as video.user
-      delete :destroy, id: video.id
+      delete :destroy, params: { id: video.id }
 
       expect(video.appearances).to eq []
       expect(controller).to redirect_to video
@@ -59,12 +69,15 @@ describe VideoAppearancesController do
 
     it "only allows editing of own videos" do
       sign_in_as create(:user)
-      delete :destroy, id: video.id
+
+      delete :destroy, params: { id: video.id }
+
       expect(response.status).to eq 302
     end
 
     it "requires authentication" do
-      delete :destroy, id: video.id
+      delete :destroy, params: { id: video.id }
+
       expect(response.status).to eq 302
     end
   end

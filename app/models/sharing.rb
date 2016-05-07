@@ -1,4 +1,4 @@
-class Sharing < ActiveRecord::Base
+class Sharing < ApplicationRecord
   belongs_to :video
   belongs_to :user
 

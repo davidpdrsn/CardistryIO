@@ -11,7 +11,7 @@ describe CommentsController do
       move = create :move
 
       expect do
-        post :create, { comment: attributes }.merge!(move_id: move.id)
+        post :create, params: { comment: attributes }.merge!(move_id: move.id)
       end.to change { Comment.count }.by(1)
     end
 
@@ -22,7 +22,7 @@ describe CommentsController do
       move = create :move
 
       expect do
-        post :create, { comment: attributes }.merge!(move_id: move.id)
+        post :create, params: { comment: attributes }.merge!(move_id: move.id)
       end.to_not change { Comment.count }
 
       expect(response.status).to eq 302
@@ -37,7 +37,7 @@ describe CommentsController do
       attributes.delete(:commentable_id)
       move = create :move, user: bob
 
-      post :create, { comment: attributes }.merge!(move_id: move.id)
+      post :create, params: { comment: attributes }.merge!(move_id: move.id)
 
       expect(Notification.count).to eq 1
       notification = Notification.last
@@ -55,7 +55,7 @@ describe CommentsController do
       attributes.delete(:commentable_id)
       move = create :move, user: bob
 
-      post :create, { comment: attributes }.merge!(move_id: move.id)
+      post :create, params: { comment: attributes }.merge!(move_id: move.id)
 
       expect(Notification.count).to eq 0
     end
@@ -69,23 +69,21 @@ describe CommentsController do
       sign_in_as comment.user
 
       expect do
-        patch(
-          :update,
+        patch(:update, params: {
           comment: { content: "new" },
           id: comment.id,
           move_id: move.id,
-        )
+        })
         comment.reload
       end.to change { comment.content }.from("old").to("new")
     end
 
     it "requires authentication" do
-      patch(
-        :update,
+      patch(:update, params: {
         comment: { content: "new" },
         id: 123,
         move_id: 123,
-      )
+      })
 
       expect(response.status).to eq 302
     end
@@ -94,7 +92,11 @@ describe CommentsController do
       comment = create :comment, commentable: move
 
       expect do
-        patch :update, move_id: move.id, comment: { content: "" }, id: comment.id
+        patch(:update, params: {
+          move_id: move.id,
+          comment: { content: "" },
+          id: comment.id,
+        })
         comment.reload
       end.to_not change { comment.content }
     end
@@ -104,12 +106,11 @@ describe CommentsController do
       sign_in_as create(:user)
 
       expect do
-        patch(
-          :update,
+        patch(:update, params: {
           comment: { content: "new" },
           id: comment.id,
           move_id: move.id,
-        )
+        })
         comment.reload
       end.not_to change { comment.content }
     end

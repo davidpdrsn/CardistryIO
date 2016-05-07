@@ -6,7 +6,7 @@ describe "searching for moves" do
     create :move, name: "Mocking Bird"
     create :move, name: "Jackson 5"
 
-    get "/api/search/moves", query: "Bird"
+    get "/api/search/moves", params: { query: "Bird" }
 
     json = JSON.parse(response.body)
 

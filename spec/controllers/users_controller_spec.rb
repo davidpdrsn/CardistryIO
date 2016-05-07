@@ -3,7 +3,8 @@ require "rails_helper"
 describe UsersController do
   describe "#edit" do
     it "requires authentication" do
-      get :edit, id: 1
+      get :edit, params: { id: 1 }
+
       expect(response.status).to eq 302
     end
 
@@ -12,7 +13,7 @@ describe UsersController do
       alice = build_stubbed(:user)
       sign_in_as bob
 
-      get :edit, id: alice.id
+      get :edit, params: { id: alice.id }
 
       expect(response.status).to eq 302
     end
@@ -20,7 +21,8 @@ describe UsersController do
 
   describe "#update" do
     it "requires authentication" do
-      patch :update, id: 1
+      patch :update, params: { id: 1 }
+
       expect(response.status).to eq 302
     end
 
@@ -29,7 +31,7 @@ describe UsersController do
       alice = build_stubbed(:user)
       sign_in_as bob
 
-      patch :update, id: alice.id
+      patch :update, params: { id: alice.id }
 
       expect(response.status).to eq 302
     end
@@ -39,7 +41,7 @@ describe UsersController do
       create :user, instagram_username: "horse"
       sign_in_as bob
 
-      patch :update, id: bob.id, user: { instagram_username: "horse" }
+      patch :update, params: { id: bob.id, user: { instagram_username: "horse" } }
       bob.reload
 
       expect(bob.username).to eq "Bob"
@@ -49,7 +51,7 @@ describe UsersController do
 
   describe "#make_admin" do
     it "requires authentication" do
-      post :make_admin, id: 1
+      post :make_admin, params: { id: 1 }
 
       expect(response.status).to eq 302
     end
@@ -57,7 +59,8 @@ describe UsersController do
     it "requires current_user to be an admin" do
       bob = create :user, admin: false
       sign_in_as bob
-      post :make_admin, id: bob.id
+
+      post :make_admin, params: { id: bob.id }
 
       expect(response.status).to eq 302
     end
@@ -67,7 +70,7 @@ describe UsersController do
       alice = create :user, admin: true
       sign_in_as alice
 
-      post :make_admin, id: bob.id
+      post :make_admin, params: { id: bob.id }
       bob.reload
 
       expect(bob.admin).to eq true

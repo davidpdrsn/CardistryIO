@@ -21,7 +21,7 @@ describe MovesController do
         sign_in
 
         expect {
-          post :create, move: attributes_for(:move)
+          post :create, params: { move: attributes_for(:move) }
         }.to change { Move.count }.by 1
       end
 
@@ -29,7 +29,7 @@ describe MovesController do
         sign_in
 
         expect {
-          post :create, move: { name: "" }
+          post :create, params: { move: { name: "" } }
         }.to change { Move.count }.by 0
       end
 
@@ -56,11 +56,10 @@ describe MovesController do
       allow(AddsCredits).to receive(:new).with(any_args)
         .and_return(creditor)
 
-      post(
-        :create,
+      post(:create, params: {
         move: attributes,
-        credits: [bob.username]
-      )
+        credits: [bob.username],
+      })
 
       expect(creditor).to have_received(:add_credits)
         .with([bob.username])
@@ -80,14 +79,12 @@ describe MovesController do
       allow(AddsCredits).to receive(:new).with(kind_of(Move))
         .and_return(creditor)
 
-      post(
-        :create,
+      post(:create, params: {
         move: attributes,
-        credits: []
-      )
+        credits: [],
+      })
 
-      expect(controller).to render_template :new
-      expect(controller).to set_flash[:alert]
+      expect(Move.count).to eq 0
     end
   end
 
@@ -97,7 +94,7 @@ describe MovesController do
       sign_in_as(move.user)
 
       expect {
-        delete :destroy, id: move.id
+        delete :destroy, params: { id: move.id }
       }.to change { Move.all.count }.by -1
     end
 
@@ -107,27 +104,27 @@ describe MovesController do
       sign_in_as(user)
 
       expect {
-        delete :destroy, id: move.id
+        delete :destroy, params: { id: move.id }
       }.not_to change { Move.all.count }
 
       expect(controller).to set_flash[:alert]
     end
 
     it "requires authentication" do
-      delete :destroy, id: 1337
+      delete :destroy, params: { id: 1337 }
       expect(response.status).to eq 302
     end
   end
 
   describe "#edit" do
     it "requires authentication" do
-      get :edit, id: 1337
+      get :edit, params: { id: 1337 }
       expect(response.status).to eq 302
     end
 
     it "only the user to edit their own moves" do
       sign_in_as(create :user)
-      get :edit, id: create(:move).id
+      get :edit, params: { id: create(:move).id }
       expect(response.status).to eq 302
     end
   end
@@ -137,7 +134,7 @@ describe MovesController do
       move = create :move, name: "Mocking Bird"
       sign_in_as(move.user)
 
-      patch :update, id: move.id, move: { name: "Sybil" }
+      patch :update, params: { id: move.id, move: { name: "Sybil" } }
 
       expect(Move.find(move.id).name).to eq "Sybil"
     end
@@ -146,20 +143,19 @@ describe MovesController do
       move = create :move, name: "Mocking Bird"
       sign_in_as(move.user)
 
-      patch :update, id: move.id, move: { name: nil }
+      patch :update, params: { id: move.id, move: { name: nil } }
 
       expect(Move.find(move.id).name).to eq "Mocking Bird"
-      expect(controller).to render_template :edit
     end
 
     it "requires authentication" do
-      patch :update, id: 1337
+      patch :update, params: { id: 1337 }
       expect(response.status).to eq 302
     end
 
     it "only the user to edit their own moves" do
       sign_in_as(create :user)
-      patch :update, id: create(:move).id
+      patch :update, params: { id: create(:move).id }
       expect(response.status).to eq 302
     end
 
@@ -174,12 +170,11 @@ describe MovesController do
       allow(AddsCredits).to receive(:new).with(move)
         .and_return(creditor)
 
-      patch(
-        :update,
+      patch(:update, params: {
         id: move.id,
         move: { name: "Sybil" },
         credits: [bob.username],
-      )
+      })
 
       expect(creditor).to have_received(:update_credits)
         .with([bob.username])
@@ -196,15 +191,14 @@ describe MovesController do
       allow(AddsCredits).to receive(:new).with(move)
         .and_return(creditor)
 
-      patch(
-        :update,
-        id: move.id,
-        move: { name: "Sybil" },
-        credits: [bob.username],
-      )
-
-      expect(controller).to set_flash[:alert]
-      expect(controller).to render_template :edit
+      expect do
+        patch(:update, params: {
+          id: move.id,
+          move: { name: "Sybil" },
+          credits: [bob.username],
+        })
+        move.reload
+      end.to_not change { move.credits }
     end
   end
 end

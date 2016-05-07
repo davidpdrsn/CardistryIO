@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   USERNAME_REGEX = /[a-zA-Z0-9_-]+/
 
   extend DecoratorDelegateMethods

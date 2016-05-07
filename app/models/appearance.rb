@@ -1,4 +1,4 @@
-class Appearance < ActiveRecord::Base
+class Appearance < ApplicationRecord
   belongs_to :video
   belongs_to :move
 

@@ -3,7 +3,7 @@ require "rails_helper"
 describe SharingsController do
   describe "#index" do
     it "requires authentication" do
-      get :index, video_id: 123
+      get :index, params: { video_id: 123 }
 
       expect(response.status).to eq 302
     end
@@ -11,14 +11,14 @@ describe SharingsController do
 
   describe "#new" do
     it "requires authentication" do
-      get :new, video_id: create(:video).id
+      get :new, params: { video_id: create(:video).id }
 
       expect(response.status).to eq 302
     end
 
     it "requires that the user owns the video" do
       sign_in_as create(:user)
-      get :new, video_id: create(:video).id
+      get :new, params: { video_id: create(:video).id }
 
       expect(response.status).to eq 302
     end
@@ -26,7 +26,7 @@ describe SharingsController do
 
   describe "#create" do
     it "requires authentication" do
-      post :create, video_id: 123
+      post :create, params: { video_id: 123 }
 
       expect(response.status).to eq 302
     end
@@ -39,7 +39,7 @@ describe SharingsController do
 
       sign_in_as alice
       expect do
-        post :create, video_id: video.id, sharing: { user: cindy.id }
+        post :create, params: { video_id: video.id, sharing: { user: cindy.id } }
       end.not_to change { Sharing.count }
     end
 
@@ -50,7 +50,7 @@ describe SharingsController do
 
       sign_in_as bob
       expect do
-        post :create, video_id: video.id, sharing: { user: alice.id }
+        post :create, params: { video_id: video.id, sharing: { user: alice.id } }
       end.not_to change { Sharing.count }
     end
 
@@ -62,7 +62,7 @@ describe SharingsController do
       sign_in_as bob
       expect do
         2.times do
-          post :create, video_id: video.id, sharing: { user: alice.id }
+          post :create, params: { video_id: video.id, sharing: { user: alice.id } }
         end
       end.to change { Sharing.count }.by(1)
     end
@@ -74,14 +74,14 @@ describe SharingsController do
 
       sign_in_as bob
       expect do
-        post :create, video_id: video.id, sharing: { user: alice.id }
+        post :create, params: { video_id: video.id, sharing: { user: alice.id } }
       end.to change { Notification.count }.by(1)
     end
   end
 
   describe "#edit" do
     it "requires authentication" do
-      get :edit, video_id: 123
+      get :edit, params: { video_id: 123 }
 
       expect(response.status).to eq 302
     end
@@ -90,7 +90,8 @@ describe SharingsController do
       bob = create :user
       sign_in_as bob
       video = create :video, user: bob, private: true, approved: true
-      get :edit, video_id: video.id
+
+      get :edit, params: { video_id: video.id }
 
       expect(response.status).to eq 200
     end
@@ -99,7 +100,8 @@ describe SharingsController do
       bob = create :user
       sign_in_as bob
       video = create :video, private: true, approved: true
-      get :edit, video_id: video.id
+
+      get :edit, params: { video_id: video.id }
 
       expect(response.status).to eq 302
     end
@@ -108,7 +110,8 @@ describe SharingsController do
       bob = create :user
       sign_in_as bob
       video = create :video, user: bob, private: false, approved: true
-      get :edit, video_id: video.id
+
+      get :edit, params: { video_id: video.id }
 
       expect(response.status).to eq 302
     end
@@ -117,7 +120,8 @@ describe SharingsController do
       bob = create :user
       sign_in_as bob
       video = create :video, user: bob, private: true, approved: false
-      get :edit, video_id: video.id
+
+      get :edit, params: { video_id: video.id }
 
       expect(response.status).to eq 302
     end
@@ -132,7 +136,7 @@ describe SharingsController do
       sharing = Sharing.create!(user: alice, video: video)
 
       expect do
-        delete :destroy, video_id: video.id, id: sharing.id
+        delete :destroy, params: { video_id: video.id, id: sharing.id }
       end.to change { Sharing.count }.by(-1)
     end
 
@@ -143,7 +147,7 @@ describe SharingsController do
       sharing = Sharing.create!(user: alice, video: video)
 
       expect do
-        delete :destroy, video_id: video.id, id: sharing.id
+        delete :destroy, params: { video_id: video.id, id: sharing.id }
       end.not_to change { Sharing.count }
     end
 
@@ -155,7 +159,7 @@ describe SharingsController do
       sharing = Sharing.create!(user: alice, video: video)
 
       expect do
-        delete :destroy, video_id: video.id, id: sharing.id
+        delete :destroy, params: { video_id: video.id, id: sharing.id }
       end.not_to change { Sharing.count }
     end
   end

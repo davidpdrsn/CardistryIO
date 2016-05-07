@@ -10,10 +10,10 @@ class VideoAppearancesController < ApplicationController
 
   def update
     video_appearances = VideoAppearances.new(
-      video:      video,
+      video: video,
       move_names: params[:move_names],
-      minutes:    params[:minutes].map(&:to_i),
-      seconds:    params[:seconds].map(&:to_i),
+      minutes: params[:minutes].map(&:to_i),
+      seconds: params[:seconds].map(&:to_i),
     )
 
     if video_appearances.save

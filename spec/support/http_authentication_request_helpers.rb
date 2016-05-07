@@ -13,8 +13,8 @@ module HttpAuthenticationRequestHelpers
   end
 
   [:get, :post, :patch, :delete].each do |method|
-    define_method("authorized_#{method}") do |path, params = {}|
-      send method, path, params, @env
+    define_method("authorized_#{method}") do |path, params: {}|
+      send method, path, params: params, env: @env
     end
   end
 end
