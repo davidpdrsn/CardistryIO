@@ -9,7 +9,6 @@ describe Video do
   it { should have_many :credits }
 
   it { should validate_presence_of :name }
-  it { should validate_uniqueness_of :name }
   it { should validate_presence_of :url }
   it { should validate_presence_of :video_type }
 

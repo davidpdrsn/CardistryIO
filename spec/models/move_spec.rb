@@ -8,7 +8,6 @@ describe Move do
   it { should have_many :credits }
 
   it { should validate_presence_of :name }
-  it { should validate_uniqueness_of :name }
 
   it "destroys appearances when its destroyed" do
     move = create :move
