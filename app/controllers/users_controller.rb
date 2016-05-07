@@ -12,10 +12,8 @@ class UsersController < Clearance::UsersController
 
   def update
     @user = User.find(params[:id])
-    # TODO: Is username really required?!
     user_params = params.require(:user).permit(
       :instagram_username,
-      :username,
       :biography,
     )
     if @user.update(user_params)

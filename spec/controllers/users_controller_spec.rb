@@ -36,9 +36,10 @@ describe UsersController do
 
     it "redirects if update failed" do
       bob = create :user, username: "Bob"
+      create :user, instagram_username: "horse"
       sign_in_as bob
 
-      patch :update, id: bob.id, user: { username: "" }
+      patch :update, id: bob.id, user: { instagram_username: "horse" }
       bob.reload
 
       expect(bob.username).to eq "Bob"
