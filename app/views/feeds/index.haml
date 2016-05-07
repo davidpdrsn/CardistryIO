@@ -1,19 +1,23 @@
--if @feed.today.present?
-  %div
-    %h3 Today
-    = render partial: "feeds/list", locals: { activities: @feed.today }
+- if [@feed.today, @feed.yesterday, @feed.last_week, @feed.older_than_one_week].all?(&:empty?)
+  %p
+    No activities yet to show in feed
+- else
+  - if @feed.today.present?
+    %div
+      %h3 Today
+      = render partial: "feeds/list", locals: { activities: @feed.today }
 
-- if @feed.yesterday.present?
-  %div
-    %h3 Yesterday
-    = render partial: "feeds/list", locals: { activities: @feed.yesterday }
+  - if @feed.yesterday.present?
+    %div
+      %h3 Yesterday
+      = render partial: "feeds/list", locals: { activities: @feed.yesterday }
 
-- if @feed.last_week.present?
-  %div
-    %h3 Last week
-    = render partial: "feeds/list", locals: { activities: @feed.last_week }
+  - if @feed.last_week.present?
+    %div
+      %h3 Last week
+      = render partial: "feeds/list", locals: { activities: @feed.last_week }
 
-- if @feed.older_than_one_week.present?
-  %div
-    %h3 Earlier
-    = render partial: "feeds/list", locals: { activities: @feed.older_than_one_week }
+  - if @feed.older_than_one_week.present?
+    %div
+      %h3 Earlier
+      = render partial: "feeds/list", locals: { activities: @feed.older_than_one_week }
