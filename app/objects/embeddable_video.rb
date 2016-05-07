@@ -51,6 +51,10 @@ class EmbeddableVideo < SimpleDelegator
     super(obj)
   end
 
+  def class
+    __getobj__.class
+  end
+
   def url
     host = URI.parse(__getobj__.url).host
 

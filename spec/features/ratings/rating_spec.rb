@@ -12,6 +12,15 @@ feature "rating move" do
       expect(page).to have_content "Average rating: 5.0"
       expect(page).to have_content "Total ratings: 1"
     end
+
+    scenario "cannot rate own moves" do
+      bob = create :user
+      move = create :move, user: bob
+
+      visit move_path(move, as: bob)
+
+      expect(page).not_to have_button "5/5: Inhuman"
+    end
   end
 
   context "video" do

@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
 
   use UserWithName, for: :name_for_select
 
+  def can_rate?(rateable)
+    UserWithRatingPermissions.new(self).can_rate?(rateable)
+  end
+
   def self.without(users)
     where.not(id: users.map(&:id))
   end

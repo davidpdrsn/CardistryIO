@@ -7,7 +7,7 @@
     Total ratings:
     = rateable.ratings.count
 
-  - if signed_in? && !current_user.already_rated?(rateable, type: key.to_s.gsub("_id", ""))
+  - if current_user.can_rate?(rateable)
     - path = polymorphic_path([rateable, :ratings])
     = button_to "1/5: No good", path, method: :post, params: { key => rateable.id, rating: 1 }
     = button_to "2/5: Ok", path, method: :post, params: { key => rateable.id, rating: 2 }

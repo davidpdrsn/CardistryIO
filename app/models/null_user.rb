@@ -6,4 +6,8 @@ class NullUser
   def videos
     []
   end
+
+  def can_rate?(*)
+    false
+  end
 end
