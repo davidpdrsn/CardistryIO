@@ -2,11 +2,13 @@ source "https://rubygems.org"
 
 ruby "2.3.0"
 
+gem "rails", "4.2.6"
+
 gem "active_model_serializers"
 gem "airbrake", "~> 5.2"
 gem "attr_extras"
 gem "autoprefixer-rails"
-gem "bourbon", "~> 4.2.0"
+gem "bourbon"
 gem "capistrano"
 gem "capistrano-bundler"
 gem "capistrano-deploytags", "~> 1.0.0", require: false
@@ -14,7 +16,7 @@ gem "capistrano-rails"
 gem "capistrano-rails-console"
 gem "capistrano-rbenv"
 gem "clearance"
-gem "coffee-rails", "~> 4.1.0"
+gem "coffee-rails"
 gem "delayed_job_active_record"
 gem "email_validator"
 gem "enum_help"
@@ -29,16 +31,14 @@ gem "instagram"
 gem "ionicons-rails"
 gem "jquery-rails"
 gem "jquery-ui-rails"
-gem "neat", "~> 1.7.0"
-gem "newrelic_rpm", ">= 3.9.8"
-gem "normalize-rails", "~> 3.0.0"
+gem "neat"
+gem "normalize-rails"
 gem "pg"
 gem "puma"
 gem "rack-mini-profiler", require: false
-gem "rails", "4.2.5.1"
 gem "recipient_interceptor"
 gem "refills"
-gem "sass-rails", "~> 5.0"
+gem "sass-rails"
 gem "simple_form"
 gem "skylight"
 gem "stackprof"
@@ -57,7 +57,7 @@ group :development, :test do
   gem "byebug"
   gem "factory_girl_rails"
   gem "pry-rails"
-  gem "rspec-rails", "~> 3.1.0"
+  gem "rspec-rails"
 end
 
 group :test do
@@ -65,7 +65,7 @@ group :test do
   gem "database_cleaner"
   gem "formulaic"
   gem "launchy"
-  gem "shoulda-matchers", require: false
+  gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "timecop"
   gem "webmock"
