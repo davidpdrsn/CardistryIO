@@ -7,6 +7,6 @@
     = simple_format link_mentions(video.description)
     = link_to video.user.username, video.user
     = button_to "Approve", approve_video_path(video), method: :post
-    = button_to "Disapprove", disapprove_video_path(video), method: :delete
+    = button_to "Disapprove", disapprove_video_path(video), method: :delete, data: { confirm: "Sure?" }
 - else
   There are no videos to approve
