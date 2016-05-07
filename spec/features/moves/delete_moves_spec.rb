@@ -18,6 +18,8 @@ feature "delete moves" do
 
     visit move_path(move, as: user)
 
-    expect(page).not_to have_button "Delete"
+    within ".actions" do
+      expect(page).not_to have_button "Delete"
+    end
   end
 end
