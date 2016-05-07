@@ -40,4 +40,20 @@ feature "feed" do
 
     expect(page).to have_content "No activities yet to show in feed"
   end
+
+  scenario "deleting move" do
+    bob = create :user, username: "Bob"
+
+    visit new_move_path(as: bob)
+    fill_in "Name", with: "Sybil"
+    fill_in "Description", with: "Old school"
+    click_button "Add move"
+
+    visit move_path(Move.last, as: bob)
+    click_button "Delete move"
+
+    visit root_path(as: bob)
+
+    expect(page).not_to have_content "Sybil"
+  end
 end

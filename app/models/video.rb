@@ -15,11 +15,15 @@ class Video < ApplicationRecord
   validate :video_host
 
   belongs_to :user
-  has_many :appearances, dependent: :destroy
-  has_many :comments, as: :commentable
-  has_many :ratings, as: :rateable
-  has_many :credits, as: :creditable
-  has_many :sharings
+
+  with_options(dependent: :destroy) do |c|
+    c.has_many :appearances
+    c.has_many :comments, as: :commentable
+    c.has_many :ratings, as: :rateable
+    c.has_many :credits, as: :creditable
+    c.has_many :activities, as: :subject
+    c.has_many :sharings
+  end
 
   scope :all_public, -> { approved.where(private: false) }
   scope :approved, -> { where(approved: true) }

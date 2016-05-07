@@ -2,10 +2,14 @@ class Move < ApplicationRecord
   extend DecoratorDelegateMethods
 
   belongs_to :user
-  has_many :appearances, dependent: :destroy
-  has_many :comments, as: :commentable
-  has_many :ratings, as: :rateable
-  has_many :credits, as: :creditable
+
+  with_options(dependent: :destroy) do |c|
+    c.has_many :appearances
+    c.has_many :comments, as: :commentable
+    c.has_many :ratings, as: :rateable
+    c.has_many :credits, as: :creditable
+    c.has_many :activities, as: :subject
+  end
 
   validates :name, presence: true, uniqueness: true
 

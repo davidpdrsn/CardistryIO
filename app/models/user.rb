@@ -13,12 +13,14 @@ class User < ActiveRecord::Base
 
   gravtastic
 
-  has_many :moves
-  has_many :videos
-  has_many :comments
-  has_many :ratings
-  has_many :notifications
-  has_many :relationships, foreign_key: :follower_id
+  with_options(dependent: :destroy) do |c|
+    c.has_many :moves
+    c.has_many :videos
+    c.has_many :comments
+    c.has_many :ratings
+    c.has_many :notifications
+    c.has_many :relationships, foreign_key: :follower_id
+  end
 
   use UserWithName, for: :name_for_select
 

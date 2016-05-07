@@ -118,4 +118,13 @@ describe Video do
       expect(video.creditted_users).to eq [bob]
     end
   end
+
+  it "deletes its activites when it is deleted" do
+    video = create :video
+    Activity.create!(subject: video, user: video.user)
+
+    expect do
+      video.destroy!
+    end.to change { Activity.count }.from(1).to(0)
+  end
 end

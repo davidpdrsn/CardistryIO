@@ -35,4 +35,13 @@ describe Move do
       expect(Move.foreign_key).to eq "move_id"
     end
   end
+
+  it "deletes its activites when it is deleted" do
+    move = create :move
+    Activity.create!(subject: move, user: move.user)
+
+    expect do
+      move.destroy!
+    end.to change { Activity.count }.from(1).to(0)
+  end
 end
