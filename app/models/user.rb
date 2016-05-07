@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
 
   use UserWithName, for: :name_for_select
 
+  def self.without(users)
+    where.not(id: users.map(&:id))
+  end
+
   def to_param
     "#{id}-#{username.parameterize}"
   end

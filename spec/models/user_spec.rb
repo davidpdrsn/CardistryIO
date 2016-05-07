@@ -205,4 +205,13 @@ describe User do
       expect(bob).not_to be_valid
     end
   end
+
+  describe ".without" do
+    it "excludes the given users from the relation" do
+      bob = create :user, username: "bob"
+      alice = create :user, username: "alice"
+
+      expect(User.without([bob]).pluck(:username)).to eq [alice.username]
+    end
+  end
 end

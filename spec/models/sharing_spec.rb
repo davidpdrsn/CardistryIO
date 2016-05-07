@@ -19,4 +19,13 @@ describe Sharing do
       expect(shared_videos.map(&:name)).to eq [video.name]
     end
   end
+
+  it "isn't possible share videos with yourself" do
+    user = create :user
+    video = create :video, user: user
+
+    sharing = Sharing.new(video: video, user: user)
+
+    expect(sharing.valid?).to eq false
+  end
 end
