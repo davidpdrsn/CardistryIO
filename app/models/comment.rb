@@ -5,6 +5,11 @@ class Comment < ActiveRecord::Base
   validates :content, presence: true
   validates :user_id, presence: true
 
+  validates_with(
+    PolymorphicAssociationValidator.new(name: :commentable,
+                                        types: [Video, Move])
+  )
+
   def updated?
     updated_at != created_at
   end

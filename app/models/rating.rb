@@ -2,6 +2,10 @@ class Rating < ActiveRecord::Base
   belongs_to :rateable, polymorphic: true
   belongs_to :user
 
+  validates_with(
+    PolymorphicAssociationValidator.new(name: :rateable, types: [Video, Move])
+  )
+
   validates :user, :rateable, presence: true
   validates :rating, numericality: {
     only_integer: true,
