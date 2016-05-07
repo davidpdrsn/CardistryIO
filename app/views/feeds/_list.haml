@@ -1,3 +1,4 @@
 - activities.each do |activity|
   %div
-    = activity.text
+    = link_to activity.text, activity.subject
+    = "(#{activity.subject.class.name.humanize.downcase})"
