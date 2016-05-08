@@ -14,13 +14,11 @@ feature "getting notified when mentioned" do
     end
 
     visit root_path(as: alice)
-    click_link "Notifications (1)"
+    expect(page).to have_content "1 new notification"
 
     expect(page).to have_content "@#{bob.username} mentioned you in a comment"
 
-    within ".notifications-list" do
-      click_link "comment"
-    end
+    find("a", text: /mentioned you in a/).click
 
     expect(page).to have_content video.name
   end
@@ -38,7 +36,7 @@ feature "getting notified when mentioned" do
     end
 
     visit root_path(as: bob)
-    expect(page).to have_content "Notifications (0)"
+    expect(page).to have_content "0 new notifications"
   end
 
   scenario "in moves" do
@@ -53,12 +51,9 @@ feature "getting notified when mentioned" do
     click_button "Add move"
 
     visit root_path(as: alice)
-    click_link "Notifications (1)"
-
     expect(page).to have_content "@#{bob.username} mentioned you in a move"
-    within ".notifications-list" do
-      click_link "move"
-    end
+
+    find("a", text: /mentioned you in a/).click
 
     expect(page).to have_content "Sybil"
   end
@@ -79,12 +74,10 @@ feature "getting notified when mentioned" do
     approve_video
 
     visit root_path(as: alice)
-    click_link "Notifications (1)"
 
     expect(page).to have_content "@#{bob.username} mentioned you in a video"
-    within ".notifications-list" do
-      click_link "video"
-    end
+
+    find("a", text: /mentioned you in a/).click
 
     expect(page).to have_content "Classic"
   end

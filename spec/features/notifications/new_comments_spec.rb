@@ -12,7 +12,6 @@ feature "notifications from comments" do
     click_button "Submit comment"
 
     visit root_path(as: bob)
-    click_link "Notifications (1)"
 
     expect(page).to have_content "New comment on #{video.name} by @#{alice.username}"
   end
@@ -21,20 +20,19 @@ feature "notifications from comments" do
     bob = create :user
     create :notification, user: bob
 
-    visit notifications_path(as: bob)
-    click_button "Mark all read"
     visit root_path(as: bob)
-    click_link "Notifications (0)"
+    click_link "Mark all as read"
+    visit root_path(as: bob)
 
-    expect(page).to have_content "You have no notifications"
+    expect(page).to have_content "0 new notifications"
   end
 
   scenario "can't mark all read when there are none" do
     bob = create :user
 
-    visit notifications_path(as: bob)
+    visit root_path(as: bob)
 
-    expect(page).not_to have_button "Mark all read"
+    expect(page).not_to have_link "Mark all as read"
   end
 
   scenario "visiting the subject for a notification" do

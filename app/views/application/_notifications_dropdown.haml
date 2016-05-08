@@ -1,6 +1,4 @@
 %div.dropdown
-  %span.screen-reader-text
-    = link_to "Notifications (#{current_user.new_notifications.count})", notifications_path
   - if current_user.new_notifications.present?
     %button.pill-button-new-notification.dropdown-toggle{:id => "notifications-button", :data => {:toggle => "dropdown"}, :href => "#"}
       %i.icon.ion-android-notifications

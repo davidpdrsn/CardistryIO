@@ -13,7 +13,7 @@ feature "move" do
     end
     click_button "Add move"
 
-    visit notifications_path(as: bob)
+    visit root_path(as: bob)
 
     expect(page).to have_content "@#{user.username} credited you for his move"
 

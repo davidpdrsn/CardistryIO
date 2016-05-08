@@ -9,7 +9,8 @@ feature "relationships" do
     click_button "Follow"
 
     visit root_path(bob, as: bob)
-    click_link "Notifications (1)"
+
+    find("a", text: /started following you/).click
 
     expect(page).to have_content "@alice started following you"
   end
