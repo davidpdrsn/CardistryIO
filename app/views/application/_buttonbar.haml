@@ -35,7 +35,6 @@
               Share with everyone.
 
   - if signed_in?
-    // = link_to notifications_path do
     %div.dropdown
       %span.screen-reader-text
         = link_to "Notifications (#{current_user.new_notifications.count})", notifications_path
@@ -53,18 +52,11 @@
           new notifications
 
           - if current_user.new_notifications.present?
-            - current_user.notifications.each do |notification|
-              %li
-                = link_to notification.subject_for_link do
-                  %span.dropdown-button-title
-                    = link_mentions notification.text.expand(link: ->() { notification_subject_link(notification) }).html_safe
+            = render current_user.notifications
         -if current_user.new_notifications.present?
           %li.mark-as-read-button
             =link_to mark_all_read_notifications_path, method: :post do
               Mark all as read
-
-
-
 
   - if signed_in?
     //= link_to current_user do
