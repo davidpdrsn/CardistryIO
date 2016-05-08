@@ -49,7 +49,7 @@
         %li.notification-header
           %span.notification-count
             #{current_user.new_notifications.count}
-          new notifications
+          new #{"notification".pluralize(current_user.new_notifications.count)}
 
           - if current_user.new_notifications.present?
             = render current_user.notifications
