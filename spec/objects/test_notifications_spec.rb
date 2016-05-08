@@ -1,6 +1,18 @@
 require "rails_helper"
 
 describe TestNotifications do
+  it "doesn't work in production" do
+    SwapsEnv.new.swap_for("production") do
+      bob = create :user, username: "Bob"
+      alice = create :user, username: "Alice"
+      create :video
+
+      expect do
+        TestNotifications.new(bob).comment_on_video
+      end.to raise_error(RuntimeError)
+    end
+  end
+
   it "raises if there are no other users in the database" do
     expect do
       TestNotifications.new(create(:user)).comment_on_video
