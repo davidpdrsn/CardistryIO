@@ -4,7 +4,12 @@ class VideosController < ApplicationController
                                        :edit, :update]
 
   def all
-    @videos = Video.all_public
+    page = (params[:page] || 1).to_i
+
+    @paged_videos = PaginatedRelation.new(
+      Video.all_public,
+      per_page: PaginatedRelation::DEFAULT_PER_PAGE,
+    ).page(page)
   end
 
   def index

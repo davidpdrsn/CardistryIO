@@ -39,4 +39,61 @@ describe PaginatedRelation do
 
     expect(relation.page(3).map(&:username)).to eq [user.username]
   end
+
+  it "knows which page it is on" do
+    6.times do
+      create :user
+    end
+
+    relation = PaginatedRelation.new(User.all, per_page: 3)
+    page = relation.page(3)
+
+    expect(page.current_page).to eq 3
+  end
+
+  it "knows which page is the previous" do
+    6.times do
+      create :user
+    end
+
+    relation = PaginatedRelation.new(User.all, per_page: 3)
+    page = relation.page(3)
+
+    expect(page.previous_page).to eq 2
+  end
+
+  it "knows which page is the next" do
+    6.times do
+      create :user
+    end
+
+    relation = PaginatedRelation.new(User.all, per_page: 3)
+    page = relation.page(3)
+
+    expect(page.next_page).to eq 4
+  end
+
+  it "knows if there are more pages" do
+    6.times do
+      create :user
+    end
+
+    relation = PaginatedRelation.new(User.all, per_page: 4)
+
+    expect(relation.page(1).more_pages?).to eq true
+    expect(relation.page(2).more_pages?).to eq false
+    expect(relation.page(10).more_pages?).to eq false
+  end
+
+  it "knows if there are more previous pages" do
+    6.times do
+      create :user
+    end
+
+    relation = PaginatedRelation.new(User.all, per_page: 4)
+
+    expect(relation.page(-10).more_previous_pages?).to eq false
+    expect(relation.page(1).more_previous_pages?).to eq false
+    expect(relation.page(2).more_previous_pages?).to eq true
+  end
 end
