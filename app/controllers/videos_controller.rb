@@ -7,7 +7,7 @@ class VideosController < ApplicationController
     page = (params[:page] || 1).to_i
 
     @paged_videos = PaginatedRelation.new(
-      Video.all_public,
+      Video.all_public.approved,
       per_page: PaginatedRelation::DEFAULT_PER_PAGE,
     ).page(page)
   end
