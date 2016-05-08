@@ -55,7 +55,7 @@
           - if current_user.new_notifications.present?
             - current_user.notifications.each do |notification|
               %li
-                =link_to "#" do
+                = link_to notification.subject_for_link do
                   %span.dropdown-button-title
                     = link_mentions notification.text.expand(link: ->() { notification_subject_link(notification) }).html_safe
         -if current_user.new_notifications.present?

@@ -38,7 +38,11 @@ class Notification < ApplicationRecord
   end
 
   def subject_for_link
-    subject.try(:commentable) || subject
+    if notification_type == "new_follower"
+      subject.follower
+    else
+      subject.try(:commentable) || subject
+    end
   end
 
   def seen!

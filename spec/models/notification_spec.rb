@@ -65,4 +65,58 @@ describe Notification do
       end.to change { notification.seen }.from(false).to(true)
     end
   end
+
+  describe "#subject_for_link" do
+    it "returns the commentable for comment notifications" do
+      video = create :video
+      comment = create :comment, commentable: video
+
+      notification = create(
+        :notification,
+        notification_type: :comment,
+        subject: comment,
+      )
+
+      expect(notification.subject_for_link).to eq video
+    end
+
+    it "returns the commentable for mention notifications" do
+      video = create :video
+      comment = create :comment, commentable: video
+
+      notification = create(
+        :notification,
+        notification_type: :mentioned,
+        subject: comment,
+      )
+
+      expect(notification.subject_for_link).to eq video
+    end
+
+    it "returns the follower for new follower notifications" do
+      bob = create :user, username: "bob"
+      alice = create :user, username: "alice"
+      relationship = bob.follow!(alice)
+
+      notification = create(
+        :notification,
+        notification_type: :new_follower,
+        subject: relationship,
+      )
+
+      expect(notification.subject_for_link).to eq bob
+    end
+
+    it "returns the subject for other notifications" do
+      video = create :video
+
+      notification = create(
+        :notification,
+        notification_type: :video_shared,
+        subject: video,
+      )
+
+      expect(notification.subject_for_link).to eq video
+    end
+  end
 end

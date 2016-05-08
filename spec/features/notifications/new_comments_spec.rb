@@ -36,4 +36,20 @@ feature "notifications from comments" do
 
     expect(page).not_to have_button "Mark all read"
   end
+
+  scenario "visiting the subject for a notification" do
+    bob = create :user
+    video = create :video
+    notification = create(
+      :notification,
+      user: bob,
+      subject: video,
+      notification_type: :comment,
+    )
+
+    visit root_path(as: bob)
+    click_link notification.text.expand
+
+    expect(page.current_path).to eq video_path(video)
+  end
 end
