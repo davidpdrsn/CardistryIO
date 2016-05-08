@@ -4,7 +4,7 @@ class VideosController < ApplicationController
                                        :edit, :update]
 
   def all
-    @videos = AllVideos.new
+    @videos = Video.all_public
   end
 
   def index
