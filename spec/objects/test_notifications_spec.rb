@@ -16,7 +16,7 @@ describe TestNotifications do
   it "raises if there are no other users in the database" do
     expect do
       TestNotifications.new(create(:user)).comment_on_video
-    end.to raise_error(RuntimeError)
+    end.to raise_error(ActiveRecord::RecordNotFound)
   end
 
   it "creates comment on video notifications" do

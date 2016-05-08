@@ -36,7 +36,7 @@ class TestNotifications
   end
 
   def create!(subject:, type:)
-    ensure_development_env!
+    TestData.ensure_not_production_env!
 
     Notification.create!(
       user: user,
@@ -46,29 +46,15 @@ class TestNotifications
     )
   end
 
-  def ensure_development_env!
-    raise "Only works in development and test" if Rails.env.production?
-  end
-
   def video
-    first!(Video)
+    Video.first!
   end
 
   def move
-    first!(Move)
+    Move.first!
   end
 
   def actor
-    first!(
-      User.where.not(id: user.id),
-      error_message: "There most be at least one other user",
-    )
-  end
-
-  def first!(relation, error_message: nil)
-    error_message ||=
-      "There must be at least one #{relation.table_name.singularize}"
-
-    relation.all.first || raise(error_message)
+    User.where.not(id: user.id).first!
   end
 end

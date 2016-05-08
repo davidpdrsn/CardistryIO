@@ -51,3 +51,23 @@ You can call the following methods on `TestNotifications`:
 - `video_shared`
 - `mentioned`
 - `new_credit`
+
+## Creating test activities
+
+You can also create test activities for testing the feed.
+
+The process is similar to creating test notifications:
+
+    $ bin/rails console
+    => me = User.find(your_id)
+    => TestActivities.new(me).video
+    => TestActivities.new(me).move
+
+Setting the date the activity was created can be done like so:
+
+    $ bin/rails console
+    => me = User.find(your_id)
+    => activity = TestActivities.new(me).video
+    => activity.update!(created_at: 1.day.ago)
+    => activity.update!(created_at: 1.week.ago)
+    => activity.update!(created_at: 1.month.ago) # etc...

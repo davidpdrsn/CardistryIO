@@ -20,6 +20,7 @@ class User < ApplicationRecord
     c.has_many :ratings
     c.has_many :notifications
     c.has_many :relationships, foreign_key: :follower_id
+    c.has_many :activities
   end
 
   use UserWithName, for: :name_for_select
