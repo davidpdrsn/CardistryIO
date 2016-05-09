@@ -75,7 +75,8 @@ Rails.application.routes.draw do
   get "instagram", to: "instagram#index"
   get "instagram/oauth/callback", to: "instagram#callback"
 
-  get "monitor", to: "monitor#index"
+  get "monitor", to: "monitor#services"
+  get "monitor_stats", to: "monitor#stats"
 
   root to: "welcome#index"
 end

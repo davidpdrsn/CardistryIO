@@ -18,6 +18,10 @@ class MonitorController < ApplicationController
     )
   end
 
+  def stats
+    @stats = VpsStats.new
+  end
+
   private
 
   def test_cache(errors)
