@@ -36,4 +36,19 @@ namespace :deploy do
 
   after :publishing, "deploy:restart"
   after :finishing, "deploy:cleanup"
+  after :deploy, "resque:restart"
+end
+
+namespace :resque do
+  task :status do
+    on roles(:app) do
+      execute "sudo restart workers"
+    end
+  end
+
+  task :status do
+    on roles(:app) do
+      execute "status workers"
+    end
+  end
 end
