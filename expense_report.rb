@@ -111,8 +111,7 @@ class Expense
 end
 
 expenses = [
-  Expense::Monthly.new("Airbrake", Dollar.new(0), notice: "currently on free " \
-                       "plan, payed plan will be at least $49"),
+  Expense::Monthly.new("Rollbar", Dollar.new(0))
   Expense::Monthly.new("Digital Ocean", Dollar.new(10)),
   Expense::Monthly.new("Digital Ocean Weekly Backups", Dollar.new(2)),
   Expense::Monthly.new("Skylight", Dollar.new(0)),
