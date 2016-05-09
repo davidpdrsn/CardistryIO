@@ -23,6 +23,18 @@ feature "editing profile" do
 
     expect(page).to have_content "New biography!"
   end
+
+  scenario "sets email" do
+    user = create :user, email: "bob@example.com"
+
+    visit user_path(user, as: user)
+    click_link "Edit"
+    fill_in "Email", with: "alice@example.com"
+    click_button "Update User"
+
+    user.reload
+    expect(user.email).to eq "alice@example.com"
+  end
 end
 
 feature "link to edit profile" do

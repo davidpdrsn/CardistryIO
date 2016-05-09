@@ -8,6 +8,13 @@
     = f.input :biography
 
   %div.field
+    = f.input :email
+
+  %div.field
     = f.button :submit
 
-Change your profile picture with <a href="https://gravatar.com">Gravatar</a>
+%p
+  You can change your password #{link_to "here", edit_user_password_path(current_user) }
+
+%p
+  Change your profile picture with <a href="https://gravatar.com">Gravatar</a>

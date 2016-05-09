@@ -15,6 +15,7 @@ class UsersController < Clearance::UsersController
     user_params = params.require(:user).permit(
       :instagram_username,
       :biography,
+      :email,
     )
     if @user.update(user_params)
       flash.notice = "Updated"
