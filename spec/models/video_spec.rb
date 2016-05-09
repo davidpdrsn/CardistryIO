@@ -152,4 +152,89 @@ describe Video do
       expect(video.unique_views_count).to eq 2
     end
   end
+
+  describe "order_by_rating" do
+    it "sorts them desc" do
+      two = create :video, name: "two"
+      create :rating, rateable: two, rating: 3
+
+      one = create :video, name: "one"
+      create :rating, rateable: one, rating: 5
+
+      three = create :video, name: "three"
+      create :rating, rateable: three, rating: 1
+
+      expect(Video.order_by_rating(:desc).map(&:name))
+        .to eq ["one", "two", "three"]
+    end
+
+    it "sorts them asc" do
+      two = create :video, name: "two"
+      create :rating, rateable: two, rating: 3
+
+      one = create :video, name: "one"
+      create :rating, rateable: one, rating: 5
+
+      three = create :video, name: "three"
+      create :rating, rateable: three, rating: 1
+
+      expect(Video.order_by_rating(:asc).map(&:name))
+        .to eq ["three", "two", "one"]
+    end
+
+    it "ignores unknown input" do
+      two = create :video, name: "two"
+      create :rating, rateable: two, rating: 3
+
+      one = create :video, name: "one"
+      create :rating, rateable: one, rating: 5
+
+      three = create :video, name: "three"
+      create :rating, rateable: three, rating: 1
+
+      expect(Video.order_by_rating("; DROP ALL TABLES").map(&:name))
+        .to eq ["one", "two", "three"]
+    end
+
+    it "doesn't include videos without ratings" do
+      two = create :video, name: "two"
+      create :rating, rateable: two, rating: 3
+
+      one = create :video, name: "one"
+      create :rating, rateable: one, rating: 5
+      three = create :video, name: "three"
+
+      create :rating, rateable: three, rating: 1
+      four = create :video, name: "four"
+
+      expect(Video.order_by_rating("DESC").map(&:name))
+        .to eq ["one", "two", "three"]
+    end
+
+    it "doesn't include duplicate videos" do
+      one = create :video, name: "one"
+      create :rating, rateable: one, rating: 5
+      create :rating, rateable: one, rating: 3
+      create :rating, rateable: one, rating: 1
+
+      expect(Video.order_by_rating("DESC").map(&:name))
+        .to eq ["one"]
+    end
+
+    it "orders by the sum of the ratings" do
+      two = create :video, name: "two"
+      create :rating, rateable: two, rating: 3
+
+      one = create :video, name: "one"
+      create :rating, rateable: one, rating: 2
+      create :rating, rateable: one, rating: 2
+      create :rating, rateable: one, rating: 2
+
+      three = create :video, name: "three"
+      create :rating, rateable: three, rating: 1
+
+      expect(Video.order_by_rating("DESC").map(&:name))
+        .to eq ["one", "two", "three"]
+    end
+  end
 end

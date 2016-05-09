@@ -34,6 +34,20 @@ class Video < ApplicationRecord
   use VideoWithUrlHint, for: :url_hint
   use WithRatingStats, for: :average_rating
 
+  def self.order_by_rating(direction)
+    direction = direction.to_s.upcase
+
+    direction = if direction == "ASC"
+                  direction
+                else
+                  "DESC"
+                end
+
+    joins(:ratings)
+      .group("videos.id")
+      .order("SUM(ratings.rating) #{direction}")
+  end
+
   def creditted_users
     User.where(id: credits.pluck(:user_id))
   end

@@ -22,6 +22,12 @@ FactoryGirl.define do
     creditable_type "Move"
   end
 
+  factory :rating do
+    user
+    rateable_id { |comment| create(:move).id }
+    rateable_type "Move"
+  end
+
   factory :move do
     sequence(:name) { |n| "Sybil #{n}" }
     user
@@ -29,7 +35,7 @@ FactoryGirl.define do
   end
 
   factory :video do
-    sequence(:name) { |n| "Classic #{n}" }
+    sequence(:name) { |n| "Classic #{n}th" }
     description "A video I made"
     url "https://www.youtube.com/watch?v=W799NKLEz8s"
     user

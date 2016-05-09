@@ -7,7 +7,7 @@ class PaginatedRelation
     Page.new(
       relation.offset(per_page * (count - 1)).limit(per_page),
       page: count,
-      number_of_pages: relation.count.fdiv(per_page).ceil,
+      number_of_pages: relation.length.fdiv(per_page).ceil,
     )
   end
 

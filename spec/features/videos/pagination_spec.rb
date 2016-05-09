@@ -8,18 +8,18 @@ feature "paginating videos" do
 
     visit all_videos_path
 
-    expect(page).to have_content videos.first.name
-    expect(page).to_not have_content videos.last.name
+    expect(page).to have_content videos.last.name
+    expect(page).to_not have_content videos.first.name
 
     click_link "Next"
 
-    expect(page).to_not have_content videos.first.name
-    expect(page).to have_content videos.last.name
+    expect(page).to have_content videos.first.name
+    expect(page).to_not have_content videos.last.name
 
     click_link "Prev"
 
-    expect(page).to have_content videos.first.name
-    expect(page).to_not have_content videos.last.name
+    expect(page).to have_content videos.last.name
+    expect(page).to_not have_content videos.first.name
   end
 
   scenario "paging far" do
@@ -31,7 +31,7 @@ feature "paginating videos" do
     click_link "Next"
     click_link "Next"
 
-    expect(page).to have_content videos.last.name
+    expect(page).to have_content videos.first.name
   end
 
   scenario "no previous page on first page" do

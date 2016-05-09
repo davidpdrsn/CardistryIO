@@ -6,8 +6,26 @@ class VideosController < ApplicationController
   def all
     page = (params[:page] || 1).to_i
 
+    sort_params = begin
+                    params
+                      .require(:sort)
+                      .permit(:by, :direction)
+                  rescue ActionController::ParameterMissing
+                    ActionController::Parameters.new(
+                      by: "created_at",
+                      direction: "DESC",
+                    ).permit!
+                  end
+
+    videos = Video.all_public.approved
+    videos = if sort_params[:by] == "created_at"
+               videos.order(created_at: sort_params[:direction])
+             else
+               videos.order_by_rating(sort_params[:direction])
+             end
+
     @paged_videos = PaginatedRelation.new(
-      Video.all_public.approved,
+      videos,
       per_page: PaginatedRelation::DEFAULT_PER_PAGE,
     ).page(page)
   end
