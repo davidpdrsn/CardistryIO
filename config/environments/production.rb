@@ -4,6 +4,7 @@ Rails.application.configure do
   config.eager_load = true
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  config.cache_store = :redis_store
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
   config.public_file_server.headers = { 'Cache-Control' => "public, max-age=#{1.year.to_i}" }
   config.middleware.use Rack::Deflater
