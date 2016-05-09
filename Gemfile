@@ -4,6 +4,9 @@ ruby "2.3.0"
 
 gem "rails", "5.0.0.rc1"
 
+# Most at the top because other gems might depend on ENV being loaded
+gem "dotenv-rails", require: "dotenv/rails-now"
+
 gem "active_model_serializers"
 gem "airbrake", "~> 5.2"
 gem "attr_extras"
@@ -20,7 +23,6 @@ gem "coffee-rails"
 gem "delayed_job_active_record"
 gem "email_validator"
 gem "enum_help"
-gem "figaro"
 gem "flamegraph"
 gem "flutie"
 gem "gravtastic"
