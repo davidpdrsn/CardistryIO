@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
   extend DecoratorDelegateMethods
 
+  MINIMUM_NUMBER_OF_RATINGS = 5
   enum video_type: {
     performance: 0,
     tutorial: 1,
@@ -45,7 +46,8 @@ class Video < ApplicationRecord
 
     joins(:ratings)
       .group("videos.id")
-      .order("SUM(ratings.rating) #{direction}")
+      .having("count(videos.id) >= ?", MINIMUM_NUMBER_OF_RATINGS)
+      .order("AVG(ratings.rating) #{direction}")
   end
 
   def creditted_users

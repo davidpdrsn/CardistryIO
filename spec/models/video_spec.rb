@@ -156,13 +156,13 @@ describe Video do
   describe "order_by_rating" do
     it "sorts them desc" do
       two = create :video, name: "two"
-      create :rating, rateable: two, rating: 3
+      5.times { create :rating, rateable: two, rating: 3 }
 
       one = create :video, name: "one"
-      create :rating, rateable: one, rating: 5
+      5.times { create :rating, rateable: one, rating: 5 }
 
       three = create :video, name: "three"
-      create :rating, rateable: three, rating: 1
+      5.times { create :rating, rateable: three, rating: 1 }
 
       expect(Video.order_by_rating(:desc).map(&:name))
         .to eq ["one", "two", "three"]
@@ -170,13 +170,13 @@ describe Video do
 
     it "sorts them asc" do
       two = create :video, name: "two"
-      create :rating, rateable: two, rating: 3
+      5.times { create :rating, rateable: two, rating: 3 }
 
       one = create :video, name: "one"
-      create :rating, rateable: one, rating: 5
+      5.times { create :rating, rateable: one, rating: 5 }
 
       three = create :video, name: "three"
-      create :rating, rateable: three, rating: 1
+      5.times { create :rating, rateable: three, rating: 1 }
 
       expect(Video.order_by_rating(:asc).map(&:name))
         .to eq ["three", "two", "one"]
@@ -184,30 +184,15 @@ describe Video do
 
     it "ignores unknown input" do
       two = create :video, name: "two"
-      create :rating, rateable: two, rating: 3
+      5.times { create :rating, rateable: two, rating: 3 }
 
       one = create :video, name: "one"
-      create :rating, rateable: one, rating: 5
+      5.times { create :rating, rateable: one, rating: 5 }
 
       three = create :video, name: "three"
-      create :rating, rateable: three, rating: 1
+      5.times { create :rating, rateable: three, rating: 1 }
 
       expect(Video.order_by_rating("; DROP ALL TABLES").map(&:name))
-        .to eq ["one", "two", "three"]
-    end
-
-    it "doesn't include videos without ratings" do
-      two = create :video, name: "two"
-      create :rating, rateable: two, rating: 3
-
-      one = create :video, name: "one"
-      create :rating, rateable: one, rating: 5
-      three = create :video, name: "three"
-
-      create :rating, rateable: three, rating: 1
-      four = create :video, name: "four"
-
-      expect(Video.order_by_rating("DESC").map(&:name))
         .to eq ["one", "two", "three"]
     end
 
@@ -216,25 +201,42 @@ describe Video do
       create :rating, rateable: one, rating: 5
       create :rating, rateable: one, rating: 3
       create :rating, rateable: one, rating: 1
+      create :rating, rateable: one, rating: 1
+      create :rating, rateable: one, rating: 1
 
       expect(Video.order_by_rating("DESC").map(&:name))
         .to eq ["one"]
     end
 
-    it "orders by the sum of the ratings" do
-      two = create :video, name: "two"
-      create :rating, rateable: two, rating: 3
-
+    it "orders by the average of the ratings" do
       one = create :video, name: "one"
-      create :rating, rateable: one, rating: 2
-      create :rating, rateable: one, rating: 2
-      create :rating, rateable: one, rating: 2
+      5.times { create :rating, rateable: one, rating: 3 }
+
+      two = create :video, name: "two"
+      10.times { create :rating, rateable: two, rating: 2 }
 
       three = create :video, name: "three"
-      create :rating, rateable: three, rating: 1
+      5.times { create :rating, rateable: three, rating: 1 }
 
       expect(Video.order_by_rating("DESC").map(&:name))
         .to eq ["one", "two", "three"]
+    end
+
+    it "only includes videos that have been rated at least 5 times" do
+      one = create :video, name: "one"
+      create :rating, rateable: one, rating: 3
+
+      two = create :video, name: "two"
+      5.times do
+        create :rating, rateable: two, rating: 2
+        create :rating, rateable: two, rating: 2
+        create :rating, rateable: two, rating: 2
+      end
+
+      three = create :video, name: "three"
+
+      expect(Video.order_by_rating("DESC").map(&:name))
+        .to eq ["two"]
     end
   end
 end

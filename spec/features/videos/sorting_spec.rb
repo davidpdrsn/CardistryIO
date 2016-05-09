@@ -25,13 +25,13 @@ feature "sorting" do
 
   scenario "sorting by rating" do
     one = create :video, created_at: Time.zone.now
-    create :rating, rateable: one, rating: 5
+    5.times { create :rating, rateable: one, rating: 5 }
 
     two = create :video, created_at: 2.days.ago
-    create :rating, rateable: two, rating: 3
+    5.times { create :rating, rateable: two, rating: 3 }
 
     three = create :video, created_at: 10.weeks.ago
-    create :rating, rateable: three, rating: 1
+    5.times { create :rating, rateable: three, rating: 1 }
 
     visit all_videos_path
     select "Rating", from: "sort_by"
@@ -43,13 +43,13 @@ feature "sorting" do
 
   scenario "sorting by rating in reverse" do
     one = create :video, created_at: Time.zone.now
-    create :rating, rateable: one, rating: 5
+    5.times { create :rating, rateable: one, rating: 5 }
 
     two = create :video, created_at: 2.days.ago
-    create :rating, rateable: two, rating: 3
+    5.times { create :rating, rateable: two, rating: 3 }
 
     three = create :video, created_at: 10.weeks.ago
-    create :rating, rateable: three, rating: 1
+    5.times { create :rating, rateable: three, rating: 1 }
 
     visit all_videos_path
     select "Rating", from: "sort_by"
