@@ -4,24 +4,12 @@ class VideosController < ApplicationController
                                        :edit, :update]
 
   def all
-    page = (params[:page] || 1).to_i
-
-    sort_params = begin
-                    params
-                      .require(:sort)
-                      .permit(:by, :direction)
-                  rescue ActionController::ParameterMissing
-                    ActionController::Parameters.new(
-                      by: "created_at",
-                      direction: "DESC",
-                    ).permit!
-                  end
-
     videos = Video.all_public.approved
-    videos = if sort_params[:by] == "created_at"
-               videos.order(created_at: sort_params[:direction])
+    sort_direction = sort_params.require(:direction)
+    videos = if sort_params.require(:by) == "created_at"
+               videos.order(created_at: sort_direction)
              else
-               videos.order_by_rating(sort_params[:direction])
+               videos.order_by_rating(sort_direction)
              end
 
     @paged_videos = PaginatedRelation.new(
@@ -35,8 +23,18 @@ class VideosController < ApplicationController
   end
 
   def show
+<<<<<<< 0e8e8a0fbdac43bc0fe77a07034102525711ded3
     @video = EmbeddableVideo.new(find_video)
     track_video_view(@video)
+=======
+    model = if signed_in?
+              current_user.accessable_videos.find(params[:id])
+            else
+              Video.all_public.find(params[:id])
+            end
+
+    @video = EmbeddableVideo.new(model)
+>>>>>>> Clean up controller
 
     respond_to do |format|
       format.html {}
@@ -138,5 +136,22 @@ class VideosController < ApplicationController
     return unless signed_in?
     return if current_user == video.user
     video.viewed_by(current_user)
+  end
+
+  def page
+    (params[:page] || 1).to_i
+  end
+
+  def sort_params
+    params.require(:sort).permit(:by, :direction)
+  rescue ActionController::ParameterMissing
+    default_sort_params
+  end
+
+  def default_sort_params
+    ActionController::Parameters.new(
+      by: "created_at",
+      direction: "DESC",
+    ).permit!
   end
 end
