@@ -40,7 +40,7 @@ namespace :deploy do
 end
 
 namespace :resque do
-  task :status do
+  task :restart do
     on roles(:app) do
       execute "sudo restart workers"
     end
