@@ -16,5 +16,4 @@ RUN apt-get install -y nodejs
 
 RUN mkdir /app
 WORKDIR /app
-ENV BUNDLE_PATH /box
 COPY . /app/

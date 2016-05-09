@@ -2,19 +2,47 @@ db:
   image: postgres:9.4
   ports:
     - "5432"
-web:
+
+app:
   build: .
-  command: bin/rails s -b 0.0.0.0 -p 3000
+  command: echo "Hello, world!"
   volumes:
     - .:/app
-  volumes_from:
-    - box
   stdin_open: true
+  environment:
+    BUNDLE_PATH: "/box"
+
+web:
+  extends:
+    service: app
+  command: bin/rails s -b 0.0.0.0 -p 3000
   ports:
     - "3000:3000"
   links:
     - db
+    - redis
+  volumes_from:
+    - box
+
+resque:
+  extends:
+    service: app
+  environment:
+    QUEUE: "*"
+    RAILS_ENV: development
+  command: bin/rake environment resque:work
+  links:
+    - db
+    - redis
+  volumes_from:
+    - box
+
 box:
   image: busybox
   volumes:
     - /box
+
+redis:
+  image: redis:2.6
+  ports:
+    - "6379"
