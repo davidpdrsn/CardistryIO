@@ -1,5 +1,3 @@
-redis = ENV.fetch("REDIS_1_PORT") do
-  ENV.fetch("REDIS_URL")
-end.gsub("tcp://", "")
-
-Resque.redis = redis
+if Rails.env.development? || Rails.env.test?
+  Resque.redis = ENV.fetch("REDIS_1_PORT")
+end
