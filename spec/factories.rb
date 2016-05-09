@@ -43,6 +43,11 @@ FactoryGirl.define do
     video_type "performance"
   end
 
+  factory :video_view do
+    user
+    video
+  end
+
   factory :appearance do
     video
     move

@@ -27,28 +27,52 @@ class Video < ApplicationRecord
     c.has_many :views, class_name: "VideoView"
   end
 
-  scope :all_public, -> { approved.where(private: false) }
-  scope :approved, -> { where(approved: true) }
-  scope :unapproved, -> { where(approved: false) }
-  scope :all_private, -> { where(private: true) }
+  class << self
+    def all_public
+      approved.where(private: false)
+    end
+
+    def approved
+      where(approved: true)
+    end
+
+    def unapproved
+      where(approved: false)
+    end
+
+    def all_private
+      where(private: true)
+    end
+
+    def order_by_rating(direction)
+      direction = sanitize_sort_direction(direction)
+      joins(:ratings)
+        .group("videos.id")
+        .having("count(videos.id) >= ?", MINIMUM_NUMBER_OF_RATINGS)
+        .order("AVG(ratings.rating) #{direction}")
+    end
+
+    def order_by_views_count(direction)
+      direction = sanitize_sort_direction(direction)
+      left_outer_joins(:views)
+        .group("videos.id")
+        .order("COUNT(video_views.id) #{direction}")
+    end
+
+    private
+
+    def sanitize_sort_direction(direction)
+      direction = direction.to_s.upcase
+      if direction == "ASC"
+        direction
+      else
+        "DESC"
+      end
+    end
+  end
 
   use VideoWithUrlHint, for: :url_hint
   use WithRatingStats, for: :average_rating
-
-  def self.order_by_rating(direction)
-    direction = direction.to_s.upcase
-
-    direction = if direction == "ASC"
-                  direction
-                else
-                  "DESC"
-                end
-
-    joins(:ratings)
-      .group("videos.id")
-      .having("count(videos.id) >= ?", MINIMUM_NUMBER_OF_RATINGS)
-      .order("AVG(ratings.rating) #{direction}")
-  end
 
   def creditted_users
     User.where(id: credits.pluck(:user_id))

@@ -6,8 +6,11 @@ class VideosController < ApplicationController
   def all
     videos = Video.all_public.approved
     sort_direction = sort_params.require(:direction)
-    videos = if sort_params.require(:by) == "created_at"
+    videos = case sort_params.require(:by)
+             when "created_at"
                videos.order(created_at: sort_direction)
+             when "views_count"
+               videos.order_by_views_count(sort_direction)
              else
                videos.order_by_rating(sort_direction)
              end
@@ -23,18 +26,8 @@ class VideosController < ApplicationController
   end
 
   def show
-<<<<<<< 0e8e8a0fbdac43bc0fe77a07034102525711ded3
     @video = EmbeddableVideo.new(find_video)
     track_video_view(@video)
-=======
-    model = if signed_in?
-              current_user.accessable_videos.find(params[:id])
-            else
-              Video.all_public.find(params[:id])
-            end
-
-    @video = EmbeddableVideo.new(model)
->>>>>>> Clean up controller
 
     respond_to do |format|
       format.html {}

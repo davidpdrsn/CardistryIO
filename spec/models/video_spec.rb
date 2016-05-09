@@ -239,4 +239,38 @@ describe Video do
         .to eq ["two"]
     end
   end
+
+  describe "#order_by_views_count" do
+    it "sorts videos by views desc" do
+      one = create :video, name: "1"
+      15.times { create :video_view, video: one }
+
+      two = create :video, name: "2"
+      13.times { create :video_view, video: two }
+
+      three = create :video, name: "3"
+      10.times { create :video_view, video: three }
+
+      four = create :video, name: "4"
+
+      expect(Video.order_by_views_count("desc").pluck(:name))
+        .to eq [1,2,3,4].map(&:to_s)
+    end
+
+    it "sorts videos by views asc" do
+      one = create :video, name: "1"
+      15.times { create :video_view, video: one }
+
+      two = create :video, name: "2"
+      13.times { create :video_view, video: two }
+
+      three = create :video, name: "3"
+      10.times { create :video_view, video: three }
+
+      four = create :video, name: "4"
+
+      expect(Video.order_by_views_count("asc").pluck(:name))
+        .to eq [4,3,2,1].map(&:to_s)
+    end
+  end
 end

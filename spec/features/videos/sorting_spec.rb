@@ -59,6 +59,26 @@ feature "sorting" do
     expect_to_appear_in_order([three, two, one].map(&:name))
   end
 
+  scenario "sorting by number of views" do
+    user = create :user
+
+    one = create :video
+    13.times { create :video_view, video: one, user: user }
+
+    two = create :video
+    12.times { create :video_view, video: two, user: user }
+
+    three = create :video
+    11.times { create :video_view, video: three, user: user }
+
+    visit all_videos_path
+    select "Views", from: "sort_by"
+    select "Highest", from: "sort_direction"
+    click_button "Go"
+
+    expect_to_appear_in_order([one, two, three].map(&:name))
+  end
+
   def expect_to_appear_in_order(strings)
     regex = /#{strings.join(".*")}/m
     expect(page.body).to match(regex)

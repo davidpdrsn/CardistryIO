@@ -3,7 +3,7 @@
 = form_tag all_videos_path, method: :get do
   = fields_for :sort do |f|
     = f.label :by, "Sort by"
-    = f.select :by, options_for_select([["Date", "created_at"], ["Rating", "rating"]])
+    = f.select :by, options_for_select([["Date", "created_at"], ["Rating", "rating"], ["Views", "views_count"]])
     = f.select :direction, options_for_select([["Highest", "DESC"], ["Lowest", "ASC"]])
   = submit_tag "Go"
 
