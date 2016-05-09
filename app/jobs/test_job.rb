@@ -1,5 +1,5 @@
 class TestJob < ApplicationJob
   def perform
-    User.all.first!.touch
+    raise "It works if you see this"
   end
 end

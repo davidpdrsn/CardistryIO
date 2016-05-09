@@ -7,4 +7,10 @@ class WelcomeController < ApplicationController
       render "feeds/index"
     end
   end
+
+  def test_resque_fail
+    TestJob.perform_later
+
+    head :ok
+  end
 end
