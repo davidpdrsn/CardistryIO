@@ -1,5 +1,9 @@
+require "dotenv"
+
 # config valid only for current version of Capistrano
 lock "3.5.0"
+
+Dotenv.load
 
 set :application, "cardistryio"
 set :repo_url, "git@github.com:davidpdrsn/CardistryIO.git"
