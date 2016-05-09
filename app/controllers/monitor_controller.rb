@@ -1,5 +1,5 @@
 class MonitorController < ApplicationController
-  def index
+  def services
     errors = []
 
     test_cache(errors)
