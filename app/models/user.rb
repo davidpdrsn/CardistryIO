@@ -14,13 +14,14 @@ class User < ApplicationRecord
   gravtastic
 
   with_options(dependent: :destroy) do |c|
-    c.has_many :moves
-    c.has_many :videos
-    c.has_many :comments
-    c.has_many :ratings
-    c.has_many :notifications
-    c.has_many :relationships, foreign_key: :follower_id
     c.has_many :activities
+    c.has_many :comments
+    c.has_many :moves
+    c.has_many :notifications
+    c.has_many :ratings
+    c.has_many :relationships, foreign_key: :follower_id
+    c.has_many :video_views
+    c.has_many :videos
   end
 
   use UserWithName, for: :name_for_select

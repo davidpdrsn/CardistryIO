@@ -7,6 +7,7 @@ describe Video do
   it { should have_many :sharings }
   it { should have_many :ratings }
   it { should have_many :credits }
+  it { should have_many :views }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :url }
@@ -125,5 +126,30 @@ describe Video do
     expect do
       video.destroy!
     end.to change { Activity.count }.from(1).to(0)
+  end
+
+  describe "#viewed_by" do
+    it "tracks that the user has viewed the video" do
+      user = create :user
+      video = create :video
+
+      video.viewed_by(user)
+
+      expect(video.views.map(&:user).map(&:username))
+        .to eq [user.username]
+    end
+  end
+
+  describe "#unique_views_count" do
+    it "returns the number of unique views a video has gotten" do
+      video = create :video
+      bob = create :user
+      alice = create :user
+
+      2.times { video.viewed_by(bob) }
+      3.times { video.viewed_by(alice) }
+
+      expect(video.unique_views_count).to eq 2
+    end
   end
 end

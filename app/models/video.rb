@@ -17,12 +17,13 @@ class Video < ApplicationRecord
   belongs_to :user
 
   with_options(dependent: :destroy) do |c|
+    c.has_many :activities, as: :subject
     c.has_many :appearances
     c.has_many :comments, as: :commentable
-    c.has_many :ratings, as: :rateable
     c.has_many :credits, as: :creditable
-    c.has_many :activities, as: :subject
+    c.has_many :ratings, as: :rateable
     c.has_many :sharings
+    c.has_many :views, class_name: "VideoView"
   end
 
   scope :all_public, -> { approved.where(private: false) }
@@ -47,6 +48,14 @@ class Video < ApplicationRecord
 
   def from_instagram?
     url.include?("instagram")
+  end
+
+  def viewed_by(user)
+    views.create!(user: user)
+  end
+
+  def unique_views_count
+    User.distinct.joins(:video_views).count
   end
 
   private

@@ -12,14 +12,8 @@ class VideosController < ApplicationController
   end
 
   def show
-    # Return NullRelation from NullUser#videos to avoid conditional
-    model = if signed_in?
-              current_user.accessable_videos.find(params[:id])
-            else
-              Video.all_public.find(params[:id])
-            end
-
-    @video = EmbeddableVideo.new(model)
+    @video = EmbeddableVideo.new(find_video)
+    track_video_view(@video)
 
     respond_to do |format|
       format.html {}
@@ -107,5 +101,19 @@ class VideosController < ApplicationController
     users.each do |user|
       Notifier.new(user).new_credit(subject: @video, actor: @video.user)
     end
+  end
+
+  def find_video
+    if signed_in?
+      current_user.accessable_videos.find(params[:id])
+    else
+      Video.all_public.find(params[:id])
+    end
+  end
+
+  def track_video_view(video)
+    return unless signed_in?
+    return if current_user == video.user
+    video.viewed_by(current_user)
   end
 end

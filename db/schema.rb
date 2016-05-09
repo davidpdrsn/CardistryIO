@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507202621) do
+ActiveRecord::Schema.define(version: 20160509105303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,20 +22,18 @@ ActiveRecord::Schema.define(version: 20160507202621) do
     t.integer  "user_id",      null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["subject_id", "subject_type"], name: "index_activities_on_subject_id_and_subject_type", using: :btree
+    t.index ["user_id"], name: "index_activities_on_user_id", using: :btree
   end
-
-  add_index "activities", ["subject_id", "subject_type"], name: "index_activities_on_subject_id_and_subject_type", using: :btree
-  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "appearances", force: :cascade do |t|
     t.integer "move_id",  null: false
     t.integer "video_id", null: false
     t.integer "minutes"
     t.integer "seconds"
+    t.index ["move_id"], name: "index_appearances_on_move_id", using: :btree
+    t.index ["video_id"], name: "index_appearances_on_video_id", using: :btree
   end
-
-  add_index "appearances", ["move_id"], name: "index_appearances_on_move_id", using: :btree
-  add_index "appearances", ["video_id"], name: "index_appearances_on_video_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -44,10 +42,9 @@ ActiveRecord::Schema.define(version: 20160507202621) do
     t.integer  "user_id",          null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
-
-  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "credits", force: :cascade do |t|
     t.integer  "creditable_id",   null: false
@@ -55,10 +52,9 @@ ActiveRecord::Schema.define(version: 20160507202621) do
     t.integer  "user_id",         null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["creditable_id", "creditable_type"], name: "index_credits_on_creditable_id_and_creditable_type", using: :btree
+    t.index ["user_id"], name: "index_credits_on_user_id", using: :btree
   end
-
-  add_index "credits", ["creditable_id", "creditable_type"], name: "index_credits_on_creditable_id_and_creditable_type", using: :btree
-  add_index "credits", ["user_id"], name: "index_credits_on_user_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -72,9 +68,8 @@ ActiveRecord::Schema.define(version: 20160507202621) do
     t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "moves", force: :cascade do |t|
     t.string   "name",        null: false
@@ -82,10 +77,9 @@ ActiveRecord::Schema.define(version: 20160507202621) do
     t.integer  "user_id",     null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["name"], name: "index_moves_on_name", unique: true, using: :btree
+    t.index ["user_id"], name: "index_moves_on_user_id", using: :btree
   end
-
-  add_index "moves", ["name"], name: "index_moves_on_name", unique: true, using: :btree
-  add_index "moves", ["user_id"], name: "index_moves_on_user_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id",                           null: false
@@ -96,10 +90,9 @@ ActiveRecord::Schema.define(version: 20160507202621) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "notification_type",                 null: false
+    t.index ["actor_id"], name: "index_notifications_on_actor_id", using: :btree
+    t.index ["subject_id", "subject_type"], name: "index_notifications_on_subject_id_and_subject_type", using: :btree
   end
-
-  add_index "notifications", ["actor_id"], name: "index_notifications_on_actor_id", using: :btree
-  add_index "notifications", ["subject_id", "subject_type"], name: "index_notifications_on_subject_id_and_subject_type", using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "rating",        null: false
@@ -108,11 +101,10 @@ ActiveRecord::Schema.define(version: 20160507202621) do
     t.integer  "user_id",       null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["rateable_id", "rateable_type"], name: "index_ratings_on_rateable_id_and_rateable_type", using: :btree
+    t.index ["rating"], name: "index_ratings_on_rating", using: :btree
+    t.index ["user_id"], name: "index_ratings_on_user_id", using: :btree
   end
-
-  add_index "ratings", ["rateable_id", "rateable_type"], name: "index_ratings_on_rateable_id_and_rateable_type", using: :btree
-  add_index "ratings", ["rating"], name: "index_ratings_on_rating", using: :btree
-  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id",                null: false
@@ -120,20 +112,18 @@ ActiveRecord::Schema.define(version: 20160507202621) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "active",      default: true, null: false
+    t.index ["followee_id"], name: "index_relationships_on_followee_id", using: :btree
+    t.index ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
   end
-
-  add_index "relationships", ["followee_id"], name: "index_relationships_on_followee_id", using: :btree
-  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
   create_table "sharings", force: :cascade do |t|
     t.integer  "video_id",   null: false
     t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sharings_on_user_id", using: :btree
+    t.index ["video_id"], name: "index_sharings_on_video_id", using: :btree
   end
-
-  add_index "sharings", ["user_id"], name: "index_sharings_on_user_id", using: :btree
-  add_index "sharings", ["video_id"], name: "index_sharings_on_video_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                                     null: false
@@ -146,12 +136,20 @@ ActiveRecord::Schema.define(version: 20160507202621) do
     t.string   "username",                                       null: false
     t.string   "instagram_username"
     t.text     "biography"
+    t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["instagram_username"], name: "index_users_on_instagram_username", unique: true, using: :btree
+    t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
+    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", using: :btree
-  add_index "users", ["instagram_username"], name: "index_users_on_instagram_username", unique: true, using: :btree
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+  create_table "video_views", force: :cascade do |t|
+    t.integer  "video_id",   null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_video_views_on_user_id", using: :btree
+    t.index ["video_id"], name: "index_video_views_on_video_id", using: :btree
+  end
 
   create_table "videos", force: :cascade do |t|
     t.string   "name",                         null: false
@@ -164,9 +162,8 @@ ActiveRecord::Schema.define(version: 20160507202621) do
     t.integer  "video_type",                   null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.index ["name"], name: "index_videos_on_name", using: :btree
+    t.index ["user_id"], name: "index_videos_on_user_id", using: :btree
   end
-
-  add_index "videos", ["name"], name: "index_videos_on_name", using: :btree
-  add_index "videos", ["user_id"], name: "index_videos_on_user_id", using: :btree
 
 end

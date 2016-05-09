@@ -26,6 +26,13 @@
 = render partial: "embed_video", locals: { video: @video }
 
 - if @video.user == current_user
+  %h1 Stats
+  %ul
+    %li
+      = pluralize @video.views.count, "view"
+      |
+      = pluralize @video.unique_views_count, "unique view"
+
   -# TODO: Make this a link
   = button_to "Edit", edit_video_path(@video), method: :get
   = button_to "Delete video", video_path(@video), method: :delete, data: { confirm: "Sure?" }
