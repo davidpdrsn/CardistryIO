@@ -5,3 +5,4 @@ set -e
 bundle check > /dev/null || bundle install
 git push
 bin/cap production deploy
+say "Deploy done"
