@@ -18,6 +18,10 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all
 
+set :rollbar_token, ENV.fetch("ROLLBAR_ACCESS_TOKEN")
+set :rollbar_env, Proc.new { fetch :stage }
+set :rollbar_role, Proc.new { :app }
+
 namespace :deploy do
   desc "Restart application"
   task :restart do
