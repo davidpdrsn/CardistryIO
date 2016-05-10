@@ -27,6 +27,19 @@ class User < ApplicationRecord
 
   use UserWithName, for: :name_for_select
 
+  def self.authenticate(username_or_email, password)
+    user = where(username: username_or_email)
+      .or(where(email: username_or_email))
+      .first
+
+    return nil unless user
+    return user if user.authenticated?(password)
+  end
+
+  def email_optional?
+    true
+  end
+
   def can_rate?(rateable)
     UserWithRatingPermissions.new(self).can_rate?(rateable)
   end

@@ -15,6 +15,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authenticate(params)
+    User.authenticate(
+      params[:session][:email_or_username],
+      params[:session][:password],
+    )
+  end
+
   def _buttonbar
     @user = current_user
     @notifications = current_user.notifications
