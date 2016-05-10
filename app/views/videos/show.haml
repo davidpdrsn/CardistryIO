@@ -5,6 +5,10 @@
   Type:
   = @video.video_type.humanize
 
+%p
+  Created at:
+  = @video.created_at.to_formatted_s(:long)
+
 = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
 
 = render partial: "shared/ratings", locals: { rateable: @video }

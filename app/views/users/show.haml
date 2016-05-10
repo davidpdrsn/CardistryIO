@@ -3,6 +3,10 @@
 .user_biography
   = simple_format @user.biography
 
+%div
+  Time zone:
+  = @user.time_zone
+
 - if @user.instagram_username.present?
   %p
     On Instagram:

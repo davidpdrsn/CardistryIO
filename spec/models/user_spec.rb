@@ -15,6 +15,11 @@ describe User do
   it { should validate_presence_of :encrypted_password }
   it { should validate_presence_of :username }
 
+  it do
+    should validate_inclusion_of(:time_zone)
+      .in_array(ActiveSupport::TimeZone.all.map(&:name))
+  end
+
   it "validates uniquess of username" do
     bob = create :user
 

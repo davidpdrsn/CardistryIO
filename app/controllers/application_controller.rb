@@ -41,4 +41,13 @@ class ApplicationController < ActionController::Base
         password == ENV.fetch("PRE_PASSWORD")
     end
   end
+
+  around_action :user_time_zone
+  def user_time_zone(&block)
+    if signed_out?
+      block.call
+    else
+      Time.use_zone(current_user.time_zone, &block)
+    end
+  end
 end

@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509135550) do
+ActiveRecord::Schema.define(version: 20160510153024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.integer  "subject_id",   null: false
     t.string   "subject_type", null: false
+    t.integer  "subject_id",   null: false
     t.integer  "user_id",      null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 20160509135550) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
-    t.integer  "commentable_id",   null: false
     t.string   "commentable_type", null: false
+    t.integer  "commentable_id",   null: false
     t.integer  "user_id",          null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20160509135550) do
   end
 
   create_table "credits", force: :cascade do |t|
-    t.integer  "creditable_id",   null: false
     t.string   "creditable_type", null: false
+    t.integer  "creditable_id",   null: false
     t.integer  "user_id",         null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20160509135550) do
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id",                           null: false
-    t.integer  "subject_id",                        null: false
     t.string   "subject_type",                      null: false
+    t.integer  "subject_id",                        null: false
     t.integer  "actor_id",                          null: false
     t.boolean  "seen",              default: false, null: false
     t.datetime "created_at",                        null: false
@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(version: 20160509135550) do
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "rating",        null: false
-    t.integer  "rateable_id",   null: false
     t.string   "rateable_type", null: false
+    t.integer  "rateable_id",   null: false
     t.integer  "user_id",       null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20160509135550) do
     t.string   "username",                                       null: false
     t.string   "instagram_username"
     t.text     "biography"
+    t.string   "time_zone",                                      null: false
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["instagram_username"], name: "index_users_on_instagram_username", unique: true, using: :btree
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree

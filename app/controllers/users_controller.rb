@@ -15,6 +15,7 @@ class UsersController < Clearance::UsersController
     user_params = params.require(:user).permit(
       :instagram_username,
       :biography,
+      :time_zone,
       :email,
     )
     if @user.update(user_params)
@@ -54,6 +55,7 @@ class UsersController < Clearance::UsersController
       :password,
       :username,
       :instagram_username,
+      :time_zone,
     )
     Clearance.configuration.user_model.new(user_params)
   end

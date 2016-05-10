@@ -9,6 +9,10 @@ class User < ApplicationRecord
   validates :encrypted_password, presence: true
   validates :username, presence: true, uniqueness: true
   validates :instagram_username, uniqueness: true, allow_nil: true
+  validates(
+    :time_zone,
+    inclusion: { in: ActiveSupport::TimeZone.all.map(&:name) },
+  )
   validate :format_of_username
 
   gravtastic

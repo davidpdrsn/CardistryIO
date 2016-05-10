@@ -5,6 +5,7 @@ FactoryGirl.define do
     biography ""
     sequence(:username) { |n| "visualmadness-#{n}" }
     sequence(:instagram_username) { |n| "kevho-#{n}" }
+    time_zone "Central Time (US & Canada)"
   end
 
   factory :comment do
