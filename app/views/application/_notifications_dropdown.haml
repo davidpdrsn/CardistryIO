@@ -13,7 +13,7 @@
       new #{"notification".pluralize(current_user.new_notifications.count)}
 
       - if current_user.new_notifications.present?
-        = render current_user.notifications
+        = render partial: "notifications/notification", collection: current_user.notifications
     -if current_user.new_notifications.present?
       %li.mark-as-read-button
         =link_to mark_all_read_notifications_path, method: :post do
