@@ -31,7 +31,7 @@ feature "creating move" do
   scenario "sees users moves" do
     create :move, name: "Sybil", user: user
     visit root_path(as: user)
-    click_link "Moves"
+    click_link "My Moves"
 
     expect(page).to have_content "Sybil"
   end

@@ -5,7 +5,7 @@ feature "delete videos" do
     video = create :video
     visit video_path(video, as: video.user)
     click_button "Delete video"
-    click_link "Videos"
+    click_link "My Videos"
 
     expect(page).not_to have_content video.name
   end

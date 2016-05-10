@@ -19,7 +19,7 @@ feature "creating videos" do
     click_button "Approve"
 
     visit root_path(as: user)
-    click_link "Videos"
+    click_link "My Videos"
     click_link "Classic"
 
     expect(page).to have_content "Classic"

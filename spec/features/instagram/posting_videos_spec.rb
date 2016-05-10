@@ -16,7 +16,7 @@ feature "posting videos from instagram" do
     click_button "Approve"
 
     visit root_path(as: bob)
-    click_link "Videos"
+    click_link "My Videos"
     click_link "Instagram video"
 
     expect(page).to have_content "Instagram video"
@@ -38,7 +38,7 @@ feature "posting videos from instagram" do
     click_button "Approve"
 
     visit root_path(as: bob)
-    click_link "Videos"
+    click_link "My Videos"
     click_link "Instagram video"
     click_button "Edit"
     fill_in "Name", with: "Edited video"

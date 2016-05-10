@@ -7,7 +7,7 @@ feature "delete moves" do
 
     visit move_path(move, as: user)
     click_button "Delete"
-    click_link "Moves"
+    click_link "My Moves"
 
     expect(page).not_to have_content move.name
   end

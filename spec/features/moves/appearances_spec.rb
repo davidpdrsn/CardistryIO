@@ -8,7 +8,7 @@ feature "appearances" do
     video = create :video, user: user, approved: true
 
     visit root_path(as: user)
-    click_link "Videos"
+    click_link "My Videos"
     click_link video.name
     click_link "Edit move appearances"
     select move.name, from: "Move name"
@@ -33,7 +33,7 @@ feature "appearances" do
     create :appearance, video: video, move: move, minutes: 1, seconds: 1
 
     visit root_path(as: user)
-    click_link "Videos"
+    click_link "My Videos"
     click_link video.name
     click_link "Edit move appearances"
     click_button "Delete all appearances"
@@ -47,7 +47,7 @@ feature "appearances" do
     create :appearance, video: video, move: move, minutes: 1, seconds: 1
 
     visit root_path(as: user)
-    click_link "Videos"
+    click_link "My Videos"
     click_link video.name
     click_link "Edit move appearances"
 
