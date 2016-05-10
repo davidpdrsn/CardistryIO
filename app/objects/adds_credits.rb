@@ -9,7 +9,7 @@ class AddsCredits
   end
 
   def update_credits(credit_params)
-    return [] unless credit_params.present?
+    credit_params ||= []
     new_credits = new_credited_users(credit_params)
     destroy_existing_credits(credit_params)
     add_credits(credit_params)

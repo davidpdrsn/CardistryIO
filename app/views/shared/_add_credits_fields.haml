@@ -3,5 +3,6 @@
   %div.add-credits{"data-json-url": polymorphic_path([object], format: :json)}
     %label
       Username
-      %input.credit-input{"data-behavior": "credit-user-search"}
+      %input.credit-input{"data-behavior": "credit-user-search", |
+        "data-creditable-users-url": creditable_users_path(params: { object.class.foreign_key => object.id }, format: :json) }
     %div.credit-list

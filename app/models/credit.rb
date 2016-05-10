@@ -5,4 +5,5 @@ class Credit < ApplicationRecord
   validates_with(
     PolymorphicAssociationValidator.new(name: :creditable, types: [Video, Move])
   )
+  validates_with SingleCreditPerUser
 end

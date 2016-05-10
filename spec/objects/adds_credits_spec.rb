@@ -59,24 +59,24 @@ describe AddsCredits do
       expect(video.creditted_users.map(&:username)).to eq [alice.username]
     end
 
-    it "does nothing if there are no usernames" do
+    it "removes credits" do
       video = create :video
       bob = create :user, username: "bob"
 
       AddsCredits.new(video).add_credits([bob.username])
       AddsCredits.new(video).update_credits([])
 
-      expect(video.creditted_users.map(&:username)).to eq [bob.username]
+      expect(video.creditted_users.map(&:username)).to eq []
     end
 
-    it "does nothing if usernames are nil" do
+    it "removes credits if params are nil" do
       video = create :video
       bob = create :user, username: "bob"
 
       AddsCredits.new(video).add_credits([bob.username])
       AddsCredits.new(video).update_credits(nil)
 
-      expect(video.creditted_users.map(&:username)).to eq [bob.username]
+      expect(video.creditted_users.map(&:username)).to eq []
     end
 
     it "returns the users credited" do

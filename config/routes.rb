@@ -34,11 +34,16 @@ Rails.application.routes.draw do
     resources :ratings, only: [:create]
   end
 
-  resources :moves, only: [:index, :show, :new, :create, :destroy, :edit, :update], concerns: [:comments, :ratings] do
-    collection do
-      get "all"
+  resources :creditable_users, only: [:index]
+
+  resources(
+    :moves,
+    only: [:index, :show, :new, :create, :destroy, :edit, :update],
+    concerns: [:comments, :ratings]) do
+      collection do
+        get "all"
+      end
     end
-  end
 
   resources :videos, concerns: [:comments, :ratings] do
     resources :sharings, only: [:new, :create, :destroy] do

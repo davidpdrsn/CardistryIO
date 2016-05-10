@@ -24,6 +24,7 @@ describe Move do
       user = create :user, username: "bob"
       create :user, username: "alice"
       Credit.create!(creditable: move, user: user)
+      move.reload
 
       expect(move.creditted_users.map(&:username)).to eq [user.username]
     end

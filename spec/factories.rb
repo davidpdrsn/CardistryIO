@@ -14,6 +14,12 @@ FactoryGirl.define do
     commentable_type "Move"
   end
 
+  factory :credit do
+    user
+    creditable_id { |comment| create(:move).id }
+    creditable_type "Move"
+  end
+
   factory :move do
     sequence(:name) { |n| "Sybil #{n}" }
     user

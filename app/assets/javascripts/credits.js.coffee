@@ -77,6 +77,8 @@ $ ->
   addBehavior "add-credit", (event) ->
     event.preventDefault()
     username = $(@).attr("data-username")
+    $(@).remove()
+    $("[data-behavior~=credit-user-search]").val("").focus()
     credit = new Credit(username)
     list.add(credit)
 
@@ -85,8 +87,9 @@ $ ->
     id = list.findIdWhere (credit) -> credit.username == username
     list.remove(id)
 
+  searchUrl = $("[data-behavior~=credit-user-search]").data("creditable-users-url")
   $("[data-behavior~=credit-user-search]").sayt
-    url: "/api/search/users"
+    url: searchUrl
     markup: (users) ->
       transform = (acc, user) ->
         acc + """
