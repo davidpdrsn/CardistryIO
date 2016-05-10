@@ -9,6 +9,7 @@ module Features
     fill_in "Email", with: email
     fill_in "Password", with: password
     fill_in "Username", with: username
+    select "Denmark", from: "Country"
     select "Central Time (US & Canada)", from: "Time zone"
     click_button "Sign up"
   end

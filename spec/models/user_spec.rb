@@ -15,10 +15,16 @@ describe User do
   it { should validate_presence_of :encrypted_password }
   it { should validate_presence_of :username }
   it { should validate_presence_of :time_zone }
+  it { should validate_presence_of :country_code }
 
   it do
     should validate_inclusion_of(:time_zone)
       .in_array(ActiveSupport::TimeZone.all.map(&:name))
+  end
+
+  it do
+    should validate_inclusion_of(:country_code)
+      .in_array(ISO3166::Country.all.map(&:alpha2))
   end
 
   it "validates uniquess of username" do
@@ -259,6 +265,14 @@ describe User do
       video = create :video, private: true, approved: true, user: bob
 
       expect(bob.accessable_videos).to eq [video]
+    end
+  end
+
+  describe "#country_name" do
+    it "returns the name of the users country" do
+      user = create :user, country_code: "DK"
+
+      expect(user.country_name).to eq "Denmark"
     end
   end
 end

@@ -15,6 +15,7 @@ class UsersController < Clearance::UsersController
     user_params = params.require(:user).permit(
       :instagram_username,
       :biography,
+      :country_code,
       :time_zone,
       :email,
     )
@@ -53,6 +54,7 @@ class UsersController < Clearance::UsersController
     user_params = params.require(:user).permit(
       :email,
       :password,
+      :country_code,
       :username,
       :instagram_username,
       :time_zone,

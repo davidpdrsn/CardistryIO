@@ -9,9 +9,15 @@ class User < ApplicationRecord
   validates :encrypted_password, presence: true
   validates :username, presence: true, uniqueness: true
   validates :instagram_username, uniqueness: true, allow_nil: true
+  validates :country_code, presence: true
   validates(
     :time_zone,
     inclusion: { in: ActiveSupport::TimeZone.all.map(&:name) },
+    presence: true,
+  )
+  validates(
+    :country_code,
+    inclusion: { in: ISO3166::Country.all.map(&:alpha2) },
     presence: true,
   )
   validate :format_of_username
@@ -106,6 +112,11 @@ class User < ApplicationRecord
     public_videos = Video.all_public.pluck(:id)
     shared_videos = Video.where(id: Sharing.where(user: self).pluck(:video_id)).pluck(:id)
     Video.where(id: public_videos | shared_videos | own_videos)
+  end
+
+  def country_name
+    country = ISO3166::Country[country_code]
+    country.translations[I18n.locale.to_s] || country.name
   end
 
   private
