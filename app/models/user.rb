@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates(
     :time_zone,
     inclusion: { in: ActiveSupport::TimeZone.all.map(&:name) },
+    presence: true,
   )
   validate :format_of_username
 
