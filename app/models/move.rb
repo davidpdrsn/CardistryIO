@@ -20,6 +20,6 @@ class Move < ApplicationRecord
   end
 
   def creditted_users
-    credits.map(&:user)
+    User.distinct.joins(:credits).where(credits: { creditable: self })
   end
 end

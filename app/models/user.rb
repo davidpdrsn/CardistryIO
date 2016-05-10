@@ -22,6 +22,7 @@ class User < ApplicationRecord
     c.has_many :relationships, foreign_key: :follower_id
     c.has_many :video_views
     c.has_many :videos
+    c.has_many :credits
   end
 
   use UserWithName, for: :name_for_select

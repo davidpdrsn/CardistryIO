@@ -9,6 +9,7 @@ describe User do
   it { should have_many :relationships }
   it { should have_many :activities }
   it { should have_many :video_views }
+  it { should have_many :credits }
 
   it { should validate_presence_of :email }
   it { should validate_presence_of :encrypted_password }
