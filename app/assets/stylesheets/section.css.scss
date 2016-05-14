@@ -27,13 +27,37 @@ section {
       float: left;
     }
     .information {
-      width: 68%;
+      width: 64%;
       float: left;
       @include padding(null 10px null 20px);
     }
     .relationships {
-      width: 20%;
+      width: 24%;
       float: left;
+
+      .circle-count {
+        border: 1px solid $main-red;
+        height: 100px;
+        width: 100px;
+        text-align: center;
+        @include border-top-radius(100%);
+        @include border-bottom-radius(100%);
+        line-height: 1.3em;
+        float: right;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding-top: 30px;
+        
+
+        .number {
+          color: $main-red;
+          font-size: 2em;
+        }
+
+        .word {
+          color: $main-blue;
+        }
+      }
     }
   }
 }
