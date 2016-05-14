@@ -23,10 +23,21 @@
           = button_to "Follow", follow_user_path(@user), method: :post, params: { user_id: @user.id }
 
   %div.relationships
-    = @user.following.length
-    = link_to "Following", following_user_path(@user)
-    = @user.followers.length
-    = link_to "Followers", followers_user_path(@user)
+    = link_to following_user_path(@user) do
+      %div.circle-count
+        %span.number
+          = @user.following.length
+        %br
+        %span.word
+          following
+
+    %div.circle-count
+      =link_to followers_user_path(@user) do
+        %span.number
+          = @user.followers.length
+        %br
+        %span.word
+          followers
 
   - if current_user == @user
     = link_to "Edit", edit_user_path(@user)
