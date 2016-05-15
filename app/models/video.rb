@@ -97,8 +97,10 @@ class Video < ApplicationRecord
     url.include?("instagram")
   end
 
-  def viewed_by(user)
-    views.create!(user: user)
+  def viewed_by(user_viewing)
+    return if user == user_viewing
+    return if user_viewed_recently?(user_viewing)
+    views.create!(user: user_viewing)
   end
 
   def unique_views_count
@@ -111,5 +113,11 @@ class Video < ApplicationRecord
     if url.present? && !EmbeddableVideo.host_supported?(url)
       errors.add(:url, "is not supported")
     end
+  end
+
+  def user_viewed_recently?(user)
+    views_by_user = views.where(user: user)
+    return false if views_by_user.empty?
+    views_by_user.where(created_at: 1.hour.ago..Time.zone.now).exists?
   end
 end

@@ -6,7 +6,10 @@ feature "tracking views on videos" do
     alice = create :user
     video = create :video, user: bob
 
-    2.times do
+    Timecop.freeze(2.hours.from_now.change(nsec: 0)) do
+      visit video_path(video, as: alice)
+    end
+    Timecop.freeze(4.hours.from_now.change(nsec: 0)) do
       visit video_path(video, as: alice)
     end
 

@@ -138,6 +138,28 @@ describe Video do
       expect(video.views.map(&:user).map(&:username))
         .to eq [user.username]
     end
+
+    it "doesn't track when a user views their own video" do
+      video = create :video
+
+      video.viewed_by(video.user)
+
+      expect(video.views).to eq []
+    end
+
+    it "doesn't track when the same user views the video within same hour" do
+      user = create :user
+      video = create :video
+
+      video.viewed_by(user)
+      video.viewed_by(user)
+
+      Timecop.freeze(2.hours.from_now.change(nsec: 0)) do
+        video.viewed_by(user)
+      end
+
+      expect(video.views.count).to eq 2
+    end
   end
 
   describe "#unique_views_count" do

@@ -115,7 +115,6 @@ class VideosController < ApplicationController
 
   def track_video_view(video)
     return unless signed_in?
-    return if current_user == video.user
     video.viewed_by(current_user)
   end
 
@@ -138,5 +137,4 @@ class VideosController < ApplicationController
   def apply_filter(videos)
     FiltersVideos.new(videos).filter(params)
   end
-
 end
