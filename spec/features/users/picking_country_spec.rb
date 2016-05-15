@@ -12,6 +12,6 @@ feature "picking a country" do
     click_button "Update User"
     visit user_path(user, as: user)
 
-    expect(page).to_not have_content("Denmark")
+    expect(page).to have_content("Denmark")
   end
 end
