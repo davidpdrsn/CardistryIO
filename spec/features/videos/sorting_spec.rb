@@ -91,6 +91,26 @@ feature "filtering and sorting videos" do
     expect_to_appear_in_order([one, two, three].map(&:name))
   end
 
+  scenario "filtering and sorting of 'My Videos'" do
+    bob = create :user
+    tutorial = create :video, video_type: :tutorial, user: bob, created_at: Time.zone.now
+    old_tutorial = create :video, video_type: :tutorial, user: bob, created_at: 2.weeks.ago
+    performance = create :video, video_type: :performance, user: bob
+    other_users_video = create :video, video_type: :tutorial
+
+    visit root_path(as: bob)
+    click_link "My Videos"
+    select "Tutorials", from: "filter_type"
+    select "Lowest", from: "sort_direction"
+    click_button "Go"
+
+    expect(page).to_not have_content performance.name
+    expect(page).to_not have_content other_users_video.name
+    expect_to_appear_in_order([old_tutorial, tutorial].map(&:name))
+  end
+
+  it "paging 'My Videos'"
+
   def expect_to_appear_in_order(strings)
     regex = /#{strings.join(".*")}/m
     expect(page.body).to match(regex)

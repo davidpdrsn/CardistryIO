@@ -4,26 +4,13 @@ class VideosController < ApplicationController
                                        :edit, :update]
 
   def all
-    videos = Video.all_public.approved
+    videos = apply_sort(
+      apply_filter(
+        Video.all_public.approved
+      )
+    )
 
-    filter = filter_params.require(:type)
-    videos = case filter
-             when "all"
-               videos
-             else
-               videos.where(video_type: filter)
-             end
-
-    sort_direction = sort_params.require(:direction)
-    videos = case sort_params.require(:by)
-             when "created_at"
-               videos.order(created_at: sort_direction)
-             when "views_count"
-               videos.order_by_views_count(sort_direction)
-             else
-               videos.order_by_rating(sort_direction)
-             end
-
+    @filter_submit_path = all_videos_path
     @paged_videos = PaginatedRelation.new(
       videos,
       per_page: PaginatedRelation::DEFAULT_PER_PAGE,
@@ -31,7 +18,13 @@ class VideosController < ApplicationController
   end
 
   def index
-    @videos = UserVideos.new(current_user)
+    @videos = apply_sort(
+      apply_filter(
+        current_user.videos.approved
+      )
+    )
+
+    @filter_submit_path = videos_path
   end
 
   def show
@@ -144,28 +137,11 @@ class VideosController < ApplicationController
     (params[:page] || 1).to_i
   end
 
-  def sort_params
-    params.require(:sort).permit(:by, :direction)
-  rescue ActionController::ParameterMissing
-    default_sort_params
+  def apply_sort(videos)
+    SortsVideos.new(videos).sort(params)
   end
 
-  def default_sort_params
-    ActionController::Parameters.new(
-      by: "created_at",
-      direction: "DESC",
-    ).permit!
-  end
-
-  def filter_params
-    params.require(:filter).permit(:type)
-  rescue ActionController::ParameterMissing
-    default_filter_params
-  end
-
-  def default_filter_params
-    ActionController::Parameters.new(
-      type: "all",
-    ).permit!
+  def apply_filter(videos)
+    FiltersVideos.new(videos).filter(params)
   end
 end

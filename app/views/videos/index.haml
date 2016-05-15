@@ -1,3 +1,5 @@
+= render partial: "filter_and_sort", locals: { filter_submit_path: @filter_submit_path }
+
 - if @videos.present?
   - @videos.each do |video|
     %ul
