@@ -109,8 +109,6 @@ feature "filtering and sorting videos" do
     expect_to_appear_in_order([old_tutorial, tutorial].map(&:name))
   end
 
-  it "paging 'My Videos'"
-
   def expect_to_appear_in_order(strings)
     regex = /#{strings.join(".*")}/m
     expect(page.body).to match(regex)

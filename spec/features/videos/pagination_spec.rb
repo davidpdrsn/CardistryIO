@@ -58,4 +58,26 @@ feature "paginating videos" do
     expect(page).to_not have_content "Next"
     expect(page).to_not have_content "Prev"
   end
+
+  scenario "paging 'My Videos'" do
+    user = create :user
+    videos = 25.times.map do
+      create :video, user: user
+    end
+
+    visit videos_path(as: user)
+
+    expect(page).to have_content videos.last.name
+    expect(page).to_not have_content videos.first.name
+
+    click_link "Next"
+
+    expect(page).to have_content videos.first.name
+    expect(page).to_not have_content videos.last.name
+
+    click_link "Prev"
+
+    expect(page).to have_content videos.last.name
+    expect(page).to_not have_content videos.first.name
+  end
 end

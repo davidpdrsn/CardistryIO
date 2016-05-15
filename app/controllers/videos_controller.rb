@@ -4,27 +4,13 @@ class VideosController < ApplicationController
                                        :edit, :update]
 
   def all
-    videos = apply_sort(
-      apply_filter(
-        Video.all_public.approved
-      )
-    )
-
     @filter_submit_path = all_videos_path
-    @paged_videos = PaginatedRelation.new(
-      videos,
-      per_page: PaginatedRelation::DEFAULT_PER_PAGE,
-    ).page(page)
+    @paged_videos = filter_sort_and_paginate(Video.all_public.approved)
   end
 
   def index
-    @videos = apply_sort(
-      apply_filter(
-        current_user.videos.approved
-      )
-    )
-
     @filter_submit_path = videos_path
+    @paged_videos = filter_sort_and_paginate(current_user.videos.approved)
   end
 
   def show
@@ -137,6 +123,14 @@ class VideosController < ApplicationController
     (params[:page] || 1).to_i
   end
 
+  def filter_sort_and_paginate(videos)
+    videos = apply_sort(apply_filter(videos))
+    PaginatedRelation.new(
+      videos,
+      per_page: PaginatedRelation::DEFAULT_PER_PAGE,
+    ).page(page)
+  end
+
   def apply_sort(videos)
     SortsVideos.new(videos).sort(params)
   end
@@ -144,4 +138,5 @@ class VideosController < ApplicationController
   def apply_filter(videos)
     FiltersVideos.new(videos).filter(params)
   end
+
 end

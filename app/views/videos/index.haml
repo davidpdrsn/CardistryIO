@@ -1,8 +1,6 @@
 = render partial: "filter_and_sort", locals: { filter_submit_path: @filter_submit_path }
 
-- if @videos.present?
-  - @videos.each do |video|
-    %ul
-      %li= link_to video.name, video
+- if @paged_videos.present?
+  = render partial: "paginated_list", locals: { paged_videos: @paged_videos }
 - else
   You have no videos, yet
