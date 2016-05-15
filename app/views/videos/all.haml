@@ -1,10 +1,15 @@
 -# TODO: Also filter "My videos"
 
 = form_tag all_videos_path, method: :get do
+  = fields_for :filter do |f|
+    = f.label :type, "Type"
+    = f.select :type, options_for_select(Video.types_for_filtering)
+
   = fields_for :sort do |f|
     = f.label :by, "Sort by"
     = f.select :by, options_for_select([["Date", "created_at"], ["Rating", "rating"], ["Views", "views_count"]])
     = f.select :direction, options_for_select([["Highest", "DESC"], ["Lowest", "ASC"]])
+
   = submit_tag "Go"
 
 - if @paged_videos.present?

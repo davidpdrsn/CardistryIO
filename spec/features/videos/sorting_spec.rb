@@ -1,6 +1,18 @@
 require "rails_helper"
 
-feature "sorting" do
+feature "filtering and sorting videos" do
+  scenario "filtering for tutorials" do
+    tutorial = create :video, video_type: :tutorial
+    performance = create :video, video_type: :performance
+
+    visit all_videos_path
+    select "Tutorials", from: "filter_type"
+    click_button "Go"
+
+    expect(page).to have_content tutorial.name
+    expect(page).to_not have_content performance.name
+  end
+
   scenario "sorting by created at by default" do
     one = create :video, created_at: Time.zone.now
     two = create :video, created_at: 2.days.ago

@@ -273,4 +273,17 @@ describe Video do
         .to eq [4,3,2,1].map(&:to_s)
     end
   end
+
+  describe ".types_for_filtering" do
+    it "returns the types that can be filtered by" do
+      expect(Video.types_for_filtering).to eq([
+        ["All", "all"],
+        ["Performances", "performance"],
+        ["Tutorials", "tutorial"],
+        ["Ideas", "idea"],
+        ["Move showcases", "move_showcase"],
+        ["Others", "other"],
+      ])
+    end
+  end
 end

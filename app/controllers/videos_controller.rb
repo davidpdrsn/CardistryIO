@@ -5,6 +5,15 @@ class VideosController < ApplicationController
 
   def all
     videos = Video.all_public.approved
+
+    filter = filter_params.require(:type)
+    videos = case filter
+             when "all"
+               videos
+             else
+               videos.where(video_type: filter)
+             end
+
     sort_direction = sort_params.require(:direction)
     videos = case sort_params.require(:by)
              when "created_at"
@@ -145,6 +154,18 @@ class VideosController < ApplicationController
     ActionController::Parameters.new(
       by: "created_at",
       direction: "DESC",
+    ).permit!
+  end
+
+  def filter_params
+    params.require(:filter).permit(:type)
+  rescue ActionController::ParameterMissing
+    default_filter_params
+  end
+
+  def default_filter_params
+    ActionController::Parameters.new(
+      type: "all",
     ).permit!
   end
 end

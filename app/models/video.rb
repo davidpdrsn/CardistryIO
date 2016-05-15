@@ -28,6 +28,13 @@ class Video < ApplicationRecord
   end
 
   class << self
+    def types_for_filtering
+      other_types = video_types.keys.map do |type|
+        [type.humanize.pluralize, type]
+      end
+      [["All", "all"]] + other_types
+    end
+
     def all_public
       approved.where(private: false)
     end
