@@ -4,4 +4,8 @@ class ApplicationRecord < ActiveRecord::Base
   def self.foreign_key
     "#{name.downcase}_id"
   end
+
+  def foreign_key
+    self.class.foreign_key
+  end
 end
