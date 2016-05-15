@@ -1,13 +1,13 @@
 class Video < ApplicationRecord
   extend DecoratorDelegateMethods
 
-  enum video_type: [
-    :performance,
-    :tutorial,
-    :idea,
-    :move_showcase,
-    :other,
-  ]
+  enum video_type: {
+    performance: 0,
+    tutorial: 1,
+    idea: 2,
+    move_showcase: 3,
+    other: 4,
+  }
 
   validates :name, presence: true, uniqueness: true
   validates :url, presence: true
