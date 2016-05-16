@@ -95,7 +95,11 @@ class Video < ApplicationRecord
   end
 
   def unique_views_count
-    User.distinct.joins(:video_views).count
+    User
+      .distinct
+      .joins(:video_views)
+      .where(video_views: { video: self })
+      .count
   end
 
   private

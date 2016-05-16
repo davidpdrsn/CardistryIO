@@ -167,9 +167,16 @@ describe Video do
       video = create :video
       bob = create :user
       alice = create :user
+      cindy = create :user
 
       2.times { video.viewed_by(bob) }
       3.times { video.viewed_by(alice) }
+
+      create(:video).tap do |another_video|
+        1.times { another_video.viewed_by(bob) }
+        1.times { another_video.viewed_by(alice) }
+        1.times { another_video.viewed_by(cindy) }
+      end
 
       expect(video.unique_views_count).to eq 2
     end
