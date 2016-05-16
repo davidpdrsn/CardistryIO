@@ -3,8 +3,9 @@ class MovesController < ApplicationController
                                        :destroy, :edit, :update]
 
   def all
-    moves = paginate(Move.order(created_at: :desc))
+    moves = paginate(apply_filter(Move.order(created_at: :desc)))
 
+    @filter_submit_path = all_moves_path
     @paged_moves = moves.map do |move|
       MoveWithUser.new(
         move: move,
@@ -14,7 +15,12 @@ class MovesController < ApplicationController
   end
 
   def index
-    @paged_moves = paginate(current_user.moves.order(created_at: :desc))
+    @filter_submit_path = moves_path
+    @paged_moves = paginate(
+      apply_filter(
+        current_user.moves.order(created_at: :desc)
+      )
+    )
   end
 
   def show
@@ -99,5 +105,9 @@ class MovesController < ApplicationController
       moves,
       per_page: PaginatedRelation::DEFAULT_PER_PAGE,
     ).page(page)
+  end
+
+  def apply_filter(moves)
+    FiltersMoves.new(moves).filter(params)
   end
 end

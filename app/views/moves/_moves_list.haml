@@ -1,3 +1,15 @@
+= form_tag filter_submit_path, method: :get do
+  = fields_for :filter do |f|
+    = f.label :type, "Type"
+    = f.select :type, options_for_select([["All", "all"], ["Finished", "finished"], ["Ideas", "idea"]])
+
+  -# = fields_for :sort do |f|
+  -#   = f.label :by, "Sort by"
+  -#   = f.select :by, options_for_select([["Date", "created_at"], ["Rating", "rating"], ["Views", "views_count"]])
+  -#   = f.select :direction, options_for_select([["Highest", "DESC"], ["Lowest", "ASC"]])
+
+  = submit_tag "Go"
+
 - if page.present?
   = render partial: "shared/paginated_list", locals: { page: page }
 - else

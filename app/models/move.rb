@@ -17,6 +17,10 @@ class Move < ApplicationRecord
     where(idea: true)
   end
 
+  def self.finished
+    where(idea: false)
+  end
+
   use WithRatingStats, for: :average_rating
 
   def to_param
