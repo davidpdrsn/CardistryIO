@@ -118,23 +118,12 @@ class VideosController < ApplicationController
     video.viewed_by(current_user)
   end
 
-  def page
-    (params[:page] || 1).to_i
-  end
-
   def filter_sort_and_paginate(videos)
-    videos = apply_sort(apply_filter(videos))
-    PaginatedRelation.new(
-      videos,
-      per_page: PaginatedRelation::DEFAULT_PER_PAGE,
-    ).page(page)
-  end
-
-  def apply_sort(videos)
-    SortsVideos.new(videos).sort(params)
-  end
-
-  def apply_filter(videos)
-    FiltersVideos.new(videos).filter(params)
+    ListTransformer.new(
+      relation: videos,
+      params: params,
+      filter_with: FiltersVideos,
+      sort_with: SortsVideos,
+    ).transform
   end
 end

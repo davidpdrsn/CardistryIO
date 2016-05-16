@@ -92,26 +92,12 @@ class MovesController < ApplicationController
     params.require(:move).permit(:name, :description)
   end
 
-  def page
-    (params[:page] || 1).to_i
-  end
-
-  def paginate(moves)
-    PaginatedRelation.new(
-      moves,
-      per_page: PaginatedRelation::DEFAULT_PER_PAGE,
-    ).page(page)
-  end
-
-  def apply_filter(moves)
-    FiltersMoves.new(moves).filter(params)
-  end
-
-  def apply_sort(moves)
-    SortsMoves.new(moves).sort(params)
-  end
-
   def filter_sort_and_paginate(moves)
-    paginate(apply_sort(apply_filter(moves)))
+    ListTransformer.new(
+      relation: moves,
+      params: params,
+      filter_with: FiltersMoves,
+      sort_with: SortsMoves,
+    ).transform
   end
 end
