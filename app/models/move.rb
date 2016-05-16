@@ -13,6 +13,10 @@ class Move < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  def self.ideas
+    where(idea: true)
+  end
+
   use WithRatingStats, for: :average_rating
 
   def to_param

@@ -44,4 +44,18 @@ describe Move do
       move.destroy!
     end.to change { Activity.count }.from(1).to(0)
   end
+
+  describe ".ideas" do
+    it "returns moves that are ideas" do
+      move = create :move, idea: true
+
+      expect(Move.ideas).to eq [move]
+    end
+
+    it "doesn't return moves that aren't ideas" do
+      create :move, idea: false
+
+      expect(Move.ideas).to eq []
+    end
+  end
 end

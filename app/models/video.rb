@@ -5,7 +5,6 @@ class Video < ApplicationRecord
   enum video_type: {
     performance: 0,
     tutorial: 1,
-    idea: 2,
     move_showcase: 3,
     other: 4,
   }

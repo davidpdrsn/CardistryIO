@@ -302,7 +302,6 @@ describe Video do
         ["All", "all"],
         ["Performances", "performance"],
         ["Tutorials", "tutorial"],
-        ["Ideas", "idea"],
         ["Move showcases", "move_showcase"],
         ["Others", "other"],
       ])
