@@ -54,4 +54,15 @@ feature "creating move" do
       expect(page).not_to have_css :a, text: "Move"
     end
   end
+
+  scenario "creates idea" do
+    user = create :user
+    visit new_move_path(as: user)
+    fill_in "Name", with: "Sybil"
+    fill_in "Description", with: "Old school"
+    check "Idea"
+    click_button "Add move"
+
+    expect(Move.last.idea).to eq true
+  end
 end

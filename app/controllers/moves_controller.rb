@@ -89,7 +89,11 @@ class MovesController < ApplicationController
   private
 
   def move_params
-    params.require(:move).permit(:name, :description)
+    params.require(:move).permit(
+      :name,
+      :description,
+      :idea,
+    )
   end
 
   def filter_sort_and_paginate(moves)

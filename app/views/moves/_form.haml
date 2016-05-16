@@ -1,5 +1,6 @@
 = simple_form_for move do |f|
   = f.input :name
   = f.input :description
+  = f.input :idea
   = render partial: "shared/add_credits_fields", locals: { object: move }
   = f.button :submit, text

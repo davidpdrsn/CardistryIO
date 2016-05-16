@@ -21,4 +21,15 @@ feature "edit move" do
 
     expect(page).not_to have_content "Edit"
   end
+
+  scenario "updates idea field" do
+    user = create :user
+    move = create :move, user: user, idea: true
+
+    visit edit_move_path(move, as: move.user)
+    uncheck "Idea"
+    click_button "Update move"
+
+    expect(Move.last.idea).to eq false
+  end
 end
