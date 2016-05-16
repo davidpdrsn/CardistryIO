@@ -29,7 +29,7 @@ FactoryGirl.define do
   end
 
   factory :move do
-    sequence(:name) { |n| "Sybil #{n}" }
+    sequence(:name) { |n| "Sybil #{n}th" }
     user
     description "My favorite move"
   end

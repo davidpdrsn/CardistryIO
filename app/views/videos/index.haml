@@ -1,6 +1,1 @@
-= render partial: "filter_and_sort", locals: { filter_submit_path: @filter_submit_path }
-
-- if @paged_videos.present?
-  = render partial: "paginated_list", locals: { paged_videos: @paged_videos }
-- else
-  You have no videos, yet
+= render partial: "videos/videos_list", locals: { filter_submit_path: @filter_submit_path, page: @paged_videos }

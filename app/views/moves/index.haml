@@ -1,6 +1,1 @@
-- if @moves.present?
-  %ul
-  - @moves.each do |move|
-    %li= link_to move.name, move
-- else
-  You have no moves, yet
+= render partial: "moves/moves_list", locals: { page: @paged_moves }

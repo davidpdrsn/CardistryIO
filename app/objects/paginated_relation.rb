@@ -14,8 +14,23 @@ class PaginatedRelation
   class Page < SimpleDelegator
     def initialize(relation, page:, number_of_pages:)
       super(relation)
+      @relation = relation
       @page = page
       @number_of_pages = number_of_pages
+    end
+
+    include Enumerable
+
+    def each(&block)
+      relation.each(&block)
+    end
+
+    def map
+      Page.new(
+        super,
+        page: page,
+        number_of_pages: number_of_pages,
+      )
     end
 
     attr_reader :number_of_pages
@@ -42,6 +57,6 @@ class PaginatedRelation
 
     private
 
-    attr_reader :page
+    attr_reader :page, :relation
   end
 end

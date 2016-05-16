@@ -1,8 +1,0 @@
-- paged_videos.each do |video|
-  %ul
-    %li= link_to video.name, video
-
-= link_to_if paged_videos.more_previous_pages?, "Prev", all_videos_path(page: paged_videos.previous_page)
-= link_to_if paged_videos.more_pages?, "Next", all_videos_path(page: paged_videos.next_page)
-%p
-  Page #{paged_videos.current_page} of #{paged_videos.number_of_pages}

@@ -1,4 +1,4 @@
-class MoveWithUser < SimpleDelegator
+class MoveWithUser < ActiveRecordDecorator
   def initialize(move:, user:)
     super(move)
     @move = move

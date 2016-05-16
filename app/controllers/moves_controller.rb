@@ -3,7 +3,9 @@ class MovesController < ApplicationController
                                        :destroy, :edit, :update]
 
   def all
-    @moves = Move.all.map do |move|
+    moves = paginate(Move.order(created_at: :desc))
+
+    @paged_moves = moves.map do |move|
       MoveWithUser.new(
         move: move,
         user: UserWithName.new(move.user),
@@ -12,7 +14,7 @@ class MovesController < ApplicationController
   end
 
   def index
-    @moves = current_user.moves
+    @paged_moves = paginate(current_user.moves.order(created_at: :desc))
   end
 
   def show
@@ -86,5 +88,16 @@ class MovesController < ApplicationController
 
   def move_params
     params.require(:move).permit(:name, :description)
+  end
+
+  def page
+    (params[:page] || 1).to_i
+  end
+
+  def paginate(moves)
+    PaginatedRelation.new(
+      moves,
+      per_page: PaginatedRelation::DEFAULT_PER_PAGE,
+    ).page(page)
   end
 end

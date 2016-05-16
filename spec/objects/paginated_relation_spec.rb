@@ -96,4 +96,13 @@ describe PaginatedRelation do
     expect(relation.page(1).more_previous_pages?).to eq false
     expect(relation.page(2).more_previous_pages?).to eq true
   end
+
+  it "enumerates the elements on the page" do
+    6.times { create :user }
+
+    page = PaginatedRelation.new(User.all, per_page: 3).page(1)
+    mapped_page = page.map { |user| user }
+
+    expect(mapped_page.more_pages?).to eq true
+  end
 end

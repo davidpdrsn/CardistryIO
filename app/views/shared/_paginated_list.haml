@@ -1,0 +1,18 @@
+- page.each do |object|
+  %ul
+    %li= link_to object.name, object
+
+- path = ->(options) { polymorphic_path([:all, page.detect { true }.class], options) }
+
+- if page.more_previous_pages?
+  = link_to "Prev", path.call(page: page.previous_page)
+- else
+  Prev
+
+- if page.more_pages?
+  = link_to "Next", path.call(page: page.next_page)
+- else
+  Next
+
+%p
+  Page #{page.current_page} of #{page.number_of_pages}
