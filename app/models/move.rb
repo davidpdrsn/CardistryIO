@@ -1,6 +1,8 @@
 class Move < ApplicationRecord
   extend DecoratorDelegateMethods
 
+  MINIMUM_NUMBER_OF_RATINGS = 5
+
   belongs_to :user
 
   with_options(dependent: :destroy) do |c|
@@ -12,6 +14,10 @@ class Move < ApplicationRecord
   end
 
   validates :name, presence: true, uniqueness: true
+
+  def self.order_by_rating(direction)
+    OrdersByRatings.new(self).order(direction)
+  end
 
   def self.ideas
     where(idea: true)

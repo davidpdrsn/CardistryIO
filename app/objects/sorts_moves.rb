@@ -1,15 +1,13 @@
-class SortsVideos
-  pattr_initialize :videos
+class SortsMoves
+  pattr_initialize :moves
 
   def sort(params)
     sort_direction = sort_params(params).require(:direction)
     case sort_params(params).require(:by)
     when "created_at"
-      videos.order(created_at: sort_direction)
-    when "views_count"
-      videos.order_by_views_count(sort_direction)
+      moves.order(created_at: sort_direction)
     when "rating"
-      videos.order_by_rating(sort_direction)
+      moves.order_by_rating(sort_direction)
     else
       raise "Unsupported sorting"
     end

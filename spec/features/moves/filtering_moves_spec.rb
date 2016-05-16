@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "filtering moves spec" do
+feature "filtering moves" do
   scenario "shows all by default" do
     move = create :move, idea: false
     idea = create :move, idea: true

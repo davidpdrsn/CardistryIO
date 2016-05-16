@@ -1,6 +1,8 @@
 require "rails_helper"
 
 feature "filtering and sorting videos" do
+  include OrderExpectations
+
   scenario "filtering for tutorials" do
     tutorial = create :video, video_type: :tutorial
     performance = create :video, video_type: :performance
@@ -107,10 +109,5 @@ feature "filtering and sorting videos" do
     expect(page).to_not have_content performance.name
     expect(page).to_not have_content other_users_video.name
     expect_to_appear_in_order([old_tutorial, tutorial].map(&:name))
-  end
-
-  def expect_to_appear_in_order(strings)
-    regex = /#{strings.join(".*")}/m
-    expect(page.body).to match(regex)
   end
 end

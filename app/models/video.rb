@@ -2,6 +2,7 @@ class Video < ApplicationRecord
   extend DecoratorDelegateMethods
 
   MINIMUM_NUMBER_OF_RATINGS = 5
+
   enum video_type: {
     performance: 0,
     tutorial: 1,
@@ -51,11 +52,7 @@ class Video < ApplicationRecord
     end
 
     def order_by_rating(direction)
-      direction = sanitize_sort_direction(direction)
-      joins(:ratings)
-        .group("videos.id")
-        .having("count(videos.id) >= ?", MINIMUM_NUMBER_OF_RATINGS)
-        .order("AVG(ratings.rating) #{direction}")
+      OrdersByRatings.new(self).order(direction)
     end
 
     def order_by_views_count(direction)
@@ -68,12 +65,7 @@ class Video < ApplicationRecord
     private
 
     def sanitize_sort_direction(direction)
-      direction = direction.to_s.upcase
-      if direction == "ASC"
-        direction
-      else
-        "DESC"
-      end
+      OrdersByRatings.sanitize_sort_direction(direction)
     end
   end
 

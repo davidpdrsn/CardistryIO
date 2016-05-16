@@ -58,4 +58,20 @@ describe Move do
       expect(Move.ideas).to eq []
     end
   end
+
+  describe "order_by_rating" do
+    it "sorts them desc" do
+      two = create :move, name: "two"
+      5.times { create :rating, rateable: two, rating: 3 }
+
+      one = create :move, name: "one"
+      5.times { create :rating, rateable: one, rating: 5 }
+
+      three = create :move, name: "three"
+      5.times { create :rating, rateable: three, rating: 1 }
+
+      expect(Move.order_by_rating(:desc).map(&:name))
+        .to eq ["one", "two", "three"]
+    end
+  end
 end
