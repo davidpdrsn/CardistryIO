@@ -28,6 +28,9 @@ fi
 echo "---- Building docker image"
 docker-compose build
 
+echo "---- Installing dependencies"
+docker-compose run web bundle install
+
 # Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
 if [ ! -d .git/safe ]; then
   echo "---- Making .git/safe hack"
