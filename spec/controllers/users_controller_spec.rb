@@ -47,6 +47,16 @@ describe UsersController do
       expect(bob.username).to eq "Bob"
       expect(controller).to set_flash[:alert]
     end
+
+    it "is not possible to update instagram_username" do
+      bob = create :user, username: "Bob", instagram_username: "bob"
+      sign_in_as bob
+
+      patch :update, params: { id: bob.id, user: { instagram_username: "lol" } }
+      bob.reload
+
+      expect(bob.instagram_username).to eq "bob"
+    end
   end
 
   describe "#make_admin" do

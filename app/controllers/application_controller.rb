@@ -27,6 +27,11 @@ class ApplicationController < ActionController::Base
     @notifications = current_user.notifications
   end
 
+  rescue_from ActionController::UnpermittedParameters do
+    flash.alert = "Error submitting form"
+    redirect_to root_path
+  end
+
   rescue_from ActiveRecord::RecordNotFound do
     flash.alert = "Page not found"
     redirect_to root_path

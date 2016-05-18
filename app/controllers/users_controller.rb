@@ -13,7 +13,6 @@ class UsersController < Clearance::UsersController
   def update
     @user = User.find(params[:id])
     user_params = params.require(:user).permit(
-      :instagram_username,
       :biography,
       :country_code,
       :time_zone,
