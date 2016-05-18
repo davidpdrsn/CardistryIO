@@ -111,10 +111,11 @@ class Expense
 end
 
 expenses = [
-  Expense::Monthly.new("Rollbar", Dollar.new(0))
+  Expense::Monthly.new("Rollbar", Dollar.new(0)),
   Expense::Monthly.new("Digital Ocean", Dollar.new(10)),
   Expense::Monthly.new("Digital Ocean Weekly Backups", Dollar.new(2)),
   Expense::Monthly.new("Skylight", Dollar.new(0)),
+  Expense::Monthly.new("Pingdom", Dollar.new(18)),
 ]
 
 expenses.sort_by(&:name).each do |expense|
