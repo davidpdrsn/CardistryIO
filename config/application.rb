@@ -21,7 +21,7 @@ module CardistryIO
 
     config.assets.initialize_on_precompile = false
 
-    config.force_ssl = true
+    # config.force_ssl = true
 
     config.generators do |generate|
       generate.helper false
