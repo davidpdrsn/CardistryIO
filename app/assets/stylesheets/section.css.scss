@@ -1,0 +1,106 @@
+section {
+  @include span-columns(9);
+  margin: 0;
+  background: $layout-content-bg-color;
+  height: 100%;
+  padding: 25px 50px 50px 65px;
+  @include calc(width, "100% - #{$nav-width}");
+
+  .profile-box {
+    background: #fff;
+    padding: 20px;
+    width: 100%;
+    @include border-top-radius($base-border-radius);
+    @include border-bottom-radius($base-border-radius);
+    @include shadow-level(1);
+    float: left;
+
+    .gravatar {
+      width: 100%;
+      height: auto;
+      @include border-top-radius(100%);
+      @include border-bottom-radius(100%);
+    }
+
+    .avatar {
+      width: 12%;
+      float: left;
+    }
+    .information {
+      width: 64%;
+      float: left;
+      @include padding(null 10px null 20px);
+    }
+    .relationships {
+      width: 24%;
+      float: left;
+
+      .circle-count {
+        border: 1px solid $main-red;
+        height: 100px;
+        width: 100px;
+        text-align: center;
+        @include border-top-radius(100%);
+        @include border-bottom-radius(100%);
+        line-height: 1.3em;
+        float: right;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding-top: 30px;
+        
+
+        .number {
+          color: $main-red;
+          font-size: 2em;
+        }
+
+        .word {
+          color: $main-blue;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  @include span-columns(12, block-collapse);
+  height: 278px;
+  background: $main-brown image-url("footer-texture-brown.png") repeat-x;
+  color: #fff;
+  text-align: center;
+  padding-top: 50px;
+  border-top: 10px solid;
+  @include border-image(linear-gradient(90deg, $main-red, $main-blue) 100% 0 0 0);
+  border-image-repeat: stretch;
+  border-width: 7px 0 0 0;
+
+  .footer-links {
+    @include clearfix;
+    text-align: left;
+    @include shift(3);
+
+    ul {
+      @include span-columns(3);
+      @include clearfix;
+      @include omega(3n);
+      margin-bottom: 50px;
+    }
+
+    li {
+      line-height: 1.5em;
+      color: #a4a4a4;
+
+      h3 {
+        color: #fff;
+        font-size: 1em;
+        font-weight: 800;
+        margin-bottom: 1em;
+      }
+    }
+  }
+  .footer-credits {
+    color: #a4a4a4;
+    max-width: 35em;
+    margin: 0 auto;
+  }
+}

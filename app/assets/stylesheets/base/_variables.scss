@@ -1,5 +1,5 @@
 // Typography
-$base-font-family: $helvetica;
+$base-font-family: 'Open Sans', sans-serif;
 $heading-font-family: $base-font-family;
 
 // Font Sizes
@@ -14,6 +14,10 @@ $base-border-radius: 3px;
 $base-spacing: $base-line-height * 1em;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
+$pill-height: 44px;
+$pill-border-radius: 44px;
+$pill-border-radius: 44px;
+$nav-width: 280px;
 
 // Colors
 $blue: #477dca;
@@ -21,7 +25,10 @@ $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
 
-$layout-border-color: #F6F6F6;
+$layout-border-color: #D4D4D4;
+$layout-content-bg-color: #F6F6F6;
+
+$main-text: #1A1A1A;
 
 $main-red: #FB3640;
 $main-red-hover: #E8000C;
@@ -29,6 +36,7 @@ $main-red-hover: #E8000C;
 $main-blue: #247BA0;
 $dark-blue: #1D3461;
 $medium-blue: #1F487E;
+$main-blue-hover: #dceff7;
 
 $main-brown: #605F5E;
 
@@ -39,7 +47,10 @@ $action-color: $main-red;
 
 // Border
 $base-border-color: $light-gray;
+$base-border-radous: 4px;
 $base-border: 1px solid $base-border-color;
+$main-blue-border: 1px solid $main-blue;
+$main-red-border: 1px solid $main-red;
 
 // Forms
 $form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);

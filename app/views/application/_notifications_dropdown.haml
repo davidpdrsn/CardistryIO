@@ -1,4 +1,28 @@
+-# %div.dropdown
+-#   - if current_user.new_notifications.present?
+-#     %button.pill-button-new-notification.dropdown-toggle{:id => "notifications-button", :data => {:toggle => "dropdown"}, :href => "#"}
+-#       %i.icon.ion-android-notifications
+-#   - else
+-#     %button.pill-button-outline.dropdown-toggle{:id => "notifications-button", :data => {:toggle => "dropdown"}, :href => "#"}
+-#       %i.icon.ion-android-notifications
+
+-#   %ul.dropdown-menu.dropdown-menu-right{:aria => {:labelledby => "notifications-button"}}
+-#     %li.notification-header
+-#       %span.notification-count
+-#         #{current_user.new_notifications.count}
+-#       new #{"notification".pluralize(current_user.new_notifications.count)}
+
+-#       - if current_user.new_notifications.present?
+-#         = render partial: "notifications/notification", collection: current_user.notifications
+-#     -if current_user.new_notifications.present?
+-#       %li.mark-as-read-button
+-#         =link_to mark_all_read_notifications_path, method: :post do
+-#           Mark all as read
+
 %div.dropdown
+  %span.screen-reader-text
+    = link_to "Notifications (#{current_user.new_notifications.count})", notifications_path
+
   - if current_user.new_notifications.present?
     %button.pill-button-new-notification.dropdown-toggle{:id => "notifications-button", :data => {:toggle => "dropdown"}, :href => "#"}
       %i.icon.ion-android-notifications
@@ -9,11 +33,14 @@
   %ul.dropdown-menu.dropdown-menu-right{:aria => {:labelledby => "notifications-button"}}
     %li.notification-header
       %span.notification-count
-        #{current_user.new_notifications.count}
-      new #{"notification".pluralize(current_user.new_notifications.count)}
+        = pluralize current_user.new_notifications.count, "new notification"
 
       - if current_user.new_notifications.present?
-        = render partial: "notifications/notification", collection: current_user.notifications
+        - current_user.notifications.each do |notification|
+          %li
+            = link_to notification.subject_for_link do
+              %span.dropdown-button-title
+                = link_mentions notification.text.expand(link: ->() { notification_subject_link(notification) }).html_safe
     -if current_user.new_notifications.present?
       %li.mark-as-read-button
         =link_to mark_all_read_notifications_path, method: :post do

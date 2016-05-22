@@ -8,7 +8,7 @@ feature "relationships" do
     visit user_path(alice, as: bob)
     click_button "Follow"
     visit user_path(bob, as: bob)
-    click_link "Following"
+    click_link "1 following"
 
     expect(page).to have_content alice.username
   end
@@ -39,7 +39,7 @@ feature "relationships" do
     visit user_path(alice, as: bob)
     click_button "Unfollow"
     visit user_path(bob, as: bob)
-    click_link "Following"
+    click_link "0 following"
 
     expect(page).not_to have_content alice.username
   end
@@ -69,7 +69,7 @@ feature "relationships" do
     alice.follow!(bob)
 
     visit user_path(bob, as: bob)
-    click_link "Followers"
+    click_link "1 followers"
 
     expect(page).to have_content alice.username
   end

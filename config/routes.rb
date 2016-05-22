@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :notifications, only: [] do
+  resources :notifications, only: [:index] do
     collection do
       post :mark_all_read
     end

@@ -1,0 +1,52 @@
+nav.mobile {
+  display: none;
+}
+
+nav.desktop {
+  @include span-columns(3, block-collapse);
+  height: 100%;
+  border-right: 1px solid $layout-border-color;
+  margin: 0;
+  padding: 25px 0 0 0;
+  width: $nav-width;
+
+  a {
+    display: block;
+  }
+
+  .main-nav {
+    li {
+      height: 50px;
+      line-height: 50px;
+      font-size: 120%;
+      padding-left: 15px;
+
+      i {
+        float: left;
+        margin-right: 15px;
+        font-size: 130%;
+      }
+    }
+    hr {
+      border-bottom: 1px solid $layout-border-color;
+      margin: 5px 0 5px 0;
+    }
+  }
+  .nav-item {
+    &:hover {
+      background: $main-blue-hover;
+    }
+    a {
+      color: #373737;
+    }
+  }
+  .active-nav-item {
+    border-left: 3px solid $main-red;
+    background-color: $layout-content-bg-color;
+    color: $main-red;
+
+    a {
+      color: $main-red;
+    }
+  }
+}

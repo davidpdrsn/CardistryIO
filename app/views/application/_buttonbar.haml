@@ -2,6 +2,7 @@
   - if signed_in?
     = render "upload_button"
     = render "notifications_dropdown"
+    = render "search_field"
     = render "profile_button"
   - else
     = link_to "Sign in", sign_in_path, class: "pill-button-outline"

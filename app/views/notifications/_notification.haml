@@ -1,4 +1,0 @@
-%li
-  = link_to notification.subject_for_link do
-    %span.dropdown-button-title
-      = link_mentions notification.text.expand(link: ->() { notification_subject_link(notification) }).html_safe

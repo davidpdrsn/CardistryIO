@@ -8,6 +8,7 @@
     %title= title
     %link{href: "http://vjs.zencdn.net/4.12/video-js.css", rel: "stylesheet"}
     %script{src: "http://vjs.zencdn.net/4.12/video.js"}
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600", rel: "stylesheet"}
 
     = stylesheet_link_tag :application, media: "all"
     = csrf_meta_tags
@@ -18,14 +19,17 @@
     %div.outer-container
 
       %header
-        = link_to image_tag("logo.svg", :class => "main-logo"), root_path
+        = render "header"
         = render "buttonbar"
 
-      %nav
-        = render "nav"
+      %nav.desktop
+        = render "nav_desktop"
 
       %section
         = yield
+
+      %nav.mobile
+        =render "nav_mobile"
 
       %footer
         = render "footer"
