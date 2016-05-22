@@ -36,4 +36,8 @@ class Move < ApplicationRecord
   def creditted_users
     User.distinct.joins(:credits).where(credits: { creditable: self })
   end
+
+  def link_text
+    name
+  end
 end

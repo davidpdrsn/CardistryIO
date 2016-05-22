@@ -1,0 +1,10 @@
+- @result_collections.each do |collection|
+  %h1= collection.type_name
+
+  - if collection.has_results?
+    %ul
+      - collection.each do |object|
+        %li
+          = link_to object.link_text, object
+  - else
+    No results

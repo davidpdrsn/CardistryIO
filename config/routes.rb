@@ -82,6 +82,7 @@ Rails.application.routes.draw do
 
   get "monitor", to: "monitor#services"
   get "monitor_stats", to: "monitor#stats"
+  get "/search", as: "searches", to: "searches#show"
 
   root to: "welcome#index"
 end

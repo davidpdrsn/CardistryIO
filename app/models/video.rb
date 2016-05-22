@@ -76,6 +76,10 @@ class Video < ApplicationRecord
     User.where(id: credits.pluck(:user_id))
   end
 
+  def link_text
+    name
+  end
+
   def to_param
     "#{id}-#{name.parameterize}"
   end

@@ -55,6 +55,10 @@ class User < ApplicationRecord
     UserWithRatingPermissions.new(self).can_rate?(rateable)
   end
 
+  def link_text
+    "@#{username}"
+  end
+
   def self.without(users)
     where.not(id: users.map(&:id))
   end

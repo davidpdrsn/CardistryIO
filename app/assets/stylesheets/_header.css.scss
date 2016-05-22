@@ -28,7 +28,7 @@ header {
       height: 44px;
       border-radius: 44px;
       border: 1px solid $main-red;
-      width: 170px;
+      width: 350px;
       padding-left: 40px;
       padding-right: 20px;
       outline: none;
@@ -47,7 +47,7 @@ header {
       pointer-events: none;
       position: absolute;
       left: 0px;
-      @include padding(36px 0px 44px 20px);
+      @include padding(11px 17px);
     }
   }
 
