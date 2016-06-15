@@ -33,6 +33,7 @@ header {
       padding-right: 20px;
       outline: none;
       transition: border-color 0.8s, color 0.8s;
+      margin-bottom: 0;
 
       &::placeholder {
         color: $main-red;
