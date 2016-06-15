@@ -48,8 +48,11 @@ button {
   }
 
   .mini-circle-avatar {
-    padding-left: 22px;
+    height: 22px;
+    width: 22px;
     margin-right: 5px;
+    margin-top: 2px;
+    display: inline-block;
     @include border-top-radius(10px);
     @include border-bottom-radius(10px);
   }
@@ -60,6 +63,13 @@ button {
     text-overflow: ellipsis;
     white-space: nowrap;
     display: inline-block;
+    margin-bottom: 3px;
+  }
+
+  .profile-dropdown-arrow {
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-left: 3px;
   }
 
   .icon {

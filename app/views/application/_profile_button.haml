@@ -1,37 +1,9 @@
--# %div.dropdown
--#   %button.pill-button-outline.dropdown-toggle{:id => "profile-button", :data => {:toggle => "dropdown"}, :href => "#"}
--#     %span{:style => "background: url(#{current_user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
--#     = current_user.username
--#     %i.icon.ion-arrow-down-b
--#   %ul.dropdown-menu.dropdown-menu-right{:aria => {:labelledby => "profile-button"}}
--#     %li
--#       = link_to current_user do
--#         %i.icon.ion-person
--#         %span.dropdown-button-title
--#           Your profile
--#         %span.dropdown-button-text
--#           Check out and edit your profile.
--#     %li
--#       = link_to edit_user_path(current_user) do
--#         %i.icon.ion-gear-b
--#         %span.dropdown-button-title
--#           Settings
--#         %span.dropdown-button-text
--#           Fine tune the settings to your liking.
--#     %li.last
--#       = link_to sign_out_path, method: :delete do
--#         %i.icon.ion-log-out
--#         %span.dropdown-button-title
--#           Sign out
--#         %span.dropdown-button-text
--#           See ya!
-
 %div.dropdown
   %button.pill-button-outline.dropdown-toggle{:id => "profile-button", :data => {:toggle => "dropdown"}, :href => "#"}
     %span{:class => "mini-circle-avatar", :style => "background: url(#{current_user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
     %span{:class => "username"}
       = current_user.username
-    %i.icon.ion-arrow-down-b
+    %i.icon.ion-arrow-down-b{:class => "profile-dropdown-arrow"}
   %ul.dropdown-menu.dropdown-menu-right{:aria => {:labelledby => "profile-button"}}
     %li
       = link_to current_user do
