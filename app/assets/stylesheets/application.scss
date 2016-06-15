@@ -8,6 +8,7 @@
 @import "base/base";
 @import "bootstrap-dropdown";
 @import "refills/flashes";
+@import "refills/footer";
 @import "ionicons";
 
 @import "nav";
@@ -20,22 +21,29 @@
 * {
   margin: 0;
 }
-html, body {
-  height: 100%; font-family: $base-font-family;
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: $base-font-family;
 }
 
 
 .outer-container {
   @include outer-container(100%);
-  height: 100%;
 
-  // Make the footer sticky (https://css-tricks.com/snippets/css/sticky-footer/)
+
   min-height: 100%;
-  margin-bottom: -278px;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -275px;
 
   &:after {
     content: "";
     display: block;
+    height: 275px;
   }
 }
 

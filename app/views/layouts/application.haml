@@ -17,7 +17,6 @@
     = render "flashes"
 
     %div.outer-container
-
       %header
         = render "header"
         = render "buttonbar"
@@ -25,14 +24,14 @@
       %nav.desktop
         = render "nav_desktop"
 
-      %section
+      %section.content-area
         = yield
 
       %nav.mobile
         =render "nav_mobile"
 
-      %footer
-        = render "footer"
+    %footer.footer
+      = render "footer"
 
 
     -# %div.main-content

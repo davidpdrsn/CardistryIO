@@ -62,9 +62,14 @@ section {
   }
 }
 
+.content-area {
+  border-left: 1px solid $layout-border-color;
+}
+
 footer {
   @include span-columns(12, block-collapse);
   height: 278px;
+  width: 100%;
   background: $main-brown image-url("footer-texture-brown.png") repeat-x;
   color: #fff;
   text-align: center;
@@ -73,6 +78,7 @@ footer {
   @include border-image(linear-gradient(90deg, $main-red, $main-blue) 100% 0 0 0);
   border-image-repeat: stretch;
   border-width: 7px 0 0 0;
+
 
   .footer-links {
     @include clearfix;
@@ -104,3 +110,5 @@ footer {
     margin: 0 auto;
   }
 }
+
+
