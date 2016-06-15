@@ -28,6 +28,11 @@ header {
       height: 44px;
     }
 
+    .search-submit-button {
+      position: absolute;
+      left: -999999px;
+    }
+
     .search-field {
       height: 44px;
       border-radius: 44px;
