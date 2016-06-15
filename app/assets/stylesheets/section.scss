@@ -3,7 +3,7 @@ section {
   margin: 0;
   background: $layout-content-bg-color;
   height: 100%;
-  padding: 25px 50px 50px 65px;
+  padding: 0px 50px 0px 65px;
   @include calc(width, "100% - #{$nav-width}");
 
   .profile-box {
