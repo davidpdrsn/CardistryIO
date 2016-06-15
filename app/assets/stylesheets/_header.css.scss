@@ -24,6 +24,10 @@ header {
     color: $main-red;
     position: relative;
 
+    .search-form {
+      height: 44px;
+    }
+
     .search-field {
       height: 44px;
       border-radius: 44px;
