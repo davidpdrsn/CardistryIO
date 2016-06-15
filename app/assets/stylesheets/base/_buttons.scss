@@ -46,12 +46,22 @@ button {
   a {
     display: block;
   }
-  span {
-    padding-left: 18px;
+
+  .mini-circle-avatar {
+    padding-left: 22px;
     margin-right: 5px;
     @include border-top-radius(10px);
     @include border-bottom-radius(10px);
   }
+
+  .username {
+    max-width: 117px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
   .icon {
     font-size: 180%;
     vertical-align: middle;
