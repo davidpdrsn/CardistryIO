@@ -2,7 +2,7 @@ require 'resque/failure/multiple'
 require 'resque/failure/redis'
 require 'resque/rollbar'
 
-if Rails.env.development? || Rails.env.test?
+if Rails.env.development?
   Resque.redis = ENV.fetch("REDIS_1_PORT").gsub("tcp://", "")
 end
 
