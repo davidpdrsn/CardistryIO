@@ -37,9 +37,9 @@ gem "pg"
 gem "puma"
 gem "rack-mini-profiler", require: false
 gem "recipient_interceptor"
-gem "redis-actionpack", github: "redis-store/redis-actionpack", branch: "master"
-gem "redis-rack", github: "redis-store/redis-rack", branch: "master"
-gem "redis-rails", github: "redis-store/redis-rails", branch: "master"
+gem "redis-actionpack", git: "https://github.com/redis-store/redis-actionpack.git", branch: "master"
+gem "redis-rack", git: "https://github.com/redis-store/redis-rack.git", branch: "master"
+gem "redis-rails", git: "https://github.com/redis-store/redis-rails.git", branch: "master"
 gem "refills"
 gem "resque"
 gem "rollbar"
@@ -61,6 +61,7 @@ end
 group :development, :test do
   gem "awesome_print"
   gem "bundler-audit", require: false
+  gem "brakeman"
   gem "byebug"
   gem "factory_girl_rails"
   gem "pry-rails"
