@@ -30,7 +30,7 @@ fi
 echo "---- Building docker image"
 docker-compose build
 
-docker-compose up -d db 
+docker-compose up -d db
 
 echo "---- Installing dependencies"
 docker-compose run web bundle install
@@ -42,6 +42,7 @@ if [ ! -d .git/safe ]; then
 fi
 
 echo "---- Setting up databases"
+docker-compose up -d
 docker-compose run web bin/rake db:create RAILS_ENV=development
 docker-compose run web bin/rake db:create RAILS_ENV=test
 docker-compose run web bin/rake db:migrate RAILS_ENV=development
