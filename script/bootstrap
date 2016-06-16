@@ -30,6 +30,8 @@ fi
 echo "---- Building docker image"
 docker-compose build
 
+docker-compose up -d up
+
 echo "---- Installing dependencies"
 docker-compose run web bundle install
 
