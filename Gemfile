@@ -61,6 +61,7 @@ end
 group :development, :test do
   gem "awesome_print"
   gem "bundler-audit", require: false
+  gem "brakeman"
   gem "byebug"
   gem "factory_girl_rails"
   gem "pry-rails"

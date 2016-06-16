@@ -1,24 +1,10 @@
 language: ruby
-
 cache: bundler
-
 addons:
-  postgresql: "9.3"
-
+  postgresql: '9.3'
 before_script:
-  - "echo '--colour' > ~/.rspec"
-  - "echo 'gem: --no-document' > ~/.gemrc"
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - git fetch origin master:master
-  - psql -c 'create database "tonsser-api_test";' -U postgres
-  - bundle exec rake db:migrate
-
+- git fetch origin master:master
+- psql -c 'create database "cardistryio_test";' -U postgres
+- bundle exec rake db:migrate
 script:
-  - script/cibuild
-
-after_success:
-  - script/travis-deploy
-
-notifications:
-  email: false
+- script/cibuild
