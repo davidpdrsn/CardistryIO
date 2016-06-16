@@ -1,50 +1,58 @@
-db:
-  image: postgres:9.4
-  ports:
-    - "5432"
+version: '2'
 
-app:
-  build: .
-  command: echo "Hello, world!"
-  volumes:
-    - .:/app
-  stdin_open: true
-  environment:
-    BUNDLE_PATH: "/box"
+services:
+  
+  app:
+    build: .
+    command: echo "Hello, world!"
+    volumes:
+      - .:/app
+    stdin_open: true
+    environment:
+      BUNDLE_PATH: "/box"
+      SKYLIGHT_AUTHENTICATION: "test"
+      INSTAGRAM_CLIENT_ID: "test"
+      INSTAGRAM_CLIENT_SECRET: "test"
 
-web:
-  extends:
-    service: app
-  environment:
-    RAILS_REDIS_1_PORT: 6379
-  command: bin/rails s -b 0.0.0.0 -p 3000
-  ports:
-    - "3000:3000"
-  links:
-    - db
-    - redis
-  volumes_from:
-    - box
+  box:
+    image: busybox
+    volumes:
+      - /box
 
-resque:
-  extends:
-    service: app
-  environment:
-    QUEUE: "*"
-    RAILS_ENV: development
-  command: bin/rake environment resque:work
-  links:
-    - db
-    - redis
-  volumes_from:
-    - box
+  web:
+    extends:
+      service: app
+    command: bin/rails s -b 0.0.0.0 -p 3000
+    ports:
+      - "3000:3000"
+    networks:
+      - cardistryio
+    volumes_from:
+      - box
 
-box:
-  image: busybox
-  volumes:
-    - /box
+  resque:
+    extends:
+      service: app
+    environment:
+      QUEUE: "*"
+      RAILS_ENV: development
+    command: bin/rake environment resque:work
+    networks:
+      - cardistryio
+    volumes_from:
+      - box
 
-redis:
-  image: redis:2.6
-  ports:
-    - "6379"
+  db:
+    image: postgres:9.4
+    networks:
+      - cardistryio
+
+  redis:
+    image: redis:alpine
+    networks:
+      - cardistryio
+
+networks:
+  cardistryio:
+    # Use a custom driver
+    driver: bridge

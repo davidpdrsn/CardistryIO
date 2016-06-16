@@ -1,0 +1,75 @@
+                Prefix Verb URI    Pattern                                       Controller#Action
+                  passwords POST   /passwords(.:format)                          clearance/passwords#create
+               new_password GET    /passwords/new(.:format)                      clearance/passwords#new
+                    session POST   /session(.:format)                            clearance/sessions#create
+              user_password POST   /users/:user_id/password(.:format)            clearance/passwords#create
+         edit_user_password GET    /users/:user_id/password/edit(.:format)       clearance/passwords#edit
+                            PATCH  /users/:user_id/password(.:format)            clearance/passwords#update
+                            PUT    /users/:user_id/password(.:format)            clearance/passwords#update
+            make_admin_user POST   /users/:id/make_admin(.:format)               users#make_admin
+                follow_user POST   /users/:id/follow(.:format)                   relationships#create
+                            DELETE /users/:id/follow(.:format)                   relationships#destroy
+             following_user GET    /users/:id/following(.:format)                relationships#following
+             followers_user GET    /users/:id/followers(.:format)                relationships#followers
+                      users POST   /users(.:format)                              users#create
+                  edit_user GET    /users/:id/edit(.:format)                     users#edit
+                       user GET    /users/:id(.:format)                          users#show
+                            PATCH  /users/:id(.:format)                          users#update
+                            PUT    /users/:id(.:format)                          users#update
+mark_all_read_notifications POST   /notifications/mark_all_read(.:format)        notifications#mark_all_read
+              notifications GET    /notifications(.:format)                      notifications#index
+                    sign_in GET    /sign_in(.:format)                            clearance/sessions#new
+                   sign_out DELETE /sign_out(.:format)                           clearance/sessions#destroy
+                    sign_up GET    /sign_up(.:format)                            clearance/users#new
+           creditable_users GET    /creditable_users(.:format)                   creditable_users#index
+                  all_moves GET    /moves/all(.:format)                          moves#all
+              move_comments POST   /moves/:move_id/comments(.:format)            comments#create
+          edit_move_comment GET    /moves/:move_id/comments/:id/edit(.:format)   comments#edit
+               move_comment PATCH  /moves/:move_id/comments/:id(.:format)        comments#update
+                            PUT    /moves/:move_id/comments/:id(.:format)        comments#update
+               move_ratings POST   /moves/:move_id/ratings(.:format)             ratings#create
+                      moves GET    /moves(.:format)                              moves#index
+                            POST   /moves(.:format)                              moves#create
+                   new_move GET    /moves/new(.:format)                          moves#new
+                  edit_move GET    /moves/:id/edit(.:format)                     moves#edit
+                       move GET    /moves/:id(.:format)                          moves#show
+                            PATCH  /moves/:id(.:format)                          moves#update
+                            PUT    /moves/:id(.:format)                          moves#update
+                            DELETE /moves/:id(.:format)                          moves#destroy
+        edit_video_sharings GET    /videos/:video_id/sharings/edit(.:format)     sharings#edit
+             video_sharings POST   /videos/:video_id/sharings(.:format)          sharings#create
+          new_video_sharing GET    /videos/:video_id/sharings/new(.:format)      sharings#new
+              video_sharing DELETE /videos/:video_id/sharings/:id(.:format)      sharings#destroy
+                 all_videos GET    /videos/all(.:format)                         videos#all
+     edit_appearances_video GET    /videos/:id/edit_appearances(.:format)        video_appearances#edit
+   update_appearances_video PATCH  /videos/:id/edit_appearances(.:format)        video_appearances#update
+  destroy_appearances_video DELETE /videos/:id/destroy_appearances(.:format)     video_appearances#destroy
+             video_comments POST   /videos/:video_id/comments(.:format)          comments#create
+         edit_video_comment GET    /videos/:video_id/comments/:id/edit(.:format) comments#edit
+              video_comment PATCH  /videos/:video_id/comments/:id(.:format)      comments#update
+                            PUT    /videos/:video_id/comments/:id(.:format)      comments#update
+              video_ratings POST   /videos/:video_id/ratings(.:format)           ratings#create
+                     videos GET    /videos(.:format)                             videos#index
+                            POST   /videos(.:format)                             videos#create
+                  new_video GET    /videos/new(.:format)                         videos#new
+                 edit_video GET    /videos/:id/edit(.:format)                    videos#edit
+                      video GET    /videos/:id(.:format)                         videos#show
+                            PATCH  /videos/:id(.:format)                         videos#update
+                            PUT    /videos/:id(.:format)                         videos#update
+                            DELETE /videos/:id(.:format)                         videos#destroy
+              shared_videos GET    /videos_shared_with_you(.:format)             sharings#index
+             approve_videos GET    /admin/approve_videos(.:format)               admin/approve_videos#new
+              approve_video POST   /admin/approve_videos/:id(.:format)           admin/approve_videos#create
+           disapprove_video DELETE /admin/approve_videos/:id(.:format)           admin/approve_videos#destroy
+               search_moves GET    /api/search/moves(.:format)                   api/searches#moves
+               search_users GET    /api/search/users(.:format)                   api/searches#users
+                            POST   /api/videos/:id/approve(.:format)             api/videos#approve
+          videos_unapproved GET    /api/videos/unapproved(.:format)              api/videos#unapproved
+                            DELETE /api/videos/:id(.:format)                     api/videos#destroy
+                  instagram GET    /instagram(.:format)                          instagram#index
+   instagram_oauth_callback GET    /instagram/oauth/callback(.:format)           instagram#callback
+                    monitor GET    /monitor(.:format)                            monitor#services
+              monitor_stats GET    /monitor_stats(.:format)                      monitor#stats
+                   searches GET    /search(.:format)                             searches#show
+                       root GET    /                                             welcome#index
+                       page GET    /pages/*id                                    high_voltage/pages#show

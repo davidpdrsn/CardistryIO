@@ -12,5 +12,5 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
   config.action_view.raise_on_missing_translations = true
   config.action_mailer.default_url_options = { host: "localhost:3000" }
-  config.cache_store = :redis_store, ENV.fetch("RAILS_REDIS_1_PORT")
+  config.cache_store = :redis_store
 end
