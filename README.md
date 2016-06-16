@@ -28,6 +28,10 @@ We have a simple expense report written in Ruby (because who needs spreadsheets)
 
     $ ruby expense_report.rb
 
+## Accessing the rails console
+
+Access the rails console by running `docker-compose run web bin/rails`.
+
 ## Creating test notifications
 
 In test and development environments you can create test notifications from the console like so:
@@ -71,3 +75,10 @@ Setting the date the activity was created can be done like so:
     => activity.update!(created_at: 1.day.ago)
     => activity.update!(created_at: 1.week.ago)
     => activity.update!(created_at: 1.month.ago) # etc...
+
+## Setting an account as admin
+
+In order to flag an account as admin, you have to set the `admin` column of the user account to `true`. Do it like so:
+
+    $ bin/rails console
+    => User.find(your_user_id).update!(admin: true)
