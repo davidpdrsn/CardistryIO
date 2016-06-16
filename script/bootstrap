@@ -37,6 +37,9 @@ if [ ! -d .git/safe ]; then
   mkdir .git/safe
 fi
 
+echo "---- Setting up environment variables"
+cp .sample.env .env
+
 echo "---- Setting up databases"
 docker-compose run web bin/rake db:create RAILS_ENV=development
 docker-compose run web bin/rake db:create RAILS_ENV=test
@@ -56,5 +59,10 @@ All set!
 
   You should now be able to run the tests with "docker-compose run web bin/rspec"
   You can use script/production-data-to-local to pull down the production database
+
+  If you wanna test adding videos from Instagram you'll need get a client_id and
+  client_secret by creating an app on https://instagram.com/developer
+  You can add those to .env
+  Same goes for testing sending email
 
 EOF
