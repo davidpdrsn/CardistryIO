@@ -1,31 +1,31 @@
 GIT
-  remote: git://github.com/redis-store/redis-actionpack.git
-  revision: ff80a6f4d681eba097905176e1e75fab38d67e65
+  remote: https://github.com/redis-store/redis-actionpack.git
+  revision: e07ec71762517dccf83b1f2a16432aa4536cc79c
   branch: master
   specs:
-    redis-actionpack (4.0.1)
+    redis-actionpack (5.0.0.pre)
       actionpack (>= 4.0.0, < 6)
-      redis-rack (~> 1.5.0)
-      redis-store (~> 1.1.0)
+      redis-rack (~> 2.0.0.pre)
+      redis-store (~> 1.2.0.pre)
 
 GIT
-  remote: git://github.com/redis-store/redis-rack.git
-  revision: 83a7b7b895bb528c1ae88329e4bca09a97d9fbbf
+  remote: https://github.com/redis-store/redis-rack.git
+  revision: ba3a6b7cd5259e9678195b3df121c2a3e012b134
   branch: master
   specs:
-    redis-rack (1.5.0)
+    redis-rack (2.0.0.pre)
       rack (> 1.5, < 3)
-      redis-store (~> 1.1.0)
+      redis-store (~> 1.2.0.pre)
 
 GIT
-  remote: git://github.com/redis-store/redis-rails.git
-  revision: bb9e202da4c9d9d4d927e4531f98e2db4e2dc657
+  remote: https://github.com/redis-store/redis-rails.git
+  revision: f05ac2a5503a894bc189b569c4a5598e7d9af51d
   branch: master
   specs:
-    redis-rails (5.0.0)
-      redis-actionpack (>= 4, < 5.1)
-      redis-activesupport (>= 4, < 5.1)
-      redis-store (~> 1.1.0)
+    redis-rails (5.0.0.pre)
+      redis-actionpack (~> 5.0.0.pre)
+      redis-activesupport (~> 5.0.0.pre)
+      redis-store (~> 1.2.0.pre)
 
 GEM
   remote: https://rubygems.org/
@@ -293,12 +293,12 @@ GEM
     recipient_interceptor (0.1.2)
       mail
     redis (3.3.0)
-    redis-activesupport (4.1.5)
-      activesupport (>= 3, < 5)
-      redis-store (~> 1.1.0)
+    redis-activesupport (5.0.0.pre)
+      activesupport (>= 3, < 6)
+      redis-store (~> 1.2.0.pre)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
-    redis-store (1.1.7)
+    redis-store (1.2.0.pre)
       redis (>= 2.2)
     refills (0.1.0)
     resque (1.26.0)
