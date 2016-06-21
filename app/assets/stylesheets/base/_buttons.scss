@@ -46,12 +46,32 @@ button {
   a {
     display: block;
   }
-  span {
-    padding-left: 18px;
+
+  .mini-circle-avatar {
+    height: 22px;
+    width: 22px;
     margin-right: 5px;
+    margin-top: 2px;
+    display: inline-block;
     @include border-top-radius(10px);
     @include border-bottom-radius(10px);
   }
+
+  .username {
+    max-width: 117px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    margin-bottom: 3px;
+  }
+
+  .profile-dropdown-arrow {
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-left: 3px;
+  }
+
   .icon {
     font-size: 180%;
     vertical-align: middle;
@@ -93,5 +113,45 @@ button {
 
   &:hover {
     background-color: $medium-blue;
+  }
+}
+
+.profile-pill {
+  @include pill-button;
+  border: 1px solid $main-red;
+  background-color: #fff;
+  color: $main-red;
+
+  &:hover {
+    border-color: $main-red-hover;
+    color: $main-red-hover;
+  }
+  &:focus {
+    border-color: $main-blue;
+    color: $main-blue;
+  }
+
+  .mini-circle-avatar {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 50%;
+  }
+
+  .username {
+    max-width: 117px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 3px;
+    height: 16px;
+    resize: none;
+  }
+
+  .profile-dropdown-arrow {
+    display: inline-block;
+    position: relative;
+    top: 7px;
   }
 }
