@@ -12,7 +12,7 @@
 
 ## I wanna contribute, where do I start?
 
-Please read the [Contributing guidelines](#) as the first thing.
+Please read the [Contributing guidelines](https://github.com/davidpdrsn/CardistryIO/blob/master/CONTRIBUTING.md) as the first thing.
 
 CardistryIO is made with Ruby on Rails so if you're unfamiliar with that, and you want to contribute code, we recommend you start [here](https://www.lynda.com/Ruby-Rails-tutorials/Ruby-Rails-4-Essential-Training/139989-2.html).
 
