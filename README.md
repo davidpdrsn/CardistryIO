@@ -16,6 +16,8 @@ Please read the [Contributing guidelines](#) as the first thing.
 
 CardistryIO is made with Ruby on Rails so if you're unfamiliar with that, and you want to contribute code, we recommend you start [here](https://www.lynda.com/Ruby-Rails-tutorials/Ruby-Rails-4-Essential-Training/139989-2.html).
 
+Issues labeled with ["Low hanging fruit"](https://github.com/davidpdrsn/CardistryIO/labels/Low%20hanging%20fruit) are a good starting point for new contributors.
+
 If you want to report a bug, or suggest a new feature, you're welcome to [open a new issue](https://github.com/davidpdrsn/CardistryIO/issues/new).
 
 If you want to contact one from the core team you can find them [here](https://github.com/davidpdrsn/CardistryIO/wiki/Core-Team).
