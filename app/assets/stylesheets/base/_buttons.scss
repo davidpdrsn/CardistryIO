@@ -115,3 +115,43 @@ button {
     background-color: $medium-blue;
   }
 }
+
+.profile-pill {
+  @include pill-button;
+  border: 1px solid $main-red;
+  background-color: #fff;
+  color: $main-red;
+
+  &:hover {
+    border-color: $main-red-hover;
+    color: $main-red-hover;
+  }
+  &:focus {
+    border-color: $main-blue;
+    color: $main-blue;
+  }
+
+  .mini-circle-avatar {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 50%;
+  }
+
+  .username {
+    max-width: 117px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 3px;
+    height: 16px;
+    resize: none;
+  }
+
+  .profile-dropdown-arrow {
+    display: inline-block;
+    position: relative;
+    top: 7px;
+  }
+}

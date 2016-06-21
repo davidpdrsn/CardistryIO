@@ -1,5 +1,5 @@
 %div.dropdown
-  %button.pill-button-outline.dropdown-toggle{:id => "profile-button", :data => {:toggle => "dropdown"}, :href => "#"}
+  %button.profile-pill.dropdown-toggle{:id => "profile-button", :data => {:toggle => "dropdown"}, :href => "#"}
     %span{:class => "mini-circle-avatar", :style => "background: url(#{current_user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
     %span{:class => "username"}
       = current_user.username
