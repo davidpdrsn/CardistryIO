@@ -47,6 +47,8 @@ gem "country_select"
 gem "skylight"
 gem "stackprof"
 gem "uglifier"
+gem "seedbank"
+gem "faker"
 
 group :development do
   gem "spring"
