@@ -8,9 +8,15 @@
           %i.icon.ion-android-hand
 
     %div.timeline-content
+      %span.username
+        = link_to activity.user.username, activity.user
+      %span
+        posted a new
+      %span.type
+        = "#{activity.subject.class.name.downcase}"
+
       %h2
         = link_to activity.text, activity.subject
-      %p
-        = "(#{activity.subject.class.name.downcase})"
-      %span
+
+      %span.date
         = "#{activity.created_at}"
