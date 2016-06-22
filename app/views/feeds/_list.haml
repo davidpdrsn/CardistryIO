@@ -18,7 +18,7 @@
         = "#{activity.subject.class.name.downcase}"
 
       %h2
-        = link_to '"' + activity.text + '"', activity.subject
+        = link_to activity.text, activity.subject
 
       %p.description
         = "#{activity.subject.description}"
