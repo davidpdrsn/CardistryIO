@@ -19,5 +19,8 @@
       %h2
         = link_to '"' + activity.text + '"', activity.subject
 
+      %p.description
+        = "#{activity.subject.description}"
+
       %span.date
         = "#{activity.created_at}"
