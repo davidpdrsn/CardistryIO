@@ -2,13 +2,15 @@
   %div.timeline-block
     %div.timeline-block-image-border
       %div.timeline-block-image
-        %i.icon.ion-ios-film-outline
-
+        - if activity.subject.class.name.downcase == "video"
+          %i.icon.ion-ios-videocam
+        - elsif activity.subject.class.name.downcase == "move"
+          %i.icon.ion-android-hand
 
     %div.timeline-content
       %h2
         = link_to activity.text, activity.subject
       %p
-        = "(#{activity.subject.class.name.humanize.downcase})"
+        = "(#{activity.subject.class.name.downcase})"
       %span
         = "#{activity.created_at}"
