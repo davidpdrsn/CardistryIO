@@ -8,6 +8,8 @@
           %i.icon.ion-android-hand
 
     %div.timeline-content
+      %div.thumbnail
+      %div.thumbnail-spacer
       %span{:class => "mini-circle-avatar", :style => "background: url(#{activity.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
       %span.username
         = link_to activity.user.username, activity.user
@@ -23,4 +25,6 @@
         = "#{activity.subject.description}"
 
       %span.date
-        = "#{activity.created_at}"
+        = "posted #{time_ago_in_words(activity.created_at)} ago"
+
+

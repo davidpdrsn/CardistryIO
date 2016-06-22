@@ -99,8 +99,56 @@
         margin-left: 33px;
       }
 
+      .thumbnail {
+        height: 100%;
+        width: 400px;
+        position: absolute;
+        top: 0px; right: 0px;
+        float: right;
+        background-image: image-url("thumbnail-placeholder.png");
+        background-position: center center;
+        background-size: cover;
+        border-top-right-radius: $base-border-radius;
+        border-bottom-right-radius: $base-border-radius;
+
+        &:before {
+          font-family: 'Ionicons';
+          content: image-url("thumbnail-play-button.png");
+          font-size: 4em;
+          color: $main-red;
+          text-align: center;
+          line-height: 50%;
+          display: block;
+          height: 100%;
+          width: 400px;
+          background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(55,55,55,0.65) 100%); /* FF3.6-15 */
+          background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(55,55,55,0.65) 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(55,55,55,0.65) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6373737',GradientType=0 ); /* IE6-9 */
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        &:hover:before {
+          background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6-15 */
+          background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#4d000000',GradientType=0 ); /* IE6-9 */
+        }
+      }
+
+      .thumbnail-spacer {
+        width: 400px;
+        height: 100px;
+        float: right;
+      }
+
       .description {
         margin-left: 33px;
+        margin-bottom: 50px;
+        padding-right: 450px;
       }
 
       .mini-circle-avatar {
