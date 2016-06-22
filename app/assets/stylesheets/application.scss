@@ -36,9 +36,8 @@ body {
 
 
   min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -275px;
+  height: calc(100% + 105px);
+  margin-bottom: -275px;
 
   &:after {
     content: "";
