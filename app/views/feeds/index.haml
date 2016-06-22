@@ -3,15 +3,36 @@
     %div.timeline-block
       %div.timeline-block-image-border
         %div.timeline-block-image
-          %i.icon.ion-sad
+          %i.icon.ion-ios-star
+
+      %div.timeline-content
+        %div.welcome-message
+          = image_tag("logo-white.svg", :class => "welcome-logo")
+        %div.thumbnail.welcome-background
+
+    %div.timeline-block
+      %div.timeline-block-image-border
+        %div.timeline-block-image
+          %i.icon.ion-ios-heart
 
       %div.timeline-content
         %h2
-          Oh no! :(
-        %p.description{:style => 'padding-right: 0'}
-          No activities yet to show in feed.
+          Welcome, #{current_user.username}!
+        %p.description{:style => 'padding-right: 10px; font-size: 1.2em; line-height: 2em;'}
           %br
-          Get started by following your favorite Cardists. You will see all activity of people you follow on your feed.
+          It is a pleasure to have you here!
+          %br
+          %br
+          Your feed is empty right now but you can get started right away.
+          %br
+          Try following your friends and favorite Cardists. All activity of people you follow will show up in this feed.
+          %br
+          There are some suggestions on what to do below. You can use these to dive right into the community!
+          %br
+          If you are more of an adventurous person, you can explore on your own as well.
+          %br
+          %br
+          We hope you will have a great time on CARDISTRY.IO! ♥
   - else
     - if @feed.today.present?
       %div.timeline-headline
