@@ -5,6 +5,7 @@ section {
   height: 100%;
   padding: 0px 50px 0px 65px;
   @include calc(width, "100% - #{$nav-width}");
+  display: table;
 
   .profile-box {
     background: #fff;
