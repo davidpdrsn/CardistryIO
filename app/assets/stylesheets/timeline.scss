@@ -1,6 +1,8 @@
 .timeline {
   position: relative;
   padding: 2em 0 4em 0;
+  display: table;
+  height: 100%;
 
   @keyframes bounceIn {
     from, 20%, 40%, 60%, 80%, to {
@@ -167,6 +169,7 @@
         margin-top: 30px;
         margin-bottom: 20px;
         margin-left: 33px;
+        color: $main-red;
       }
 
       .thumbnail {

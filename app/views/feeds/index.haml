@@ -1,7 +1,17 @@
 %div.timeline
   - if [@feed.today, @feed.yesterday, @feed.last_week, @feed.older_than_one_week].all?(&:empty?)
-    %p
-      No activities yet to show in feed
+    %div.timeline-block
+      %div.timeline-block-image-border
+        %div.timeline-block-image
+          %i.icon.ion-sad
+
+      %div.timeline-content
+        %h2
+          Oh no! :(
+        %p.description{:style => 'padding-right: 0'}
+          No activities yet to show in feed.
+          %br
+          Get started by following your favorite Cardists. You will see all activity of people you follow on your feed.
   - else
     - if @feed.today.present?
       %div.timeline-headline
