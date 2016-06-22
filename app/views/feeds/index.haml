@@ -99,7 +99,49 @@
       %div.timeline-content
         %h2{:style => 'margin-bottom: 10px;'}
           Some of our most popular users
-        %p.description{:style => 'padding-right: 10px; font-size: 1.2em; line-height: 2em;'}
+        %div.grid-items-lines
+          %a.grid-item
+            = image_tag("example-avatar.jpg")
+            %h3
+              Johnny McFlourish
+            %p
+              Germany
+
+          %a.grid-item
+            = image_tag("example-avatar.jpg")
+            %h3
+              Johnny McFlourish
+            %p
+              Germany
+
+          %a.grid-item
+            = image_tag("example-avatar.jpg")
+            %h3
+              Johnny McFlourish
+            %p
+              Germany
+
+          %a.grid-item
+            = image_tag("example-avatar.jpg")
+            %h3
+              Johnny McFlourish
+            %p
+              Germany
+
+          %a.grid-item
+            = image_tag("example-avatar.jpg")
+            %h3
+              Johnny McFlourish
+            %p
+              Germany
+
+          %a.grid-item
+            = image_tag("example-avatar.jpg")
+            %h3
+              Johnny McFlourish
+            %p
+              Germany
+
 
   - else
     - if @feed.today.present?
