@@ -25,7 +25,8 @@
         = render "nav_desktop"
 
       %section.content-area
-        = yield
+        %div.content-container
+          = yield
 
       %nav.mobile
         =render "nav_mobile"
