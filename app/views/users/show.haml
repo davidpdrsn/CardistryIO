@@ -1,46 +1,58 @@
 %div.profile-box
-  %div.avatar
-    = image_tag(@user.gravatar_url, :class => "gravatar")
+  %div.profile-container
+    %div.avatar
+      = image_tag(@user.gravatar_url, :class => "gravatar")
 
-%div.information
-  %h3
-    = @user.username
-  %span.location
-    #{@user.country_name} (#{@user.time_zone})
-  %p.profile-text
-    = simple_format @user.biography
+    %div.information
+      %h3
+        = @user.username
 
-  - if @user.instagram_username.present?
-    %p
-      On Instagram:
-      = link_to @user.instagram_username, "http://instagram.com/#{@user.instagram_username}"
+      - if signed_in? && @user != current_user
+        %div.follow-actions
+          - if current_user.follows?(@user)
+            = button_to "UNFOLLOW", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
+          - else
+            = button_to "FOLLOW", follow_user_path(@user), method: :post, params: { user_id: @user.id }
 
-  - if signed_in? && @user != current_user
-    %div.follow_actions
-      - if current_user.follows?(@user)
-        = link_to "Unfollow", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
-      - else
-        = link_to "Follow", follow_user_path(@user), method: :post, params: { user_id: @user.id }
+      - if current_user == @user
+        %div.follow-actions
+          = button_to "EDIT", edit_user_path(@user)
 
-%div.relationships
-  = link_to following_user_path(@user) do
-    %div.circle-count
-      %span.number
-        = @user.following.length
-      %br
-      %span.word
-        following
+      %div.container
+        %p.location
+          #{@user.country_name} (#{@user.time_zone})
 
-  %div.circle-count
-    =link_to followers_user_path(@user) do
-      %span.number
-        = @user.followers.length
-      %br
-      %span.word
-        followers
+        %p.biography
+          #{@user.biography}
 
-- if current_user == @user
-  = link_to "Edit", edit_user_path(@user)
+        - if @user.instagram_username.present?
+          %p
+            On Instagram:
+            = link_to @user.instagram_username, "http://instagram.com/#{@user.instagram_username}"
+
+    %div.relationships
+      = link_to following_user_path(@user) do
+        %div.circle-count
+          %div.number
+            = @user.following.length
+          %div.word
+            following
+
+      =link_to followers_user_path(@user) do
+        %div.circle-count
+          %div.number
+            = @user.followers.length
+          %div.word
+            followers
+
+  %div.profile-navigation
+    %ul
+      %li
+        VIDEOS
+      %li
+        IDEAS
+      %li
+        MOVES
 
 - if current_user.admin? && !@user.admin
   = link_to "Make admin", make_admin_user_path(@user), method: :post, data: { confirm: "Sure?" }

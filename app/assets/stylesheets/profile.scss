@@ -1,0 +1,129 @@
+.profile-box {
+  background: #fff;
+  width: 100%;
+  @include border-top-radius($base-border-radius);
+  @include border-bottom-radius($base-border-radius);
+  @include shadow-level(1);
+  float: left;
+  height: 250px;
+
+  .profile-container {
+    height: 200px;
+    padding: 20px;
+  }
+
+  .gravatar {
+    width: 100%;
+    height: auto;
+    @include border-top-radius(100%);
+    @include border-bottom-radius(100%);
+  }
+
+  .avatar {
+    width: 12%;
+    float: left;
+    position: relative;
+    top: 50%;
+    @include transform(translateY(-50%));
+  }
+
+  .information {
+    width: 66%;
+    float: left;
+    position: relative;
+    top: 50%;
+    @include transform(translateY(-50%));
+    @include padding(null null null 30px);
+
+    h3 {
+      float: left;
+      font-size: 2.6em;
+      margin-bottom: 0px;
+    }
+
+    .container {
+      float: left;
+      margin-top: 10px;
+
+      .location {
+        font-size: 0.9em;
+
+        &:before {
+          font-family: 'Ionicons';
+          content: '\f456';
+          font-size: 1.2em;
+          margin-right: 5px;
+          padding-top: 3px;
+        }
+      }
+
+      .biography {
+        line-height: 1.8em;
+      }
+    }
+
+    .follow-actions {
+      float: right;
+
+      .button_to {
+        input[value="FOLLOW"], input[value="UNFOLLOW"], input[value="EDIT"] {
+          @include pill-button;
+
+          height: 35px;
+          background: transparent;
+          border: 1px solid $main-blue;
+          color: $main-red;
+          font-weight: bold;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+  .relationships {
+    width: 22%;
+    float: left;
+    position: relative;
+    top: 50%;
+    @include transform(translateY(-50%));
+
+    .circle-count {
+      border: 1px solid $main-red;
+      height: 110px;
+      width: 110px;
+      text-align: center;
+      @include border-top-radius(100%);
+      @include border-bottom-radius(100%);
+      float: right;
+      padding-top: 20px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      display: table-cell;
+      vertical-align: middle;
+
+      .number {
+        color: $main-red;
+        font-size: 2em;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      .word {
+        color: $main-blue;
+        padding: 0px;
+        margin: 0px;
+      }
+    }
+  }
+
+  .profile-navigation {
+    height: 50px;
+    width: 100%;
+    border-top: 1px solid $layout-border-color;
+    line-height: 50px;
+
+    li {
+      float: left;
+    }
+  }
+}
