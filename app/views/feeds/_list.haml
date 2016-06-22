@@ -8,6 +8,7 @@
           %i.icon.ion-android-hand
 
     %div.timeline-content
+      %span{:class => "mini-circle-avatar", :style => "background: url(#{activity.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
       %span.username
         = link_to activity.user.username, activity.user
       %span
@@ -16,7 +17,7 @@
         = "#{activity.subject.class.name.downcase}"
 
       %h2
-        = link_to activity.text, activity.subject
+        = link_to '"' + activity.text + '"', activity.subject
 
       %span.date
         = "#{activity.created_at}"
