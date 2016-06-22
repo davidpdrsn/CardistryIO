@@ -89,10 +89,24 @@
       }
 
       h2 {
+        font-family: "Prompt", sans-serif;
         font-size: 2.8em;
-        font-weight: 400;
+        font-weight: 300;
+        font-style: italic;
         margin-top: 20px;
         margin-bottom: 20px;
+        margin-left: 33px;
+      }
+
+      .mini-circle-avatar {
+        position: relative;
+        top: 10px;
+        height: 28px;
+        width: 28px;
+        margin-right: 5px;
+        display: inline-block;
+        @include border-top-radius(14px);
+        @include border-bottom-radius(14px);
       }
 
       .username {
@@ -111,6 +125,7 @@
       .date {
         color: $main-blue;
         font-size: 1em;
+        margin-left: 33px;
       }
     }
   }
