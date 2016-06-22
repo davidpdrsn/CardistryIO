@@ -71,6 +71,7 @@
       padding: 15px;
       border-radius: $base-border-radius;
       border-left: 3px solid $main-red;
+      color: #373737;
 
       @include shadow-level(1);
 
@@ -93,8 +94,12 @@
         font-size: 2.8em;
         font-weight: 300;
         font-style: italic;
-        margin-top: 20px;
+        margin-top: 30px;
         margin-bottom: 20px;
+        margin-left: 33px;
+      }
+
+      .description {
         margin-left: 33px;
       }
 
