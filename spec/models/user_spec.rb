@@ -16,6 +16,9 @@ describe User do
   it { should validate_presence_of :username }
   it { should validate_presence_of :time_zone }
   it { should validate_presence_of :country_code }
+  it do
+    should validate_length_of(:biography).is_at_most(User::BIOGRAPHY_MAX_LENGTH)
+  end
 
   it do
     should validate_inclusion_of(:time_zone)

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   USERNAME_REGEX = /[a-zA-Z0-9_-]+/
+  BIOGRAPHY_MAX_LENGTH = 100
 
   extend DecoratorDelegateMethods
   include Clearance::User
@@ -20,6 +21,7 @@ class User < ApplicationRecord
     inclusion: { in: ISO3166::Country.all.map(&:alpha2) },
     presence: true,
   )
+  validates :biography, length: { maximum: BIOGRAPHY_MAX_LENGTH }
   validate :format_of_username
 
   gravtastic
