@@ -6,7 +6,7 @@ feature "relationships" do
     alice = create :user, username: "alice"
 
     visit user_path(bob, as: alice)
-    click_button "Follow"
+    click_link "Follow"
 
     visit root_path(bob, as: bob)
 

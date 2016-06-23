@@ -6,7 +6,7 @@ feature "relationships" do
     alice = create :user
 
     visit user_path(alice, as: bob)
-    click_button "Follow"
+    click_link "Follow"
     visit user_path(bob, as: bob)
     click_link "1 following"
 
@@ -35,9 +35,9 @@ feature "relationships" do
     alice = create :user
 
     visit user_path(alice, as: bob)
-    click_button "Follow"
+    click_link "Follow"
     visit user_path(alice, as: bob)
-    click_button "Unfollow"
+    click_link "Unfollow"
     visit user_path(bob, as: bob)
     click_link "0 following"
 
