@@ -35,7 +35,7 @@ fi
 echo "---- Setting up environment variables"
 cp .sample.env .env
 
-
+docker-compose run -d db
 echo "---- Setting up databases"
 docker-compose run web bin/rake db:create RAILS_ENV=development
 docker-compose run web bin/rake db:create RAILS_ENV=test
