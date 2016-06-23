@@ -11,6 +11,7 @@
 @import "refills/footer";
 @import "refills/cards";
 @import "refills/grid-items";
+@import "refills/stats.scss";
 @import "ionicons";
 
 @import "nav";
@@ -18,6 +19,8 @@
 @import "section";
 @import "mobile";
 @import "timeline";
+
+@import "profile";
 
 // Some resets
 * {

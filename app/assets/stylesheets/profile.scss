@@ -1,0 +1,194 @@
+.profile-box {
+  background: #fff;
+  width: 100%;
+  @include border-top-radius($base-border-radius);
+  @include border-bottom-radius($base-border-radius);
+  @include shadow-level(1);
+  float: left;
+  height: auto;
+  margin-top: $content-area-top-margin;
+
+  .profile-container {
+    height: 200px;
+    padding: 20px;
+
+    .grid-items-lines {
+      margin: 0;
+
+      .grid-item {
+        cursor: default;
+        height: 17em;
+
+        p {
+          max-width: 100%;
+          display: table-cell;
+          vertical-align: middle;
+          color: $main-blue;
+          font-size: 1.3em;
+          text-align: center;
+
+          /* These are technically the same, but use both */
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          -ms-word-break: break-all;
+          word-break: break-word;
+          /* Adds a hyphen where the word breaks, if supported (No Blink) */
+          -ms-hyphens: auto;
+          -moz-hyphens: auto;
+          -webkit-hyphens: auto;
+          hyphens: auto;
+        }
+
+        &:hover {
+          background: none;
+        }
+
+        .user-navigation {
+          display: table-cell;
+          vertical-align: middle;
+
+          li {
+            margin-top: -1px;
+            padding: 10px 0 10px 0;
+            font-size: 1.3em;
+
+            i.icon {
+              margin-right: 0.5em;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .backdrop {
+    height: 400px;
+    width: calc(100% + 40px);
+    margin: -20px;
+    position: relative;
+    top: 0;
+    left: 0;
+    border-top-right-radius: $base-border-radius;
+    border-top-left-radius: $base-border-radius;
+    overflow: hidden;
+    border-bottom: 3px solid $main-red;
+
+    .user-information {
+      position: absolute;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      text-align: center;
+      height: 275px;
+
+      h3 {
+        font-family: "Prompt", sans-serif;
+        font-size: 2em;
+        font-weight: 300;
+        margin-top: 0.75em;
+        color: #fff;
+        text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      }
+
+      .profile-action-button {
+        height: 35px;
+        background: transparent;
+        border: 2px solid #fff;
+        color: #fff;
+        font-weight: bold;
+        margin-top: 0.75em;
+        @include pill-button;
+        float: none;
+        font-weight: bold;
+      }
+
+      .location {
+        font-size: 1em;
+        color: #fff;
+        text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+        &:before {
+          font-family: 'Ionicons';
+          content: '\f456';
+          margin-right: 5px;
+          padding-top: 3px;
+        }
+      }
+
+      .gravatar {
+        width: 100px;
+        height: 100px;
+        @include border-top-radius(100%);
+        @include border-bottom-radius(100%);
+        @include shadow-level(2);
+        border: 3px solid $main-blue;
+      }
+    }
+  }
+
+  .overlay {
+    $image-gradient-color-top: $main-blue;
+    $transparency-top: 0.9;
+    $image-gradient-color-bottom: $main-red;
+    $transparency-bottom: 0.6;
+    $vertical-angle: 0deg;
+    $image-gradient-color-left: $main-red;
+    $transparency-left: 0.8;
+    $image-gradient-color-right: $main-blue;
+    $transparency-right: 0.8;
+    $horizontal-angle: 90deg;
+
+    @include position(absolute, 0);
+    background-color: transparentize(
+                    $image-gradient-color-top,
+                    $transparency-top
+    );
+    background-image: linear-gradient($vertical-angle,
+            transparentize($image-gradient-color-top, $transparency-top),
+            transparentize($image-gradient-color-bottom, $transparency-bottom)
+    );
+    display: block;
+
+    &::after {
+      @include position(absolute, 0);
+      background-color: transparentize(
+                      $image-gradient-color-left,
+                      $transparency-right
+      );
+      background-image: linear-gradient($horizontal-angle,
+              transparentize($image-gradient-color-left, $transparency-left),
+              transparentize($image-gradient-color-right, $transparency-right)
+      );
+      content: "";
+      display: block;
+    }
+  }
+
+  .backdrop-gravatar {
+    filter: blur(30px);
+    width: 100%;
+    height: auto;
+    padding-bottom: 100px;
+    margin-top: -40%;
+    @include transform(scale(1.15));
+  }
+
+  .avatar {
+    @include transform(translateY(-50%));
+  }
+
+  .profile-navigation {
+    height: 50px;
+    width: 100%;
+    border-top: 1px solid $layout-border-color;
+    line-height: 50px;
+    display: inline-block;
+
+    li {
+      float: left;
+    }
+  }
+}
