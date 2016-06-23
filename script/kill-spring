@@ -1,0 +1,4 @@
+#!/bin/bash
+
+container_name=$(docker ps | grep spring | tr -s " " | awk '{ print $NF }')
+docker kill $container_name
