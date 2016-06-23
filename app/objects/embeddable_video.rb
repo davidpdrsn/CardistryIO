@@ -18,17 +18,43 @@ class EmbeddableVideo < SimpleDelegator
         "https://player.vimeo.com/video/#{video_id}"
       end
     end
+
+    def fetch_thumbnail_url
+      uri = URI.parse("http://vimeo.com/api/v2/video/#{vimeo_id}.json")
+      json = JSON.parse(Net::HTTP.get_response(uri).body).first
+      json.fetch("user_portrait_huge")
+    end
+
+    private
+
+    def vimeo_id
+      video.url.match(/vimeo\.com\/(?<id>\d+)/)[:id]
+    end
   end
 
   class YouTubeVideo < Base
     def url
       video.url.sub("watch?v=", "embed/")
     end
+
+    def fetch_thumbnail_url
+      "http://img.youtube.com/vi/#{youtube_id}/default.jpg"
+    end
+
+    private
+
+    def youtube_id
+      video.url.match(/watch\?v=(?<id>[\w_-]*)/)[:id]
+    end
   end
 
   class InstagramVideo < Base
     def url
       video.url
+    end
+
+    def fetch_thumbnail_url
+      video.thumbnail_url
     end
   end
 
@@ -56,18 +82,30 @@ class EmbeddableVideo < SimpleDelegator
   end
 
   def url
+    host.url
+  end
+
+  def fetch_thumbnail_url
+    host.fetch_thumbnail_url
+  end
+
+  private
+
+  def host
     host = URI.parse(__getobj__.url).host
 
-    raise UnsupportedHost if host.nil?
+    if host.nil?
+      raise UnsupportedHost
+    end
 
     CONFIG.each do |regex, klass|
-      return klass.new(__getobj__).url if host.match(regex)
+      if host.match(regex)
+        return klass.new(__getobj__)
+      end
     end
 
     raise UnsupportedHost
   end
-
-  private
 
   CONFIG = {
     /vimeo/ => VimeoVideo,
