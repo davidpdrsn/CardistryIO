@@ -1,13 +1,5 @@
 #!/bin/bash
 set -e
 
-if [ $(uname) = "Darwin" ]; then
-  echo "---- Making sure docker-machine is running"
-  docker-machine start default || true
-
-  echo "---- Connecting to docker-machine"
-  eval $(docker-machine env default)
-fi
-
 docker-compose run web bin/rake db:migrate RAILS_ENV=development
 docker-compose run web bin/rake db:migrate RAILS_ENV=test

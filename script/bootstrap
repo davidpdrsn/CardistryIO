@@ -16,14 +16,6 @@ EOF
   exit
 fi
 
-if [ $(uname) = "Darwin" ]; then
-  echo "---- Making sure docker-machine is running"
-  docker-machine start default || true
-
-  echo "---- Connecting to docker-machine"
-  eval $(docker-machine env default)
-fi
-
 # Build docker instance
 echo "---- Building docker image"
 docker-compose build

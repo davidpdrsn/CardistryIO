@@ -9,12 +9,4 @@ rm -rf log/test.log
 touch log/development.log
 touch log/test.log
 
-if [ $(uname) = "Darwin" ]; then
-  echo "---- Making sure docker-machine is running"
-  docker-machine start default || true
-
-  echo "---- Connecting to docker-machine"
-  eval $(docker-machine env default)
-fi
-
 docker-compose up $@
