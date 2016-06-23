@@ -275,4 +275,43 @@ describe User do
       expect(user.country_name).to eq "Denmark"
     end
   end
+
+  describe ".authenticate" do
+    it "finds users based on username and password" do
+      user = create :user, username: "bob", password: "123"
+
+      expect(User.authenticate("bob", "123")).to eq user
+    end
+
+    it "finds users based on email and password" do
+      user = create :user, email: "bob@example.com", password: "123"
+
+      expect(User.authenticate("bob@example.com", "123")).to eq user
+    end
+
+    it "returns nil if the credentials don't match" do
+      user = create :user, email: "bob@example.com", password: "123"
+
+      expect(User.authenticate("hest", "123")).to be_nil
+      expect(User.authenticate("bob@example.com", "hest")).to be_nil
+    end
+
+    it "is case insensitive with username" do
+      user = create :user, username: "Bob", password: "123"
+
+      expect(User.authenticate("bob", "123")).to eq user
+    end
+
+    it "is case insensitive with email" do
+      user = create :user, email: "Bob@example.com", password: "123"
+
+      expect(User.authenticate("bob@example.com", "123")).to eq user
+    end
+
+    it "is not case insensitive with password" do
+      user = create :user, email: "bob@example.com", password: "hest"
+
+      expect(User.authenticate("bob@example.com", "HEST")).to be_nil
+    end
+  end
 end

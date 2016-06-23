@@ -39,7 +39,7 @@ class User < ApplicationRecord
   use UserWithName, for: :name_for_select
 
   def self.authenticate(username_or_email, password)
-    user = where(username: username_or_email)
+    user = where("lower(username) = lower(?)", username_or_email)
       .or(where(email: username_or_email))
       .first
 
