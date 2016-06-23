@@ -8,6 +8,7 @@ feature "viewing videos" do
     create :video, name: "Cardistry Con", approved: true
 
     visit root_path(as: user)
+
     click_link "My Videos"
 
     expect(page).to have_content "Classic"

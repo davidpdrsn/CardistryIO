@@ -1,0 +1,38 @@
+.footer {
+  $large-screen: 50em !default;
+  height: 275px;
+
+  .footer-logo {
+    margin-bottom: 1em;
+    margin-right: 1em;
+
+    @include media($large-screen) {
+      float: left;
+      margin-bottom: 0;
+    }
+
+    img {
+      height: 2.2em;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 0;
+
+    @include media($large-screen) {
+      float: left;
+      padding-top: 0.3em;
+    }
+
+    li {
+      line-height: 1.5em;
+      padding-right: 1em;
+
+      @include media($large-screen) {
+        display: inline;
+        text-align: left;
+      }
+    }
+  }
+}

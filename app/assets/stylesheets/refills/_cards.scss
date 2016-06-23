@@ -1,0 +1,117 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  $base-border-color: gainsboro !default;
+  $base-background-color: white !default;
+  $base-spacing: 1.5em !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $card-border-color: $base-border-color;
+  $card-border: 1px solid $card-border-color;
+  $card-background: lighten($card-border-color, 10%);
+  $card-header-background: $card-background;
+  $card-margin: 1em;
+  $card-image-hover-opacity: 0.9;
+  $card-image-hover-color: #F8F2B4;
+
+  @include shadow-level(1);
+  background-color: $base-background-color;
+  border-radius: $base-border-radius;
+  cursor: pointer;
+  flex-basis: 15em;
+  flex-grow: 1;
+  margin: 0 $card-margin $base-spacing $card-margin;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  border-bottom: 3px solid $main-red;
+
+  .card-image {
+    background-color: $card-image-hover-color;
+    height: 200px;
+    max-height: 200px;
+    overflow: hidden;
+
+    img {
+      @include border-top-radius($base-border-radius);
+      opacity: 1;
+      transition: all 0.2s ease-in-out;
+      width: 100%;
+    }
+  }
+
+  .card-header {
+    background-color: $base-background-color;
+    border-radius: $base-border-radius $base-border-radius 0 0;
+    font-family: 'Prompt', sans-serif;
+    line-height: 1.5em;
+    padding: 1em 0 0.2em 0;
+    transition: all 0.2s ease-in-out;
+    font-family: "Prompt", sans-serif;
+    font-size: 2.8em;
+    font-weight: 300;
+    font-style: italic;
+    color: $main-red;
+    text-align: center;
+  }
+
+  .card-copy {
+    font-size: 1.2em;
+    line-height: 1.9em;
+    padding: 20px;
+    text-align: center;
+    max-height: 160px;
+    height: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 40px;
+
+    &:after {
+      content:'';
+      width:100%;
+      height:100%;
+      position:absolute;
+      left:0;
+      bottom: 130px;
+      background:linear-gradient(transparent 550px, white);
+    }
+
+    p {
+      margin: 0 0 ($base-spacing / 2);
+    }
+  }
+
+  .card-meta {
+    padding-top: 27px;
+    height: 100px;
+    text-align: center;
+    border-top: 1px solid $base-border-color;
+
+    .rating {
+      margin-top: 10px;
+      color: $main-red;
+    }
+  }
+
+  &:focus,
+  &:hover {
+    cursor: pointer;
+    @include shadow-level(2);
+
+    img {
+      opacity: $card-image-hover-opacity;
+    }
+  }
+
+  &:active {
+    background-color: $card-background;
+
+    .card-header {
+      background-color: $card-background;
+    }
+  }
+}

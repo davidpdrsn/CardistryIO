@@ -1,0 +1,310 @@
+.timeline {
+  position: relative;
+  padding: 2em 0 4em 0;
+  display: table;
+  height: 100%;
+  width: 100%;
+
+  @keyframes bounceIn {
+    from, 20%, 40%, 60%, 80%, to {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+      animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+
+    0% {
+      opacity: 0;
+      -webkit-transform: scale3d(.3, .3, .3);
+      transform: scale3d(.3, .3, .3);
+    }
+
+    20% {
+      -webkit-transform: scale3d(1.1, 1.1, 1.1);
+      transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40% {
+      -webkit-transform: scale3d(.9, .9, .9);
+      transform: scale3d(.9, .9, .9);
+    }
+
+    60% {
+      opacity: 1;
+      -webkit-transform: scale3d(1.03, 1.03, 1.03);
+      transform: scale3d(1.03, 1.03, 1.03);
+    }
+
+    80% {
+      -webkit-transform: scale3d(.97, .97, .97);
+      transform: scale3d(.97, .97, .97);
+    }
+
+    to {
+      opacity: 1;
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  .bounceIn {
+    -webkit-animation-name: bounceIn;
+    animation-name: bounceIn;
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+  }
+
+  &:before {
+    /* this is the vertical line */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15px;
+    height: 100%;
+    width: 1px;
+    background: $main-blue;
+  }
+
+  h1 {
+    background: $main-blue;
+    padding: 11px;
+    border-radius: $base-border-radius;
+    text-align: center;
+    color: #fff;
+    font-size: 1.5em;
+    display: inline-block;
+    position: relative;
+    margin: 0 0 0 60px;
+
+    @include shadow-level(1);
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -38px;
+      width: 38px;
+      height: 1px;
+      background: $main-blue;
+    }
+  }
+
+  .timeline-block {
+    position: relative;
+    margin: 0 0 4em 0;
+
+    .timeline-block-image-border {
+      background: $main-red;
+      position: absolute;
+      top: calc(50% - 16px);
+      left: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+
+      .timeline-block-image {
+        background: $main-red;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 3px solid $layout-content-bg-color;
+        position: relative;
+        left: 1px;
+        top: 1px;
+        color: #fff;
+        text-align: center;
+      }
+    }
+
+    .timeline-content {
+      position: relative;
+      margin-left: 60px;
+      background: #fff;
+      padding: 15px;
+      border-radius: $base-border-radius;
+      border-left: 3px solid $main-red;
+      color: #373737;
+
+      @include shadow-level(1);
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -32px;
+        width: 32px;
+        height: 1px;
+        background: $main-red;
+      }
+
+      span {
+        font-size: 1.3em;
+      }
+
+      h2 {
+        font-family: "Prompt", sans-serif;
+        font-size: 2.8em;
+        font-weight: 300;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        margin-left: 33px;
+        color: $main-red;
+      }
+
+      .thumbnail {
+        height: 100%;
+        width: 400px;
+        position: absolute;
+        top: 0px; right: 0px;
+        float: right;
+        background-image: image-url("thumbnail-placeholder.png");
+        background-position: center center;
+        background-size: cover;
+        border-top-right-radius: $base-border-radius;
+        border-bottom-right-radius: $base-border-radius;
+
+        &:before {
+          font-family: 'Ionicons';
+          content: image-url("thumbnail-play-button.png");
+          font-size: 4em;
+          color: $main-red;
+          text-align: center;
+          line-height: 50%;
+          display: block;
+          height: 100%;
+          width: 400px;
+          background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6-15 */
+          background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#4d000000',GradientType=0 ); /* IE6-9 */
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .welcome-background {
+        width: 100%;
+
+        &:before {
+          width: 100%;
+          content: '';
+        }
+      }
+
+      .welcome-message {
+        z-index: 999;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+
+        h2 {
+          color: #fff;
+          font-style: normal;
+        }
+      }
+
+      .welcome-logo {
+        margin: 15px;
+        width: 400px;
+      }
+
+      .description {
+        margin-left: 33px;
+        margin-bottom: 50px;
+        padding-right: 450px;
+      }
+
+      .mini-circle-avatar {
+        position: relative;
+        top: 10px;
+        height: 28px;
+        width: 28px;
+        margin-right: 5px;
+        display: inline-block;
+        @include border-top-radius(14px);
+        @include border-bottom-radius(14px);
+      }
+
+      .username {
+        a {
+          color: $main-red;
+          border-bottom: 2px solid $main-blue;
+          font-weight: bold;
+        }
+      }
+
+      .type {
+        color: $main-red;
+        font-weight: bold;
+      }
+
+      .date {
+        color: $main-blue;
+        font-size: 1em;
+        margin-left: 33px;
+      }
+    }
+
+    .timeline-block-image.is-hidden {
+      visibility: hidden;
+    }
+    .timeline-block-image.bounce-in {
+      visibility: visible;
+      animation: bounceIn 1.5s;
+    }
+    .timeline-content.is-hidden {
+      visibility: hidden;
+    }
+    .timeline-content.bounce-in {
+      visibility: visible;
+      animation: fadeIn 0.7s;
+    }
+  }
+
+  .timeline-headline {
+    position: relative;
+    margin: 3.5em 0 1.5em;
+
+    .timeline-headline-circle {
+      background: $main-blue;
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      top: calc(50% - 7px);
+      left: 8px;
+      border-radius: 50%;
+    }
+  }
+
+  .timeline-headline.is-hidden {
+    visibility: hidden;
+  }
+  .timeline-headline.bounce-in {
+    visibility: visible;
+    animation: fadeIn 0.7s;
+  }
+}

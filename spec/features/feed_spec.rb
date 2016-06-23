@@ -34,13 +34,6 @@ feature "feed" do
     expect(page).to have_content "Air Time"
   end
 
-  scenario "when the feed is completely empty" do
-    user = create :user
-    visit root_path(as: user)
-
-    expect(page).to have_content "No activities yet to show in feed"
-  end
-
   scenario "deleting move" do
     bob = create :user, username: "Bob"
 

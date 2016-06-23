@@ -8,33 +8,43 @@
 @import "base/base";
 @import "bootstrap-dropdown";
 @import "refills/flashes";
+@import "refills/footer";
+@import "refills/cards";
+@import "refills/grid-items";
 @import "ionicons";
 
 @import "nav";
 @import "header";
 @import "section";
 @import "mobile";
+@import "timeline";
 
 // Some resets
 * {
   margin: 0;
 }
-html, body {
-  height: 100%; font-family: $base-font-family;
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: $base-font-family;
 }
 
 
 .outer-container {
   @include outer-container(100%);
-  height: 100%;
 
-  // Make the footer sticky (https://css-tricks.com/snippets/css/sticky-footer/)
+
   min-height: 100%;
-  margin-bottom: -278px;
+  height: calc(100% + 82px);
+  margin-bottom: -275px;
 
   &:after {
     content: "";
     display: block;
+    height: 275px;
   }
 }
 

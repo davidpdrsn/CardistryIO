@@ -1,4 +1,29 @@
 - activities.each do |activity|
-  %div
-    = link_to activity.text, activity.subject
-    = "(#{activity.subject.class.name.humanize.downcase})"
+  %div.timeline-block
+    %div.timeline-block-image-border
+      %div.timeline-block-image
+        - if activity.subject.class.name.downcase == "video"
+          %i.icon.ion-ios-videocam
+        - elsif activity.subject.class.name.downcase == "move"
+          %i.icon.ion-android-hand
+
+    %div.timeline-content
+      %div.thumbnail
+      %span{:class => "mini-circle-avatar", :style => "background: url(#{activity.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
+      %span.username
+        = link_to activity.user.username, activity.user
+      %span
+        posted a new
+      %span.type
+        = "#{activity.subject.class.name.downcase}"
+
+      %h2
+        = link_to activity.text, activity.subject
+
+      %p.description
+        = "#{activity.subject.description}"
+
+      %span.date
+        = "posted #{time_ago_in_words(activity.created_at)} ago"
+
+
