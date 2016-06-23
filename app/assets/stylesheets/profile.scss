@@ -5,115 +5,179 @@
   @include border-bottom-radius($base-border-radius);
   @include shadow-level(1);
   float: left;
-  height: 250px;
+  height: auto;
+  margin-top: $content-area-top-margin;
 
   .profile-container {
     height: 200px;
     padding: 20px;
-  }
 
-  .gravatar {
-    width: 100%;
-    height: auto;
-    @include border-top-radius(100%);
-    @include border-bottom-radius(100%);
-  }
+    .grid-items-lines {
+      margin: 0;
 
-  .avatar {
-    width: 12%;
-    float: left;
-    position: relative;
-    top: 50%;
-    @include transform(translateY(-50%));
-  }
+      .grid-item {
+        cursor: default;
+        height: 17em;
 
-  .information {
-    width: 66%;
-    float: left;
-    position: relative;
-    top: 50%;
-    @include transform(translateY(-50%));
-    @include padding(null null null 30px);
+        p {
+          max-width: 100%;
+          display: table-cell;
+          vertical-align: middle;
+          color: $main-blue;
+          font-size: 1.3em;
+          text-align: center;
 
-    h3 {
-      float: left;
-      font-size: 2.6em;
-      margin-bottom: 0px;
+          /* These are technically the same, but use both */
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          -ms-word-break: break-all;
+          word-break: break-word;
+          /* Adds a hyphen where the word breaks, if supported (No Blink) */
+          -ms-hyphens: auto;
+          -moz-hyphens: auto;
+          -webkit-hyphens: auto;
+          hyphens: auto;
+        }
+
+        &:hover {
+          background: none;
+        }
+
+        .user-navigation {
+          display: table-cell;
+          vertical-align: middle;
+
+          li {
+            margin-top: -1px;
+            padding: 10px 0 10px 0;
+            font-size: 1.3em;
+
+            i.icon {
+              margin-right: 0.5em;
+            }
+          }
+        }
+      }
     }
+  }
 
-    .container {
-      float: left;
-      margin-top: 10px;
+  .backdrop {
+    height: 400px;
+    width: calc(100% + 40px);
+    margin: -20px;
+    position: relative;
+    top: 0;
+    left: 0;
+    border-top-right-radius: $base-border-radius;
+    border-top-left-radius: $base-border-radius;
+    overflow: hidden;
+    border-bottom: 3px solid $main-red;
+
+    .user-information {
+      position: absolute;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      text-align: center;
+      height: 275px;
+
+      h3 {
+        font-family: "Prompt", sans-serif;
+        font-size: 2em;
+        font-weight: 300;
+        margin-top: 0.75em;
+        color: #fff;
+        text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      }
+
+      .profile-action-button {
+        height: 35px;
+        background: transparent;
+        border: 2px solid #fff;
+        color: #fff;
+        font-weight: bold;
+        margin-top: 0.75em;
+        @include pill-button;
+        float: none;
+        font-weight: bold;
+      }
 
       .location {
-        font-size: 0.9em;
+        font-size: 1em;
+        color: #fff;
+        text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
         &:before {
           font-family: 'Ionicons';
           content: '\f456';
-          font-size: 1.2em;
           margin-right: 5px;
           padding-top: 3px;
         }
       }
 
-      .biography {
-        line-height: 1.8em;
-      }
-    }
-
-    .follow-actions {
-      float: right;
-
-      .button_to {
-        input[value="FOLLOW"], input[value="UNFOLLOW"], input[value="EDIT"] {
-          @include pill-button;
-
-          height: 35px;
-          background: transparent;
-          border: 1px solid $main-blue;
-          color: $main-red;
-          font-weight: bold;
-          margin-top: 10px;
-        }
+      .gravatar {
+        width: 100px;
+        height: 100px;
+        @include border-top-radius(100%);
+        @include border-bottom-radius(100%);
+        @include shadow-level(2);
+        border: 3px solid $main-blue;
       }
     }
   }
 
-  .relationships {
-    width: 22%;
-    float: left;
-    position: relative;
-    top: 50%;
-    @include transform(translateY(-50%));
+  .overlay {
+    $image-gradient-color-top: $main-blue;
+    $transparency-top: 0.9;
+    $image-gradient-color-bottom: $main-red;
+    $transparency-bottom: 0.6;
+    $vertical-angle: 0deg;
+    $image-gradient-color-left: $main-red;
+    $transparency-left: 0.8;
+    $image-gradient-color-right: $main-blue;
+    $transparency-right: 0.8;
+    $horizontal-angle: 90deg;
 
-    .circle-count {
-      border: 1px solid $main-red;
-      height: 110px;
-      width: 110px;
-      text-align: center;
-      @include border-top-radius(100%);
-      @include border-bottom-radius(100%);
-      float: right;
-      padding-top: 20px;
-      margin-right: 5px;
-      margin-bottom: 5px;
-      display: table-cell;
-      vertical-align: middle;
+    @include position(absolute, 0);
+    background-color: transparentize(
+                    $image-gradient-color-top,
+                    $transparency-top
+    );
+    background-image: linear-gradient($vertical-angle,
+            transparentize($image-gradient-color-top, $transparency-top),
+            transparentize($image-gradient-color-bottom, $transparency-bottom)
+    );
+    display: block;
 
-      .number {
-        color: $main-red;
-        font-size: 2em;
-        padding: 0px;
-        margin: 0px;
-      }
-
-      .word {
-        color: $main-blue;
-        padding: 0px;
-        margin: 0px;
-      }
+    &::after {
+      @include position(absolute, 0);
+      background-color: transparentize(
+                      $image-gradient-color-left,
+                      $transparency-right
+      );
+      background-image: linear-gradient($horizontal-angle,
+              transparentize($image-gradient-color-left, $transparency-left),
+              transparentize($image-gradient-color-right, $transparency-right)
+      );
+      content: "";
+      display: block;
     }
+  }
+
+  .backdrop-gravatar {
+    filter: blur(30px);
+    width: 100%;
+    height: auto;
+    padding-bottom: 100px;
+    margin-top: -40%;
+    @include transform(scale(1.15));
+  }
+
+  .avatar {
+    @include transform(translateY(-50%));
   }
 
   .profile-navigation {
@@ -121,6 +185,7 @@
     width: 100%;
     border-top: 1px solid $layout-border-color;
     line-height: 50px;
+    display: inline-block;
 
     li {
       float: left;

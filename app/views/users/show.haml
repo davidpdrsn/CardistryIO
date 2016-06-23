@@ -1,49 +1,95 @@
 %div.profile-box
-  %div.profile-container
-    %div.avatar
+  %div.backdrop
+    = image_tag(@user.gravatar_url, :class => "backdrop-gravatar")
+    %div.user-information
       = image_tag(@user.gravatar_url, :class => "gravatar")
-
-    %div.information
       %h3
         = @user.username
-
+      %p.location
+        #{@user.country_name} (#{@user.time_zone})
       - if signed_in? && @user != current_user
-        %div.follow-actions
-          - if current_user.follows?(@user)
-            = button_to "UNFOLLOW", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
-          - else
-            = button_to "FOLLOW", follow_user_path(@user), method: :post, params: { user_id: @user.id }
+        - if current_user.follows?(@user)
+          = button_to "UNFOLLOW", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
+        - else
+          = button_to "FOLLOW", follow_user_path(@user), method: :post, params: { user_id: @user.id }
 
       - if current_user == @user
-        %div.follow-actions
-          = button_to "EDIT", edit_user_path(@user)
+        = link_to "EDIT", edit_user_path(@user), :class => "profile-action-button"
 
-      %div.container
-        %p.location
-          #{@user.country_name} (#{@user.time_zone})
+    %div.overlay
 
+  %div.profile-container
+    %div.grid-items-lines
+      %div.grid-item{:style => "display: table;"}
+        %ul.user-navigation
+          %li
+            %i.icon.ion-person-add
+            = button_to "Follow", follow_user_path(@user), method: :post, params: { user_id: @user.id }
+          %li
+            %i.icon.ion-paper-airplane
+            Message
+          %li
+            %i.icon.ion-social-instagram
+            Instagram
+
+
+      %div.grid-item{:style => "display: table;"}
         %p.biography
           #{@user.biography}
 
-        - if @user.instagram_username.present?
-          %p
-            On Instagram:
-            = link_to @user.instagram_username, "http://instagram.com/#{@user.instagram_username}"
+      %div.grid-item{:style => "display: table;"}
+        %div.stats{:style => "display: table-cell; vertical-align: middle;"}
+          %ul{:style => "text-align: right;"}
+            = link_to followers_user_path(@user) do
+              %li
+                %span.number
+                  = @user.followers.length
+                %span.word
+                  followers
+            = link_to following_user_path(@user) do
+              %li
+                %span.number
+                  = @user.following.length
+                %span.word
+                  following
 
-    %div.relationships
-      = link_to following_user_path(@user) do
-        %div.circle-count
-          %div.number
-            = @user.following.length
-          %div.word
-            following
 
-      =link_to followers_user_path(@user) do
-        %div.circle-count
-          %div.number
-            = @user.followers.length
-          %div.word
-            followers
+    -#
+    -#  - if signed_in? && @user != current_user
+    -#    %div.follow-actions
+    -#      - if current_user.follows?(@user)
+    -#        = button_to "UNFOLLOW", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
+    -#      - else
+    -#        = button_to "FOLLOW", follow_user_path(@user), method: :post, params: { user_id: @user.id }
+    -#
+    -#  - if current_user == @user
+    -#    %div.follow-actions
+    -#      = button_to "EDIT", edit_user_path(@user)
+    -#
+    -#  %div.container
+    -#    %p.location
+    -#      #{@user.country_name} (#{@user.time_zone})
+    -#
+    -#    %p.biography
+    -#      #{@user.biography}
+    -#
+    -#    - if @user.instagram_username.present?
+    -#      %p
+    -#        On Instagram:
+    -#        = link_to @user.instagram_username, "http://instagram.com/#{@user.instagram_username}"
+    -#
+    -#%div.stats
+    -#  %ul
+    -#    = link_to followers_user_path(@user) do
+    -#      %li
+    -#        = @user.followers.length
+    -#        %span
+    -#          followers
+    -#    = link_to following_user_path(@user) do
+    -#      %li
+    -#        = @user.following.length
+    -#        %span
+    -#          following
 
   %div.profile-navigation
     %ul
