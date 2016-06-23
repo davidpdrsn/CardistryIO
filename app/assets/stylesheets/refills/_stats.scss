@@ -1,0 +1,49 @@
+.stats {
+  $base-spacing: 1.5em !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $action-color: #477dca !default;
+  $stats-color: lighten($action-color, 10%);
+
+  padding: $base-spacing / 2;
+  display: table;
+  text-align: right;
+  width: 100%;
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    border-right: 1px solid transparentize($base-font-color, 0.8);
+    color: $stats-color;
+    display: inline;
+    font-size: 1.2em;
+    line-height: 2.5em;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  .number {
+    font-size: 3.7em;
+    color: $main-red;
+  }
+
+  .word {
+    font-size: 1em;
+    color: $main-blue;
+  }
+
+  span {
+    color: $base-font-color;
+    display: block;
+    font-size: 0.7em;
+    font-weight: normal;
+  }
+}
