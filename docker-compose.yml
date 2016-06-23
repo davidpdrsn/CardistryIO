@@ -43,6 +43,6 @@ box:
     - /box
 
 redis:
-  image: redis:2.6
+  image: redis:alpine
   ports:
     - "6379"
