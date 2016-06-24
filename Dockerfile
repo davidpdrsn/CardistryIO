@@ -1,6 +1,7 @@
-FROM ruby:2.3.0
+FROM ruby:2.3.0-slim
 
 RUN apt-get update -qq && apt-get install -y build-essential
+RUN apt-get install -y git-core
 
 # for postgres
 RUN apt-get install -y libpq-dev

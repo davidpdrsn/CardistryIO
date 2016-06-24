@@ -11,8 +11,12 @@ default: &default
 
 development:
   <<: *default
+  host: 'db'
+  port: 5432
   database: cardistryio_development
 
 test:
   <<: *default
+  host: 'db'
+  port: 5432
   database: cardistryio_test

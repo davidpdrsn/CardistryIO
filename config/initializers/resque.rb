@@ -3,7 +3,7 @@ require 'resque/failure/redis'
 require 'resque/rollbar'
 
 if Rails.env.development?
-  Resque.redis = ENV.fetch("REDIS_1_PORT").gsub("tcp://", "")
+  Resque.redis = 'redis:6379'
 end
 
 Resque::Failure::Multiple.classes = [
