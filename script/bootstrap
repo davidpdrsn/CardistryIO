@@ -48,13 +48,9 @@ cat <<EOF
 All set!
 
   Start the app with "docker-compose up"
-  When started you can connect at http://`docker-machine ip default`:3000
-
-  If you wanna to work production data locally run "script/production-data-to-local"
-  This requires that you have access to Heroku, ask Planck about it
+  When started you can connect at http://localhost:3000
 
   You should now be able to run the tests with "docker-compose run web bin/rspec"
-  You can use script/production-data-to-local to pull down the production database
 
   If you wanna test adding videos from Instagram you'll need get a client_id and
   client_secret by creating an app on https://instagram.com/developer
