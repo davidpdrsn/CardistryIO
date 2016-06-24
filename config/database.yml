@@ -6,17 +6,13 @@ default: &default
   template: template0
   timeout: 5000
   username: postgres
-  host: <%= ENV['DB_PORT_5432_TCP_ADDR'] %>
-  port: <%= ENV['DB_PORT_5432_TCP_PORT'] %>
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
 
 development:
   <<: *default
-  host: 'db'
-  port: 5432
   database: cardistryio_development
 
 test:
   <<: *default
-  host: 'db'
-  port: 5432
   database: cardistryio_test
