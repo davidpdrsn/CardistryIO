@@ -10,3 +10,6 @@ before_script:
 - bundle exec rake db:migrate
 script:
 - script/cibuild
+notifications:
+  slack:
+    secure: VPt1DbTWT0M7lYYrFXQYuHOtYpp0b7zj695Q9F5m0o2uoxabPO4K3IPqK6eWs/VET1jeHviSlJxiC3WOcrWWkaXZKI1YY4Py18nxG79cJ5mJ7saMtelu7YUK0IWX/udczxSIpBi7tKefT69ooAPaIeOPddouQVRL0ohIX95HhRI=
