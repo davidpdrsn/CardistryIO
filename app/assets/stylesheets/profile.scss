@@ -54,7 +54,12 @@
 
             i.icon {
               margin-right: 0.5em;
+              color: $main-red;
             }
+          }
+
+          a {
+            color: $main-blue;
           }
         }
       }
@@ -62,7 +67,7 @@
   }
 
   .backdrop {
-    height: 400px;
+    height: 325px;
     width: calc(100% + 40px);
     margin: -20px;
     position: relative;
@@ -82,7 +87,7 @@
       bottom: 0;
       margin: auto;
       text-align: center;
-      height: 275px;
+      height: 215px;
 
       h3 {
         font-family: "Prompt", sans-serif;

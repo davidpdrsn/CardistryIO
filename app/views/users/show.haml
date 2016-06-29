@@ -9,12 +9,9 @@
         #{@user.country_name} (#{@user.time_zone})
       - if signed_in? && @user != current_user
         - if current_user.follows?(@user)
-          = button_to "UNFOLLOW", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
+          = link_to "UNFOLLOW", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
         - else
-          = button_to "FOLLOW", follow_user_path(@user), method: :post, params: { user_id: @user.id }
-
-      - if current_user == @user
-        = link_to "EDIT", edit_user_path(@user), :class => "profile-action-button"
+          = link_to "FOLLOW", follow_user_path(@user), method: :post, params: { user_id: @user.id }
 
     %div.overlay
 
@@ -22,15 +19,32 @@
     %div.grid-items-lines
       %div.grid-item{:style => "display: table;"}
         %ul.user-navigation
+          - if signed_in? && @user != current_user
+            - if current_user.follows?(@user)
+              = link_to follow_user_path(@user), method: :post, params: { user_id: @user.id } do
+                %li
+                  %i.icon.ion-person-remove
+                  Unfollow
+            - else
+              = link_to follow_user_path(@user), method: :post, params: { user_id: @user.id } do
+                %li
+                  %i.icon.ion-person-add
+                    Follow
+          - if current_user == @user
+            = link_to edit_user_path(@user) do
+              %li
+                %i.icon.ion-edit
+                Edit
+
+
           %li
-            %i.icon.ion-person-add
-            = button_to "Follow", follow_user_path(@user), method: :post, params: { user_id: @user.id }
+            = link_to edit_user_path do
+              %i.icon.ion-paper-airplane
+              Message
           %li
-            %i.icon.ion-paper-airplane
-            Message
-          %li
-            %i.icon.ion-social-instagram
-            Instagram
+            = link_to edit_user_path do
+              %i.icon.ion-social-instagram
+              Instagram
 
 
       %div.grid-item{:style => "display: table;"}
