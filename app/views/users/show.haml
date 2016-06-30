@@ -106,7 +106,7 @@
     -#          following
 
   %div.profile-navigation
-    %ul
+    %ul.profile-nav-items
       %a{:href => "#"}
         %li
           VIDEOS
@@ -116,6 +116,14 @@
       %a{:href => "#"}
         %li
           MOVES
+
+%div.profile-content
+  %div.content-element
+    = render partial: "user_videos_cards"
+  %div.content-element
+    = render partial: "user_ideas_cards", locals: { user: @user }
+  %div.content-element
+    = render partial: "user_moves_cards", locals: { user: @user }
 
 - if current_user.admin? && !@user.admin
   = link_to "Make admin", make_admin_user_path(@user), method: :post, data: { confirm: "Sure?" }

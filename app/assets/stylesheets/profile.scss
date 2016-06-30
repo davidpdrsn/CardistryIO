@@ -205,10 +205,21 @@
       text-align: center;
       white-space: nowrap;
       font-weight: bold;
-
-      .active {
-        border-bottom: 3px solid $main-red;
-      }
+      margin-bottom: -3px;
     }
+    .is-active {
+      -webkit-box-shadow:inset 0px 0px 0px 2px $main-red;
+      -moz-box-shadow:inset 0px 0px 0px 2px $main-red;
+      box-shadow:inset 0px -3px 0px 0px $main-red;
+    }
+  }
+}
+
+.profile-content {
+  float: left;
+
+  .content-element {
+    display: none;
+    padding: 50px 0 300px 0;
   }
 }

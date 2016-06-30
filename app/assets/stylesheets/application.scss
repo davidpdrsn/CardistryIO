@@ -41,7 +41,7 @@ body {
 .outer-container {
   @include outer-container(100%);
 
-
+  background: $layout-content-bg-color;
   min-height: 100%;
   height: calc(100% + 82px);
   margin-bottom: -275px;
