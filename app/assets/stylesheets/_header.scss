@@ -2,6 +2,7 @@ header {
   @include span-columns(12);
   height: 95px;
   border-bottom: 1px solid $layout-border-color;
+  background: white;
 
   .main-logo {
     float: left;
