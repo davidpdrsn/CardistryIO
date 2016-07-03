@@ -3,12 +3,12 @@ class TestActivities
 
   def video
     TestData.ensure_not_production_env!
-    create!(subject: Video.first!)
+    create!(subject: Video.order('RANDOM()').first!)
   end
 
   def move
     TestData.ensure_not_production_env!
-    create!(subject: Move.first!)
+    create!(subject: Move.order('RANDOM()').first!)
   end
 
   private

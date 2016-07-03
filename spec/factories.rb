@@ -1,12 +1,16 @@
 FactoryGirl.define do
   factory :user do
-    sequence(:email) { |n| "kevin-#{n}@example.com" }
     password "secret"
     country_code "DK"
     biography ""
-    sequence(:username) { |n| "visualmadness-#{n}" }
-    sequence(:instagram_username) { |n| "kevho-#{n}" }
+    sequence(:username) { |n| "#{Faker::Internet.user_name(nil, %w(_-))}-#{n}" }
+    sequence(:email) { |n| "#{username}@example.com" }
+    sequence(:instagram_username) { |n| "ig-#{username}" }
     time_zone "Central Time (US & Canada)"
+
+    trait :admin do
+      admin true
+    end
   end
 
   factory :comment do
@@ -29,18 +33,33 @@ FactoryGirl.define do
   end
 
   factory :move do
-    sequence(:name) { |n| "Sybil #{n}th" }
+    sequence(:name) { |n| "#{Faker::App.name} #{rand(1000)}th" }
     user
     description "My favorite move"
   end
 
   factory :video do
-    sequence(:name) { |n| "Classic #{n}th" }
+    sequence(:name) { |n| "#{Faker::App.name} #{rand(1000)}" }
     description "A video I made"
     url "https://www.youtube.com/watch?v=W799NKLEz8s"
     user
     approved true
-    video_type "performance"
+
+    trait :performance do
+      video_type "performance"
+    end
+
+    trait :tutorial do
+      video_type "tutorial"
+    end
+
+    trait :move_showcase do
+      video_type "move_showcase"
+    end
+
+    trait :other do
+      video_type "other"
+    end
   end
 
   factory :video_view do
