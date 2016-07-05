@@ -1,4 +1,4 @@
-= render partial: "filter_and_sort", locals: { filter_submit_path: filter_submit_path }
+= render partial: "shared/filter_and_sort", locals: { filter_submit_path: filter_submit_path }
 
 - if page.present?
   = render partial: "shared/paginated_list", locals: { page: page }

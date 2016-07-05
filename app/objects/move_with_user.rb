@@ -5,7 +5,14 @@ class MoveWithUser < ActiveRecordDecorator
     @user = user
   end
 
-  def name
-    "#{@move.name} by #{@user.username}"
+  def author
+    @user.username
+  end
+
+  def additional_attributes
+    {
+      creditted_users: @move.creditted_users,
+      appearances: @move.appearances,
+    }
   end
 end
