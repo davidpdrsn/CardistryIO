@@ -16,7 +16,7 @@
         %ul.user-navigation
           - if signed_in? && @user != current_user
             - if current_user.follows?(@user)
-              = link_to follow_user_path(@user), method: :post, params: { user_id: @user.id } do
+              = link_to follow_user_path(@user), method: :delete, params: { user_id: @user.id } do
                 %li
                   %i.icon.ion-minus-circled
                   Unfollow
@@ -24,22 +24,23 @@
               = link_to follow_user_path(@user), method: :post, params: { user_id: @user.id } do
                 %li
                   %i.icon.ion-person-add
-                    Follow
+                  Follow
           - if current_user == @user
             = link_to edit_user_path(@user) do
               %li
                 %i.icon.ion-edit
                 Edit
 
-
           %li
             = link_to edit_user_path do
               %i.icon.ion-paper-airplane
               Message
-          %li
-            = link_to edit_user_path do
-              %i.icon.ion-social-instagram
-              Instagram
+
+          -if @user.instagram_username.present?
+            %li
+              = link_to @user.instagram_username, "http://instagram.com/#{@user.instagram_username}" do
+                %i.icon.ion-social-instagram
+                Instagram
 
 
       %div.grid-item{:style => "display: table;"}
