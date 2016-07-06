@@ -1,1 +1,18 @@
-Ideas
+%div.cards
+  - @user.moves.where(idea: true).each do |idea|
+    %div.card
+      %div.card-image
+        = image_tag "thumbnail-placeholder.png"
+      %div.card-header
+        = "#{idea.name}"
+      %div.card-copy
+        = "#{idea.description}"
+      %div.card-meta
+        1.337 views 
+        = "| posted #{time_ago_in_words(idea.created_at)} ago"
+        %div.rating
+          %i.icon.ion-android-star
+          %i.icon.ion-android-star
+          %i.icon.ion-android-star
+          %i.icon.ion-android-star
+          %i.icon.ion-android-star
