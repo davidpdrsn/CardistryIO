@@ -1,18 +1,23 @@
 %div.cards
-  - @user.videos.each do |video|
-    %div.card
-      %div.card-image
-        = image_tag "thumbnail-placeholder.png"
-      %div.card-header
-        = "#{video.name}"
-      %div.card-copy
-        = "#{video.description}"
-      %div.card-meta
-        1.337 views
-        = "| posted #{time_ago_in_words(video.created_at)} ago"
-        %div.rating
-          %i.icon.ion-android-star
-          %i.icon.ion-android-star
-          %i.icon.ion-android-star
-          %i.icon.ion-android-star
-          %i.icon.ion-android-star
+  - if @user.videos.present?
+    - @user.videos.each do |video|
+      = link_to video, {:class => "card"} do
+        %div.card-image
+          = image_tag "thumbnail-placeholder.png"
+        %div.card-header
+          = "#{video.name}"
+        %div.card-copy
+          = "#{video.description}"
+        %div.card-meta
+          1.337 views
+          = "| posted #{time_ago_in_words(video.created_at)} ago"
+          %div.rating
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+  - else
+    %h1
+      No videos yet.
+

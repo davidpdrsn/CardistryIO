@@ -1,6 +1,23 @@
 .cards {
   margin-left: -16px;
   margin-right: -16px;
+
+  a {
+    color: inherit;
+  }
+
+  h1 {
+    line-height: 1.5em;
+    font-family: "Prompt", sans-serif;
+    font-size: 2.8em;
+    font-weight: 300;
+    font-style: italic;
+    color: $main-red;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 100px;
+  }
 }
 
 .profile-box {
@@ -300,9 +317,16 @@
 .profile-content {
   float: left;
   animation: slideInUp 0.5s;
+  width: 100%;
 
   .content-element {
     display: none;
     padding: 50px 0 300px 0;
   }
+}
+
+.admin-actions {
+  position: fixed;
+  right: 0;
+  bottom: 0;
 }
