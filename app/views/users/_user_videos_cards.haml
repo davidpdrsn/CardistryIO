@@ -1,96 +1,18 @@
 %div.cards
-  %div.card
-    %div.card-image
-      = image_tag "thumbnail-placeholder.png"
-    %div.card-header
-      Quaalude
-    %div.card-copy
-      Quaalude is a three packet cut created by Tobias Levin.
-    %div.card-meta
-      1.337 views | posted 2 days ago
-      %div.rating
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-
-  %div.card
-    %div.card-image
-      = image_tag "thumbnail-placeholder.png"
-    %div.card-header
-      Flicker Shot
-    %div.card-copy
-      When our video, Air Time, went viral, we received countless requests to produce a Cardistry tutorial of the move in it where a card was boomeranged behind Huron’s back into his other hand. The move, Flicker Shot, is one of Huron’s signature card flourishes, and has never been published before.
-    %div.card-meta
-      1.337 views | posted 2 days ago
-      %div.rating
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-
-  %div.card
-    %div.card-image
-      = image_tag "thumbnail-placeholder.png"
-    %div.card-header
-      Legolove
-    %div.card-copy
-      In order to understand and appreciate the art of cardistry combos, one must gather knowledge of as many moves as possible. Simplicity and practicality plays an important role when you're combining and/or improvising. Through the years, we've come across many different utility moves with different appearance and levels of simplicity.
-    %div.card-meta
-      1337 views | posted 2 days ago
-      %div.rating
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-
-  %div.card
-    %div.card-image
-      = image_tag "thumbnail-placeholder.png"
-    %div.card-header
-      Quaalude
-    %div.card-copy
-      Quaalude is a three packet cut created by Tobias Levin.
-    %div.card-meta
-      1.337 views | posted 2 days ago
-      %div.rating
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-
-  %div.card
-    %div.card-image
-      = image_tag "thumbnail-placeholder.png"
-    %div.card-header
-      Flicker Shot
-    %div.card-copy
-      When our video, Air Time, went viral, we received countless requests to produce a Cardistry tutorial of the move in it where a card was boomeranged behind Huron’s back into his other hand. The move, Flicker Shot, is one of Huron’s signature card flourishes, and has never been published before.
-    %div.card-meta
-      1.337 views | posted 2 days ago
-      %div.rating
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-
-  %div.card
-    %div.card-image
-      = image_tag "thumbnail-placeholder.png"
-    %div.card-header
-      Legolove
-    %div.card-copy
-      In order to understand and appreciate the art of cardistry combos, one must gather knowledge of as many moves as possible. Simplicity and practicality plays an important role when you're combining and/or improvising. Through the years, we've come across many different utility moves with different appearance and levels of simplicity.
-    %div.card-meta
-      1337 views | posted 2 days ago
-      %div.rating
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
-        %i.icon.ion-android-star
+  - @user.videos.each do |video|
+    %div.card
+      %div.card-image
+        = image_tag "thumbnail-placeholder.png"
+      %div.card-header
+        = "#{video.name}"
+      %div.card-copy
+        = "#{video.description}"
+      %div.card-meta
+        1.337 views
+        = "| posted #{time_ago_in_words(video.created_at)} ago"
+        %div.rating
+          %i.icon.ion-android-star
+          %i.icon.ion-android-star
+          %i.icon.ion-android-star
+          %i.icon.ion-android-star
+          %i.icon.ion-android-star
