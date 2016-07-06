@@ -83,6 +83,6 @@
   %div.content-element
     = render partial: "user_moves_cards", locals: { user: @user }
 
-%div.admin-actions
-  - if current_user.admin? && !@user.admin
+- if current_user.admin? && !@user.admin
+  %div.admin-actions
     = link_to "Make admin", make_admin_user_path(@user), method: :post, data: { confirm: "Sure?" }
