@@ -38,7 +38,7 @@ class EmbeddableVideo < SimpleDelegator
     end
 
     def fetch_thumbnail_url
-      "http://img.youtube.com/vi/#{youtube_id}/default.jpg"
+      "http://img.youtube.com/vi/#{youtube_id}/hqdefault.jpg"
     end
 
     private
