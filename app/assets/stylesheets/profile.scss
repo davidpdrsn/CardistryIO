@@ -329,4 +329,7 @@
   position: fixed;
   right: 0;
   bottom: 0;
+  padding: 15px;
+  background: #fff;
+  @include shadow-level(1);
 }
