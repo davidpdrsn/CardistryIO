@@ -7,11 +7,6 @@
         = @user.username
       %p.location
         #{@user.country_name} (#{@user.time_zone})
-      - if signed_in? && @user != current_user
-        - if current_user.follows?(@user)
-          = link_to "UNFOLLOW", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
-        - else
-          = link_to "FOLLOW", follow_user_path(@user), method: :post, params: { user_id: @user.id }
 
     %div.overlay
 
@@ -23,7 +18,7 @@
             - if current_user.follows?(@user)
               = link_to follow_user_path(@user), method: :post, params: { user_id: @user.id } do
                 %li
-                  %i.icon.ion-person-remove
+                  %i.icon.ion-minus-circled
                   Unfollow
             - else
               = link_to follow_user_path(@user), method: :post, params: { user_id: @user.id } do
@@ -67,44 +62,6 @@
                 %span.word
                   following
 
-
-    -#
-    -#  - if signed_in? && @user != current_user
-    -#    %div.follow-actions
-    -#      - if current_user.follows?(@user)
-    -#        = button_to "UNFOLLOW", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
-    -#      - else
-    -#        = button_to "FOLLOW", follow_user_path(@user), method: :post, params: { user_id: @user.id }
-    -#
-    -#  - if current_user == @user
-    -#    %div.follow-actions
-    -#      = button_to "EDIT", edit_user_path(@user)
-    -#
-    -#  %div.container
-    -#    %p.location
-    -#      #{@user.country_name} (#{@user.time_zone})
-    -#
-    -#    %p.biography
-    -#      #{@user.biography}
-    -#
-    -#    - if @user.instagram_username.present?
-    -#      %p
-    -#        On Instagram:
-    -#        = link_to @user.instagram_username, "http://instagram.com/#{@user.instagram_username}"
-    -#
-    -#%div.stats
-    -#  %ul
-    -#    = link_to followers_user_path(@user) do
-    -#      %li
-    -#        = @user.followers.length
-    -#        %span
-    -#          followers
-    -#    = link_to following_user_path(@user) do
-    -#      %li
-    -#        = @user.following.length
-    -#        %span
-    -#          following
-
   %div.profile-navigation
     %ul.profile-nav-items
       %a{:href => "#"}
@@ -125,5 +82,6 @@
   %div.content-element
     = render partial: "user_moves_cards", locals: { user: @user }
 
-- if current_user.admin? && !@user.admin
-  = link_to "Make admin", make_admin_user_path(@user), method: :post, data: { confirm: "Sure?" }
+%div.admin-actions
+  - if current_user.admin? && !@user.admin
+    = link_to "Make admin", make_admin_user_path(@user), method: :post, data: { confirm: "Sure?" }
