@@ -3,7 +3,7 @@
     - @user.videos.each do |video|
       = link_to video, {:class => "card"} do
         %div.card-image
-          = image_tag "thumbnail-placeholder.png"
+          = image_tag video.thumbnail_url
         %div.card-header
           = "#{video.name}"
         %div.card-copy

@@ -3,7 +3,7 @@
     - @user.moves.where(idea: false).each do |move|
       = link_to move, {:class => "card"} do
         %div.card-image
-          = image_tag "thumbnail-placeholder.png"
+          = image_tag move.thumbnail_url
         %div.card-header
           = "#{move.name}"
         %div.card-copy
