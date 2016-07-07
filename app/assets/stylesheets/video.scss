@@ -76,6 +76,13 @@
       color: $main-blue;
     }
 
+    .comment_content {
+      margin-top: 20px;
+      label {
+        display: none;
+      }
+    }
+
     .grid-items-lines {
       .grid-item {
         &:hover {
@@ -105,3 +112,4 @@
   padding: 20px;
   @include shadow-level(1);
 }
+
