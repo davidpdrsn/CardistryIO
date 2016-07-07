@@ -83,6 +83,7 @@ button {
 .pill-button-filled {
   @include pill-button;
   background-color: $main-red;
+  border: none;
 
   &:hover {
     background-color: $main-red-hover;
