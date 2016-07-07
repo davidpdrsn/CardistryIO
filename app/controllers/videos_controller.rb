@@ -27,7 +27,12 @@ class VideosController < ApplicationController
 
   def new
     params.delete(:as)
-    new_video_params = params.permit(:url, :instagram_id, :description)
+    new_video_params = params.permit(
+      :url,
+      :instagram_id,
+      :description,
+      :thumbnail_url,
+    )
     @video = Video.new(new_video_params)
   end
 
@@ -37,6 +42,7 @@ class VideosController < ApplicationController
     @video.transaction do
       @video.save!
       AddsCredits.new(@video).add_credits(params[:credits])
+      LoadVideoThumbnailJob.perform_later(@video)
       flash.notice = "Video created, will appear once it was been approved"
       redirect_to root_path
     end
@@ -96,6 +102,7 @@ class VideosController < ApplicationController
       :private,
       :instagram_id,
       :video_type,
+      :thumbnail_url,
     ]
   end
 

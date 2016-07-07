@@ -1,20 +1,11 @@
 #!/bin/bash
 set -e
 
-if [ $(uname) = "Darwin" ]; then
-  echo "---- Making sure docker-machine is running"
-  docker-machine start default || true
-
-  echo "---- Connecting to docker-machine"
-  eval $(docker-machine env default)
+if !(docker ps | grep spring > /dev/null); then
+  echo "Starting spring container"
+  docker-compose run -d web script/start-spring
 fi
 
-if $(docker ps | grep 'web' > /dev/null); then
-  echo "--- Running with docker"
-
-  echo "--- Running the tests"
-  docker-compose run web bin/rspec $@
-else
-  echo "Docker isn't running"
-  exit 1
-fi
+container_name=$(docker ps | grep spring | tr -s " " | awk '{ print $NF }')
+echo "Running 'docker exec -it $container_name bin/rspec $@'"
+docker exec -it $container_name bin/rspec $@

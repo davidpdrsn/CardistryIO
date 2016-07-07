@@ -18,9 +18,9 @@
   - if signed_in? && @user != current_user
     %div.follow_actions
       - if current_user.follows?(@user)
-        = button_to "Unfollow", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
+        = link_to "Unfollow", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
       - else
-        = button_to "Follow", follow_user_path(@user), method: :post, params: { user_id: @user.id }
+        = link_to "Follow", follow_user_path(@user), method: :post, params: { user_id: @user.id }
 
 %div.relationships
   = link_to following_user_path(@user) do

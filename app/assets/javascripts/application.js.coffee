@@ -11,13 +11,9 @@
 
 $ ->
   $(".chosen-select").chosen()
-
-jQuery ->
   $('.dropdown-toggle').dropdown()
 
-
-
-
-
-
-
+  addBehavior "show-comment-form", (e) ->
+    e.preventDefault()
+    console.log $(".add_comment_form")
+    $(".add_comment_form").toggleClass "hide"

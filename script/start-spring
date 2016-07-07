@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+bin/rspec spec/lib/active_record_decorator_spec.rb
+tail -f /dev/null

@@ -16,17 +16,12 @@ EOF
   exit
 fi
 
-if [ $(uname) = "Darwin" ]; then
-  echo "---- Making sure docker-machine is running"
-  docker-machine start default || true
-
-  echo "---- Connecting to docker-machine"
-  eval $(docker-machine env default)
-fi
-
 # Build docker instance
 echo "---- Building docker image"
 docker-compose build
+
+# Starts containers and creates network
+docker-compose up -d
 
 echo "---- Installing dependencies"
 docker-compose run web bundle install
@@ -40,6 +35,7 @@ fi
 echo "---- Setting up environment variables"
 cp .sample.env .env
 
+docker-compose run -d db
 echo "---- Setting up databases"
 docker-compose run web bin/rake db:create RAILS_ENV=development
 docker-compose run web bin/rake db:create RAILS_ENV=test
@@ -52,13 +48,9 @@ cat <<EOF
 All set!
 
   Start the app with "docker-compose up"
-  When started you can connect at http://`docker-machine ip default`:3000
-
-  If you wanna to work production data locally run "script/production-data-to-local"
-  This requires that you have access to Heroku, ask Planck about it
+  When started you can connect at http://localhost:3000
 
   You should now be able to run the tests with "docker-compose run web bin/rspec"
-  You can use script/production-data-to-local to pull down the production database
 
   If you wanna test adding videos from Instagram you'll need get a client_id and
   client_secret by creating an app on https://instagram.com/developer
