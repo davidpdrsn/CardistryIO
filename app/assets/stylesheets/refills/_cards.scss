@@ -35,6 +35,7 @@
     height: 200px;
     max-height: 200px;
     overflow: hidden;
+    background-image: url("thumbnail-placeholder.png");
 
     img {
       @include border-top-radius($base-border-radius);
