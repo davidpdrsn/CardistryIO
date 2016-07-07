@@ -7,6 +7,7 @@
   float: left;
   height: auto;
   margin-top: $content-area-top-margin;
+  margin-bottom: $content-area-top-margin;
   padding: 20px;
 
   h1 {
@@ -63,12 +64,44 @@
     font-size: 1.3em;
   }
 
-  .description {
+  .video-info {
     font-size: 1.2em;
     line-height: 1.9em;
     padding: 20px;
     margin-bottom: 40px;
     margin-top: 20px;
-  }
 
+    .meta {
+      font-size: 0.8em;
+      color: $main-blue;
+    }
+
+    .grid-items-lines {
+      .grid-item {
+        &:hover {
+          cursor: default;
+          background-color: #fff;
+        }
+
+        h1 {
+          text-align: left;
+          padding: 0;
+          color: $main-blue;
+        }
+
+        .mini-circle-avatar {
+          position: relative;
+        }
+      }
+    }
+  }
+}
+
+.owner-actions {
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+  @include shadow-level(1);
 }
