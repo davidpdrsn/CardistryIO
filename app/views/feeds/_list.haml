@@ -8,7 +8,7 @@
           %i.icon.ion-android-hand
 
     %div.timeline-content
-      %div.thumbnail
+      %div.thumbnail{:style => "background: url(#{activity.subject.thumbnail_url}) no-repeat center center;"}
       %span{:class => "mini-circle-avatar", :style => "background: url(#{activity.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
       %span.username
         = link_to activity.user.username, activity.user
