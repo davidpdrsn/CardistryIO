@@ -25,7 +25,7 @@ class TimeSlots
 
   def calculate_grouped_objs
     objs.each_with_object(Hash.new([])) do |obj, acc|
-      created_at = obj.created_at.to_date
+      created_at = obj.created_at.utc.to_date
 
       if created_at == Date.today
         acc[:today] = acc[:today] + [obj]
