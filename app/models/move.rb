@@ -29,6 +29,10 @@ class Move < ApplicationRecord
 
   use WithRatingStats, for: :average_rating
 
+  def thumbnail_url
+    nil
+  end
+
   def to_param
     "#{id}-#{name.parameterize}"
   end
