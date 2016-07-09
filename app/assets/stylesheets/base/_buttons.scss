@@ -2,10 +2,10 @@
 button {
   @include appearance(none);
   -webkit-font-smoothing: antialiased;
-  background-color: $action-color;
-  border-radius: $base-border-radius;
-  border: none;
-  color: #fff;
+  background-color: white;
+  border: 1px solid $main-blue;
+  color: $main-red;
+  border-radius: 100px;
   cursor: pointer;
   display: inline-block;
   font-family: $base-font-family;
@@ -83,6 +83,7 @@ button {
 .pill-button-filled {
   @include pill-button;
   background-color: $main-red;
+  border: none;
 
   &:hover {
     background-color: $main-red-hover;

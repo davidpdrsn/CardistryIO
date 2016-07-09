@@ -12,6 +12,7 @@
 @import "refills/cards";
 @import "refills/grid-items";
 @import "refills/stats.scss";
+@import "refills/comments.scss";
 @import "ionicons";
 
 @import "nav";
@@ -19,9 +20,7 @@
 @import "section";
 @import "mobile";
 @import "timeline";
-
-@import "profile";
-
+@import "video";
 @import "profile";
 
 // Some resets
@@ -57,4 +56,14 @@ body {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
+}
+
+.mini-circle-avatar {
+  top: 10px;
+  height: 28px;
+  width: 28px;
+  margin-right: 5px;
+  display: inline-block;
+  @include border-top-radius(14px);
+  @include border-bottom-radius(14px);
 }

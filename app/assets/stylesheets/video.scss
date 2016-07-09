@@ -1,0 +1,115 @@
+.video-content {
+  background: #fff;
+  width: 100%;
+  @include border-top-radius($base-border-radius);
+  @include border-bottom-radius($base-border-radius);
+  @include shadow-level(1);
+  float: left;
+  height: auto;
+  margin-top: $content-area-top-margin;
+  margin-bottom: $content-area-top-margin;
+  padding: 20px;
+
+  h1 {
+    background-color: $base-background-color;
+    border-radius: $base-border-radius $base-border-radius 0 0;
+    font-family: 'Prompt', sans-serif;
+    line-height: 1.5em;
+    padding: 1em 0 0em 0;
+    margin: 0;
+    transition: all 0.2s ease-in-out;
+    font-family: "Prompt", sans-serif;
+    font-size: 2.8em;
+    font-weight: 300;
+    font-style: italic;
+    color: $main-red;
+    text-align: center;
+  }
+
+  .embedded-video {
+    iframe {
+      width: calc(100% + 40px);
+      height: 525px;
+      margin-left: -20px;
+      margin-right: -20px;
+      margin-top: -20px;
+      @include border-top-radius($base-border-radius);
+    }
+  }
+  .author {
+    .mini-circle-avatar {
+      position: relative;
+      top: 7px;
+      height: 28px;
+      width: 28px;
+      margin-right: 3px;
+      display: inline-block;
+      @include border-top-radius(14px);
+      @include border-bottom-radius(14px);
+    }
+    .username {
+      font-size: 1.1em;
+
+      a {
+        color: $main-red;
+        font-weight: bold;
+        line-height: 3;
+      }
+    }
+
+    color: $main-blue;
+    width: 100%;
+    text-align: center;
+    font-family: "Prompt", sans-serif;
+    font-size: 1.3em;
+  }
+
+  .video-info {
+    font-size: 1.2em;
+    line-height: 1.9em;
+    padding: 20px;
+    margin-bottom: 40px;
+    margin-top: 20px;
+
+    .meta {
+      font-size: 0.8em;
+      color: $main-blue;
+    }
+
+    .comment_content {
+      margin-top: 20px;
+      label {
+        display: none;
+      }
+    }
+
+    .grid-items-lines {
+      .grid-item {
+        &:hover {
+          cursor: default;
+          background-color: #fff;
+        }
+
+        h1 {
+          text-align: left;
+          padding: 0;
+          color: $main-blue;
+        }
+
+        .mini-circle-avatar {
+          position: relative;
+        }
+      }
+    }
+  }
+}
+
+.owner-actions {
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+  @include shadow-level(1);
+}
+
