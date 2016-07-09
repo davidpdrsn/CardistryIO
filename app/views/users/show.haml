@@ -1,46 +1,88 @@
 %div.profile-box
-  %div.avatar
-    = image_tag(@user.gravatar_url, :class => "gravatar")
+  %div.backdrop
+    = image_tag(@user.gravatar_url, :class => "backdrop-gravatar")
+    %div.user-information
+      = image_tag(@user.gravatar_url, :class => "gravatar")
+      %h3
+        = @user.username
+      %p.location
+        #{@user.country_name} (#{@user.time_zone})
 
-%div.information
-  %h3
-    = @user.username
-  %span.location
-    #{@user.country_name} (#{@user.time_zone})
-  %p.profile-text
-    = simple_format @user.biography
+    %div.overlay
 
-  - if @user.instagram_username.present?
-    %p
-      On Instagram:
-      = link_to @user.instagram_username, "http://instagram.com/#{@user.instagram_username}"
+  %div.profile-container
+    %div.grid-items-lines
+      %div.grid-item{:style => "display: table;"}
+        %ul.user-navigation
+          - if signed_in? && @user != current_user
+            - if current_user.follows?(@user)
+              = link_to follow_user_path(@user), method: :delete, params: { user_id: @user.id } do
+                %li
+                  %i.icon.ion-minus-circled
+                  Unfollow
+            - else
+              = link_to follow_user_path(@user), method: :post, params: { user_id: @user.id } do
+                %li
+                  %i.icon.ion-person-add
+                  Follow
+          - if current_user == @user
+            = link_to edit_user_path(@user) do
+              %li
+                %i.icon.ion-edit
+                Edit
 
-  - if signed_in? && @user != current_user
-    %div.follow_actions
-      - if current_user.follows?(@user)
-        = link_to "Unfollow", follow_user_path(@user), method: :delete, params: { user_id: @user.id }
-      - else
-        = link_to "Follow", follow_user_path(@user), method: :post, params: { user_id: @user.id }
+          %li
+            = link_to edit_user_path do
+              %i.icon.ion-paper-airplane
+              Message
 
-%div.relationships
-  = link_to following_user_path(@user) do
-    %div.circle-count
-      %span.number
-        = @user.following.length
-      %br
-      %span.word
-        following
+          -if @user.instagram_username.present?
+            %li
+              = link_to @user.instagram_username, "http://instagram.com/#{@user.instagram_username}" do
+                %i.icon.ion-social-instagram
+                Instagram
 
-  %div.circle-count
-    =link_to followers_user_path(@user) do
-      %span.number
-        = @user.followers.length
-      %br
-      %span.word
-        followers
 
-- if current_user == @user
-  = link_to "Edit", edit_user_path(@user)
+      %div.grid-item{:style => "display: table;"}
+        %p.biography
+          #{@user.biography}
+
+      %div.grid-item{:style => "display: table;"}
+        %div.stats{:style => "display: table-cell; vertical-align: middle;"}
+          %ul{:style => "text-align: right;"}
+            = link_to followers_user_path(@user) do
+              %li
+                %span.number
+                  = @user.followers.length
+                %span.word
+                  followers
+            = link_to following_user_path(@user) do
+              %li
+                %span.number
+                  = @user.following.length
+                %span.word
+                  following
+
+  %div.profile-navigation
+    %ul.profile-nav-items
+      %a{:href => "#"}
+        %li
+          VIDEOS
+      %a{:href => "#"}
+        %li
+          IDEAS
+      %a{:href => "#"}
+        %li
+          MOVES
+
+%div.profile-content
+  %div.content-element
+    = render partial: "user_videos_cards"
+  %div.content-element
+    = render partial: "user_ideas_cards", locals: { user: @user }
+  %div.content-element
+    = render partial: "user_moves_cards", locals: { user: @user }
 
 - if current_user.admin? && !@user.admin
-  = link_to "Make admin", make_admin_user_path(@user), method: :post, data: { confirm: "Sure?" }
+  %div.admin-actions
+    = link_to "Make admin", make_admin_user_path(@user), method: :post, data: { confirm: "Sure?" }
