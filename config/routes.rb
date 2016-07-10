@@ -84,5 +84,9 @@ Rails.application.routes.draw do
   get "monitor_stats", to: "monitor#stats"
   get "/search", as: "searches", to: "searches#show"
 
-  root to: "welcome#index"
+  # While running the beta
+  root to: redirect("http://beta.cardistry.io")
+
+  # For when the beta is over
+  # root to: "welcome#index"
 end
