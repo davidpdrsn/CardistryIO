@@ -6,7 +6,7 @@ lock "3.5.0"
 Dotenv.load
 
 set :application, "cardistryio"
-set :repo_url, "https://github.com/davidpdrsn/CardistryIO.git"
+set :repo_url, "git@github.com:davidpdrsn/CardistryIO.git"
 
 set :deploy_to, "/home/cardistryio/cardistryio"
 
