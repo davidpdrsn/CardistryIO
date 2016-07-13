@@ -1,15 +1,6 @@
 %ul.object-list
   - page.each do |object|
-    %li.list-item
-      = render partial: "embed_video", locals: { video: object }
-      %h3.item-name= link_to object.name, object
-      %h4.author= "by #{object.user.username}"
-      %p.description= object.description
-
-      %ul.attributes
-        %li.runtime 02:30
-        %li.view-count= rand(10000)
-        %li.comment-count= rand(100)
+    = render partial: "list_item", locals: { object: object }
 
 - path = ->(options) { polymorphic_path([:all, page.detect { true }.class], options) }
 

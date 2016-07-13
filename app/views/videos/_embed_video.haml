@@ -1,23 +1,24 @@
-- if video.from_instagram?
-  :erb
-    <video
-      class="video-js vjs-default-skin"
-      controls
-      preload="auto"
-      width="<% video.width %>"
-      height="<% video.height %>"
-      poster="<%= video.image %>"
-    >
-      <source src="<%= video.url %>" type='video/mp4'>
+%article.embedded-video
+  - if video.from_instagram?
+    :erb
+      <video
+        class="video-js vjs-default-skin"
+        controls
+        preload="auto"
+        width="<% video.width %>"
+        height="<% video.height %>"
+        poster="<%= video.image %>"
+      >
+        <source src="<%= video.url %>" type='video/mp4'>
 
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a web browser
-        that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-      </p>
-    </video>
-- else
-  %iframe{ src: video.url, |
-           frameborder: 0, |
-           width: 500, |
-           height: 300, |
-           allowfullscreen: true }
+        <p class="vjs-no-js">
+          To view this video please enable JavaScript, and consider upgrading to a web browser
+          that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+        </p>
+      </video>
+  - else
+    %iframe{ src: video.url, |
+             frameborder: 0, |
+             width: 500, |
+             height: 300, |
+             allowfullscreen: true }

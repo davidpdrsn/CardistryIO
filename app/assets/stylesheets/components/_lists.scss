@@ -1,4 +1,40 @@
 .object-list {
-  .list-item {
+  & > .list-item {
+    display: flex;
+    border-bottom: 1px solid $light-gray;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+
+    & > .embedded-video {
+      width: 45%;
+    }
+
+    & > .video-details {
+      width: 45%;
+
+      & > .name {
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      & > .author {
+        font-size: 0.8rem;
+        margin: 0;
+      }
+
+      & > .description {
+        display: none;
+      }
+    }
+  }
+}
+
+.video-attributes {
+  font-size: 0.8em;
+
+  & > .type,
+  & > .average-ratings,
+  & > .total-ratings {
+    display: none;
   }
 }

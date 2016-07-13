@@ -37,7 +37,7 @@ FactoryGirl.define do
   factory :video do
     sequence(:name) { |n| "Classic #{n}th" }
     description "A video I made"
-    url "https://www.youtube.com/watch?v=W799NKLEz8s"
+    url "https://www.youtube.com/embed/W799NKLEz8s"
     user
     approved true
     video_type "performance"

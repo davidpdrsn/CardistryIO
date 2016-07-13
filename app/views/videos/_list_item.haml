@@ -1,0 +1,11 @@
+%li.list-item
+  = render partial: "videos/embed_video", locals: { video: object }
+  %aside.video-details
+    %h3.name= link_to object.name, object
+    %h4.author= "by #{object.author}"
+    %p.description= object.description
+
+    %ul.video-attributes
+      - object.additional_attributes.each do |attribute, value|
+        %li{class: attribute}
+          = "#{value} #{attribute.titleize}"

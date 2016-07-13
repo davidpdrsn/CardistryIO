@@ -1,4 +1,8 @@
 class VideoWithUser < ActiveRecordDecorator
+  include ActionView::Helpers::TextHelper
+
+  attr_accessor :video, :user
+
   def initialize(video:, user:)
     super(video)
     @video = video
@@ -6,14 +10,20 @@ class VideoWithUser < ActiveRecordDecorator
   end
 
   def author
-    @user.username
+    truncate(user.username, length: 15)
+  end
+
+  def name
+    truncate(video.name, length: 12)
   end
 
   def additional_attributes
     {
-      runtime: '02:30',
-      view_count: @video.unique_views_count,
-      comment_count: @video.comments.count,
+      'views' => video.unique_views_count,
+      'comments' => video.comments.count,
+      'average-ratings' => video.average_rating,
+      'total-ratings' => video.ratings.count
     }
   end
+
 end
