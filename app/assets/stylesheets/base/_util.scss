@@ -64,6 +64,8 @@
 // Markup:
 // <span class="mini-circle-avatar" style="background-image: url(image.png)"></span>
 //
+// .with-username - makes the avatar 28x28 pixels and removes the top margin to perfectly align with a <span class="username"> besides it.
+//
 // Styleguide 0.4
 .mini-circle-avatar {
   height: 22px;
@@ -74,6 +76,35 @@
   vertical-align: middle;
   @include border-top-radius(10px);
   @include border-bottom-radius(10px);
+}
+.with-username {
+  top: 0;
+  height: 28px;
+  width: 28px;
+  @include border-top-radius(14px);
+  @include border-bottom-radius(14px);
+}
+
+// Class: .username
+//
+// Used to a display a link to a username.
+//
+// Markup:
+// <span class="username">
+//  <a href="link_to_user">Username</a>
+// </span>
+//
+// Styleguide 0.5
+.username {
+  font-size: 1.3em;
+  font-family: "Prompt", sans-serif;
+  font-weight: bold;
+
+  a {
+    color: $main-red;
+    border-bottom: 2px solid $main-blue;
+    font-weight: bold;
+  }
 }
 
 

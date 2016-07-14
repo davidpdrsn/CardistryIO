@@ -237,25 +237,6 @@
         padding-right: 450px;
       }
 
-      .mini-circle-avatar {
-        position: relative;
-        top: 10px;
-        height: 28px;
-        width: 28px;
-        margin-right: 5px;
-        display: inline-block;
-        @include border-top-radius(14px);
-        @include border-bottom-radius(14px);
-      }
-
-      .username {
-        a {
-          color: $main-red;
-          border-bottom: 2px solid $main-blue;
-          font-weight: bold;
-        }
-      }
-
       .type {
         color: $main-red;
         font-weight: bold;

@@ -13,7 +13,7 @@
           %div.thumbnail{:style => "background: url(#{activity.subject.thumbnail_url}) no-repeat center center;"}
         - else
           %div.thumbnail{:style => "background: url(#{image_path('thumbnail-placeholder.png')}) no-repeat center center;"}
-      %span{:class => "mini-circle-avatar", :style => "background: url(#{activity.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
+      %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{activity.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
       %span.username
         = link_to activity.user.username, activity.user
       %span

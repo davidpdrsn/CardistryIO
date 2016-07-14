@@ -37,31 +37,9 @@
     }
   }
   .author {
-    .mini-circle-avatar {
-      position: relative;
-      top: 7px;
-      height: 28px;
-      width: 28px;
-      margin-right: 3px;
-      display: inline-block;
-      @include border-top-radius(14px);
-      @include border-bottom-radius(14px);
-    }
-    .username {
-      font-size: 1.1em;
-
-      a {
-        color: $main-red;
-        font-weight: bold;
-        line-height: 3;
-      }
-    }
-
-    color: $main-blue;
     width: 100%;
     text-align: center;
-    font-family: "Prompt", sans-serif;
-    font-size: 1.3em;
+    margin-top: 45px;
   }
 
   .video-info {

@@ -5,7 +5,7 @@
   %h1
     = @video.name
   %div.author
-    %span{:class => "mini-circle-avatar", :style => "background: url(#{@video.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
+    %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{@video.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
     %span.username
       = link_to @video.user.username, @video.user
 
