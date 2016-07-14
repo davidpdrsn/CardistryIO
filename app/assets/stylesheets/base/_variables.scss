@@ -1,13 +1,18 @@
 // Typography
-$base-font-family: 'Open Sans', sans-serif;
-$heading-font-family: $base-font-family;
+$base-font-family: "Open Sans", sans-serif;
+$heading-font-family: "Prompt", sans-serif;
 
 // Font Sizes
 $base-font-size: 1em;
+$h1-font-size: 2.8em;
+$h2-font-size: 1.3em;
 
 // Line height
 $base-line-height: 1.5;
-$heading-line-height: 1.2;
+$heading-line-height: 1.5;
+
+// Font weight
+$thin: 300;
 
 // Other Sizes
 $base-border-radius: 3px;
@@ -23,6 +28,7 @@ $nav-width: 280px;
 $content-area-top-margin: 75px;
 
 // Colors
+$white: white;
 $blue: #477dca;
 $dark-gray: #333;
 $medium-gray: #999;

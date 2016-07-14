@@ -127,7 +127,7 @@ button {
   background-color: #fff;
   color: $main-red;
 
-  .username {
+  .username-in-button {
     max-width: 117px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -137,6 +137,7 @@ button {
     margin-top: 3px;
     height: 16px;
     resize: none;
+    font-size: inherit;
   }
 
   .profile-dropdown-arrow {

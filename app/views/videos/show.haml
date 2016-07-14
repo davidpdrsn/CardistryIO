@@ -2,7 +2,7 @@
   %div.embedded-video
     = render partial: "embed_video", locals: { video: @video }
 
-  %h1
+  %h1.video-title
     = @video.name
   %div.author
     %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{@video.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
@@ -10,9 +10,13 @@
       = link_to @video.user.username, @video.user
 
   %div.video-info
-    = simple_format link_mentions(@video.description)
+    - if @video.description.present?
+      = simple_format link_mentions(@video.description)
+    - else
+      %p.no-description
+        This video has no description...
 
-    %div.meta
+    %h3.video-meta
       = @video.video_type.humanize
       |
       = "posted #{time_ago_in_words(@video.created_at)} ago"
@@ -22,9 +26,9 @@
 
       = render partial: "shared/ratings", locals: { rateable: @video }
 
-      %div.grid-item
-        - if @video.appearances.present?
-          %h1
+      - if @video.appearances.present?
+        %div.grid-item
+          %h2
             Moves in this video
           %ul
             - @video.appearances.each do |appearance|
@@ -33,8 +37,6 @@
                   = TimeFormatter.new(appearance.minutes, appearance.seconds).format
                   |
                   = link_to appearance.move_name, appearance.move
-        - else
-          No move appearances added
 
     %div.comments
       - @video.comments.each do |comment|

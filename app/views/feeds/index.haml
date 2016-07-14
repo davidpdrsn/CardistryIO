@@ -147,23 +147,27 @@
     - if @feed.today.present?
       %div.timeline-headline
         %div.timeline-headline-circle
-        %h1 Today
+        %span.timeline-separator
+          Today
       = render partial: "feeds/list", locals: { activities: @feed.today }
 
     - if @feed.yesterday.present?
       %div.timeline-headline
         %div.timeline-headline-circle
-        %h1 Yesterday
+        %span.timeline-separator
+          Yesterday
       = render partial: "feeds/list", locals: { activities: @feed.yesterday }
 
     - if @feed.last_week.present?
       %div.timeline-headline
         %div.timeline-headline-circle
-        %h1 Last week
+        %span.timeline-separator
+          Last week
       = render partial: "feeds/list", locals: { activities: @feed.last_week }
 
     - if @feed.older_than_one_week.present?
       %div.timeline-headline
         %div.timeline-headline-circle
-        %h1 Earlier
+        %span.timeline-separator
+          Earlier
       = render partial: "feeds/list", locals: { activities: @feed.older_than_one_week }

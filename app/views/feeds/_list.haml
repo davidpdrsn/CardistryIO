@@ -21,13 +21,13 @@
       %span.type
         = "#{activity.subject.class.name.downcase}"
 
-      %h2
+      %h1.activity-title
         = link_to activity.text, activity.subject
 
       %p.description
         = "#{activity.subject.description}"
 
-      %span.date
+      %h3
         = "posted #{time_ago_in_words(activity.created_at)} ago"
 
 

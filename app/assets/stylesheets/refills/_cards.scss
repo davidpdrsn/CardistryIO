@@ -48,16 +48,11 @@
   }
 
   .card-header {
-    background-color: $base-background-color;
-    border-radius: $base-border-radius $base-border-radius 0 0;
     font-family: 'Prompt', sans-serif;
     line-height: 1.5em;
     padding: 1em 0 0.2em 0;
-    transition: all 0.2s ease-in-out;
-    font-family: "Prompt", sans-serif;
     font-size: 2.8em;
     font-weight: 300;
-    font-style: italic;
     color: $main-red;
     text-align: center;
   }

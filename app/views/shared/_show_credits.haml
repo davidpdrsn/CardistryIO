@@ -1,11 +1,9 @@
-%div.grid-item
-  - if object.creditted_users.present?
-    %h1
+- if object.creditted_users.present?
+  %div.grid-item
+    %h2
       Credits
     %ul
       - object.creditted_users.each do |user|
         %li
           %span{:class => "mini-circle-avatar", :style => "background: url(#{user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
           = link_to "@#{user.username}", user
-  - else
-    = "This #{name} has no credits"

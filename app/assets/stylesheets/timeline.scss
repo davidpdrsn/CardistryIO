@@ -86,7 +86,8 @@
     background: $main-blue;
   }
 
-  h1 {
+  .timeline-separator {
+    font-family: $heading-font-family;
     background: $main-blue;
     padding: 11px;
     border-radius: $base-border-radius;
@@ -162,15 +163,8 @@
         font-size: 1.3em;
       }
 
-      h2 {
-        font-family: "Prompt", sans-serif;
-        font-size: 2.8em;
-        font-weight: 300;
-        margin-top: 30px;
-        margin-bottom: 20px;
+      h3 {
         margin-left: 33px;
-        color: $main-red;
-        width: calc(100% - 450px);
       }
 
       .thumbnail {

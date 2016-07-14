@@ -1,3 +1,9 @@
+// Typography
+//
+// Typographic elements used throughout the site.
+//
+// Styleguide 2
+
 body {
   @include font-feature-settings("kern", "liga", "pnum");
   -webkit-font-smoothing: antialiased;
@@ -7,6 +13,11 @@ body {
   line-height: $base-line-height;
 }
 
+// Base Heading Styles
+//
+// The base styles used for all headings.
+//
+// Styleguide 2.1
 h1,
 h2,
 h3,
@@ -19,10 +30,67 @@ h6 {
   margin: 0 0 $small-spacing;
 }
 
-h3 {
-  font-weight: 300;
-  font-size: 1.8em;
+// h1
+//
+// Styling for main headlines such as video titles.
+//
+// Markup:
+// <h1 {{modifier_class}}>This is a heading</h1>
+//
+// .activity-title - The title of an activity on the timeline.
+// .video-title - The title of a video on the show video view.
+//
+// Styleguide 2.2
+h1 {
+  padding: 1em 0 0em 0;
+  font-size: $h1-font-size;
+  font-weight: $thin;
   color: $main-red;
+}
+.activity-title {
+  font-size: 2.8em;
+  font-weight: 300;
+  margin-bottom: 20px;
+  margin-left: 33px;
+  width: calc(100% - 450px);
+}
+.video-title {
+  text-align: center;
+}
+
+// h2
+//
+// Used as section headlines.
+//
+// Markup:
+// <h2>Section Headline</h2>
+//
+// Styleguide 2.3
+h2 {
+  font-size: $h2-font-size;
+  font-weight: $thin;
+  color: $main-blue;
+}
+
+// h3
+//
+// Used to display meta information such as dates or the number of comments.
+//
+// Markup:
+// <h3>uploaded 2 days ago | 7 comments</h3>
+//
+// .video-meta - A small modifier for the show video page that makes the text smaller and adds a top margin
+//
+// Styleguide 2.4
+h3 {
+  font-family: $base-font-family;
+  color: $main-blue;
+  font-size: 1em;
+  font-weight: normal;
+}
+.video-meta {
+  margin-top: 20px;
+  font-size: 0.8em;
 }
 
 p {
@@ -65,4 +133,9 @@ footer {
   h1 {
     font-size: 120%;
   }
+}
+
+.no-description {
+  color: $medium-gray;
+  font-style: italic;
 }
