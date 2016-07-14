@@ -13,7 +13,6 @@
 // <button>Click me</button>
 //
 // :hover - the border and text color get darkened
-// :active - the button gets moved to the bottom and to the right to give the impression of a physical button that is pressed
 // :focus - we remove the browser default style and darken the colors a little bit.
 //
 // Styleguide 1.1
@@ -53,11 +52,6 @@ button {
     color: darken($main-red, 10%);
   }
 
-  &:active {
-    margin-top: 1px;
-    margin-left: 2px;
-  }
-
   .icon {
     font-size: 180%;
     vertical-align: middle;
@@ -76,6 +70,15 @@ button {
   background-color: $main-red;
   border: none;
   color: $white;
+
+  &:hover {
+    color: $white;
+    background-color: $main-red-hover;
+  }
+
+  &:focus {
+    color: $white;
+  }
 }
 
 // Pill Button (Outline)
