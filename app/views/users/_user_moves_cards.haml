@@ -1,0 +1,26 @@
+%div.cards
+  - if @user.moves.where(idea: false).present?
+    - @user.moves.where(idea: false).each do |move|
+      = link_to move, {:class => "card"} do
+        %div.card-image
+          - if move.thumbnail_url.present?
+            = image_tag move.thumbnail_url
+          - else
+            = image_tag "thumbnail-placeholder.png"
+        %div.card-header
+          = "#{move.name}"
+        %div.card-copy
+          = "#{move.description}"
+        %div.card-meta
+          1.337 views
+          = "| posted #{time_ago_in_words(move.created_at)} ago"
+          %div.rating
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+
+  - else
+    %h1
+      No moves yet.

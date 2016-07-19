@@ -1,4 +1,6 @@
 = simple_form_for video do |f|
+  - if params[:thumbnail_url]
+    = f.input :thumbnail_url, value: params[:thumbnail_url], as: :hidden
   = f.input :name
   = f.input :description
   = f.input :video_type, label: "Type", prompt: "Pick a type", label_method: ->(x) { x.last.humanize }

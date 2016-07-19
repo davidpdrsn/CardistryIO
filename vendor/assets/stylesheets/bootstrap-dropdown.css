@@ -17,6 +17,7 @@
 .dropup,
 .dropdown {
   position: relative;
+  z-index: 9999999;
 }
 .dropdown-toggle:focus {
   outline: 0;

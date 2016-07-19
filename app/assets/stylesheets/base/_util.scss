@@ -1,5 +1,19 @@
 @import "variables";
 
+// Utility classes
+//
+// Mixins and classes you can use throughout the app to to style elements.
+//
+// Styleguide 0
+
+// Mixin: shadow-level
+//
+// Can be used to add a material-design style shadow to the container.
+// It supports three levels of shadows. Level 1 is usually used.
+//
+// @level - the shadow level between 1 and 3.
+//
+// Styleguide 0.1
 @mixin shadow-level($level) {
   @if $level == 1 {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -12,8 +26,85 @@
   }
 }
 
+// Mixin: pill-button
+//
+// Can be used to make a link look like a button.
+// Used for the Sign in/Sign up buttons
+//
+// Styleguide 0.2
+@mixin pill-button {
+  @include border-top-radius($pill-border-radius);
+  @include border-bottom-radius($pill-border-radius);
+  text-align: center;
+  height: $pill-height;
+  padding: 8px 15px 8px 15px;
+  color: #fff;
+  resize: vertical;
+  float: right;
+  margin-right: 10px;
+  display: inline-block;
+  font-weight: normal;
+}
+
+// Class: .hide
+//
+// Can be used to hide an element
+//
+// Styleguide 0.3
 .hide {
   display: none;
+}
+
+// Class: .mini-circle-avatar
+//
+// Used to make a 22x22px round image.
+// Mainly used for showing the user avatar (i.e. in the profile button).
+// The image is set as a background image.
+//
+// Markup:
+// <span class="mini-circle-avatar" style="background-image: url(image.png)"></span>
+//
+// .with-username - makes the avatar 28x28 pixels and removes the top margin to perfectly align with a <span class="username"> besides it.
+//
+// Styleguide 0.4
+.mini-circle-avatar {
+  height: 22px;
+  width: 22px;
+  margin-right: 5px;
+  margin-top: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  @include border-top-radius(10px);
+  @include border-bottom-radius(10px);
+}
+.with-username {
+  top: 0;
+  height: 28px;
+  width: 28px;
+  @include border-top-radius(14px);
+  @include border-bottom-radius(14px);
+}
+
+// Class: .username
+//
+// Used to a display a link to a username.
+//
+// Markup:
+// <span class="username">
+//  <a href="link_to_user">Username</a>
+// </span>
+//
+// Styleguide 0.5
+.username {
+  font-size: 1.3em;
+  font-family: "Prompt", sans-serif;
+  font-weight: bold;
+
+  a {
+    color: $main-red;
+    border-bottom: 2px solid $main-blue;
+    font-weight: bold;
+  }
 }
 
 

@@ -31,9 +31,7 @@ select[multiple=multiple],
 textarea {
   background-color: none;
   border: $main-red-border;
-  //border-radius: $base-border-radius;
-  @include border-top-radius($pill-border-radius);
-  @include border-bottom-radius($pill-border-radius);
+  border-radius: $base-border-radius;
   // box-shadow: $form-box-shadow;
   box-sizing: border-box;
   font-family: $base-font-family;

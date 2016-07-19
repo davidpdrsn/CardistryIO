@@ -1,5 +1,4 @@
 #!/bin/bash
 set -e
 
-docker-compose run web bin/rake db:migrate RAILS_ENV=development
-docker-compose run web bin/rake db:migrate RAILS_ENV=test
+docker-compose run web bash -c "bin/rake db:migrate RAILS_ENV=development && bin/rake db:migrate RAILS_ENV=test"

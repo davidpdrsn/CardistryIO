@@ -1,0 +1,25 @@
+%div.cards
+  - if @user.moves.where(idea: true).present?
+    - @user.moves.where(idea: true).each do |idea|
+      = link_to idea, {:class => "card"} do
+        %div.card-image
+          - if idea.thumbnail_url.present?
+            = image_tag idea.thumbnail_url
+          - else
+            = image_tag "thumbnail-placeholder.png"
+        %div.card-header
+          = "#{idea.name}"
+        %div.card-copy
+          = "#{idea.description}"
+        %div.card-meta
+          1.337 views
+          = "| posted #{time_ago_in_words(idea.created_at)} ago"
+          %div.rating
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+            %i.icon.ion-android-star
+  - else
+    %h1
+      No ideas yet.

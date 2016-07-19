@@ -23,7 +23,7 @@
   background-color: $base-background-color;
   border-radius: $base-border-radius;
   cursor: pointer;
-  flex-basis: 15em;
+  flex-basis: 27em;
   flex-grow: 1;
   margin: 0 $card-margin $base-spacing $card-margin;
   position: relative;
@@ -35,26 +35,24 @@
     height: 200px;
     max-height: 200px;
     overflow: hidden;
+    background-image: url("thumbnail-placeholder.png");
 
     img {
       @include border-top-radius($base-border-radius);
       opacity: 1;
       transition: all 0.2s ease-in-out;
       width: 100%;
+      position: relative;
+      top: -80px;
     }
   }
 
   .card-header {
-    background-color: $base-background-color;
-    border-radius: $base-border-radius $base-border-radius 0 0;
     font-family: 'Prompt', sans-serif;
     line-height: 1.5em;
     padding: 1em 0 0.2em 0;
-    transition: all 0.2s ease-in-out;
-    font-family: "Prompt", sans-serif;
     font-size: 2.8em;
     font-weight: 300;
-    font-style: italic;
     color: $main-red;
     text-align: center;
   }
@@ -73,11 +71,11 @@
     &:after {
       content:'';
       width:100%;
-      height:100%;
+      height: 300px;
       position:absolute;
       left:0;
       bottom: 130px;
-      background:linear-gradient(transparent 550px, white);
+      @include linear-gradient(rgba(255,255,255,0.001) 220px, white)
     }
 
     p {

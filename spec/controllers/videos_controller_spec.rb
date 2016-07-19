@@ -139,6 +139,18 @@ describe VideosController do
 
       expect(response.status).to eq 302
     end
+
+    it "loads the thumbnail" do
+      allow(LoadVideoThumbnailJob).to receive(:perform_later)
+      user = create :user
+      sign_in_as user
+      attributes = attributes_for(:video)
+      attributes.delete(:approved)
+
+      post :create, params: { video: attributes }
+
+      expect(LoadVideoThumbnailJob).to have_received(:perform_later)
+    end
   end
 
   describe "#destroy" do

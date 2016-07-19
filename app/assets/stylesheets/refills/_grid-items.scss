@@ -61,7 +61,7 @@
   }
 
   .grid-item p {
-    color: transparentize($grid-item-color, 0.4);
+    color: $medium-gray;
     line-height: 1.5em;
 
     @include media($medium-screen) {

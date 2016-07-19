@@ -1,113 +1,108 @@
+// Interactive Elements
+//
+// All elements a user can interact with, such as buttons or forms.
+//
+// Styleguide 1
+
+// Button
+//
+// Standard style for all buttons.
+// A button has a pill-shape with a $main-blue border, white background and $main-red text.
+//
+// Markup:
+// <button>Click me</button>
+//
+// :hover - the border and text color get darkened
+// :focus - we remove the browser default style and darken the colors a little bit.
+//
+// Styleguide 1.1
 #{$all-button-inputs},
 button {
   @include appearance(none);
   -webkit-font-smoothing: antialiased;
-  background-color: $action-color;
-  border-radius: $base-border-radius;
-  border: none;
-  color: #fff;
+  background-color: white;
+  border: 1px solid $main-blue;
+  border-radius: $pill-border-radius;
   cursor: pointer;
-  display: inline-block;
   font-family: $base-font-family;
   font-size: $base-font-size;
-  font-weight: 600;
   line-height: 1;
-  padding: 0.75em 1em;
   text-decoration: none;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-
-  &:hover,
-  &:focus {
-    // background-color: darken($action-color, 15%);
-    //color: #fff;
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-}
-
-@mixin pill-button {
-  @include border-top-radius($pill-border-radius);
-  @include border-bottom-radius($pill-border-radius);
   text-align: center;
   height: $pill-height;
   padding: 8px 15px 8px 15px;
-  color: #fff;
+  color: $main-red;
   resize: vertical;
-  float: right;
   margin-right: 10px;
   display: inline-block;
   font-weight: normal;
+  transition: all 0.3s ease;
 
-  a {
-    display: block;
+  &:hover {
+    border-color: darken($main-blue, 20%);
+    color: darken($main-red, 15%);
   }
 
-  .mini-circle-avatar {
-    height: 22px;
-    width: 22px;
-    margin-right: 5px;
-    margin-top: 2px;
-    display: inline-block;
-    @include border-top-radius(10px);
-    @include border-bottom-radius(10px);
-  }
-
-  .username {
-    max-width: 117px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    margin-bottom: 3px;
-  }
-
-  .profile-dropdown-arrow {
-    display: inline-block;
-    margin-bottom: 10px;
-    margin-left: 3px;
+  &:focus {
+    outline: none;
+    border-color: darken($main-blue, 10%);
+    color: darken($main-red, 10%);
   }
 
   .icon {
     font-size: 180%;
     vertical-align: middle;
   }
-  .ion-arrow-down-b {
-    font-size: 0.8em;
-  }
 }
+
+// Pill Button (Filled)
+//
+// A button that has a pill shape and is filled with $main-red.
+//
+// Markup:
+// <button class="pill-button-filled">Click me</button>
+//
+// Styleguide 1.3
 .pill-button-filled {
-  @include pill-button;
   background-color: $main-red;
+  border: none;
+  color: $white;
 
   &:hover {
+    color: $white;
     background-color: $main-red-hover;
   }
+
   &:focus {
-    background-color: $main-blue;
+    color: $white;
   }
 }
+
+// Pill Button (Outline)
+//
+// A pill button that is only an outline with a white background.
+//
+// Markup:
+// <button class="pill-button-outline">Click me</button>
+//
+// Styleguide 1.4
 .pill-button-outline {
   @include pill-button;
   border: 1px solid $main-red;
-  background-color: #fff;
+  background-color: $white;
   color: $main-red;
-
-  &:hover {
-    border-color: $main-red-hover;
-    color: $main-red-hover;
-  }
-  &:focus {
-    border-color: $main-blue;
-    color: $main-blue;
-  }
 }
+
+// Notification Button
+//
+// A pill shaped button used to show the notifications in the header bar.
+// Used when there are new notifications for the user.
+//
+// Styleguide 1.5
 .pill-button-new-notification {
-  @include pill-button;
   background-color: $main-blue;
   border-color: none;
 
@@ -116,28 +111,26 @@ button {
   }
 }
 
+// Profile Button
+//
+// A pill shaped button with specific customizations to show the username, an avatar
+// and an arrow icon to show that the button is a dropdown.
+// Used in the header bar.
+//
+// Markup:
+// <button class="profile-pill">
+//  <span class="mini-circle-avatar" style="background: url('avatar.png')"></span>
+//  <span class="username">Username</span>
+//  <i class="icon ion-arrow-down-b profile-dropdown-arrow"></i>
+// </button>
+//
+// Styleguide 1.6
 .profile-pill {
-  @include pill-button;
   border: 1px solid $main-red;
   background-color: #fff;
   color: $main-red;
 
-  &:hover {
-    border-color: $main-red-hover;
-    color: $main-red-hover;
-  }
-  &:focus {
-    border-color: $main-blue;
-    color: $main-blue;
-  }
-
-  .mini-circle-avatar {
-    display: inline-block;
-    vertical-align: middle;
-    border-radius: 50%;
-  }
-
-  .username {
+  .username-in-button {
     max-width: 117px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -147,11 +140,15 @@ button {
     margin-top: 3px;
     height: 16px;
     resize: none;
+    font-size: inherit;
   }
 
   .profile-dropdown-arrow {
     display: inline-block;
+    margin-bottom: 10px;
+    margin-left: 3px;
     position: relative;
     top: 7px;
+    font-size: 0.8em;
   }
 }
