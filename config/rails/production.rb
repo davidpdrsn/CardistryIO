@@ -1,4 +1,5 @@
 require Rails.root.join("config/smtp")
+
 Rails.application.configure do
   config.cache_classes = true
   config.eager_load = true
@@ -8,6 +9,8 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
   config.public_file_server.headers = { 'Cache-Control' => "public, max-age=#{1.year.to_i}" }
   config.middleware.use Rack::Deflater
+  config.middleware.delete Rack::MiniProfiler
+  config.middleware.insert_after Rack::Deflater, Rack::MiniProfiler
   config.assets.js_compressor = :uglifier
   config.assets.compile = false
   config.assets.digest = true
@@ -21,4 +24,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { host: ENV.fetch("HOST") }
 end
+
 Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
