@@ -8,9 +8,25 @@ class WelcomeController < ApplicationController
     end
   end
 
+  def beta_signin
+    if valid_beta_authentication?
+      session[:beta_user] = true
+      redirect_to root_path
+    else
+      session[:beta_user] = nil
+    end
+  end
+
   def test_resque_fail
     TestJob.perform_later
 
     head :ok
+  end
+
+  private
+
+  def valid_beta_authentication?
+    params[:username] == ENV.fetch("PRE_USERNAME") &&
+      params[:password] == ENV.fetch("PRE_PASSWORD")
   end
 end

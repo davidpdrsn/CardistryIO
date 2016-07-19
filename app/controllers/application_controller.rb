@@ -55,4 +55,17 @@ class ApplicationController < ActionController::Base
       Time.use_zone(current_user.time_zone, &block)
     end
   end
+
+  around_action :require_beta_authentication
+  def require_beta_authentication(&block)
+    if signed_in_as_beta_tester? || (params[:username] && params[:password])
+      block.call
+    else
+      render "welcome/beta_signin", layout: nil
+    end
+  end
+
+  def signed_in_as_beta_tester?
+    session[:beta_user].present?
+  end
 end

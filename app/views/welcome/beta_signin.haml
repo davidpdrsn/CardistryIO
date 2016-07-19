@@ -1,0 +1,18 @@
+%h1
+  Welcome to CardistryIO
+
+%p
+  CardistryIO is not quite ready yet. If you are part of beta you can enter your
+  username and password below. Otherwise you can go to <a href="http://beta.cardistry.co">beta.cardistry.io</a> to join the waiting list.
+
+= form_tag beta_signin_url, method: :post do
+  .field
+    = label_tag :username
+    = text_field_tag :username
+
+  .field
+    = label_tag :password
+    = text_field_tag :password
+
+  .field
+    = submit_tag "Login"
