@@ -37,13 +37,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  before_action :prerelease_protection
-  def prerelease_protection
-    return unless Rails.env.production?
-
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV.fetch("PRE_USERNAME") &&
-        password == ENV.fetch("PRE_PASSWORD")
+  around_action :require_beta_authentication
+  def require_beta_authentication(&block)
+    if signed_in_as_beta_tester? || (params[:username] && params[:password])
+      block.call
+    else
+      render "welcome/beta_signin", layout: nil
     end
   end
 
@@ -53,15 +52,6 @@ class ApplicationController < ActionController::Base
       block.call
     else
       Time.use_zone(current_user.time_zone, &block)
-    end
-  end
-
-  around_action :require_beta_authentication
-  def require_beta_authentication(&block)
-    if signed_in_as_beta_tester? || (params[:username] && params[:password])
-      block.call
-    else
-      render "welcome/beta_signin", layout: nil
     end
   end
 
