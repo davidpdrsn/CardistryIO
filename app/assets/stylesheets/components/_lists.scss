@@ -1,40 +1,46 @@
 .object-list {
   & > .list-item {
-    display: flex;
     border-bottom: 1px solid $light-gray;
     margin-bottom: 1em;
     padding-bottom: 1em;
 
-    & > .embedded-video {
-      width: 45%;
-    }
+    &.-video {
+      display: flex;
 
-    & > .video-details {
-      width: 45%;
-
-      & > .name {
-        font-size: 1rem;
-        margin: 0;
+      & > .embedded-video {
+        width: 45%;
       }
 
-      & > .author {
-        font-size: 0.8rem;
-        margin: 0;
+      & > .video-details {
+        width: 50%;
+
+        & > .name {
+          font-size: 1rem;
+          margin: 0;
+          @include truncate;
+        }
+
+        & > .author {
+          font-size: 0.8rem;
+          margin: 0;
+          @include truncate;
+        }
+
+        & > .description {
+          display: none;
+        }
       }
 
-      & > .description {
-        display: none;
+      > .video-attributes {
+        font-size: 0.8em;
+
+        & > .type,
+        & > .average-ratings,
+        & > .total-ratings {
+          display: none;
+        }
       }
     }
   }
 }
 
-.video-attributes {
-  font-size: 0.8em;
-
-  & > .type,
-  & > .average-ratings,
-  & > .total-ratings {
-    display: none;
-  }
-}

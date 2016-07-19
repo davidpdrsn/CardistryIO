@@ -26,6 +26,15 @@
   }
 }
 
+// Mixin: truncate
+// 
+// Can be used to truncate overflowing text from an element
+@mixin truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 // Mixin: pill-button
 //
 // Can be used to make a link look like a button.
@@ -51,6 +60,7 @@
 // Can be used to hide an element
 //
 // Styleguide 0.3
+
 .hide {
   display: none;
 }

@@ -1,4 +1,7 @@
 class MoveWithUser < ActiveRecordDecorator
+
+  attr_accessor :move, :user
+
   def initialize(move:, user:)
     super(move)
     @move = move
@@ -6,13 +9,15 @@ class MoveWithUser < ActiveRecordDecorator
   end
 
   def author
-    @user.username
+    user.username
   end
 
   def additional_attributes
     {
-      creditted_users: @move.creditted_users,
-      appearances: @move.appearances,
+      'creditted-users' => move.creditted_users.count,
+      'appearances' => move.appearances.count,
+      'average-ratings' => move.average_rating,
+      'total-ratings' => ratings.count,
     }
   end
 end

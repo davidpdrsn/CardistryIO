@@ -1,0 +1,9 @@
+%li.list-item.-move
+  %h4.name= link_to object.name, object
+  %h5.author= "by #{object.user.username}"
+  %p.description= object.description
+
+  %ul.move-attributes
+    - object.additional_attributes.each do |attribute, value|
+      %li{class: attribute}
+        = "#{value} #{attribute.titleize}"

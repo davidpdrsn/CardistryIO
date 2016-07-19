@@ -10,11 +10,11 @@ class VideoWithUser < ActiveRecordDecorator
   end
 
   def author
-    truncate(user.username, length: 15)
+    user.username
   end
 
   def name
-    truncate(video.name, length: 12)
+    video.name
   end
 
   def additional_attributes
@@ -25,5 +25,4 @@ class VideoWithUser < ActiveRecordDecorator
       'total-ratings' => video.ratings.count
     }
   end
-
 end
