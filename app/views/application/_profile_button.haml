@@ -13,7 +13,7 @@
         %span.dropdown-button-text
           Check out and edit your profile.
     %li
-      = link_to current_user do
+      = link_to edit_user_path(current_user) do
         %i.icon.ion-gear-b
         %span.dropdown-button-title
           Settings
