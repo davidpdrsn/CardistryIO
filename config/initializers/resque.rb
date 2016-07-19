@@ -11,3 +11,5 @@ Resque::Failure::Multiple.classes = [
   Resque::Failure::Rollbar,
 ]
 Resque::Failure.backend = Resque::Failure::Multiple
+
+Resque.logger = Logger.new "log/resque.log"
