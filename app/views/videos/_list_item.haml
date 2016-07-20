@@ -5,7 +5,7 @@
     %h4.author= "by #{object.author}"
     %p.description= object.description
 
-    %ul.video-attributes
+    %ul.attributes
       - object.additional_attributes.each do |attribute, value|
         %li{class: attribute}
           = "#{value} #{attribute.titleize}"

@@ -3,7 +3,7 @@
   %h5.author= "by #{object.user.username}"
   %p.description= object.description
 
-  %ul.move-attributes
+  %ul.attributes
     - object.additional_attributes.each do |attribute, value|
       %li{class: attribute}
         = "#{value} #{attribute.titleize}"

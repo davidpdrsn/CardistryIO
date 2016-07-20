@@ -14,10 +14,8 @@ class MoveWithUser < ActiveRecordDecorator
 
   def additional_attributes
     {
-      'creditted-users' => move.creditted_users.count,
-      'appearances' => move.appearances.count,
       'average-ratings' => move.average_rating,
-      'total-ratings' => ratings.count,
+      'total-ratings' => move.ratings.count,
     }
   end
 end

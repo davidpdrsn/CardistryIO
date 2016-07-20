@@ -1,27 +1,41 @@
 .search-filters {
   width: 100%;
 
-  > .filter-form {
+  @include media($medium-screen-up) {
+    max-width: 30em;
+    margin: auto;
+  }
+
+  @include media($large-screen-up) {
+    margin-left: 0;
+  }
+
+  .filter-form {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 1rem auto;
 
-    > .filter-type {
+    .filter-type {
       width: 30%;
       margin-right: 1rem;
     }
 
-    > .filter-order {
-      > .select {
+    .filter-order {
+      .select {
         display: inline;
       }
     }
+  }
 
-    > .submit {
-      width: 100%;
-      max-width: 500px;
-      margin: auto;
+  .submit {
+    width: 100%;
+    max-width: 25em;
+    margin: auto;
+
+    @include media($large-screen-up) {
+      margin-left: 0;
+      max-width: 9em;
     }
   }
 
