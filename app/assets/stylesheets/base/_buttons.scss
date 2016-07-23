@@ -136,6 +136,8 @@ button {
   border: 1px solid $main-red;
   background-color: #fff;
   color: $main-red;
+  line-height: 14px;
+  padding: 0 15px 0 15px;
 
   .username-in-button {
     max-width: 117px;
@@ -152,10 +154,8 @@ button {
 
   .profile-dropdown-arrow {
     display: inline-block;
-    margin-bottom: 10px;
+    margin-top: 5px;
     margin-left: 3px;
-    position: relative;
-    top: 7px;
     font-size: 0.8em;
   }
 }
