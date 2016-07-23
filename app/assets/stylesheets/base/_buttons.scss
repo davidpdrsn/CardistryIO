@@ -105,9 +105,16 @@ button {
 .pill-button-new-notification {
   background-color: $main-blue;
   border-color: none;
+  color: $white;
 
   &:hover {
     background-color: $medium-blue;
+    color: $white;
+  }
+
+  &:focus {
+    background-color: $medium-blue;
+    color: $white;
   }
 }
 
