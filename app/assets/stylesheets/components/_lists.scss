@@ -1,15 +1,15 @@
 .object-list {
-  & > .list-item {
+  & .list-item {
     border-bottom: 1px solid $light-gray;
     margin-bottom: 1em;
     padding-bottom: 1em;
 
-    > .attributes {
+    .attributes {
       font-size: 0.8em;
     }
 
     &.-move {
-      > .name {
+      .name {
         font-size: 1.2rem;
         margin-bottom: 0
       }
@@ -18,40 +18,38 @@
     &.-video {
       display: flex;
 
-      & > .embedded-video {
+      & .embedded-video {
         width: 45%;
         margin-right: 1rem;
       }
 
-      & > .video-details {
+      & .video-details {
         width: 50%;
 
-        & > .name {
+        & .name {
           font-size: 1rem;
           margin: 0;
           @include truncate;
         }
 
-        & > .author {
+        & .author {
           font-size: 0.8rem;
           margin: 0;
           @include truncate;
         }
 
-        & > .description {
+        & .description {
           display: none;
         }
 
-        > .attributes {
-          & > .type,
-          & > .average-ratings,
-          & > .total-ratings {
+        .attributes {
+          & .type,
+          & .average-ratings,
+          & .total-ratings {
             display: none;
           }
         }
       }
-
     }
   }
 }
-
