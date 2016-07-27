@@ -49,6 +49,20 @@ After setting up, you can run the application using:
 - `script/server`: Start a local web server.
 - `script/test`: Run the tests.
 
+### Seeding your database
+
+Just run:
+
+`docker-compose run web bin/rake db:seed:development`
+
+and it will seed activities, moves and users. For specific seeds, currently you can run:
+
+```
+docker-compose run web bin/rake db:seed:development:activities
+docker-compose run web bin/rake db:seed:development:moves
+docker-compose run web bin/rake db:seed:development:users
+```
+
 ### Creating test notifications
 
 In test and development environments you can create test notifications from the console like so:
