@@ -1,13 +1,13 @@
 .search-filters
   = form_tag filter_submit_path, method: :get, class: 'filter-form' do
-    .filter-type
-      = fields_for :filter do |f|
-        = f.label :type, "Type", class: 'label'
+    = fields_for :filter do |f|
+      .filter-element
         = f.select :type, options_for_select(Video.types_for_filtering), {}, {class: 'select'}
-    .filter-order
-      = fields_for :sort do |f|
-        = f.label :by, "Sort by", class: 'label'
-        = f.select :by, options_for_select([["Date", "created_at"], ["Rating", "rating"], ["Views", "views_count"]]), {}, {class: 'select'}
-        = f.select :direction, options_for_select([["Highest", "DESC"], ["Lowest", "ASC"]]), {}, {class: 'select'}
 
-    = submit_tag "Go", class: 'submit'
+    = fields_for :sort do |f|
+      .filter-element
+        = f.select :by, options_for_select([["Sort by date", "created_at"], ["Sort by rating", "rating"], ["Sort by views", "views_count"]]), {}, {class: 'select'}
+      .filter-element
+        = f.select :direction, options_for_select([["Descending", "DESC"], ["Ascending", "ASC"]]), {}, {class: 'select'}
+
+    // = submit_tag "Go", class: 'submit'
