@@ -1,8 +1,13 @@
 .object-list {
   & .list-item {
-    border-bottom: 1px solid $light-gray;
     margin-bottom: 1em;
     padding-bottom: 1em;
+    background: $white;
+    border-radius: $base-border-radius;
+    @include shadow-level(1);
+    margin-top: 25px;
+    padding: 25px 15px 25px 30px;
+    border-left: 3px solid $main-red;
 
     .attributes {
       font-size: 0.8em;
