@@ -39,6 +39,7 @@ h6 {
 //
 // .activity-title - The title of an activity on the timeline.
 // .video-title - The title of a video on the show video view.
+// .list-title - The title link of a list element
 //
 // Styleguide 2.2
 h1 {
@@ -55,6 +56,9 @@ h1 {
 }
 .video-title {
   text-align: center;
+}
+.list-title {
+  padding: 0;
 }
 
 // h2
