@@ -9,5 +9,3 @@
         = f.select :by, options_for_select([["Sort by date", "created_at"], ["Sort by rating", "rating"], ["Sort by views", "views_count"]]), {}, {class: 'select', :onchange => "this.form.submit()"}
       .filter-element
         = f.select :direction, options_for_select([["Descending", "DESC"], ["Ascending", "ASC"]]), {}, {class: 'select', :onchange => "this.form.submit()"}
-
-    // = submit_tag "Go", class: 'submit'
