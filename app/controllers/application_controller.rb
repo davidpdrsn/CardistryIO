@@ -38,11 +38,15 @@ class ApplicationController < ActionController::Base
   end
 
   around_action :require_beta_authentication
-  def require_beta_authentication(&block)
-    if signed_in_as_beta_tester? || (params[:username] && params[:password])
-      block.call
+  def require_beta_authentication
+    if Rails.env.production?
+      if signed_in_as_beta_tester? || (params[:username] && params[:password])
+        yield
+      else
+        render "welcome/beta_signin", layout: nil
+      end
     else
-      render "welcome/beta_signin", layout: nil
+      yield
     end
   end
 
