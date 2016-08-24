@@ -38,10 +38,9 @@
 
           -if @user.instagram_username.present?
             %li
-              = link_to @user.instagram_username, "http://instagram.com/#{@user.instagram_username}" do
+              = link_to "http://instagram.com/#{@user.instagram_username}" do
                 %i.icon.ion-social-instagram
                 Instagram
-
 
       %div.grid-item{:style => "display: table;"}
         %p.biography

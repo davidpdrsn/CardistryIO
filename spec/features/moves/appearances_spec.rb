@@ -38,7 +38,7 @@ feature "appearances" do
     click_link "Edit move appearances"
     click_button "Delete all appearances"
 
-    expect(page).to have_content "No move appearances added"
+    expect(page).not_to have_content move.name
   end
 
   scenario "show video on edit page, as reference" do

@@ -13,11 +13,11 @@ feature "tracking views on videos" do
       visit video_path(video, as: alice)
     end
 
-    expect(page).to_not have_content "Stats"
+    expect(page).to_not have_content "views"
+    expect(page).to_not have_content "unique views"
 
     visit video_path(video, as: bob)
 
-    expect(page).to have_content "Stats"
     expect(page).to have_content "2 views"
     expect(page).to have_content "1 unique view"
   end
