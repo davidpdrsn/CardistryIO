@@ -27,6 +27,6 @@ class SearchesController < ApplicationController
   end
 
   def query
-    params.require(:query)
+    params.fetch(:query) { "" }
   end
 end

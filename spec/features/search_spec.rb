@@ -45,4 +45,12 @@ feature "search" do
 
     expect(page).to have_content "No results"
   end
+
+  scenario "searching for empty string" do
+    visit root_path
+
+    click_button "Search"
+
+    expect(page).to have_content "No results"
+  end
 end
