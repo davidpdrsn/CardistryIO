@@ -18,6 +18,18 @@ en:
   titles:
     application: CardistryIO
 
+  general:
+    authentication:
+      sign_in: Sign in
+      sign_up: Sign up
+    single_words:
+      or: or
+
+  beta:
+    landing_page:
+      welcome_text: Follow the links below to get started
+      welcome_heading: Welcome onboard!
+
   moves:
     list:
       empty: Nothing to see here
