@@ -262,8 +262,6 @@ GEM
     puma (3.4.0)
     rack (2.0.0.rc1)
       json
-    rack-mini-profiler (0.9.9.2)
-      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-timeout (0.4.2)
@@ -456,7 +454,6 @@ DEPENDENCIES
   pg
   pry-rails
   puma
-  rack-mini-profiler
   rack-timeout
   rails (= 5.0.0.rc1)
   recipient_interceptor

@@ -8,13 +8,6 @@ class ApplicationController < ActionController::Base
     super || NullUser.new
   end
 
-  before_action :enable_rack_mini_profiler
-  def enable_rack_mini_profiler
-    if current_user.admin?
-      Rack::MiniProfiler.authorize_request
-    end
-  end
-
   def authenticate(params)
     User.authenticate(
       params[:session][:email_or_username],
