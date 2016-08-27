@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.0"
 
-gem "rails", "5.0.0.rc1"
+gem "rails", "5.0.0.1"
 
 # Most at the top because other gems might depend on ENV being loaded
 gem "dotenv-rails", require: "dotenv/rails-now"
@@ -37,9 +37,9 @@ gem "pg"
 gem "puma"
 gem "rack-mini-profiler", require: false
 gem "recipient_interceptor"
-gem "redis-actionpack", git: "https://github.com/redis-store/redis-actionpack.git", branch: "master"
-gem "redis-rack", git: "https://github.com/redis-store/redis-rack.git", branch: "master"
-gem "redis-rails", git: "https://github.com/redis-store/redis-rails.git", branch: "master"
+gem "redis-actionpack"
+gem "redis-rack"
+gem "redis-rails"
 gem "refills"
 gem "resque"
 gem "rollbar"
@@ -47,8 +47,8 @@ gem "resque-rollbar"
 gem "sass-rails"
 gem "simple_form"
 gem "country_select"
-gem "skylight"
 gem "stackprof"
+gem "listen"
 gem "title"
 gem "uglifier"
 
@@ -65,11 +65,11 @@ group :development, :test do
   gem "byebug"
   gem "factory_girl_rails"
   gem "pry-rails"
-  gem "rspec-rails", "3.5.0.beta3"
+  gem "rspec-rails"
 end
 
 group :test do
-  gem "capybara-webkit", ">= 1.2.0"
+  gem "capybara-webkit"
   gem "database_cleaner"
   gem "formulaic"
   gem "launchy"

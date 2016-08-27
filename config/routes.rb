@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "/from_action", to: "foo#from_action"
+  get "/from_inline_script", to: "foo#from_inline_script"
+  get "/from_application_js", to: "foo#from_application_js"
+
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 
