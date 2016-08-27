@@ -3,4 +3,4 @@
 - if page.present?
   = render partial: "shared/paginated_list", locals: { page: page }
 - else
-  You have no videos, yet
+  = t "videos.list.empty"

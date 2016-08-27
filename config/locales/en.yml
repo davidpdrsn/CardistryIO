@@ -17,3 +17,11 @@ en:
 
   titles:
     application: CardistryIO
+
+  moves:
+    list:
+      empty: Nothing to see here
+
+  videos:
+    list:
+      empty: Nothing to see here
