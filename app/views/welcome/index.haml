@@ -1,9 +1,8 @@
-%h1 Welcome onboard!
+%h1= t("beta.landing_page.welcome_heading")
 
-%p
-  Follow the links below to get started
+%p= t "beta.landing_page.welcome_text"
 
 %div
-  = link_to "Sign in", sign_in_path
-  or
-  = link_to "sign up", sign_up_path
+  = link_to t("general.authentication.sign_in"), sign_in_path
+  = t "general.single_words.or"
+  = link_to t("general.authentication.sign_up"), sign_up_path
