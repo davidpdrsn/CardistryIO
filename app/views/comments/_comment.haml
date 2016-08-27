@@ -1,15 +1,9 @@
 %div.comment
-  = link_mentions comment.content
-  %p
-    By
-    = link_to comment.user.username, comment.user
-
-  - if comment.updated?
-    %p
-      Updated
-      = time_ago_in_words comment.updated_at
-      ago
-
-  - if current_user == comment.user
-    %p
-      = link_to "Edit", polymorphic_path([comment.commentable, comment], action: :edit)
+  %div.comment-image
+    = link_to comment.user do
+      = image_tag comment.user.gravatar_url
+  %div.comment-content
+    = link_mentions(comment.content)
+    %p.comment-detail
+      = link_to "@#{comment.user.username}", comment.user
+      commented #{time_ago_in_words(comment.created_at)} ago
