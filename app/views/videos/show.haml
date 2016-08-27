@@ -38,7 +38,7 @@
                   |
                   = link_to appearance.move_name, appearance.move
 
-    %div.comments= render @video.comments
+    %div.comments= render @video.comments.order(:created_at)
 
     = render partial: "comments/form", locals: { commentable: @video }
 
