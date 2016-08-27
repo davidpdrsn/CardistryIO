@@ -42,10 +42,12 @@
       - @video.comments.each do |comment|
         %div.comment
           %div.comment-image
-            = image_tag comment.user.gravatar_url
+            = link_to comment.user do
+              = image_tag comment.user.gravatar_url
           %div.comment-content
-            = comment.content
+            = link_mentions(comment.content)
             %p.comment-detail
+              = link_to "@#{comment.user.username}", comment.user
               commented #{time_ago_in_words(comment.created_at)} ago
 
     = render partial: "comments/form", locals: { commentable: @video }
