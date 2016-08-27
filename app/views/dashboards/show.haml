@@ -1,0 +1,32 @@
+%h1 Quick stats
+%dl
+  - [Activity, Comment, Credit, Move, Notification, Rating, Relationship, User, Video, VideoView].each do |klass|
+    %dt= klass.name.pluralize
+    %dd= klass.count
+
+%div
+  %div{style: "float: left; width: 33.333%"}
+    %h1 All users
+    %ul
+      - User.all.order(created_at: :desc).each do |user|
+        %li
+          = link_to user.username, user
+          = time_ago_in_words(user.created_at)
+
+  %div{style: "float: left; width: 33.333%"}
+    %h1 All videos
+    %ul
+      - Video.all.each do |video|
+        %li
+          = link_to video.name, video
+          = time_ago_in_words(video.created_at)
+
+  %div{style: "float: left; width: 33.333%"}
+    %h1 All moves
+    %ul
+      - Move.all.each do |move|
+        %li
+          = link_to move.name, move
+          = time_ago_in_words(move.created_at)
+
+%div{style: "clear: both;"}
