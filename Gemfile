@@ -35,7 +35,6 @@ gem "neat"
 gem "normalize-rails"
 gem "pg"
 gem "puma"
-gem "rack-mini-profiler", require: false
 gem "recipient_interceptor"
 gem "redis-actionpack", git: "https://github.com/redis-store/redis-actionpack.git", branch: "master"
 gem "redis-rack", git: "https://github.com/redis-store/redis-rack.git", branch: "master"
