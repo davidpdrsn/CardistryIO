@@ -16,7 +16,7 @@
   %div{style: "float: left; width: 33.333%"}
     %h1 All videos
     %ul
-      - Video.all.each do |video|
+      - Video.all.order(created_at: :desc).each do |video|
         %li
           = link_to video.name, video
           = time_ago_in_words(video.created_at)
@@ -24,7 +24,7 @@
   %div{style: "float: left; width: 33.333%"}
     %h1 All moves
     %ul
-      - Move.all.each do |move|
+      - Move.all.order(created_at: :desc).each do |move|
         %li
           = link_to move.name, move
           = time_ago_in_words(move.created_at)
