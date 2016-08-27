@@ -1,4 +1,4 @@
-class DashboardsController < ApplicationController
+class DashboardsController < Api::AdminController
   def show
     render layout: false
   end
