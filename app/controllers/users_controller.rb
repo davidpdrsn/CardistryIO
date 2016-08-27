@@ -2,6 +2,10 @@ class UsersController < Clearance::UsersController
   before_action :require_login, only: [:edit, :update, :make_admin]
   before_action :has_access, only: [:edit, :update]
 
+  def index
+    @users = User.all.order(created_at: :desc)
+  end
+
   def show
     @user = User.find(params[:id])
   end

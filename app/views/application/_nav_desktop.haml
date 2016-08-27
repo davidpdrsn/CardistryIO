@@ -7,6 +7,9 @@
         notifications_path
 
   %ul
+    %li.nav-item{:class => current_path_class('users/all')}
+      %i.icon.ion-android-hand
+      = link_to "All Users", users_path
     %li.nav-item{:class => current_path_class('moves/all')}
       %i.icon.ion-android-hand
       = link_to "All Moves", all_moves_path
