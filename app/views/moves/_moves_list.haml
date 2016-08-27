@@ -13,4 +13,4 @@
 - if page.present?
   = render partial: "shared/paginated_list", locals: { page: page }
 - else
-  You have no moves, yet
+  = t "moves.list.empty"
