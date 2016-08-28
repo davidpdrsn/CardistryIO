@@ -27,11 +27,15 @@ class LinkMentions
   end
 
   def is_mention?(word)
-    word.include?("@")
+    match_against_regex(word).present?
+  end
+
+  def match_against_regex(word)
+    word.match(/(.*?)@(#{User::USERNAME_REGEX})(.*)/)
   end
 
   def make_into_link_and_track_mentioned_users(word)
-    match = word.match(/(.*?)@(#{User::USERNAME_REGEX})(.*)/)
+    match = match_against_regex(word)
     start = match[1]
     username = match[2]
     rest = match[3]
