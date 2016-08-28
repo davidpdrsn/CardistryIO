@@ -18,6 +18,18 @@ describe RelationshipsController do
       expect(bob.follows?(alice)).to eq true
     end
 
+    it "doesn't follow users multiple times" do
+      bob = create :user
+      alice = create :user
+      sign_in_as bob
+
+      2.times do
+        post :create, params: { id: alice.id }
+      end
+
+      expect(bob.follows?(alice)).to eq true
+    end
+
     it "creates notifications" do
       bob = create :user
       alice = create :user
