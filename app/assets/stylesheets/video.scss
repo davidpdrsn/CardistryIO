@@ -45,6 +45,8 @@
 
     .grid-items-lines {
       .grid-item {
+        height: auto;
+
         &:hover {
           cursor: default;
           background-color: #fff;
