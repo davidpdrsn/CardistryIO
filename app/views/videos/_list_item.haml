@@ -1,11 +1,20 @@
 %li.list-item.-video
-  = render partial: "videos/embed_video", locals: { video: object }
-  %aside.video-details
-    %h3.name= link_to object.name, object
-    %h4.author= "by #{object.author}"
-    %p.description= object.description
+  %div.video-thumbnail{:style => "background: url(#{object.thumbnail_url}) no-repeat center; background-size: cover;"}
 
-    %ul.attributes
-      - object.additional_attributes.each do |attribute, value|
-        %li{class: attribute}
-          = "#{value} #{attribute.titleize}"
+  %div.video-data
+    %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{object.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
+    %span.username
+      = link_to object.user.username, object.user
+
+    %h1.list-title= link_to object.name, object
+
+    - if object.description?
+      %p.description= object.description
+    - else
+      %p.no-description
+        There is no description for this video.
+
+      %ul.attributes
+        - object.additional_attributes.each do |attribute, value|
+          %li{class: attribute}
+            %h3= "#{value} #{attribute.titleize}"

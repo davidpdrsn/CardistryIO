@@ -21,39 +21,24 @@
     }
 
     &.-video {
-      display: flex;
+      float: left;
+      position: relative;
+      width: 100%;
 
-      & .embedded-video {
-        width: 45%;
-        margin-right: 1rem;
+      .video-thumbnail {
+        float: right;
+        width: 30%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-left: 60px;
       }
 
-      & .video-details {
-        width: 50%;
-
-        & .name {
-          font-size: 1rem;
-          margin: 0;
-          @include truncate;
-        }
-
-        & .author {
-          font-size: 0.8rem;
-          margin: 0;
-          @include truncate;
-        }
-
-        & .description {
-          display: none;
-        }
-
-        .attributes {
-          & .type,
-          & .average-ratings,
-          & .total-ratings {
-            display: none;
-          }
-        }
+      .video-data {
+        float: left;
+        width: 70%;
+        padding: 0 60px 0 0;
       }
     }
   }
