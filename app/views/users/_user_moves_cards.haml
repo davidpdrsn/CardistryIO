@@ -1,6 +1,6 @@
 %div.cards
-  - if @user.moves.where(idea: false).present?
-    - @user.moves.where(idea: false).each do |move|
+  - if moves.present?
+    - moves.each do |move|
       = link_to move, {:class => "card"} do
         %div.card-image
           - if move.thumbnail_url.present?
@@ -14,11 +14,10 @@
         %div.card-meta
           = "posted #{time_ago_in_words(move.created_at)} ago"
           %div.rating
-            %i.icon.ion-android-star
-            %i.icon.ion-android-star
-            %i.icon.ion-android-star
-            %i.icon.ion-android-star
-            %i.icon.ion-android-star
-
+            - if move.ratings.empty?
+              = t "ratings.not_rated"
+            - else
+              - WithRatingStats.new(move).average_rating.round.times do
+                %i.icon.ion-android-star
   - else
-    %h1= t "users.profile.moves.none"
+    %h1= t "users.profile.#{type}.none"
