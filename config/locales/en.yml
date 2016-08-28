@@ -40,3 +40,12 @@ en:
 
   ratings:
     not_rated: No ratings yet
+
+  users:
+    profile:
+      videos:
+        none: No videos yet
+      moves:
+        none: No moves yet
+      ideas:
+        none: No ideas yet
