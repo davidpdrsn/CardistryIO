@@ -23,6 +23,7 @@ class SortsVideos
     default_sort_params
   end
 
+  # TODO: These shouldn't be needed anymore
   def default_sort_params
     ActionController::Parameters.new(
       by: "created_at",

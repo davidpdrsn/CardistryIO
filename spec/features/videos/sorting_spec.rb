@@ -3,13 +3,12 @@ require "rails_helper"
 feature "filtering and sorting videos" do
   include OrderExpectations
 
-  scenario "filtering for tutorials" do
+  scenario "filtering for tutorials", :js do
     tutorial = create :video, video_type: :tutorial
     performance = create :video, video_type: :performance
 
     visit all_videos_path
-    select "Tutorials", from: "filter_type"
-    click_button "Go"
+    select "Show only tutorials", from: "filter_type"
 
     expect(page).to have_content tutorial.name
     expect(page).to_not have_content performance.name
@@ -25,19 +24,18 @@ feature "filtering and sorting videos" do
     expect_to_appear_in_order([one, two, three].map(&:name))
   end
 
-  scenario "sorting by created at ascending" do
+  scenario "sorting by created at ascending", :js do
     one = create :video, created_at: Time.zone.now
     two = create :video, created_at: 2.days.ago
     three = create :video, created_at: 10.weeks.ago
 
     visit all_videos_path
-    select "Lowest", from: "sort_direction"
-    click_button "Go"
+    select "Ascending", from: "sort_direction"
 
     expect_to_appear_in_order([three, two, one].map(&:name))
   end
 
-  scenario "sorting by rating" do
+  scenario "sorting by rating", :js do
     one = create :video, created_at: Time.zone.now
     5.times { create :rating, rateable: one, rating: 5 }
 
@@ -48,14 +46,13 @@ feature "filtering and sorting videos" do
     5.times { create :rating, rateable: three, rating: 1 }
 
     visit all_videos_path
-    select "Rating", from: "sort_by"
-    select "Highest", from: "sort_direction"
-    click_button "Go"
+    select "Sort by rating", from: "sort_by"
+    select "Descending", from: "sort_direction"
 
     expect_to_appear_in_order([one, two, three].map(&:name))
   end
 
-  scenario "sorting by rating in reverse" do
+  scenario "sorting by rating in reverse", :js do
     one = create :video, created_at: Time.zone.now
     5.times { create :rating, rateable: one, rating: 5 }
 
@@ -66,34 +63,32 @@ feature "filtering and sorting videos" do
     5.times { create :rating, rateable: three, rating: 1 }
 
     visit all_videos_path
-    select "Rating", from: "sort_by"
-    select "Lowest", from: "sort_direction"
-    click_button "Go"
+    select "Sort by rating", from: "sort_by"
+    select "Ascending", from: "sort_direction"
 
     expect_to_appear_in_order([three, two, one].map(&:name))
   end
 
-  scenario "sorting by number of views" do
+  scenario "sorting by number of views", :js do
     user = create :user
 
-    one = create :video
+    one = create :video, name: "one"
     13.times { create :video_view, video: one, user: user }
 
-    two = create :video
+    two = create :video, name: "two"
     12.times { create :video_view, video: two, user: user }
 
-    three = create :video
+    three = create :video, name: "three"
     11.times { create :video_view, video: three, user: user }
 
     visit all_videos_path
-    select "Views", from: "sort_by"
-    select "Highest", from: "sort_direction"
-    click_button "Go"
+    select "Sort by views", from: "sort_by"
+    select "Descending", from: "sort_direction"
 
     expect_to_appear_in_order([one, two, three].map(&:name))
   end
 
-  scenario "filtering and sorting of 'My Videos'" do
+  scenario "filtering and sorting of 'My Videos'", :js do
     bob = create :user
     tutorial = create :video, video_type: :tutorial, user: bob, created_at: Time.zone.now
     old_tutorial = create :video, video_type: :tutorial, user: bob, created_at: 2.weeks.ago
@@ -102,9 +97,8 @@ feature "filtering and sorting videos" do
 
     visit root_path(as: bob)
     click_link "My Videos"
-    select "Tutorials", from: "filter_type"
-    select "Lowest", from: "sort_direction"
-    click_button "Go"
+    select "Show only tutorials", from: "filter_type"
+    select "Ascending", from: "sort_direction"
 
     expect(page).to_not have_content performance.name
     expect(page).to_not have_content other_users_video.name

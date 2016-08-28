@@ -12,6 +12,7 @@
       There is no description for this move.
 
   %ul.attributes
-    - object.additional_attributes.each do |attribute, value|
-      %li{class: attribute}
-        %h3= "#{value} #{attribute.titleize}"
+    %li{class: "average-ratings"}
+      %h3 #{object.average_rating} average ratings
+    %li{class: "total-ratings"}
+      %h3 #{object.ratings.count} total ratings

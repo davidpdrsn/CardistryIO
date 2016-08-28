@@ -19,26 +19,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
-    @comment = Comment.find(params[:id])
-    ensure_user_made_comment(@comment)
-  end
-
-  def update
-    commentable = find_commentable
-    @comment = Comment.find(params[:id])
-
-    ensure_user_made_comment(@comment) do
-      if @comment.update(comment_params)
-        flash.notice = "Comment updated"
-        redirect_to commentable
-      else
-        flash.alert = "Comment was invalid"
-        render :edit
-      end
-    end
-  end
-
   private
 
   def find_commentable

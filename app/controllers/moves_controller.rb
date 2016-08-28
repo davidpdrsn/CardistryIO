@@ -3,15 +3,8 @@ class MovesController < ApplicationController
                                        :destroy, :edit, :update]
 
   def all
-    moves = filter_sort_and_paginate(Move.all)
-
     @filter_submit_path = all_moves_path
-    @paged_moves = moves.map do |move|
-      MoveWithUser.new(
-        move: move,
-        user: UserWithName.new(move.user),
-      )
-    end
+    @paged_moves = filter_sort_and_paginate(Move.all)
   end
 
   def index

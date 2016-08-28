@@ -1,4 +1,15 @@
-= render partial: "shared/filter_and_sort", locals: { filter_submit_path: filter_submit_path }
+.search-filters
+  = form_tag filter_submit_path, method: :get, class: "filter-form" do
+    = fields_for :filter do |form|
+      .filter-element
+        = videos_filter_select(form)
+
+    = fields_for :sort do |f|
+      .filter-element
+        = videos_sort_by_select(f)
+
+      .filter-element
+        = videos_sort_direction_select(f)
 
 - if page.present?
   = render partial: "shared/paginated_list", locals: { page: page }

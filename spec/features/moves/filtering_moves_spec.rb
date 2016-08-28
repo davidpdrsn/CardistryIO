@@ -11,40 +11,37 @@ feature "filtering moves" do
     expect(page).to have_content idea.name
   end
 
-  scenario "filtering by idea" do
+  scenario "filtering by idea", :js do
     move = create :move, idea: false
     idea = create :move, idea: true
 
     visit all_moves_path
-    select "Ideas", from: "filter_type"
-    click_button "Go"
+    select "idea", from: "filter_type"
 
     expect(page).to_not have_content move.name
     expect(page).to have_content idea.name
   end
 
-  scenario "filtering by moves" do
+  scenario "filtering by moves", :js do
     move = create :move, idea: false
     idea = create :move, idea: true
 
     visit all_moves_path
     # TODO: Come up with a better name for this
-    select "Finished", from: "filter_type"
-    click_button "Go"
+    select "finished", from: "filter_type"
 
     expect(page).to have_content move.name
     expect(page).to_not have_content idea.name
   end
 
-  scenario "filtering 'My Moves'" do
+  scenario "filtering 'My Moves'", :js do
     user = create :user
     move = create :move, idea: false, user: user
     idea = create :move, idea: true, user: user
 
     visit moves_path(as: user)
     # TODO: Come up with a better name for this
-    select "Finished", from: "filter_type"
-    click_button "Go"
+    select "finished", from: "filter_type"
 
     expect(page).to have_content move.name
     expect(page).to_not have_content idea.name

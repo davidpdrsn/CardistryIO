@@ -15,16 +15,18 @@ class Move < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  def self.order_by_rating(direction)
-    OrdersByRatings.new(self).order(direction)
-  end
+  class << self
+    def order_by_rating(direction)
+      OrdersByRatings.new(self).order(direction)
+    end
 
-  def self.ideas
-    where(idea: true)
-  end
+    def ideas
+      where(idea: true)
+    end
 
-  def self.finished
-    where(idea: false)
+    def finished
+      where(idea: false)
+    end
   end
 
   use WithRatingStats, for: :average_rating

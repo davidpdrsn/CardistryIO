@@ -43,8 +43,10 @@ feature "creating move" do
     visit root_path(as: user)
     click_link "All Moves"
 
-    expect(page).to have_css :a, text: "Sybil by davidpdrsn"
-    expect(page).to have_css :a, text: "Mocking Bird"
+    within ".content-area" do
+      expect(page).to have_css :a, text: "Sybil"
+      expect(page).to have_css :a, text: "Mocking Bird"
+    end
   end
 
   scenario "can't create without being logged in" do
