@@ -30,9 +30,9 @@ class Video < ApplicationRecord
   class << self
     def types_for_filtering
       other_types = video_types.keys.map do |type|
-        [type.humanize.pluralize, type]
+        ["Show only " + type.humanize.pluralize.downcase, type]
       end
-      [["All", "all"]] + other_types
+      [["Show all types", "all"]] + other_types
     end
 
     def all_public

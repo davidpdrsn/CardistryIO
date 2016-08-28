@@ -1,0 +1,88 @@
+.search-filters {
+  width: 100%;
+  background: $white;
+  border-radius: $base-border-radius;
+  padding: 8px 15px 5px 15px;
+  margin-top: $content-area-top-margin;
+  height: 60px;
+  line-height: 45px;
+  @include shadow-level(1);
+
+  @include media($medium-screen-up) {
+
+  }
+
+  @include media($large-screen-up) {
+    margin-left: 0;
+  }
+
+  .filter-form {
+    .filter-element {
+      display: inline-block;
+      border-right: 1px solid darken($light-gray, 50%);
+      height: 46px;
+      position: relative;
+    }
+    .filter-element:last-child {
+      border-right: none;
+    }
+
+    .filter-element::before {
+      content: "";
+      position: absolute;
+      width: 2em;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    .filter-element::after {
+      font-family: "Ionicons";
+      content: '\f35f';
+      height: 1em;
+      font-size: 1.1em;
+      color: darken($light-gray, 50%);
+      position: absolute;
+      top: 0;
+      right: -10px;
+      margin-right: 25px;
+    }
+
+    select {
+      font-size: 1.1em;
+      color: darken($light-gray, 50%);
+      border-radius: 0;
+      padding: 0 40px 0 20px;
+    }
+
+    select:last-child {
+      border-right: none;
+    }
+
+    select::after {
+      font-family: 'Ionicons';
+      content: '\f456';
+      height: 1em;
+    }
+  }
+
+
+  .submit {
+    width: 100%;
+    max-width: 25em;
+    margin: auto;
+
+    @include media($large-screen-up) {
+      margin-left: 0;
+      max-width: 9em;
+    }
+  }
+
+  .select {
+    height: 44px;
+    font-size: inherit;
+    background: white;
+    border: none;
+    margin-bottom: 1rem;
+    -webkit-appearance: button;
+  }
+}

@@ -1,0 +1,11 @@
+.search-filters
+  = form_tag filter_submit_path, method: :get, class: 'filter-form' do
+    = fields_for :filter do |f|
+      .filter-element
+        = f.select :type, options_for_select(Video.types_for_filtering), {}, {class: 'select', :onchange => "this.form.submit()"}
+
+    = fields_for :sort do |f|
+      .filter-element
+        = f.select :by, options_for_select([["Sort by date", "created_at"], ["Sort by rating", "rating"], ["Sort by views", "views_count"]]), {}, {class: 'select', :onchange => "this.form.submit()"}
+      .filter-element
+        = f.select :direction, options_for_select([["Descending", "DESC"], ["Ascending", "ASC"]]), {}, {class: 'select', :onchange => "this.form.submit()"}

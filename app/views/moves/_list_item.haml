@@ -1,0 +1,17 @@
+%li.list-item.-move
+  %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{object.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
+  %span.username
+    = link_to object.user.username, object.user
+
+  %h1.list-title= link_to object.name, object
+
+  - if object.description?
+    %p.description= object.description
+  - else
+    %p.no-description
+      There is no description for this move.
+
+  %ul.attributes
+    - object.additional_attributes.each do |attribute, value|
+      %li{class: attribute}
+        %h3= "#{value} #{attribute.titleize}"

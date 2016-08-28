@@ -1,0 +1,45 @@
+.object-list {
+  & .list-item {
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    background: $white;
+    border-radius: $base-border-radius;
+    @include shadow-level(1);
+    margin-top: 25px;
+    padding: 25px 15px 25px 30px;
+    border-left: 3px solid $main-red;
+
+    .attributes {
+      font-size: 0.8em;
+    }
+
+    &.-move {
+      .name {
+        font-size: 1.2rem;
+        margin-bottom: 0
+      }
+    }
+
+    &.-video {
+      float: left;
+      position: relative;
+      width: 100%;
+
+      .video-thumbnail {
+        float: right;
+        width: 30%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-left: 60px;
+      }
+
+      .video-data {
+        float: left;
+        width: 70%;
+        padding: 0 60px 0 0;
+      }
+    }
+  }
+}

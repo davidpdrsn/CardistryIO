@@ -1,17 +1,27 @@
 require "rails_helper"
 
 describe MoveWithUser do
-  describe "#name" do
-    it "includes the name of the user" do
-      raw_move = double("move", name: "Sybil")
-      user = double("user", username: "david")
+  subject(:move) { described_class.new(move: raw_move, user: user) }
 
-      move = MoveWithUser.new(
-        move: raw_move,
-        user: user,
-      )
+  let(:raw_move) { instance_double('move', name: 'Sybil', average_rating: 5.7, ratings: [5,6]) }
+  let(:user) { instance_double('user', username: 'david') }
 
-      expect(move.name).to eq "Sybil by david"
+  describe '#author' do
+    subject(:author) { move.author }
+
+    it { is_expected.to eq 'david' }
+  end
+
+  describe '#additional_attributes' do
+    subject { move.additional_attributes }
+
+    let(:expected_attributes) do
+      {
+        'average-ratings' => 5.7,
+        'total-ratings' => 2
+      }
     end
+
+    it { is_expected.to include expected_attributes }
   end
 end
