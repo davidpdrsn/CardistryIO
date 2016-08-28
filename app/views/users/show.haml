@@ -31,11 +31,6 @@
                 %i.icon.ion-edit
                 Edit
 
-          %li
-            = link_to edit_user_path do
-              %i.icon.ion-paper-airplane
-              Message
-
           -if @user.instagram_username.present?
             %li
               = link_to "http://instagram.com/#{@user.instagram_username}" do
