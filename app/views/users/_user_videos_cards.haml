@@ -15,12 +15,11 @@
           = pluralize video.views.count, "view"
           = "| posted #{time_ago_in_words(video.created_at)} ago"
           %div.rating
-            %i.icon.ion-android-star
-            %i.icon.ion-android-star
-            %i.icon.ion-android-star
-            %i.icon.ion-android-star
-            %i.icon.ion-android-star
+            - if video.ratings.empty?
+              = t "ratings.not_rated"
+            - else
+              - WithRatingStats.new(video).average_rating.round.times do
+                %i.icon.ion-android-star
   - else
     %h1
       No videos yet.
-

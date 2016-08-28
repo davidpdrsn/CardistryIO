@@ -37,3 +37,6 @@ en:
   videos:
     list:
       empty: Nothing to see here
+
+  ratings:
+    not_rated: No ratings yet
