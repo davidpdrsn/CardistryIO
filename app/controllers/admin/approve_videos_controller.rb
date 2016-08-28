@@ -25,9 +25,14 @@ module Admin
     private
 
     def create_activity(video)
-      Observers::VideoActivity
-        .new(Observers::Activity.new)
-        .save(video)
+      Observers::VideoActivity.new(
+        CompositeObserver.new(
+          [
+            Observers::Activity.new,
+            Observers::LoadsThumbnails.new,
+          ]
+        )
+      ).save(video)
     end
 
     def is_admin?
