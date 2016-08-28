@@ -76,16 +76,4 @@ feature "approving videos" do
 
     expect(page).to have_content video.name
   end
-
-  scenario "the thumbnail gets loaded" do
-    admin = create :user, admin: true
-    video = create :video, approved: false
-
-    visit root_path(as: admin)
-    click_link "All Videos"
-    click_link "Approve videos"
-    click_button "Approve"
-
-    expect(video.reload.thumbnail_url).to_not be_empty
-  end
 end

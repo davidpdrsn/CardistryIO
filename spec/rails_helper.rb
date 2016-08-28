@@ -26,6 +26,7 @@ Capybara::Webkit.configure do |config|
     "https://www.youtube.com",
     "https://secure.gravatar.com",
     "http://vjs.zencdn.net",
+    "fonts.googleapis.com",
   ].each do |url|
     config.block_url(url)
   end

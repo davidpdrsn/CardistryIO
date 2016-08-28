@@ -306,11 +306,11 @@ describe Video do
   describe ".types_for_filtering" do
     it "returns the types that can be filtered by" do
       expect(Video.types_for_filtering).to eq([
-        ["All", "all"],
-        ["Performances", "performance"],
-        ["Tutorials", "tutorial"],
-        ["Move showcases", "move_showcase"],
-        ["Others", "other"],
+        ["Show all types", "all"],
+        ["Show only performances", "performance"],
+        ["Show only tutorials", "tutorial"],
+        ["Show only move showcases", "move_showcase"],
+        ["Show only others", "other"],
       ])
     end
   end

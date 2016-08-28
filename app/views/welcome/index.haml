@@ -1,8 +1,9 @@
-%h1= t("beta.landing_page.welcome_heading")
+- if Rails.env.production?
+  %h1= t("beta.landing_page.welcome_heading")
 
-%p= t "beta.landing_page.welcome_text"
+  %p= t "beta.landing_page.welcome_text"
 
-%div
-  = link_to t("general.authentication.sign_in"), sign_in_path
-  = t "general.single_words.or"
-  = link_to t("general.authentication.sign_up"), sign_up_path
+  %div
+    = link_to t("general.authentication.sign_in"), sign_in_path
+    = t "general.single_words.or"
+    = link_to t("general.authentication.sign_up"), sign_up_path

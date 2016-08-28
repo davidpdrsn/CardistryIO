@@ -13,69 +13,69 @@ feature "sorting moves" do
     expect_to_appear_in_order([one, two, three].map(&:name))
   end
 
-  scenario "sorting by created at desc" do
+  scenario "sorting by created at desc", :js do
     one = create :move, created_at: Time.zone.now
     two = create :move, created_at: 1.day.ago
     three = create :move, created_at: 3.weeks.ago
 
     visit all_moves_path
-    select "Date", from: "sort_by"
-    select "Highest", from: "sort_direction"
-    click_button "Go"
+    select "Sort by date", from: "sort_by"
+    select "Descending", from: "sort_direction"
 
     expect_to_appear_in_order([one, two, three].map(&:name))
   end
 
-  scenario "sorting by created at acs" do
+  scenario "sorting by created at acs", :js do
     one = create :move, created_at: Time.zone.now
     two = create :move, created_at: 1.day.ago
     three = create :move, created_at: 3.weeks.ago
 
     visit all_moves_path
-    select "Date", from: "sort_by"
-    select "Lowest", from: "sort_direction"
-    click_button "Go"
+    select "Sort by date", from: "sort_by"
+    select "Ascending", from: "sort_direction"
 
     expect_to_appear_in_order([three, two, one].map(&:name))
   end
 
-  scenario "sorting by rating desc" do
-    one = create :move, created_at: Time.zone.now
-    5.times { create :rating, rateable: one, rating: 5 }
+  scenario "sorting by rating desc", :js do
+    highest_rated = create :move, created_at: Time.zone.now, name: "highest_rated"
+    5.times { create :rating, rateable: highest_rated, rating: 5 }
 
-    two = create :move, created_at: 2.days.ago
-    5.times { create :rating, rateable: two, rating: 3 }
+    middle_rated = create :move, created_at: 2.days.ago, name: "middle_rated"
+    5.times { create :rating, rateable: middle_rated, rating: 3 }
 
-    three = create :move, created_at: 10.weeks.ago
-    5.times { create :rating, rateable: three, rating: 1 }
-
-    visit all_moves_path
-    select "Rating", from: "sort_by"
-    select "Highest", from: "sort_direction"
-    click_button "Go"
-
-    expect_to_appear_in_order([one, two, three].map(&:name))
-  end
-
-  scenario "sorting by rating asc" do
-    one = create :move, created_at: Time.zone.now
-    5.times { create :rating, rateable: one, rating: 1 }
-
-    two = create :move, created_at: 2.days.ago
-    5.times { create :rating, rateable: two, rating: 3 }
-
-    three = create :move, created_at: 10.weeks.ago
-    5.times { create :rating, rateable: three, rating: 5 }
+    lowest_rated = create :move, created_at: 10.weeks.ago, name: "lowest_rated"
+    5.times { create :rating, rateable: lowest_rated, rating: 1 }
 
     visit all_moves_path
-    select "Rating", from: "sort_by"
-    select "Highest", from: "sort_direction"
-    click_button "Go"
+    select "Sort by rating", from: "sort_by"
+    select "Descending", from: "sort_direction"
 
-    expect_to_appear_in_order([three, two, one].map(&:name))
+    expect_to_appear_in_order([highest_rated,
+                               middle_rated,
+                               lowest_rated].map(&:name))
   end
 
-  scenario "sorting 'My Moves'" do
+  scenario "sorting by rating asc", :js do
+    highest_rated = create :move, created_at: Time.zone.now, name: "highest_rated"
+    5.times { create :rating, rateable: highest_rated, rating: 5 }
+
+    middle_rated = create :move, created_at: 2.days.ago, name: "middle_rated"
+    5.times { create :rating, rateable: middle_rated, rating: 3 }
+
+    lowest_rated = create :move, created_at: 10.weeks.ago, name: "lowest_rated"
+    5.times { create :rating, rateable: lowest_rated, rating: 1 }
+
+    visit all_moves_path
+    select "Sort by rating", from: "sort_by"
+    select "Ascending", from: "sort_direction"
+
+    expect_to_appear_in_order([lowest_rated,
+                               middle_rated,
+                               highest_rated].map(&:name))
+  end
+
+  scenario "sorting 'My Moves'", :js do
     user = create :user
 
     one = create :move, created_at: Time.zone.now, user: user
@@ -88,9 +88,8 @@ feature "sorting moves" do
     5.times { create :rating, rateable: three, rating: 5 }
 
     visit moves_path(as: user)
-    select "Rating", from: "sort_by"
-    select "Highest", from: "sort_direction"
-    click_button "Go"
+    select "Sort by rating", from: "sort_by"
+    select "Descending", from: "sort_direction"
 
     expect_to_appear_in_order([three, two, one].map(&:name))
   end
