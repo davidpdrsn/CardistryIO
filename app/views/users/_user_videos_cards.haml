@@ -13,7 +13,7 @@
           = "#{video.description}"
         %div.card-meta
           = pluralize video.views.count, "view"
-          = "| posted #{time_ago_in_words(video.created_at)} ago"
+          = "| " + t("users.profile.posted", time: time_ago_in_words(video.created_at))
           %div.rating
             - if video.ratings.empty?
               = t "ratings.not_rated"

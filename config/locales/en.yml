@@ -43,6 +43,7 @@ en:
 
   users:
     profile:
+      posted: posted %{time} ago
       videos:
         none: No videos yet
       moves:
