@@ -68,7 +68,7 @@ feature "relationships" do
     alice = create :user
     alice.follow!(bob)
 
-    visit user_path(bob, as: bob)
+    visit user_path(bob)
     click_link "1 followers"
 
     expect(page).to have_content alice.username
