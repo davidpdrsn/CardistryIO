@@ -1,4 +1,4 @@
-# Observer that creates activities for videos when they're being approved
+# Observer that only saves decorated video if it is public and approved
 module Observers
   class VideoActivity < SimpleDelegator
     def save(video)
