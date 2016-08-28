@@ -1,5 +1,5 @@
 %div.cards
-  - if @user.videos.present?
+  - if @user.videos.all_public.present?
     - @user.videos.each do |video|
       = link_to video, {:class => "card"} do
         %div.card-image
