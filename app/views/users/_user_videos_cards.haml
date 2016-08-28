@@ -21,5 +21,4 @@
               - WithRatingStats.new(video).average_rating.round.times do
                 %i.icon.ion-android-star
   - else
-    %h1
-      No videos yet.
+    %h1= t "users.profile.videos.none"
