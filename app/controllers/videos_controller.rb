@@ -5,7 +5,13 @@ class VideosController < ApplicationController
 
   def all
     @filter_submit_path = all_videos_path
-    @paged_videos = filter_sort_and_paginate(Video.all_public.approved)
+    videos = filter_sort_and_paginate(Video.all_public.approved)
+    @paged_videos = videos.map do |video|
+      VideoWithUser.new(
+        video: video,
+        user: UserWithName.new(video.user),
+      )
+    end
   end
 
   def index

@@ -1,6 +1,6 @@
-- page.each do |object|
-  %ul
-    %li= link_to object.name, object
+%ul.object-list
+  - page.each do |object|
+    = render partial: "list_item", locals: { object: object }
 
 - path = ->(options) { polymorphic_path([:all, page.detect { true }.class], options) }
 

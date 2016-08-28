@@ -1,0 +1,55 @@
+.object-list {
+  & .list-item {
+    border-bottom: 1px solid $light-gray;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+
+    .attributes {
+      font-size: 0.8em;
+    }
+
+    &.-move {
+      .name {
+        font-size: 1.2rem;
+        margin-bottom: 0
+      }
+    }
+
+    &.-video {
+      display: flex;
+
+      & .embedded-video {
+        width: 45%;
+        margin-right: 1rem;
+      }
+
+      & .video-details {
+        width: 50%;
+
+        & .name {
+          font-size: 1rem;
+          margin: 0;
+          @include truncate;
+        }
+
+        & .author {
+          font-size: 0.8rem;
+          margin: 0;
+          @include truncate;
+        }
+
+        & .description {
+          display: none;
+        }
+
+        .attributes {
+          & .type,
+          & .average-ratings,
+          & .total-ratings {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
