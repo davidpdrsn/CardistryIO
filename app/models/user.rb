@@ -81,7 +81,7 @@ class User < ApplicationRecord
   end
 
   def follow!(user)
-    return unless relationships.where(followee: user, active: true).blank?
+    return if follows?(user)
     klass = if relationships.where(followee: user, active: false).present?
               OldRelationship
             else
