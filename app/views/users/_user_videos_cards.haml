@@ -12,7 +12,7 @@
         %div.card-copy
           = "#{video.description}"
         %div.card-meta
-          1.337 views
+          = pluralize video.views.count, "view"
           = "| posted #{time_ago_in_words(video.created_at)} ago"
           %div.rating
             %i.icon.ion-android-star
