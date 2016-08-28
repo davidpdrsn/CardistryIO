@@ -73,9 +73,9 @@
   %div.content-element
     = render partial: "user_videos_cards"
   %div.content-element
-    = render partial: "user_ideas_cards", locals: { user: @user }
+    = render partial: "user_moves_cards", locals: { user: @user, moves: @user.moves.ideas, type: "ideas" }
   %div.content-element
-    = render partial: "user_moves_cards", locals: { user: @user }
+    = render partial: "user_moves_cards", locals: { user: @user, moves: @user.moves.finished, type: "moves" }
 
 - if current_user.admin? && !@user.admin
   %div.admin-actions
