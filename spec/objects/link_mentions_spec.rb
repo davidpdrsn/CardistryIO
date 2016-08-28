@@ -86,6 +86,12 @@ describe LinkMentions do
     expect(html).to include("/users/#{alice.to_param}")
   end
 
+  it "works with lonely @ signs" do
+    html = html_with_mentions("hi @ 22:00")
+
+    expect(html).to eq "hi @ 22:00"
+  end
+
   def expect_to_have_link(html, text, negate = true)
     if !negate
       expect(Capybara.string(html)).not_to have_link text
