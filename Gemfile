@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.0"
 
-gem "rails", "5.0.0.rc1"
+gem "rails", "5.0.0.1"
 
 # Most at the top because other gems might depend on ENV being loaded
 gem "dotenv-rails", require: "dotenv/rails-now"
@@ -36,9 +36,7 @@ gem "normalize-rails"
 gem "pg"
 gem "puma"
 gem "recipient_interceptor"
-gem "redis-actionpack", git: "https://github.com/redis-store/redis-actionpack.git", branch: "master"
-gem "redis-rack", git: "https://github.com/redis-store/redis-rack.git", branch: "master"
-gem "redis-rails", git: "https://github.com/redis-store/redis-rails.git", branch: "master"
+gem "redis-rails"
 gem "refills"
 gem "resque"
 gem "rollbar"
@@ -64,7 +62,7 @@ group :development, :test do
   gem "byebug"
   gem "factory_girl_rails"
   gem "pry-rails"
-  gem "rspec-rails", "3.5.0.beta3"
+  gem "rspec-rails"
 end
 
 group :test do
