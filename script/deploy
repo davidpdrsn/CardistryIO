@@ -2,9 +2,6 @@
 
 set -e
 
-echo "Don't deploy until you've fixed the issues with videos and moves index pages"
-exit 1
-
 bundle check > /dev/null || bundle install
 bundle exec rspec
 git push
