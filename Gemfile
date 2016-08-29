@@ -51,6 +51,7 @@ gem "skylight"
 gem "stackprof"
 gem "title"
 gem "uglifier"
+gem "sprockets-es6"
 
 group :development do
   gem "spring"
