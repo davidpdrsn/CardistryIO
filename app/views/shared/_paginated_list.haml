@@ -5,12 +5,12 @@
 - path = ->(options) { polymorphic_path([:all, page.detect { true }.class], options) }
 
 - if page.more_previous_pages?
-  = link_to "Prev", path.call(page: page.previous_page)
+  = link_to "Prev", path.call({ page: page.previous_page }.merge(current_filter_sort_params))
 - else
   Prev
 
 - if page.more_pages?
-  = link_to "Next", path.call(page: page.next_page)
+  = link_to "Next", path.call({ page: page.next_page }.merge(current_filter_sort_params))
 - else
   Next
 
