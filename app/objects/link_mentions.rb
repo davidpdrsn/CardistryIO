@@ -21,9 +21,11 @@ class LinkMentions
   HtmlWithMentions = Struct.new(:html, :users_mentioned)
 
   def transform_words
-    str.split(" ").map do |word|
-      yield word
-    end.join(" ")
+    str.lines.map(&:chomp).map do |line|
+      line.split(" ").map do |word|
+        yield word
+      end.join(" ")
+    end.join("\n")
   end
 
   def is_mention?(word)

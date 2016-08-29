@@ -92,6 +92,17 @@ describe LinkMentions do
     expect(html).to eq "hi @ 22:00"
   end
 
+  it "maintains line breaks" do
+    bob = create :user, username: "bob"
+    alice = create :user, username: "alice"
+    html = html_with_mentions("@bob\n@alice\r\nlol foo bar\nbaz")
+
+    expect(html.lines.count).to eq 4
+    expect(html.lines[2]).to eq "lol foo bar\n"
+    expect_to_have_link html, "@bob"
+    expect_to_have_link html, "@alice"
+  end
+
   def expect_to_have_link(html, text, negate = true)
     if !negate
       expect(Capybara.string(html)).not_to have_link text
