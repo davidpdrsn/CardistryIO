@@ -36,7 +36,7 @@
         = pluralize current_user.new_notifications.count, "new notification"
 
       - if current_user.new_notifications.present?
-        - current_user.notifications.each do |notification|
+        - current_user.new_notifications.each do |notification|
           %li
             = link_to notification.subject_for_link do
               %span.dropdown-button-title
