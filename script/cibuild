@@ -2,7 +2,7 @@
 set -e
 
 echo "--- Running the tests"
-bin/rspec
+xvfb-run bin/rspec
 
 echo "--- Running bundler-audit"
 bin/bundle-audit update
