@@ -8,9 +8,9 @@
           - else
             = image_tag "thumbnail-placeholder.png"
         %div.card-header
-          = "#{video.name}"
+          = video.name
         %div.card-copy
-          = "#{video.description}"
+          = simple_format link_mentions(video.description)
         %div.card-meta
           = pluralize video.views.count, "view"
           = "| " + t("users.profile.posted", time: time_ago_in_words(video.created_at))

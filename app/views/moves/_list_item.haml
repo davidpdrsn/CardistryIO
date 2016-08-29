@@ -6,7 +6,7 @@
   %h1.list-title= link_to object.name, object
 
   - if object.description?
-    %p.description= object.description
+    .description= simple_format link_mentions(object.description)
   - else
     %p.no-description
       There is no description for this move.

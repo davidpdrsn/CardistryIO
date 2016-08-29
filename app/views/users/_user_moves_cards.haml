@@ -10,7 +10,7 @@
         %div.card-header
           = "#{move.name}"
         %div.card-copy
-          = "#{move.description}"
+          = simple_format link_mentions(move.description)
         %div.card-meta
           = t "users.profile.posted", time: time_ago_in_words(move.created_at)
           %div.rating
