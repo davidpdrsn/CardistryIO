@@ -10,9 +10,7 @@ feature "rating move" do
       find("#rate-5").click
       wait_for_ajax
 
-      reload_page
-      expect(page).to have_content "5.0 Inhuman"
-      expect(page).to have_content "1 Vote"
+      expect(page).to have_content "Rating counted"
     end
 
     scenario "cannot rate own moves" do
@@ -34,9 +32,7 @@ feature "rating move" do
       find("#rate-5").click
       wait_for_ajax
 
-      reload_page
-      expect(page).to have_content "5.0 Inhuman"
-      expect(page).to have_content "1 Vote"
+      expect(page).to have_content "Rating counted"
     end
   end
 
