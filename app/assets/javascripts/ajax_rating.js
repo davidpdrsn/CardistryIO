@@ -1,8 +1,8 @@
 $(document).ready(function() {
   $(".rate-button").click(function() {
+    $(this).addClass("loading");
     var valuesToSubmit = $(".rating-widget-form").serialize();
     var that = $(this);
-    var buttonText = $(this).text();
 
     $.ajax({
       type: "POST",
@@ -10,14 +10,11 @@ $(document).ready(function() {
       data: valuesToSubmit
     })
     .success(function() {
+      $(that).removeClass("loading");
       $(that).addClass("success");
       $(that).text("Rating counted");
 
-      /*setTimeout(function() {
-        $(that).text(buttonText);
-        $(that).removeClass("success");
-        $(that).addClass("active");
-      }, 2500); */
+      $(".rate-button").not(".success").fadeTo("slow", 0.4);
     });
 
     return false;

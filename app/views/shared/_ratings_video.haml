@@ -57,38 +57,38 @@
         - if rateable.ratings.find_by(user: current_user) != nil
           %div.send-ratings
             - if rateable.ratings.find_by(user: current_user).rating == 1
-              %li.rate-button#rate-1.success
+              %li.rate-button#rate-1.success.disabled
                 Rating counted
             - else
-              %li.rate-button#rate-1
+              %li.rate-button#rate-1.disabled
                 Delete now
 
             - if rateable.ratings.find_by(user: current_user).rating == 2
-              %li.rate-button#rate-2.success
+              %li.rate-button#rate-2.success.disabled
                 Rating counted
             - else
-              %li.rate-button#rate-2
+              %li.rate-button#rate-2.disabled
                 Needs work
 
             - if rateable.ratings.find_by(user: current_user).rating == 3
-              %li.rate-button#rate-3.success
+              %li.rate-button#rate-3.success.disabled
                 Rating counted
             - else
-              %li.rate-button#rate-3
+              %li.rate-button#rate-3.disabled
                 Good
 
             - if rateable.ratings.find_by(user: current_user).rating == 4
-              %li.rate-button#rate-4.success
+              %li.rate-button#rate-4.success.disabled
                 Rating counted
             - else
-              %li.rate-button#rate-4
+              %li.rate-button#rate-4.disabled
                 Awesome
 
             - if rateable.ratings.find_by(user: current_user).rating == 5
-              %li.rate-button#rate-5.success
+              %li.rate-button#rate-5.success.disabled
                 Rating counted
             - else
-              %li.rate-button#rate-5
+              %li.rate-button#rate-5.disabled
                 Inhuman
         - else
           %div.send-ratings.ratings-disabled
