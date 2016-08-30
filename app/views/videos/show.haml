@@ -31,7 +31,7 @@
           %h2
             Moves in this video
           %ul
-            - @video.appearances.each do |appearance|
+            - @video.appearances.sort_by(&:value_for_sort).each do |appearance|
               %li
                 %p
                   = TimeFormatter.new(appearance.minutes, appearance.seconds).format

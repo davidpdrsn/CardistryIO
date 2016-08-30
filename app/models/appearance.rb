@@ -7,4 +7,8 @@ class Appearance < ApplicationRecord
 
   delegate :name, to: :move, prefix: true
   delegate :name, to: :video, prefix: true
+
+  def value_for_sort
+    [minutes, seconds]
+  end
 end
