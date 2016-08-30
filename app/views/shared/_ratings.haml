@@ -36,18 +36,24 @@
 
   %div.interaction
     %ul.rate
+      - if current_user.can_rate?(rateable)
+        %div.send-ratings
+          - path = polymorphic_path([rateable, :ratings])
+          %li.rate-button
+            = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 1 }, class: "hide-button"
+            Delete now
+          %li.rate-button
+            = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 2 }, class: "hide-button"
+            Needs Work
+          %li.rate-button
+            = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 3 }, class: "hide-button"
+            Good
+          %li.rate-button
+            = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 4 }, class: "hide-button"
+            Awesome
+          %li.rate-button
+            = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 5 }, class: "hide-button"
+            Inhuman
+      - else
+        %div.send-ratings.ratings-disabled
 
-      %div.send-ratings
-
-        - path = polymorphic_path([rateable, :ratings])
-        %li.rate-button
-          = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 1 }, class: "hide-button"
-          Delete now
-        %li.rate-button
-          Needs Work
-        %li.rate-button
-          Good
-        %li.rate-button
-          Awesome
-        %li.rate-button
-          Inhuman
