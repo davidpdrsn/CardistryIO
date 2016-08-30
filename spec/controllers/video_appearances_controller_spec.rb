@@ -36,6 +36,18 @@ describe VideoAppearancesController do
       expect(controller).to set_flash[:alert]
     end
 
+    it "resets appearances when submitting empty form" do
+      video = create :video
+      sign_in_as video.user
+      create :appearance, video: video, minutes: 0, seconds: 20
+
+      expect do
+        patch(:update, params: {
+          id: video.id,
+        })
+      end.to change { video.reload.appearances.count }.from(1).to(0)
+    end
+
     it "requires authentication" do
       patch :update, params: { id: video.id }
 
