@@ -1,6 +1,6 @@
 - if object.appearances.present?
   %div.grid-items-lines.appearances-list
-    %div.headline
+    %div.section-headline
       Moves in this video
 
     - object.appearances.sort_by(&:value_for_sort).each do |appearance|

@@ -1,24 +1,3 @@
--#%div.grid-item
--#  %h2
--#    Ratings
--#
--#  %p
--#    Average rating:
--#    = rateable.average_rating
--#
--#  %p
--#    Total ratings:
--#    = rateable.ratings.count
--#
--#  %div.send-ratings
--#    - if current_user.can_rate?(rateable)
--#      - path = polymorphic_path([rateable, :ratings])
--#      = button_to "1/5: Delete now", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 1 }, class: "rating-button"
--#      = button_to "2/5: Need work", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 2 }
--#      = button_to "3/5: Good", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 3 }
--#      = button_to "4/5: Awesome", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 4 }
--#      = button_to "5/5: Inhuman", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 5 }
-
 %div.ratings
   %div.current-rating.for-move
     %span.number

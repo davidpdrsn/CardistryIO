@@ -10,22 +10,37 @@
   margin-bottom: $content-area-top-margin;
   padding: 20px;
 
+  .section-headline {
+    font-family: "Prompt", sans-serif;
+    font-weight: 300;
+    background: $main-blue;
+    color: #fff;
+    height: 55px;
+    width: 100%;
+    font-size: 28px;
+    line-height: 55px;
+    padding-left: 25px;
+  }
+
+  .comments {
+    background: $light-blue;
+    margin: 10px -20px 0 -20px;
+
+    .comment {
+      padding: 20px 20px 20px 20px;
+    }
+
+    .comment ~ .comment {
+      padding: 0 20px 20px 20px;
+    }
+
+  }
+
+
   .grid-items-lines {
     background: $light-blue;
     margin: 10px -20px 0 -20px;
     font-size: 0.8em;
-
-    .headline {
-      font-family: "Prompt", sans-serif;
-      font-weight: 300;
-      background: $main-blue;
-      color: #fff;
-      height: 55px;
-      width: 100%;
-      font-size: 28px;
-      line-height: 55px;
-      padding-left: 25px;
-    }
 
     .timestamp {
       a {

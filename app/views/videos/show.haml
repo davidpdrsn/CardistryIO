@@ -27,9 +27,19 @@
 
     = render partial: "shared/show_move_appearances", locals: { object: @video, name: "video" }
 
-    %div.comments= render @video.comments.order(:created_at)
+    %div.comments
+      %div.section-headline
+        - if @video.comments.count == 0
+          No comments yet
+        - elsif @video.comments.count == 1
+          #{@video.comments.count} comment
+        - else
+          #{@video.comments.count} comments
 
-    = render partial: "comments/form", locals: { commentable: @video }
+      %div.comment-container
+        = render @video.comments.order(created_at: :desc)
+
+        = render partial: "comments/form", locals: { commentable: @video }
 
   - if @video.user == current_user
     %div.owner-actions
