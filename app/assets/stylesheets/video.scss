@@ -10,7 +10,23 @@
   margin-bottom: $content-area-top-margin;
   padding: 20px;
 
+  .credits-list {
+    background: $light-blue;
+    margin: 10px -20px 0 -20px;
+    font-size: 0.8em;
 
+    .headline {
+      font-family: "Prompt", sans-serif;
+      font-weight: 300;
+      background: $main-blue;
+      color: #fff;
+      height: 60px;
+      width: 100%;
+      font-size: 28px;
+      line-height: 60px;
+      padding-left: 25px;
+    }
+  }
 
   .embedded-video {
     iframe {
@@ -45,11 +61,6 @@
     .grid-items-lines {
       .grid-item {
         height: auto;
-
-        &:hover {
-          cursor: default;
-          background-color: #fff;
-        }
 
         h1 {
           text-align: left;

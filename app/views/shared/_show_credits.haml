@@ -1,9 +1,11 @@
 - if object.creditted_users.present?
-  %div.grid-item
-    %h2
+  %div.grid-items-lines.credits-list
+    %div.headline
       Credits
-    %ul
-      - object.creditted_users.each do |user|
-        %li
-          %span{:class => "mini-circle-avatar", :style => "background: url(#{user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
-          = link_to "@#{user.username}", user
+    - object.creditted_users.each do |user|
+      %div.grid-item
+        = image_tag(user.gravatar_url)
+        %span.username
+          = link_to user.username, user
+
+

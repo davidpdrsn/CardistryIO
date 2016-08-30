@@ -23,21 +23,22 @@
 
     = render partial: "shared/ratings_video", locals: { rateable: @video }
 
+    = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
 
-    %div.grid-items-lines
-      = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
-
-      - if @video.appearances.present?
-        %div.grid-item
-          %h2
-            Moves in this video
-          %ul
-            - @video.appearances.sort_by(&:value_for_sort).each do |appearance|
-              %li
-                %p
-                  = link_to_move_from_video(appearance: appearance)
-                  |
-                  = link_to appearance.move_name, appearance.move
+    -#%div.grid-items-lines
+    -#  = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
+    -#
+    -#  - if @video.appearances.present?
+    -#    %div.grid-item
+    -#      %h2
+    -#        Moves in this video
+    -#      %ul
+    -#        - @video.appearances.sort_by(&:value_for_sort).each do |appearance|
+    -#          %li
+    -#            %p
+    -#              = link_to_move_from_video(appearance: appearance)
+    -#              |
+    -#              = link_to appearance.move_name, appearance.move
 
     %div.comments= render @video.comments.order(:created_at)
 
