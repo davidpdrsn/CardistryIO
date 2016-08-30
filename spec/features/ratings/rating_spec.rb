@@ -7,7 +7,7 @@ feature "rating move" do
       move = create :move
 
       visit move_path(move, as: bob)
-      click_on("rate-5")
+      find("#rate-5").click
 
       expect(page).to have_content "5.0 Inhuman"
       expect(page).to have_content "1 Vote"
@@ -29,7 +29,7 @@ feature "rating move" do
       video = create :video, approved: true
 
       visit video_path(video, as: bob)
-      click_on("rate-5")
+      find("#rate-5").click
 
       expect(page).to have_content "5.0 Inhuman"
       expect(page).to have_content "1 Vote"
@@ -49,7 +49,7 @@ feature "rating move" do
     video = create :video, approved: true
 
     visit video_path(video, as: bob)
-    click_on("rate-5")
+    find("#rate-5").click
     visit video_path(video, as: bob)
 
     expect(page).not_to have_selector(:css, "#vote-5")
