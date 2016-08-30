@@ -8,8 +8,9 @@ feature "rating move" do
 
       visit move_path(move, as: bob)
       find("#rate-5").click
+      wait_for_ajax
 
-      visit(current_path)
+      reload_page
       expect(page).to have_content "5.0 Inhuman"
       expect(page).to have_content "1 Vote"
     end
@@ -31,8 +32,9 @@ feature "rating move" do
 
       visit video_path(video, as: bob)
       find("#rate-5").click
+      wait_for_ajax
 
-      visit(current_path)
+      reload_page
       expect(page).to have_content "5.0 Inhuman"
       expect(page).to have_content "1 Vote"
     end
