@@ -14,6 +14,17 @@ feature "filtering and sorting videos" do
     expect(page).to_not have_content performance.name
   end
 
+  scenario "filtering for jams", :js do
+    jam = create :video, video_type: :jam
+    performance = create :video, video_type: :performance
+
+    visit all_videos_path
+    select "Show only jams", from: "filter_type"
+
+    expect(page).to have_content jam.name
+    expect(page).to_not have_content performance.name
+  end
+
   scenario "sorting by created at by default" do
     one = create :video, created_at: Time.zone.now
     two = create :video, created_at: 2.days.ago

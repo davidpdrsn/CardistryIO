@@ -310,6 +310,7 @@ describe Video do
         ["Show only performances", "performance"],
         ["Show only tutorials", "tutorial"],
         ["Show only move showcases", "move_showcase"],
+        ["Show only jams", "jam"],
         ["Show only others", "other"],
       ])
     end

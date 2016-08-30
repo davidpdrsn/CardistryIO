@@ -7,7 +7,8 @@ class Video < ApplicationRecord
     performance: 0,
     tutorial: 1,
     move_showcase: 3,
-    other: 4,
+    jam: 4,
+    other: 100,
   }
 
   validates :name, presence: true, uniqueness: true
