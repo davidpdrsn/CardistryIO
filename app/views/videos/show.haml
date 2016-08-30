@@ -9,7 +9,7 @@
     %span.username
       = link_to @video.user.username, @video.user
 
-  = render partial: "shared/ratings", locals: { rateable: @video }
+  = render partial: "shared/ratings_video", locals: { rateable: @video }
 
   %div.video-info
     - if @video.description.present?

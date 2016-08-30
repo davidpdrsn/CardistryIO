@@ -1,0 +1,73 @@
+-#%div.grid-item
+-#  %h2
+-#    Ratings
+-#
+-#  %p
+-#    Average rating:
+-#    = rateable.average_rating
+-#
+-#  %p
+-#    Total ratings:
+-#    = rateable.ratings.count
+-#
+-#  %div.send-ratings
+-#    - if current_user.can_rate?(rateable)
+-#      - path = polymorphic_path([rateable, :ratings])
+-#      = button_to "1/5: Delete now", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 1 }, class: "rating-button"
+-#      = button_to "2/5: Need work", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 2 }
+-#      = button_to "3/5: Good", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 3 }
+-#      = button_to "4/5: Awesome", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 4 }
+-#      = button_to "5/5: Inhuman", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 5 }
+
+%div.ratings
+  %div.current-rating
+    %span.number
+      - if rateable.average_rating == 0
+        \/
+      - else
+        = rateable.average_rating
+    %span.word
+      - if rateable.average_rating == 0
+        Not rated
+      - if rateable.average_rating >= 1 && rateable.average_rating < 2
+        Delete now
+      - if rateable.average_rating >= 2 && rateable.average_rating < 3
+        Needs work
+      - if rateable.average_rating >= 3 && rateable.average_rating < 4
+        Good
+      - if rateable.average_rating >= 4 && rateable.average_rating < 5
+        Awesome
+      - if rateable.average_rating >= 5
+        Inhuman
+    %span.number
+      = rateable.ratings.count
+    %span.word
+      - if rateable.ratings.count == 1
+        Vote
+      - else
+        Votes
+
+  %div.interaction
+    %ul.rate
+      - if current_user.can_rate?(rateable)
+        %div.send-ratings
+          - path = polymorphic_path([rateable, :ratings])
+          %li.rate-button
+            = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 1 }, class: "hide-button"
+            Delete now
+          %li.rate-button
+            = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 2 }, class: "hide-button"
+            Needs Work
+          %li.rate-button
+            = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 3 }, class: "hide-button"
+            Good
+          %li.rate-button
+            = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 4 }, class: "hide-button"
+            Awesome
+          %li.rate-button
+            = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 5 }, class: "hide-button"
+            Inhuman
+      - else
+        %div.send-ratings.ratings-disabled
+          You've already rated this video.
+
