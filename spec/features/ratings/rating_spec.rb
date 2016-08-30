@@ -7,10 +7,10 @@ feature "rating move" do
       move = create :move
 
       visit move_path(move, as: bob)
-      click_button "5/5: Inhuman"
+      click_on("rate-5")
 
-      expect(page).to have_content "Average rating: 5.0"
-      expect(page).to have_content "Total ratings: 1"
+      expect(page).to have_content "5.0 Inhuman"
+      expect(page).to have_content "1 Vote"
     end
 
     scenario "cannot rate own moves" do
@@ -19,7 +19,7 @@ feature "rating move" do
 
       visit move_path(move, as: bob)
 
-      expect(page).not_to have_button "5/5: Inhuman"
+      expect(page).not_to have_selector(:css, "#vote-5")
     end
   end
 
@@ -29,10 +29,10 @@ feature "rating move" do
       video = create :video, approved: true
 
       visit video_path(video, as: bob)
-      click_button "5/5: Inhuman"
+      click_on("rate-5")
 
-      expect(page).to have_content "Average rating: 5.0"
-      expect(page).to have_content "Total ratings: 1"
+      expect(page).to have_content "5.0 Inhuman"
+      expect(page).to have_content "1 Vote"
     end
   end
 
@@ -41,7 +41,7 @@ feature "rating move" do
 
     visit video_path(video)
 
-    expect(page).not_to have_button "5/5: Inhuman"
+    expect(page).not_to have_selector(:css, "#vote-5")
   end
 
   scenario "can't vote more than once" do
@@ -49,9 +49,9 @@ feature "rating move" do
     video = create :video, approved: true
 
     visit video_path(video, as: bob)
-    click_button "5/5: Inhuman"
+    click_on("rate-5")
     visit video_path(video, as: bob)
 
-    expect(page).not_to have_button "5/5: Inhuman"
+    expect(page).not_to have_selector(:css, "#vote-5")
   end
 end
