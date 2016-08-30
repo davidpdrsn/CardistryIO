@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $(".rate-button").click(function() {
+  $(".rate-button").not($(".disabled")).click(function() {
     $(this).addClass("loading");
 
     var form = $(this).children("form");
