@@ -22,17 +22,32 @@
 %div.ratings
   %div.current-rating
     %span.number
-      5.0
+      = rateable.average_rating
     %span.word
-      Inhuman
+      - if rateable.average_rating <= 1
+        Delete now
+      - if rateable.average_rating >= 2 && rateable.average_rating < 3
+        Needs work
+      - if rateable.average_rating >= 3 && rateable.average_rating < 4
+        Good
+      - if rateable.average_rating >= 4 && rateable.average_rating < 5
+        Awesome
+      - if rateable.average_rating >= 5
+        Inhuman
     %span.number
-      1000
+      = rateable.ratings.count
     %span.word
-      Votes
+      - if rateable.ratings.count == 1
+        Vote
+      - else
+        Votes
     %span.number
-      12
+      = rateable.views.count
     %span.word
-      Views
+      - if rateable.views.count == 1
+        View
+      - else
+        Views
 
   %div.interaction
     %ul.rate
@@ -56,4 +71,5 @@
             Inhuman
       - else
         %div.send-ratings.ratings-disabled
-          You've already voted for this video.
+          You've already rated this video.
+
