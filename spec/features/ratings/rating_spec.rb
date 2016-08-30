@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "rating move" do
   context "move" do
-    scenario "rating move" do
+    scenario "rating move", :js do
       bob = create :user
       move = create :move
 
@@ -26,7 +26,7 @@ feature "rating move" do
   end
 
   context "video" do
-    scenario "rating video" do
+    scenario "rating video", :js do
       bob = create :user
       video = create :video, approved: true
 
