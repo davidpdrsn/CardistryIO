@@ -1,8 +1,7 @@
 .ratings {
-  font-family: "Open Sans", sans-serif;
   counter-reset: step;
   overflow: hidden;
-  width: 100%;
+  width: calc(100% + 40px);
   height: 250px;
   border-left: none;
   position: relative;
@@ -20,7 +19,7 @@
     height: 100%;
     width: auto;
     float: left;
-    padding: 15px 45px 15px 25px;
+    padding: 15px 45px 15px 40px;
 
     span {
       display: block;
@@ -47,14 +46,15 @@
 
   .interaction {
     text-align: center;
-    margin-top: 30px;
+    background: $light-blue;
+    height: 100%;
   }
 
   .rate {
     width: calc(100% - 300px);
     padding: 0;
     display: inline-block;
-    margin-top: 50px;
+    margin-top: 72px;
 
     .ratings-disabled {
       font-size: 1.5em;
@@ -71,16 +71,16 @@
     position: relative;
     width: 20%;
     text-align: center;
+    z-index: 10;
 
     &:after {
       content: '';
-      width: 100%;
+      width: calc(100% - 60px);
       height: 1px;
       background: #247BA0;
       position: absolute;
-      left: -50%;
+      left: calc(-50% + 30px);
       top: 30px;
-      z-index: -1;
     }
 
     &:before {
@@ -99,6 +99,7 @@
       margin: 0 auto 22px auto;
       transition: all .4s ease-in-out;
       cursor: pointer;
+      z-index: 100;
     }
 
     &:hover:before {

@@ -9,8 +9,6 @@
     %span.username
       = link_to @video.user.username, @video.user
 
-  = render partial: "shared/ratings_video", locals: { rateable: @video }
-
   %div.video-info
     - if @video.description.present?
       = simple_format link_mentions(@video.description)
@@ -22,6 +20,9 @@
       = @video.video_type.humanize
       |
       = "posted #{time_ago_in_words(@video.created_at)} ago"
+
+    = render partial: "shared/ratings_video", locals: { rateable: @video }
+
 
     %div.grid-items-lines
       = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
