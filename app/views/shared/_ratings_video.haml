@@ -54,6 +54,42 @@
             = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 5 }, class: "hide-button"
             Inhuman
       - else
-        %div.send-ratings.ratings-disabled
-          You've already rated this video.
+        - if rateable.ratings.find_by(user: current_user) != nil
+          %div.send-ratings
+            - if rateable.ratings.find_by(user: current_user).rating == 1
+              %li.rate-button#rate-1.success
+                Rating counted
+            - else
+              %li.rate-button#rate-1
+                Delete now
 
+            - if rateable.ratings.find_by(user: current_user).rating == 2
+              %li.rate-button#rate-2.success
+                Rating counted
+            - else
+              %li.rate-button#rate-2
+                Needs work
+
+            - if rateable.ratings.find_by(user: current_user).rating == 3
+              %li.rate-button#rate-3.success
+                Rating counted
+            - else
+              %li.rate-button#rate-3
+                Good
+
+            - if rateable.ratings.find_by(user: current_user).rating == 4
+              %li.rate-button#rate-4.success
+                Rating counted
+            - else
+              %li.rate-button#rate-4
+                Awesome
+
+            - if rateable.ratings.find_by(user: current_user).rating == 5
+              %li.rate-button#rate-5.success
+                Rating counted
+            - else
+              %li.rate-button#rate-5
+                Inhuman
+        - else
+          %div.send-ratings.ratings-disabled
+            You can't rate your own videos.
