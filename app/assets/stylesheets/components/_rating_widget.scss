@@ -52,7 +52,10 @@
     display: inline-block;
     margin-top: 50px;
   }
-  li {
+  .hide-button {
+    display: none;
+  }
+  .rate-button {
     list-style-type: none;
     float: left;
     position: relative;
