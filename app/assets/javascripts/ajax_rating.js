@@ -11,7 +11,7 @@ $(document).ready(function() {
     })
     .success(function() {
       $(that).addClass("success");
-      $(that).text("Vote counted");
+      $(that).text("Rating counted");
 
       setTimeout(function() {
         $(that).text(buttonText);
