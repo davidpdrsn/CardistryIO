@@ -20,7 +20,7 @@
 -#      = button_to "5/5: Inhuman", path, method: :post, params: { rateable.foreign_key => rateable.id, "rating" => 5 }
 
 %div.ratings
-  %div.current-rating
+  %div.current-rating.for-move
     %span.number
       - if rateable.average_rating == 0
         \/

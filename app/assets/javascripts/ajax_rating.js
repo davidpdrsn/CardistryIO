@@ -13,11 +13,11 @@ $(document).ready(function() {
       $(that).addClass("success");
       $(that).text("Rating counted");
 
-      setTimeout(function() {
+      /*setTimeout(function() {
         $(that).text(buttonText);
         $(that).removeClass("success");
         $(that).addClass("active");
-      }, 2500);
+      }, 2500); */
     });
 
     return false;
