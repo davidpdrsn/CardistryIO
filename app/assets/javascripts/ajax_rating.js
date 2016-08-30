@@ -5,7 +5,6 @@ $(document).ready(function() {
     var form = $(this).children("form");
     var valuesToSubmit = form.serialize();
     var that = $(this);
-    console.log(valuesToSubmit);
 
     $.ajax({
       type: "POST",
@@ -13,11 +12,22 @@ $(document).ready(function() {
       data: valuesToSubmit
     })
     .success(function() {
-      $(that).removeClass("loading");
-      $(that).addClass("success");
-      $(that).text("Rating counted");
+      $(that)
+          .removeClass("loading")
+          .addClass("success")
+          .text("Rating counted");
 
-      $(".rate-button").not(".success").fadeTo("slow", 0.4);
+      $(".rate-button")
+          .not(".success")
+          .fadeTo("slow", 0.4);
+    })
+    .error(function() {
+      $(".rate-button").removeClass("error");
+
+      $(that)
+          .removeClass("loading")
+          .addClass("error")
+          .text("Try again");
     });
 
     return false;

@@ -113,6 +113,15 @@
     }
   }
 
+  .error {
+    color: #333;
+
+    &:before {
+      background: tomato;
+      font-family: "Ionicons";
+      content: "\f12a";
+    }
+  }
   .success {
     color: #333 !important;
 
