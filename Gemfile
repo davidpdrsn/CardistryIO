@@ -46,7 +46,6 @@ gem "simple_form"
 gem "country_select"
 gem "skylight"
 gem "stackprof"
-gem "title"
 gem "uglifier"
 
 group :development do

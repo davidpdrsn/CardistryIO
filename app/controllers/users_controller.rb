@@ -4,14 +4,17 @@ class UsersController < Clearance::UsersController
 
   def index
     @users = User.all.order(created_at: :desc)
+    title t("titles.users.index")
   end
 
   def show
     @user = User.find(params[:id])
+    title @user.username
   end
 
   def edit
     @user = User.find(params[:id])
+    title t("titles.users.edit")
   end
 
   def update

@@ -6,11 +6,13 @@ class VideosController < ApplicationController
   def all
     @filter_submit_path = all_videos_path
     @paged_videos = filter_sort_and_paginate(Video.all_public.approved)
+    title t("titles.videos.all")
   end
 
   def index
     @filter_submit_path = videos_path
     @paged_videos = filter_sort_and_paginate(current_user.videos.approved)
+    title t("titles.videos.index")
   end
 
   def show
@@ -18,7 +20,9 @@ class VideosController < ApplicationController
     track_video_view(@video)
 
     respond_to do |format|
-      format.html {}
+      format.html {
+        title @video.name
+      }
       format.json {
         render json: @video, serializer: VideoSerializer, root: false
       }
@@ -34,6 +38,7 @@ class VideosController < ApplicationController
       :thumbnail_url,
     )
     @video = Video.new(new_video_params)
+    title t("titles.videos.new")
   end
 
   def create
@@ -53,6 +58,7 @@ class VideosController < ApplicationController
 
   def edit
     @video = current_user.videos.find(params[:id])
+    title t("titles.videos.edit")
   end
 
   def update

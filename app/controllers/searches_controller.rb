@@ -1,6 +1,7 @@
 class SearchesController < ApplicationController
   def show
     @result_collections = [users, videos, moves]
+    title t("titles.searches.show", query: query)
   end
 
   private

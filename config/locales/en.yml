@@ -17,6 +17,26 @@ en:
 
   titles:
     application: CardistryIO
+    users:
+      edit: Update profile
+      index: All users
+    relationships:
+      followers: "@%{username}'s followers"
+      following: "@%{username} following"
+    moves:
+      all: Moves
+      index: My moves
+      new: Add new move
+      edit: Update move
+    videos:
+      all: Videos
+      index: My videos
+      new: Add new video
+      edit: Update video
+    pages:
+      contact: Contact
+    searches:
+      show: "Search for \"%{query}\""
 
   general:
     authentication:

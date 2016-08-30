@@ -55,4 +55,17 @@ class ApplicationController < ActionController::Base
   def signed_in_as_beta_tester?
     session[:beta_user].present?
   end
+
+  def title(text = nil)
+    if text
+      @__title = text
+    else
+      if @__title
+        "#{@__title} | CardistryIO"
+      else
+        "CardistryIO"
+      end
+    end
+  end
+  helper_method :title
 end

@@ -26,9 +26,11 @@ class RelationshipsController < ApplicationController
 
   def following
     @user = User.find(params[:id])
+    title t("titles.relationships.following", username: @user.username)
   end
 
   def followers
     @user = User.find(params[:id])
+    title t("titles.relationships.followers", username: @user.username)
   end
 end
