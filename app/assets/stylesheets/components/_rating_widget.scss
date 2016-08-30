@@ -51,6 +51,12 @@
     padding: 0;
     display: inline-block;
     margin-top: 50px;
+
+    .ratings-disabled {
+      font-size: 1.5em;
+      color: $medium-gray;
+      padding-top: 20px;
+    }
   }
   .hide-button {
     display: none;
