@@ -45,12 +45,12 @@ body {
   background: $layout-content-bg-color;
   min-height: 100%;
   height: calc(100% + 82px);
-  margin-bottom: -275px;
+  margin-bottom: -135px;
 
   &:after {
     content: "";
     display: block;
-    height: 275px;
+    height: 135px;
   }
 }
 
