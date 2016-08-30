@@ -16,7 +16,16 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = EmbeddableVideo.new(find_video)
+    start = if params[:start].to_i.to_s == params[:start]
+              params[:start]
+            else
+              nil
+            end
+    @video = EmbeddableVideo.new(
+      find_video,
+      autoplay: params[:autoplay] == "true",
+      start: start,
+    )
     track_video_view(@video)
 
     respond_to do |format|

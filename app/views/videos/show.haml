@@ -34,7 +34,7 @@
             - @video.appearances.sort_by(&:value_for_sort).each do |appearance|
               %li
                 %p
-                  = TimeFormatter.new(appearance.minutes, appearance.seconds).format
+                  = link_to_move_from_video(appearance: appearance)
                   |
                   = link_to appearance.move_name, appearance.move
 

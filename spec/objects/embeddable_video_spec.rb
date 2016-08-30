@@ -28,6 +28,39 @@ describe EmbeddableVideo do
 
       expect(video.url).to eq "https://www.youtube.com/embed/x2O5NB8X-a4"
     end
+
+    it "supports autoplay" do
+      obj = stubbed_video(
+        url: "https://www.youtube.com/watch?v=x2O5NB8X-a4",
+      )
+
+      video = EmbeddableVideo.new(obj, autoplay: true)
+
+      expect(video.url)
+        .to eq "https://www.youtube.com/embed/x2O5NB8X-a4?autoplay=1"
+    end
+
+    it "supports time offset" do
+      obj = stubbed_video(
+        url: "https://www.youtube.com/watch?v=x2O5NB8X-a4",
+      )
+
+      video = EmbeddableVideo.new(obj, start: 20)
+
+      expect(video.url)
+        .to eq "https://www.youtube.com/embed/x2O5NB8X-a4?start=20"
+    end
+
+    it "supports time offset and autoplay" do
+      obj = stubbed_video(
+        url: "https://www.youtube.com/watch?v=x2O5NB8X-a4",
+      )
+
+      video = EmbeddableVideo.new(obj, autoplay: true, start: 20)
+
+      expect(video.url)
+        .to eq "https://www.youtube.com/embed/x2O5NB8X-a4?autoplay=1&start=20"
+    end
   end
 
   context "vimeo" do
@@ -49,6 +82,36 @@ describe EmbeddableVideo do
       video = EmbeddableVideo.new(obj)
 
       expect(video.url).to eq "https://player.vimeo.com/video/132077814"
+    end
+
+    it "supports autoplay" do
+      obj = stubbed_video(
+        url: "https://vimeo.com/132077814",
+      )
+
+      video = EmbeddableVideo.new(obj, autoplay: true)
+
+      expect(video.url).to eq "https://player.vimeo.com/video/132077814?autoplay=1"
+    end
+
+    it "supports start time offset" do
+      obj = stubbed_video(
+        url: "https://vimeo.com/132077814",
+      )
+
+      video = EmbeddableVideo.new(obj, start: "121")
+
+      expect(video.url).to eq "https://player.vimeo.com/video/132077814#t=2m1s"
+    end
+
+    it "supports autoplay and start time" do
+      obj = stubbed_video(
+        url: "https://vimeo.com/132077814",
+      )
+
+      video = EmbeddableVideo.new(obj, autoplay: true, start: 121)
+
+      expect(video.url).to eq "https://player.vimeo.com/video/132077814#t=2m1s?autoplay=1"
     end
   end
 

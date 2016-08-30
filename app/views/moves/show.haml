@@ -11,7 +11,7 @@
     %ul
       %li
         - @move.appearances.each do |appearance|
-          = link_to appearance.video_name, appearance.video
+          = link_to_move_in_video appearance: appearance
           = TimeFormatter.new(appearance.minutes, appearance.seconds).format
   - else
     Doesn't appear in any videos

@@ -1,22 +1,97 @@
 class EmbeddableVideo < SimpleDelegator
+  def self.host_supported?(url)
+    CONFIG.keys.any? { |regex| url.match(regex) }
+  end
+
+  def initialize(model, autoplay: false, start: nil)
+    obj = if model.from_instagram?
+            instagram_module = InstagramWrapperFactory.call
+
+            client = instagram_module::Client.unauthenticated_client
+            instagram_video = instagram_module::InstagramVideo.new_from_model(model, client)
+            DelegationChain.new(model, instagram_video)
+          else
+            model
+          end
+    @autoplay = autoplay
+    @start = start.try(:to_i)
+    super(obj)
+  end
+
+  def class
+    __getobj__.class
+  end
+
+  def url
+    host.url
+  end
+
+  def fetch_thumbnail_url
+    host.fetch_thumbnail_url
+  end
+
+  private
+
+  attr_reader :autoplay, :start
+
+  def host
+    host = URI.parse(__getobj__.url).host
+
+    if host.nil?
+      raise UnsupportedHost
+    end
+
+    CONFIG.each do |regex, klass|
+      if host.match(regex)
+        return klass.new(__getobj__, autoplay: autoplay, start: start)
+      end
+    end
+
+    raise UnsupportedHost
+  end
+
   class Base
-    def initialize(video)
+    def initialize(video, autoplay:, start:)
       @video = video
+      @autoplay = autoplay
+      @start = start
     end
 
     protected
 
-    attr_reader :video
+    attr_reader :video, :autoplay, :start
+
+    def add_query_param(url, key:, value:)
+      if url.include?("?")
+        "#{url}&#{key}=#{value}"
+      else
+        "#{url}?#{key}=#{value}"
+      end
+    end
   end
 
   class VimeoVideo < Base
     def url
-      if video.url.match(/player/)
+      url = if video.url.match(/player/)
         video.url
       else
         video_id = URI.parse(video.url).path.gsub("/", "")
         "https://player.vimeo.com/video/#{video_id}"
       end
+
+      url = if start
+              minutes = start.fdiv(60).floor
+              seconds = start % 60
+              "#{url}#t=#{minutes}m#{seconds}s"
+            else
+              url
+            end
+
+      url = if autoplay
+              add_query_param(url, key: "autoplay", value: "1")
+            else
+              url
+            end
     end
 
     def fetch_thumbnail_url
@@ -34,7 +109,22 @@ class EmbeddableVideo < SimpleDelegator
 
   class YouTubeVideo < Base
     def url
-      video.url.sub("watch?v=", "embed/")
+      url = video.url.sub("watch?v=", "embed/")
+
+      url = if autoplay
+              add_query_param(url, key: "autoplay", value: "1")
+            else
+              url
+            end
+
+      url = if start
+              "#{url}?start=#{start}"
+              add_query_param(url, key: "start", value: start)
+            else
+              url
+            end
+
+      url
     end
 
     def fetch_thumbnail_url
@@ -59,53 +149,6 @@ class EmbeddableVideo < SimpleDelegator
   end
 
   class UnsupportedHost < RuntimeError; end
-
-  def self.host_supported?(url)
-    CONFIG.keys.any? { |regex| url.match(regex) }
-  end
-
-  def initialize(model)
-    obj = if model.from_instagram?
-            instagram_module = InstagramWrapperFactory.call
-
-            client = instagram_module::Client.unauthenticated_client
-            instagram_video = instagram_module::InstagramVideo.new_from_model(model, client)
-            DelegationChain.new(model, instagram_video)
-          else
-            model
-          end
-    super(obj)
-  end
-
-  def class
-    __getobj__.class
-  end
-
-  def url
-    host.url
-  end
-
-  def fetch_thumbnail_url
-    host.fetch_thumbnail_url
-  end
-
-  private
-
-  def host
-    host = URI.parse(__getobj__.url).host
-
-    if host.nil?
-      raise UnsupportedHost
-    end
-
-    CONFIG.each do |regex, klass|
-      if host.match(regex)
-        return klass.new(__getobj__)
-      end
-    end
-
-    raise UnsupportedHost
-  end
 
   CONFIG = {
     /vimeo/ => VimeoVideo,
