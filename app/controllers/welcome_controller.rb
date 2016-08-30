@@ -11,9 +11,12 @@ class WelcomeController < ApplicationController
   def beta_signin
     if valid_beta_authentication?
       session[:beta_user] = true
+      flash.clear
       redirect_to root_path
     else
       session[:beta_user] = nil
+      flash.alert = "Wrong beta username or password"
+      render layout: false
     end
   end
 
