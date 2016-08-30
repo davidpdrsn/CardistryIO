@@ -22,9 +22,14 @@
 %div.ratings
   %div.current-rating
     %span.number
-      = rateable.average_rating
+      - if rateable.average_rating == 0
+        \/
+      - else
+        = rateable.average_rating
     %span.word
-      - if rateable.average_rating <= 1
+      - if rateable.average_rating == 0
+        Not rated
+      - if rateable.average_rating >= 1 && rateable.average_rating < 2
         Delete now
       - if rateable.average_rating >= 2 && rateable.average_rating < 3
         Needs work
