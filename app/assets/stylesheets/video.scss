@@ -10,7 +10,7 @@
   margin-bottom: $content-area-top-margin;
   padding: 20px;
 
-  .credits-list {
+  .grid-items-lines {
     background: $light-blue;
     margin: 10px -20px 0 -20px;
     font-size: 0.8em;
@@ -20,11 +20,25 @@
       font-weight: 300;
       background: $main-blue;
       color: #fff;
-      height: 60px;
+      height: 55px;
       width: 100%;
       font-size: 28px;
-      line-height: 60px;
+      line-height: 55px;
       padding-left: 25px;
+    }
+
+    .timestamp {
+      a {
+        font-size: 1.3em;
+        display: block;
+      }
+    }
+
+    .move-name {
+      a {
+        font-size: 1.8em;
+        display: block;
+      }
     }
   }
 
