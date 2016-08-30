@@ -1,11 +1,4 @@
 %div.main-nav
-  -# %h1
-  -# = link_to "CardistryIO", root_path
-
-  -#- if signed_in?
-    = link_to "Notifications (#{current_user.new_notifications.count})",
-        notifications_path
-
   %ul
     %li.nav-item{:class => current_path_class('users')}
       %i.icon.ion-person-stalker
@@ -31,30 +24,11 @@
         %i.icon.ion-android-share-alt
         = link_to "Videos shared with you", shared_videos_path
 
-    - if current_user.admin?
-      %li.nav-item{:class => current_path_class('/admin/approve_videos')}
-        = link_to "Approve videos (#{Video.unapproved.count})", approve_videos_path, {:id => "approve-videos"}
+      - if current_user.admin?
+        %li.nav-item{:class => current_path_class('/admin/approve_videos')}
+          = link_to "Approve videos (#{Video.unapproved.count})", approve_videos_path, {:id => "approve-videos"}
 
-
-    -#- if signed_in?
-      %li.nav-item{:class => current_path_class('moves')}
-        %i.icon.ion-person
-        = link_to "My moves", moves_path
-      %li.nav-item
-        %i.icon.ion-person
-        = link_to "My videos", videos_path
-      -# = link_to "Add move", new_move_path
-      -# = link_to "Submit video", new_video_path
-      -# = link_to "Submit videos from Instagram", instagram_path
-      -# = link_to current_user.username, current_user
-      -# = link_to "Sign out", sign_out_path, method: :delete
-    - else
-      %li.nav-item
-        = link_to "Sign in", sign_in_path
-      %li.nav-item
-        = link_to "Sign up", sign_up_path
-
-    %hr.menu-divider
+      %hr.menu-divider
 
     %li.nav-item{:class => current_path_class('pages/contact')}
       %i.icon.ion-paper-airplane
