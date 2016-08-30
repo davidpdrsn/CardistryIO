@@ -1,12 +1,15 @@
 $(document).ready(function() {
   $(".rate-button").click(function() {
     $(this).addClass("loading");
-    var valuesToSubmit = $(".rating-widget-form").serialize();
+
+    var form = $(this).children("form");
+    var valuesToSubmit = form.serialize();
     var that = $(this);
+    console.log(valuesToSubmit);
 
     $.ajax({
       type: "POST",
-      url: $(".rating-widget-form").attr("action"),
+      url: form.attr("action"),
       data: valuesToSubmit
     })
     .success(function() {
