@@ -65,6 +65,7 @@ section {
 
 .content-area {
   border-left: 1px solid $layout-border-color;
+  z-index: 100;
 }
 
 footer {

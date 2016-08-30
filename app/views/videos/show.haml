@@ -9,6 +9,8 @@
     %span.username
       = link_to @video.user.username, @video.user
 
+  = render partial: "shared/ratings", locals: { rateable: @video }
+
   %div.video-info
     - if @video.description.present?
       = simple_format link_mentions(@video.description)
@@ -23,8 +25,6 @@
 
     %div.grid-items-lines
       = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
-
-      = render partial: "shared/ratings", locals: { rateable: @video }
 
       - if @video.appearances.present?
         %div.grid-item
