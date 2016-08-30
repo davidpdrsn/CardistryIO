@@ -5,8 +5,7 @@
   height: 250px;
   border-left: none;
   position: relative;
-  margin: 20px -20px 0 -20px;
-  z-index: 99;
+  margin: 65px -20px 0 -20px;
 
   h1 {
     color: #FB3640;
@@ -19,7 +18,7 @@
     height: 100%;
     width: auto;
     float: left;
-    padding: 15px 45px 15px 40px;
+    padding: 15px 25px 15px 25px;
 
     span {
       display: block;
@@ -36,7 +35,6 @@
     }
     .word {
       font-size: 15px;
-      margin-bottom: 20px;
     }
   }
 
@@ -59,10 +57,9 @@
     .ratings-disabled {
       font-size: 1.5em;
       color: $medium-gray;
-      padding-top: 20px;
+      padding-top: 40px;
     }
   }
-<<<<<<< HEAD
   .hide-button {
     display: none;
   }
@@ -72,17 +69,6 @@
     position: relative;
     width: 20%;
     text-align: center;
-    z-index: 10;
-
-    &:after {
-      content: '';
-      width: calc(100% - 60px);
-      height: 1px;
-      background: #247BA0;
-      position: absolute;
-      left: calc(-50% + 30px);
-      top: 30px;
-    }
 
     &:before {
       content: counter(step);
@@ -100,7 +86,6 @@
       margin: 0 auto 22px auto;
       transition: all .4s ease-in-out;
       cursor: pointer;
-      z-index: 100;
     }
 
     &:hover:before {

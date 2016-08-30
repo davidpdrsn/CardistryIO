@@ -27,8 +27,6 @@
     %div.grid-items-lines
       = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
 
-      = render partial: "shared/ratings", locals: { rateable: @video }
-
       - if @video.appearances.present?
         %div.grid-item
           %h2
