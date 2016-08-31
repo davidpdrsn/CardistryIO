@@ -19,8 +19,9 @@
           %li
             = link_to notification.subject_for_link do
               %span.dropdown-button-title
-                = link_mentions notification.text.expand(link: ->() { notification_subject_link(notification) }).html_safe
-    -if current_user.new_notifications.present?
+                = notification.text.expand(link: notification.subject.class.name.downcase).html_safe
+
+    - if current_user.new_notifications.present?
       %li.mark-as-read-button
-        =link_to mark_all_read_notifications_path, method: :post do
+        = link_to mark_all_read_notifications_path, method: :post do
           Mark all as read
