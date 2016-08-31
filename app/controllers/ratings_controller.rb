@@ -9,7 +9,6 @@ class RatingsController < ApplicationController
                end
     rateable.ratings.create!(rating: params.require(:rating), user: current_user)
 
-    flash.notice = "Rating submitted"
-    redirect_to rateable
+    render partial: "shared/current_ratings", locals: { rateable: rateable.reload }
   end
 end

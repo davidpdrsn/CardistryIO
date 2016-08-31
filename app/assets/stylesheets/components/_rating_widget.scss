@@ -16,9 +16,12 @@
   .current-rating {
     background: #247BA0;
     height: 100%;
-    width: auto;
+    width: 134px;
     float: left;
     padding: 15px 25px 15px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     span {
       display: block;
@@ -36,10 +39,6 @@
     .word {
       font-size: 15px;
     }
-  }
-
-  .for-move {
-    padding-top: 55px;
   }
 
   .interaction {

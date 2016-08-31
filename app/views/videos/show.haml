@@ -21,7 +21,7 @@
       |
       = "posted #{time_ago_in_words(@video.created_at)} ago"
 
-    = render partial: "shared/ratings_video", locals: { rateable: @video }
+    = render partial: "shared/ratings", locals: { rateable: @video }
 
     = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
 

@@ -1,0 +1,35 @@
+%div.current-rating
+  %span.number.average_rating
+    - if rateable.average_rating == 0
+      \/
+    - else
+      = rateable.average_rating
+  %span.word.average_rating_word
+    - if rateable.average_rating == 0
+      Not rated
+    - if rateable.average_rating >= 1 && rateable.average_rating < 2
+      Delete now
+    - if rateable.average_rating >= 2 && rateable.average_rating < 3
+      Needs work
+    - if rateable.average_rating >= 3 && rateable.average_rating < 4
+      Good
+    - if rateable.average_rating >= 4 && rateable.average_rating < 5
+      Awesome
+    - if rateable.average_rating >= 5
+      Inhuman
+  %span.number.number_of_ratings
+    = rateable.ratings.count
+  %span.word.number_of_ratings_word
+    - if rateable.ratings.count == 1
+      Vote
+    - else
+      Votes
+
+  - if rateable.respond_to?(:views)
+    %span.number
+      = rateable.views.count
+    %span.word
+      - if rateable.views.count == 1
+        View
+      - else
+        Views

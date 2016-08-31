@@ -11,7 +11,7 @@ $(document).ready(function() {
       url: form.attr("action"),
       data: valuesToSubmit
     })
-    .success(function() {
+    .success(function(partial) {
       $(that)
           .removeClass("loading")
           .addClass("success")
@@ -20,6 +20,8 @@ $(document).ready(function() {
       $(".rate-button")
           .not(".success")
           .fadeTo("slow", 0.4);
+
+      $(".current-rating").replaceWith(partial);
     })
     .error(function() {
       $(".rate-button").removeClass("error");

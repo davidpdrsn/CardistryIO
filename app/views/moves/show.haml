@@ -3,7 +3,7 @@
 
 = render partial: "shared/show_credits", locals: { object: @move, name: "move" }
 
-= render partial: "shared/ratings_move", locals: { rateable: @move }
+= render partial: "shared/ratings", locals: { rateable: @move }
 
 %p
   - if @move.appearances.present?

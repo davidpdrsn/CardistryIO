@@ -1,37 +1,5 @@
 %div.ratings
-  %div.current-rating.for-video
-    %span.number
-      - if rateable.average_rating == 0
-        \/
-      - else
-        = rateable.average_rating
-    %span.word
-      - if rateable.average_rating == 0
-        Not rated
-      - if rateable.average_rating >= 1 && rateable.average_rating < 2
-        Delete now
-      - if rateable.average_rating >= 2 && rateable.average_rating < 3
-        Needs work
-      - if rateable.average_rating >= 3 && rateable.average_rating < 4
-        Good
-      - if rateable.average_rating >= 4 && rateable.average_rating < 5
-        Awesome
-      - if rateable.average_rating >= 5
-        Inhuman
-    %span.number
-      = rateable.ratings.count
-    %span.word
-      - if rateable.ratings.count == 1
-        Vote
-      - else
-        Votes
-    %span.number
-      = rateable.views.count
-    %span.word
-      - if rateable.views.count == 1
-        View
-      - else
-        Views
+  = render partial: "shared/current_ratings", locals: { rateable: rateable }
 
   %div.interaction
     %ul.rate
@@ -54,7 +22,7 @@
             = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => 5 }, class: "hide-button"
             Inhuman
       - else
-        - if rateable.ratings.find_by(user: current_user) != nil
+        - if rateable.ratings.find_by(user: current_user).present?
           %div.send-ratings
             - if rateable.ratings.find_by(user: current_user).rating == 1
               %li.rate-button#rate-1.success.disabled
@@ -92,4 +60,4 @@
                 Inhuman
         - else
           %div.send-ratings.ratings-disabled
-            You can't rate your own videos.
+            You can't rate your own #{rateable.class.name.downcase.pluralize}.
