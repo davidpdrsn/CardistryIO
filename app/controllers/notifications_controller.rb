@@ -9,6 +9,6 @@ class NotificationsController < ApplicationController
   def mark_all_read
     current_user.notifications.each(&:seen!)
     flash.notice = "Marked all as read"
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 end
