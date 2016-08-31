@@ -61,7 +61,7 @@ Find your user id. You find that by visiting your profile in the browser and loo
 
 That would create you a notification that someone commented on a video. The video might not be one of yours, but should still work.
 
-Note that for all the notifications to work there has to be at least two users in the database. You can just create a second one through the browser. Some notifications also require a move and a video to be present.
+Note that for all the notifications to work there has to be at least two users in the database. You can just create a second one through the browser. Some notifications also require a move, a video, or a comment to be present.
 
 You can call the following methods on `TestNotifications`:
 
@@ -70,7 +70,9 @@ You can call the following methods on `TestNotifications`:
 - `video_approved`
 - `new_follower`
 - `video_shared`
-- `mentioned`
+- `mentioned_in_video`
+- `mentioned_in_move`
+- `mentioned_in_comment`
 - `new_credit`
 
 ### Creating test activities

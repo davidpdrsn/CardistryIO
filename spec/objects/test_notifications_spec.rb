@@ -79,16 +79,40 @@ describe TestNotifications do
     expect(notification.subject.class).to eq Video
   end
 
-  it "creates mentioned notifications" do
+  it "creates mentioned notifications for videos" do
     bob = create :user, username: "Bob"
     alice = create :user, username: "Alice"
     create :video
-    notification = TestNotifications.new(bob).mentioned
+    notification = TestNotifications.new(bob).mentioned_in_video
 
     expect(notification.notification_type).to eq "mentioned"
     expect(notification.user).to eq bob
     expect(notification.actor).to eq alice
     expect(notification.subject.class).to eq Video
+  end
+
+  it "creates mentioned notifications for moves" do
+    bob = create :user, username: "Bob"
+    alice = create :user, username: "Alice"
+    create :move
+    notification = TestNotifications.new(bob).mentioned_in_move
+
+    expect(notification.notification_type).to eq "mentioned"
+    expect(notification.user).to eq bob
+    expect(notification.actor).to eq alice
+    expect(notification.subject.class).to eq Move
+  end
+
+  it "creates mentioned notifications for comments" do
+    bob = create :user, username: "Bob"
+    alice = create :user, username: "Alice"
+    create :comment
+    notification = TestNotifications.new(bob).mentioned_in_comment
+
+    expect(notification.notification_type).to eq "mentioned"
+    expect(notification.user).to eq bob
+    expect(notification.actor).to eq alice
+    expect(notification.subject.class).to eq Comment
   end
 
   it "creates new_credit notifications" do

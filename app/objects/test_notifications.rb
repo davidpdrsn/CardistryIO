@@ -27,8 +27,16 @@ class TestNotifications
     create!(subject: video, type: :video_shared)
   end
 
-  def mentioned
+  def mentioned_in_video
     create!(subject: video, type: :mentioned)
+  end
+
+  def mentioned_in_move
+    create!(subject: move, type: :mentioned)
+  end
+
+  def mentioned_in_comment
+    create!(subject: comment, type: :mentioned)
   end
 
   def new_credit
@@ -58,6 +66,10 @@ class TestNotifications
 
   def move
     Move.first!
+  end
+
+  def comment
+    Comment.first!
   end
 
   def actor
