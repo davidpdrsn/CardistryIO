@@ -1,9 +1,10 @@
 class WelcomeController < ApplicationController
   def index
     if signed_in?
-      @feed = TimeSlots.new(
-        Feed.new(current_user).activities
-      )
+      @feed = PaginatedRelation.new(
+        Feed.new(current_user).activities,
+        per_page: PaginatedRelation::DEFAULT_PER_PAGE,
+      ).page(page)
       render "feeds/index"
     end
   end
@@ -31,5 +32,9 @@ class WelcomeController < ApplicationController
   def valid_beta_authentication?
     params[:username] == ENV.fetch("PRE_USERNAME") &&
       params[:password] == ENV.fetch("PRE_PASSWORD")
+  end
+
+  def page
+    params.fetch(:page, 1).to_i
   end
 end

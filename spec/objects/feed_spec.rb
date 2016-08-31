@@ -20,7 +20,7 @@ describe Feed do
     bob.follow!(alice)
     move = create :move, name: "Mocking Bird", user: alice
 
-    three = create :move, name: "three", user: alice, created_at: 3.days.ago
+    three = create :video, name: "three", user: alice, created_at: 3.days.ago
     one = create :move, name: "one", user: alice, created_at: 1.days.ago
     two = create :move, name: "two", user: alice, created_at: 2.days.ago
 

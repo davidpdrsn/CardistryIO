@@ -1,6 +1,6 @@
 .timeline {
   position: relative;
-  padding: 2em 0 4em 0;
+  padding: 3.5em 0 4em 0;
   display: table;
   height: 100%;
   width: 100%;
@@ -19,13 +19,11 @@
   }
 
   .timeline-separator {
-    font-family: $heading-font-family;
     background: $main-blue;
     padding: 11px;
     border-radius: $base-border-radius;
     text-align: center;
     color: #fff;
-    font-size: 1.5em;
     display: inline-block;
     position: relative;
     margin: 0 0 0 60px;
@@ -187,25 +185,25 @@
     }
   }
 
-  .timeline-headline {
+  .timeline-pagination {
     position: relative;
     margin: 3.5em 0 1.5em;
 
-    .timeline-headline-circle {
+    .timeline-pagination-circle {
       background: $main-blue;
       width: 15px;
       height: 15px;
       position: absolute;
-      top: calc(50% - 7px);
+      top: calc(50% - 10px);
       left: 8px;
       border-radius: 50%;
     }
   }
 
-  .timeline-headline.is-hidden {
+  .timeline-pagination.is-hidden {
     visibility: hidden;
   }
-  .timeline-headline.bounce-in {
+  .timeline-pagination.bounce-in {
     visibility: visible;
     animation: fadeIn 0.7s;
   }

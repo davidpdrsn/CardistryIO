@@ -1,6 +1,6 @@
 jQuery(document).ready ($) ->
   timelineBlocks = $(".timeline-block")
-  timelineHeadlines = $(".timeline-headline")
+  timelinePagination = $(".timeline-pagination")
   offset = 0.9
   #hide timeline blocks which are outside the viewport
 
@@ -18,7 +18,7 @@ jQuery(document).ready ($) ->
 
   showBlocks = (blocks, headlines, offset) ->
     blocks.each ->
-      $(this).offset().top <= $(window).scrollTop() + $(window).height() * offset and $(this).find('.timeline-block-image').hasClass('is-hidden') and $(this).find('.timeline-block-image, .timeline-content, .timeline-headline').removeClass('is-hidden').addClass('bounce-in')
+      $(this).offset().top <= $(window).scrollTop() + $(window).height() * offset and $(this).find('.timeline-block-image').hasClass('is-hidden') and $(this).find('.timeline-block-image, .timeline-content, .timeline-pagination').removeClass('is-hidden').addClass('bounce-in')
       return
 
     headlines.each ->
@@ -26,14 +26,14 @@ jQuery(document).ready ($) ->
       return
     return
 
-  hideBlocks timelineBlocks, timelineHeadlines, offset
+  hideBlocks timelineBlocks, timelinePagination, offset
   #on scolling, show/animate timeline blocks when enter the viewport
   $(window).on 'scroll', ->
     if !window.requestAnimationFrame then setTimeout((->
-      showBlocks timelineBlocks, timelineHeadlines, offset
+      showBlocks timelineBlocks, timelinePagination, offset
       return
     ), 100) else window.requestAnimationFrame((->
-      showBlocks timelineBlocks, timelineHeadlines, offset
+      showBlocks timelineBlocks, timelinePagination, offset
       return
     ))
     return

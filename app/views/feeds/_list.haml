@@ -1,35 +1,32 @@
-- activities.each do |activity|
-  %div.timeline-block
-    %div.timeline-block-image-border
-      %div.timeline-block-image
-        - if activity.subject.class.name.downcase == "video"
-          %i.icon.ion-ios-videocam
-        - elsif activity.subject.class.name.downcase == "move"
-          %i.icon.ion-android-hand
+%div.timeline-block
+  %div.timeline-block-image-border
+    %div.timeline-block-image
+      - if activity.subject.class.name.downcase == "video"
+        %i.icon.ion-ios-videocam
+      - elsif activity.subject.class.name.downcase == "move"
+        %i.icon.ion-android-hand
 
-    %div.timeline-content
-      = link_to activity.subject do
-        - if activity.subject.thumbnail_url.present?
-          %div.thumbnail{:style => "background: url(#{activity.subject.thumbnail_url}) no-repeat center; background-size: cover;"}
-        - elsif activity.subject.class.name.downcase == "move"
-          %div
-        - else
-          %div.thumbnail{:style => "background: url(#{image_path('thumbnail-placeholder.png')}) no-repeat center center;"}
-      %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{activity.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
-      %span.username
-        = link_to activity.user.username, activity.user
-      %span
-        posted a new
-      %span.type
-        = "#{activity.subject.class.name.downcase}"
+  %div.timeline-content
+    = link_to activity.subject do
+      - if activity.subject.thumbnail_url.present?
+        %div.thumbnail{:style => "background: url(#{activity.subject.thumbnail_url}) no-repeat center; background-size: cover;"}
+      - elsif activity.subject.class.name.downcase == "move"
+        %div
+      - else
+        %div.thumbnail{:style => "background: url(#{image_path('thumbnail-placeholder.png')}) no-repeat center center;"}
+    %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{activity.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
+    %span.username
+      = link_to activity.user.username, activity.user
+    %span
+      posted a new
+    %span.type
+      = "#{activity.subject.class.name.downcase}"
 
-      %h1.activity-title
-        = link_to activity.text, activity.subject
+    %h1.activity-title
+      = link_to activity.text, activity.subject
 
-      %p.description
-        = simple_format link_mentions(activity.subject.description)
+    %p.description
+      = simple_format link_mentions(activity.subject.description)
 
-      %h3
-        = "posted #{time_ago_in_words(activity.created_at)} ago"
-
-
+    %h3
+      = "posted #{time_ago_in_words(activity.created_at)} ago"

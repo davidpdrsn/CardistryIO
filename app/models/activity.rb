@@ -7,4 +7,12 @@ class Activity < ApplicationRecord
   validates_with(
     PolymorphicAssociationValidator.new(name: :subject, types: [Video, Move])
   )
+
+  def name
+    subject.name
+  end
+
+  def text
+    name
+  end
 end
