@@ -1,7 +1,13 @@
 default: &default
   adapter: postgresql
-  encoding: unicode
+  encoding: utf8
+  min_messages: warning
   pool: 5
+  template: template0
+  timeout: 5000
+  username: postgres
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
 
 development:
   <<: *default
