@@ -7,7 +7,8 @@ class MonitorController < ApplicationController
     test_resque(errors)
 
     if errors.empty?
-      render plain: "OK"
+      # render plain: "OK"
+      render plain: "Simulating error, but really everything is fine"
     else
       render plain: errors.join(", "), status: :internal_server_error
     end
