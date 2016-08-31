@@ -42,13 +42,13 @@ end
 namespace :resque do
   task :restart do
     on roles(:app) do
-      execute "sudo restart workers"
+      execute "sudo restart resque"
     end
   end
 
   task :status do
     on roles(:app) do
-      execute "status workers"
+      execute "status resque"
     end
   end
 end
