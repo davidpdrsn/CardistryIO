@@ -1,4 +1,6 @@
 class MonitorController < ApplicationController
+  skip_around_action :require_beta_authentication
+
   def services
     errors = []
 
