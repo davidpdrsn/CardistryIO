@@ -14,7 +14,13 @@ class TestNotifications
   end
 
   def new_follower
-    create!(subject: actor, type: :new_follower)
+    relationship = begin
+                     actor.relationships.find_by!(followee: user)
+                   rescue ActiveRecord::RecordNotFound
+                     actor.follow!(user)
+                     retry
+                   end
+    create!(subject: relationship, type: :new_follower)
   end
 
   def video_shared

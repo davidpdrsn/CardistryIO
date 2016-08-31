@@ -63,7 +63,8 @@ describe TestNotifications do
     expect(notification.notification_type).to eq "new_follower"
     expect(notification.user).to eq bob
     expect(notification.actor).to eq alice
-    expect(notification.subject.class).to eq User
+    expect(notification.subject.class).to eq Relationship
+    expect(notification.subject_for_link).to eq alice
   end
 
   it "creates video_shared notifications" do
