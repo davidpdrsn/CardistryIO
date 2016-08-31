@@ -54,4 +54,13 @@ feature "rating move" do
 
     expect(page).not_to have_selector(:css, "#vote-5")
   end
+
+  scenario "trying to rate when not signed in" do
+    move = create :move
+
+    visit move_path(move)
+
+    expect(page).to_not have_content "You can't rate your own moves."
+    expect(page).to have_content "Sign in to rate"
+  end
 end
