@@ -29,7 +29,6 @@ module Admin
         CompositeObserver.new(
           [
             Observers::Activity.new,
-            Observers::LoadsThumbnails.new,
           ]
         )
       ).save(video)
