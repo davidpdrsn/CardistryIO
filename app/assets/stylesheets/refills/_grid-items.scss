@@ -35,11 +35,6 @@
     @include media($large-screen) {
       @include grid-item-columns($grid-item-columns);
     }
-
-    &:focus,
-    &:hover {
-      background: transparentize($main-blue, 0.95);
-    }
   }
 
   .grid-item img {
