@@ -44,12 +44,14 @@ class Notifier
   private
 
   def send_notification_without_checking_subject_actor_relationship(subject:, actor:, type:)
-    Notification.create!(
+    notification = Notification.create!(
       user: user_to_notify,
       notification_type: type,
       actor: actor,
       subject: subject,
     )
+    deliver_notification_via_email(notification)
+    notification
   end
 
   def send_notification(subject:, actor:, type:)
@@ -59,6 +61,11 @@ class Notifier
       actor: actor,
       type: type,
     )
+  end
+
+  def deliver_notification_via_email(notification)
+    return unless notification.user.admin? && notification.new_follower?
+    NotificationMailer.new_notification(notification).deliver_later
   end
 
   class SubjectRelationshipAdapter < SimpleDelegator

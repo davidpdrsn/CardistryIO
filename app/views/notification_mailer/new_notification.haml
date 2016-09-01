@@ -1,0 +1,8 @@
+%p
+  Hey @#{@notification.user.username}
+
+%p
+  You have a new notification on #{link_to "cardistry.io", "http://cardistry.io"}:
+
+%p
+  #{link_to "@#{@notification.actor.username}", @notification.actor} started following you.
