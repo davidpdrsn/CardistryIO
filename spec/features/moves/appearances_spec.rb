@@ -22,7 +22,7 @@ feature "appearances" do
 
     click_link move.name
 
-    expect(page).to have_content "Appears in"
+    expect(page).to have_content "Move appearances"
     expect(page).to have_content video.name
     expect(page).to have_content "01:23"
   end

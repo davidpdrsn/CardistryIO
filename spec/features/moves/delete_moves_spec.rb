@@ -18,8 +18,6 @@ feature "delete moves" do
 
     visit move_path(move, as: user)
 
-    within ".actions" do
-      expect(page).not_to have_button "Delete"
-    end
+    expect(page).not_to have_selector(:css, ".owner-actions")
   end
 end
