@@ -11,12 +11,12 @@ feature "paginating videos" do
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name
 
-    click_link "Next"
+    find("pagination-forward").click
 
     expect(page).to have_content videos.first.name
     expect(page).to_not have_content videos.last.name
 
-    click_link "Prev"
+    find("pagination-back").click
 
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name
@@ -28,8 +28,8 @@ feature "paginating videos" do
     end
 
     visit all_videos_path
-    click_link "Next"
-    click_link "Next"
+    find("pagination-forward").click
+    find("pagination-forward").click
 
     expect(page).to have_content videos.first.name
   end
@@ -39,8 +39,8 @@ feature "paginating videos" do
 
     visit all_videos_path
 
-    expect(page).to have_content "Prev"
-    expect(page).to_not have_link "Prev"
+    expect(page).to have_selector(:css, "#pagination-back")
+    expect(page).to have_selector(:css, ".pagination-nav-button .back .disabled")
   end
 
   scenario "no next page on last page" do
@@ -48,8 +48,8 @@ feature "paginating videos" do
 
     visit all_videos_path
 
-    expect(page).to have_content "Next"
-    expect(page).to_not have_link "Next"
+    expect(page).to have_selector(:css, "#pagination-forward")
+    expect(page).to have_selector(:css, ".pagination-nav-button .forward .disabled")
   end
 
   scenario "sees no paging buttons when there are few videos" do
@@ -70,12 +70,12 @@ feature "paginating videos" do
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name
 
-    click_link "Next"
+    find("#pagination-forward").click
 
     expect(page).to have_content videos.first.name
     expect(page).to_not have_content videos.last.name
 
-    click_link "Prev"
+    find("#pagination-back").click
 
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name

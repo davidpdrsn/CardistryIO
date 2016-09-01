@@ -7,7 +7,7 @@
 %div.pagination-container
   %ul.pagination.with-shadow
     - if page.more_previous_pages?
-      %li.pagination-nav-button.back
+      %li.pagination-nav-button.back#pagination-back
         = link_to "<i class='icon ion-ios-arrow-back'></i>".html_safe, root_path(page: page.previous_page)
     - else
       %li.pagination-nav-button.back.disabled
@@ -17,7 +17,7 @@
       Page #{page.current_page} of #{page.number_of_pages}
 
     - if page.more_pages?
-      %li.pagination-nav-button.forward
+      %li.pagination-nav-button.forward#pagination-forward
         = link_to "<i class='icon ion-ios-arrow-forward'></i>".html_safe, root_path(page: page.next_page)
     - else
       %li.pagination-nav-button.forward.disabled
