@@ -97,7 +97,7 @@ document.addEventListener "turbolinks:load", ->
     $(@).parent().remove()
     if $('.item-list > li').length == 0
       $('.item-list').remove()
-    $("[data-behavior~=credit-user-search]").val("").focus()
+    $("[data-behavior~=credit-user-search]").focus()
     credit = new Credit(username)
     list.add(credit)
 
