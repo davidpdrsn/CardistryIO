@@ -3,7 +3,7 @@ class NotificationMailer < ApplicationMailer
     @notification = notification
     mail(
       to: notification.user.email,
-      subject: "@#{notification.actor.username} is now following you on cardistry.io",
+      subject: notification.text.expand,
     )
   end
 end

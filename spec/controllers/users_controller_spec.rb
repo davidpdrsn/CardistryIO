@@ -26,6 +26,15 @@ describe UsersController do
       expect(response.status).to eq 302
     end
 
+    it "sets email frequency" do
+      bob = create :user, email_frequency: :never
+      sign_in_as bob
+
+      patch :update, params: { id: bob.id, user: { email_frequency: :immediately } }
+
+      expect(bob.reload.email_frequency.to_sym).to eq :immediately
+    end
+
     it "only allows users to edit their own profile" do
       bob = build_stubbed(:user)
       alice = build_stubbed(:user)

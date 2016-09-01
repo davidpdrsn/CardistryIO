@@ -10,17 +10,18 @@ describe Notification do
   describe "#text" do
     context "comment" do
       it "returns the text for that type" do
-        commentable = create :video
+        video = create :video
         bob = create :user
+        comment = create :comment, commentable: video, user: bob
 
         text = Notification.create!(
-          user: commentable.user,
+          user: video.user,
           notification_type: :comment,
           actor: bob,
-          subject: commentable,
+          subject: comment,
         ).text
 
-        expect(text.expand).to eq "New comment on #{commentable.name} by @#{bob.username}"
+        expect(text.expand).to eq "New comment on #{video.name} by @#{bob.username}"
       end
     end
 
@@ -119,6 +120,22 @@ describe Notification do
       )
 
       expect(notification.subject_for_link).to eq video
+    end
+  end
+
+  describe "#deliver_mail_now?" do
+    it "returns true if user wants emails immediately" do
+      user = create :user, email_frequency: :immediately
+      notification = create :notification, user: user
+
+      expect(notification.deliver_mail_now?).to eq true
+    end
+
+    it "returns false if user doesn't want email immediately" do
+      user = create :user, email_frequency: :never
+      notification = create :notification, user: user
+
+      expect(notification.deliver_mail_now?).to eq false
     end
   end
 end

@@ -43,7 +43,7 @@ describe CommentsController do
       notification = Notification.last
       expect(notification.user).to eq bob
       expect(notification.notification_type).to eq "comment"
-      expect(notification.subject).to eq move
+      expect(notification.subject.commentable).to eq move
       expect(notification.actor).to eq alice
     end
 

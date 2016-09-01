@@ -14,14 +14,10 @@ class Notification < ApplicationRecord
     :new_credit,
   ]
 
-  def type
-    fail
-  end
-
   def text
     text = case notification_type
            when "comment"
-             "New comment on #{subject.name} by @#{actor.username}"
+             "New comment on #{subject.commentable.name} by @#{actor.username}"
            when "video_approved"
              "Your video #{subject.name} has been approved"
            when "new_follower"
@@ -49,5 +45,9 @@ class Notification < ApplicationRecord
 
   def seen!
     update!(seen: true)
+  end
+
+  def deliver_mail_now?
+    user.email_frequency == "immediately"
   end
 end

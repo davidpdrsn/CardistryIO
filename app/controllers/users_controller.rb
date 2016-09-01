@@ -24,6 +24,7 @@ class UsersController < Clearance::UsersController
       :country_code,
       :time_zone,
       :email,
+      :email_frequency,
     )
     if @user.update(user_params)
       flash.notice = "Updated"

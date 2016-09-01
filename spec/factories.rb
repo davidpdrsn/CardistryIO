@@ -58,7 +58,7 @@ FactoryGirl.define do
   factory :notification do
     user
     notification_type :comment
-    association :subject, factory: :video
+    association :subject, factory: :comment
     association :actor, factory: :user
   end
 

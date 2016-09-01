@@ -38,10 +38,11 @@ feature "notifications from comments" do
   scenario "visiting the subject for a notification" do
     bob = create :user
     video = create :video
+    comment = create :comment, commentable: video
     notification = create(
       :notification,
       user: bob,
-      subject: video,
+      subject: comment,
       notification_type: :comment,
     )
 

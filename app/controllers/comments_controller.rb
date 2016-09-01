@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     ).notify_mentioned_users
 
     if comment.save
-      create_notification(commentable)
+      create_notification(commentable, comment)
       flash.notice = "Comment added"
       redirect_to commentable
     else
@@ -35,8 +35,11 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content)
   end
 
-  def create_notification(subject)
-    Notifier.new(subject.user).comment(subject: subject, actor: current_user)
+  def create_notification(commentable, comment)
+    Notifier.new(commentable.user).comment(
+      comment: comment,
+      commentor: current_user,
+    )
   end
 
   def ensure_user_made_comment(comment)

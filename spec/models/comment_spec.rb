@@ -21,4 +21,23 @@ describe Comment do
       expect(comment.updated?).to eq true
     end
   end
+
+  describe "#commenting_on_own_commentable?" do
+    it "returns false if commenting on some elses thing" do
+      user = create :user
+      another_user = create :user
+      video = create :video, user: another_user
+      comment = create :comment, user: user, commentable: video
+
+      expect(comment.commenting_on_own_commentable?).to eq false
+    end
+
+    it "returns true if commenting on own thing" do
+      user = create :user
+      video = create :video, user: user
+      comment = create :comment, user: user, commentable: video
+
+      expect(comment.commenting_on_own_commentable?).to eq true
+    end
+  end
 end

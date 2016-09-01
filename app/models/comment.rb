@@ -13,4 +13,8 @@ class Comment < ApplicationRecord
   def updated?
     updated_at != created_at
   end
+
+  def commenting_on_own_commentable?
+    commentable.user == user
+  end
 end

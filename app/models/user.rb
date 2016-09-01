@@ -6,6 +6,11 @@ class User < ApplicationRecord
   include Clearance::User
   include Gravtastic
 
+  enum email_frequency: {
+    immediately: 0,
+    never: 100,
+  }
+
   validates :email, presence: true
   validates :encrypted_password, presence: true
   validates :username, presence: true, uniqueness: true

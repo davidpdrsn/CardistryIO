@@ -10,7 +10,7 @@ class RelationshipsController < ApplicationController
     else
       relationship = current_user.follow!(user)
       if relationship.new?
-        Notifier.new(user).new_follower(subject: relationship, actor: current_user)
+        Notifier.new(user).new_follower(relationship: relationship)
       end
       flash.notice = "Now following #{user.username}"
       redirect_to user

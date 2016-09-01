@@ -10,7 +10,7 @@ module Admin
     def create
       video = Video.find(params[:id])
       video.approve!
-      Notifier.new(video.user).video_approved(subject: video, actor: current_user)
+      Notifier.new(video.user).video_approved(video: video, admin_approving: current_user)
       MentionNotifier.new(video).notify_mentioned_users
       notify_users(video)
       create_activity(video)

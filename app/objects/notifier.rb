@@ -1,24 +1,26 @@
 class Notifier
   pattr_initialize :user_to_notify
 
-  def video_approved(subject:, actor:)
-    send_notification(subject: subject, actor: actor, type: :video_approved)
+  def video_approved(video:, admin_approving:)
+    return if video.user == admin_approving
+    send_notification(subject: video, actor: admin_approving, type: :video_approved)
   end
 
-  def comment(subject:, actor:)
-    send_notification(subject: subject, actor: actor, type: :comment)
+  def comment(comment:, commentor:)
+    return if comment.commenting_on_own_commentable?
+    send_notification(subject: comment, actor: commentor, type: :comment)
   end
 
-  def new_follower(subject:, actor:)
+  def new_follower(relationship:)
     send_notification(
-      subject: SubjectRelationshipAdapter.new(subject),
-      actor: actor,
+      subject: SubjectRelationshipAdapter.new(relationship),
+      actor: relationship.follower,
       type: :new_follower
     )
   end
 
   def video_shared(subject:, actor:)
-    send_notification_without_checking_subject_actor_relationship(
+    send_notification(
       subject: subject,
       actor: actor,
       type: :video_shared
@@ -26,7 +28,7 @@ class Notifier
   end
 
   def mentioned(subject:, actor:)
-    send_notification_without_checking_subject_actor_relationship(
+    send_notification(
       subject: subject,
       actor: actor,
       type: :mentioned
@@ -34,7 +36,7 @@ class Notifier
   end
 
   def new_credit(subject:, actor:)
-    send_notification_without_checking_subject_actor_relationship(
+    send_notification(
       subject: subject,
       actor: actor,
       type: :new_credit
@@ -43,7 +45,7 @@ class Notifier
 
   private
 
-  def send_notification_without_checking_subject_actor_relationship(subject:, actor:, type:)
+  def send_notification(subject:, actor:, type:)
     notification = Notification.create!(
       user: user_to_notify,
       notification_type: type,
@@ -54,17 +56,8 @@ class Notifier
     notification
   end
 
-  def send_notification(subject:, actor:, type:)
-    return if subject.user == actor
-    send_notification_without_checking_subject_actor_relationship(
-      subject: subject,
-      actor: actor,
-      type: type,
-    )
-  end
-
   def deliver_notification_via_email(notification)
-    return unless notification.user.admin? && notification.new_follower?
+    return unless notification.user.admin? && notification.deliver_mail_now?
     NotificationMailer.new_notification(notification).deliver_later
   end
 
