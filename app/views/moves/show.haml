@@ -1,30 +1,3 @@
--#%h1= @move.name
--#= simple_format link_mentions(@move.description)
--#
--#= render partial: "shared/show_credits", locals: { object: @move, name: "move" }
--#
--#= render partial: "shared/ratings", locals: { rateable: @move }
--#
--#%p
--#  - if @move.appearances.present?
--#    Appears in
--#    %ul
--#      %li
--#        - @move.appearances.each do |appearance|
--#          = link_to_move_in_video appearance: appearance
--#          = TimeFormatter.new(appearance.minutes, appearance.seconds).format
--#  - else
--#    Doesn't appear in any videos
-
--#.actions
--#  - if current_user == @move.user
--#    = button_to "Edit", edit_move_path(@move), method: :get
--#    = button_to "Delete move", @move, method: :delete, data: { confirm: "Sure?" }
--#
--#%div.comments= render @move.comments.order(:created_at)
--#= render partial: "comments/form", locals: { commentable: @move }
-
-
 %div.show-content
   %h1.move-title
     = @move.name
@@ -47,6 +20,9 @@
 
     = render partial: "shared/show_credits", locals: { object: @move, name: "move" }
 
+    = render partial: "shared/show_move_appearances", locals: { object: @move, name: "move" }
+
+
     %div.comments
       %div.section-headline
         - if @move.comments.count == 0
@@ -60,3 +36,8 @@
         = render @move.comments.order(created_at: :desc)
 
         = render partial: "comments/form", locals: { commentable: @move }
+
+  - if @move.user == current_user
+    %div.owner-actions
+      = button_to "Edit move", edit_move_path(@move), method: :get
+      = button_to "Delete move", @move, method: :delete, data: { confirm: "Sure?" }
