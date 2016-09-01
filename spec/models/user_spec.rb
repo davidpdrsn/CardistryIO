@@ -164,6 +164,16 @@ describe User do
 
       expect(relationship.new?).to eq false
     end
+
+    it "returns the old relationship when following someone again" do
+      bob = create :user
+      alice = create :user
+
+      bob.follow!(alice)
+      relationship = bob.follow!(alice)
+
+      expect(relationship.new?).to eq false
+    end
   end
 
   describe "#following" do

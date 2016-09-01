@@ -5,6 +5,8 @@ describe Notification do
   it { should belong_to :subject }
   it { should belong_to :actor }
 
+  it { should validate_presence_of :subject }
+
   describe "#text" do
     context "comment" do
       it "returns the text for that type" do

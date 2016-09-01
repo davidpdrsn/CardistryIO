@@ -3,6 +3,8 @@ class Notification < ApplicationRecord
   belongs_to :subject, polymorphic: true
   belongs_to :actor, class_name: "User"
 
+  validates :subject, presence: true
+
   enum notification_type: [
     :comment,
     :video_approved,

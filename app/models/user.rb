@@ -81,7 +81,10 @@ class User < ApplicationRecord
   end
 
   def follow!(user)
-    return if follows?(user)
+    if follows?(user)
+      return OldRelationship.new(current_relationship_with(user))
+    end
+
     klass = if relationships.where(followee: user, active: false).present?
               OldRelationship
             else
@@ -94,7 +97,7 @@ class User < ApplicationRecord
   end
 
   def follows?(user)
-    relationships.where(followee: user, active: true).present?
+    current_relationship_with(user).present?
   end
 
   def following
@@ -126,6 +129,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def current_relationship_with(user)
+    relationships.where(followee: user, active: true)
+  end
 
   def format_of_username
     if username.present? && !username.match(/^#{USERNAME_REGEX}$/)
