@@ -10,7 +10,7 @@
       %li.pagination-nav-button.back#pagination-back
         = link_to "<i class='icon ion-ios-arrow-back'></i>".html_safe, root_path(page: page.previous_page)
     - else
-      %li.pagination-nav-button.back.disabled
+      %li.pagination-nav-button.back.disabled#pagination-back
         %i.icon.ion-ios-arrow-back
 
     %li.pagination-text
@@ -20,5 +20,5 @@
       %li.pagination-nav-button.forward#pagination-forward
         = link_to "<i class='icon ion-ios-arrow-forward'></i>".html_safe, root_path(page: page.next_page)
     - else
-      %li.pagination-nav-button.forward.disabled
+      %li.pagination-nav-button.forward.disabled#pagination-forward
         %i.icon.ion-ios-arrow-forward

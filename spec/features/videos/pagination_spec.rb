@@ -11,12 +11,12 @@ feature "paginating videos" do
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name
 
-    find("pagination-forward").click
+    find("#pagination-forward").click
 
     expect(page).to have_content videos.first.name
     expect(page).to_not have_content videos.last.name
 
-    find("pagination-back").click
+    find("#pagination-back").click
 
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name
@@ -28,8 +28,8 @@ feature "paginating videos" do
     end
 
     visit all_videos_path
-    find("pagination-forward").click
-    find("pagination-forward").click
+    find("#pagination-forward").click
+    find("#pagination-forward").click
 
     expect(page).to have_content videos.first.name
   end
