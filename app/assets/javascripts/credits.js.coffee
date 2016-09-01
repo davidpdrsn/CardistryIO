@@ -52,11 +52,13 @@ class Credit
 
   toHtml: ->
     """
-    <span data-username="#{@username}">
-      @#{@username}
-      <button type="button" data-behavior="remove-credit">Remove</button>
+    <div class="grid-item" data-username="#{@username}">
+      <a>
+        <span class="username">@#{@username}</span>
+      </a>
+      <i data-behavior="remove-credit" class="icon ion-ios-trash-outline delete-credit"></i>
       <input type="hidden" name="credits[]" value="#{@username}">
-    </span>
+    </div>
     """
 
 loadExistingCredits = (f) ->
@@ -77,7 +79,9 @@ $ ->
   addBehavior "add-credit", (event) ->
     event.preventDefault()
     username = $(@).attr("data-username")
-    $(@).remove()
+    $(@).parent().remove()
+    if $('.item-list > li').length == 0
+      $('.item-list').remove()
     $("[data-behavior~=credit-user-search]").val("").focus()
     credit = new Credit(username)
     list.add(credit)
@@ -102,4 +106,4 @@ $ ->
           </li>
         """
       items = users.reduce(transform, "")
-      "<ul>#{items}</ul>"
+      "<ul class='item-list'>#{items}</ul>"

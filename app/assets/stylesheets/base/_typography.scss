@@ -98,6 +98,20 @@ h3 {
   font-size: 0.8em;
 }
 
+
+.section-headline {
+  font-family: "Prompt", sans-serif;
+  font-weight: 300;
+  background: $main-blue;
+  color: #fff;
+  height: 55px;
+  width: 100%;
+  font-size: 28px;
+  line-height: 55px;
+  padding-left: 25px;
+}
+
+
 p {
   margin: 0 0 $small-spacing;
 }
