@@ -1,25 +1,62 @@
-%h1= @move.name
-= simple_format link_mentions(@move.description)
+-#%h1= @move.name
+-#= simple_format link_mentions(@move.description)
+-#
+-#= render partial: "shared/show_credits", locals: { object: @move, name: "move" }
+-#
+-#= render partial: "shared/ratings", locals: { rateable: @move }
+-#
+-#%p
+-#  - if @move.appearances.present?
+-#    Appears in
+-#    %ul
+-#      %li
+-#        - @move.appearances.each do |appearance|
+-#          = link_to_move_in_video appearance: appearance
+-#          = TimeFormatter.new(appearance.minutes, appearance.seconds).format
+-#  - else
+-#    Doesn't appear in any videos
 
-= render partial: "shared/show_credits", locals: { object: @move, name: "move" }
+-#.actions
+-#  - if current_user == @move.user
+-#    = button_to "Edit", edit_move_path(@move), method: :get
+-#    = button_to "Delete move", @move, method: :delete, data: { confirm: "Sure?" }
+-#
+-#%div.comments= render @move.comments.order(:created_at)
+-#= render partial: "comments/form", locals: { commentable: @move }
 
-= render partial: "shared/ratings", locals: { rateable: @move }
 
-%p
-  - if @move.appearances.present?
-    Appears in
-    %ul
-      %li
-        - @move.appearances.each do |appearance|
-          = link_to_move_in_video appearance: appearance
-          = TimeFormatter.new(appearance.minutes, appearance.seconds).format
-  - else
-    Doesn't appear in any videos
+%div.show-content
+  %h1.video-title
+    = @move.name
+  %div.author
+    %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{@move.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
+    %span.username
+      = link_to @move.user.username, @move.user
 
-.actions
-  - if current_user == @move.user
-    = button_to "Edit", edit_move_path(@move), method: :get
-    = button_to "Delete move", @move, method: :delete, data: { confirm: "Sure?" }
+  %div.video-info
+    - if @move.description.present?
+      = simple_format link_mentions(@move.description)
+    - else
+      %p.no-description
+        This move has no description...
 
-%div.comments= render @move.comments.order(:created_at)
-= render partial: "comments/form", locals: { commentable: @move }
+    %h3.video-meta
+      = "posted #{time_ago_in_words(@move.created_at)} ago"
+
+    = render partial: "shared/ratings", locals: { rateable: @move }
+
+    = render partial: "shared/show_credits", locals: { object: @move, name: "move" }
+
+    %div.comments
+      %div.section-headline
+        - if @move.comments.count == 0
+          No comments yet
+        - elsif @move.comments.count == 1
+          #{@move.comments.count} comment
+        - else
+          #{@move.comments.count} comments
+
+      %div.comment-container
+        = render @move.comments.order(created_at: :desc)
+
+        = render partial: "comments/form", locals: { commentable: @move }
