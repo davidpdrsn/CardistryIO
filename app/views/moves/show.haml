@@ -26,9 +26,9 @@
 
 
 %div.show-content
-  %h1.video-title
+  %h1.move-title
     = @move.name
-  %div.author
+  %div.author.left-align
     %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{@move.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
     %span.username
       = link_to @move.user.username, @move.user
