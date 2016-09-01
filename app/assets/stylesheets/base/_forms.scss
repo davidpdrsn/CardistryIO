@@ -29,17 +29,20 @@ label {
 #{$all-text-inputs},
 select[multiple=multiple],
 textarea {
-  background-color: none;
-  border: $main-red-border;
-  border-radius: $base-border-radius;
-  // box-shadow: $form-box-shadow;
+  background-color: transparent;
+  border: none;
+  border-bottom: $main-red-border;
+  border-width: 2px;
   box-sizing: border-box;
   font-family: $base-font-family;
-  font-size: $base-font-size;
+  font-size: 20px;
   margin-bottom: $base-spacing / 2;
   padding: $base-spacing / 3;
+  padding-left: 0;
   transition: border-color;
   width: 100%;
+  border-top-left-radius: $base-border-radius;
+  border-top-right-radius: $base-border-radius;
 
   &:hover {
     border-color: $main-red-hover;
@@ -49,6 +52,11 @@ textarea {
     border-color: $main-blue;
     // box-shadow: $form-box-shadow-focus;
     outline: none;
+  }
+
+  &::placeholder {
+    font-size: 18px;
+    vertical-align: bottom;
   }
 }
 
@@ -76,3 +84,4 @@ select {
   max-width: 100%;
   width: auto;
 }
+
