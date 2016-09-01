@@ -8,4 +8,5 @@
         %span.move-name
           = link_to_move_in_video appearance: appearance
         %span.timestamp
+          at
           = TimeFormatter.new(appearance.minutes, appearance.seconds).format
