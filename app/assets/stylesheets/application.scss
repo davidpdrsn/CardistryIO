@@ -69,3 +69,16 @@ body {
   @include border-top-radius(14px);
   @include border-bottom-radius(14px);
 }
+
+.content-container {
+  background: #fff;
+  width: 100%;
+  @include border-top-radius($base-border-radius);
+  @include border-bottom-radius($base-border-radius);
+  @include shadow-level(1);
+  float: left;
+  height: auto;
+  margin-top: $content-area-top-margin;
+  margin-bottom: $content-area-top-margin;
+  padding: 20px;
+}

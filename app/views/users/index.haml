@@ -1,12 +1,16 @@
-%h1
-  All users
+%div.content-container
+  %h1
+    All users
 
-%p
-  This is a list of everyone signed up so far. Will make it easier to find people to follow while we're still getting started.
+  %p
+    This is a list of everyone signed up so far. Will make it easier to find people to follow while we're still getting started.
 
-%ul
-  - @users.each do |user|
-    %li
-      = link_to "@#{user.username}", user
-      %small
-        joined #{time_ago_in_words(user.created_at)} ago
+
+  %div.grid-items-lines
+    - @users.each do |user|
+      %div.grid-item
+        = image_tag(user.gravatar_url)
+        %h3
+          = link_to "@#{user.username}", user
+        %p
+          joined #{time_ago_in_words(user.created_at)} ago
