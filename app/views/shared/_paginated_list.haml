@@ -4,15 +4,21 @@
 
 - path = ->(options) { polymorphic_path([:all, page.detect { true }.class], options) }
 
-- if page.more_previous_pages?
-  = link_to "Prev", path.call({ page: page.previous_page }.merge(current_filter_sort_params))
-- else
-  Prev
+%div.pagination-container
+  %ul.pagination.with-shadow
+    - if page.more_previous_pages?
+      %li.pagination-nav-button.back
+        = link_to "<i class='icon ion-ios-arrow-back'></i>".html_safe, root_path(page: page.previous_page)
+    - else
+      %li.pagination-nav-button.back.disabled
+        %i.icon.ion-ios-arrow-back
 
-- if page.more_pages?
-  = link_to "Next", path.call({ page: page.next_page }.merge(current_filter_sort_params))
-- else
-  Next
+    %li.pagination-text
+      Page #{page.current_page} of #{page.number_of_pages}
 
-%p
-  Page #{page.current_page} of #{page.number_of_pages}
+    - if page.more_pages?
+      %li.pagination-nav-button.forward
+        = link_to "<i class='icon ion-ios-arrow-forward'></i>".html_safe, root_path(page: page.next_page)
+    - else
+      %li.pagination-nav-button.forward.disabled
+        %i.icon.ion-ios-arrow-forward
