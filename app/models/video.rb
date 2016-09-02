@@ -26,6 +26,7 @@ class Video < ApplicationRecord
     c.has_many :ratings, as: :rateable
     c.has_many :sharings
     c.has_many :views, class_name: "VideoView"
+    c.has_many :notifications, as: :subject
   end
 
   class << self

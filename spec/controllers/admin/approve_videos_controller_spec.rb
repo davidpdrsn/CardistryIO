@@ -59,6 +59,7 @@ describe Admin::ApproveVideosController do
       post :create, params: { id: video.id }
 
       expect(Notification.count).to eq 1
+      expect(Notification.first.notification_type).to eq "new_credit"
       expect(Notification.first.user).to eq daren
       expect(Notification.first.subject).to eq video
     end

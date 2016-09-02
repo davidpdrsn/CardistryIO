@@ -148,7 +148,7 @@ class User < ApplicationRecord
     end
   end
 
-  class RelationshipsWithAge < SimpleDelegator
+  class RelationshipsWithAge < ActiveRecordDecorator
     class << self
       def method_missing(name, *args, &block)
         Relationship.send(name, *args, &block)

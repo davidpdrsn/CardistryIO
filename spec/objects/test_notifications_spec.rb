@@ -5,7 +5,8 @@ describe TestNotifications do
     SwapsEnv.new.swap_for("production") do
       bob = create :user, username: "Bob"
       alice = create :user, username: "Alice"
-      create :video
+      video = create :video
+      create :comment, commentable: video
 
       expect do
         TestNotifications.new(bob).comment_on_video
@@ -22,25 +23,27 @@ describe TestNotifications do
   it "creates comment on video notifications" do
     bob = create :user, username: "Bob"
     alice = create :user, username: "Alice"
-    create :video
+    video = create :video
+    create :comment, commentable: video
     notification = TestNotifications.new(bob).comment_on_video
 
     expect(notification.notification_type).to eq "comment"
     expect(notification.user).to eq bob
     expect(notification.actor).to eq alice
-    expect(notification.subject.class).to eq Video
+    expect(notification.subject.class).to eq Comment
   end
 
   it "creates comment on move notifications" do
     bob = create :user, username: "Bob"
     alice = create :user, username: "Alice"
-    create :move
+    move = create :move
+    comment = create :comment, commentable: move
     notification = TestNotifications.new(bob).comment_on_move
 
     expect(notification.notification_type).to eq "comment"
     expect(notification.user).to eq bob
     expect(notification.actor).to eq alice
-    expect(notification.subject.class).to eq Move
+    expect(notification.subject.class).to eq Comment
   end
 
   it "creates video_approved notifications" do

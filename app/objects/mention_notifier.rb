@@ -8,7 +8,7 @@ class MentionNotifier
     end
   end
 
-  class CommentAdapter < SimpleDelegator
+  class CommentAdapter < ActiveRecordDecorator
     def self.method_missing(name, *args, &block)
       Comment.send(name, *args, &block)
     end

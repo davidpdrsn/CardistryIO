@@ -315,4 +315,18 @@ describe Video do
       ])
     end
   end
+
+  it "deletes related notifications when it is delete" do
+    video = create :video
+    user = create :user
+    admin = create :user
+    notification = Notifier.new(user).video_approved(
+      video: video,
+      admin_approving: admin,
+    )
+
+    video.destroy!
+
+    expect(Notification.find_by(id: notification.id)).to eq nil
+  end
 end

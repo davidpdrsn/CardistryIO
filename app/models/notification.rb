@@ -3,7 +3,22 @@ class Notification < ApplicationRecord
   belongs_to :subject, polymorphic: true
   belongs_to :actor, class_name: "User"
 
-  validates :subject, presence: true
+  validates :subject, :actor, presence: true
+
+  validates_with(
+    PolymorphicAssociationForEnumValuesValidator.new(
+      name: :subject,
+      enum_column: :notification_type,
+      types: {
+        "comment" => [Comment],
+        "video_approved" => [Video],
+        "new_follower" => [Relationship],
+        "video_shared" => [Video],
+        "mentioned" => [Video, Comment, Move],
+        "new_credit" => [Video, Move],
+      }
+    )
+  )
 
   enum notification_type: [
     :comment,

@@ -138,4 +138,28 @@ describe Notification do
       expect(notification.deliver_mail_now?).to eq false
     end
   end
+
+  describe "validating type of subject" do
+    context "video approved" do
+      it "is invalid if subject is a move" do
+        admin = create :user
+        user = create :user
+        move = create :move
+
+        expect do
+          Notifier.new(user).video_approved(video: move, admin_approving: admin)
+        end.to raise_error(ActiveRecord::RecordInvalid)
+      end
+
+      it "is valid if subject is a video" do
+        admin = create :user
+        user = create :user
+        video = create :video
+
+        expect do
+          Notifier.new(user).video_approved(video: video, admin_approving: admin)
+        end.to change { Notification.count }.from(0).to(1)
+      end
+    end
+  end
 end

@@ -61,7 +61,7 @@ class Notifier
     NotificationMailer.new_notification(notification).deliver_later
   end
 
-  class SubjectRelationshipAdapter < SimpleDelegator
+  class SubjectRelationshipAdapter < ActiveRecordDecorator
     class << self
       def method_missing(name, *args, &block)
         Relationship.send(name, *args, &block)

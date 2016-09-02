@@ -46,7 +46,7 @@ class TestNotifications
   private
 
   def comment_on(model)
-    create!(subject: model, type: :comment)
+    create!(subject: model.comments.first!, type: :comment)
   end
 
   def create!(subject:, type:)
