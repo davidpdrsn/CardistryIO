@@ -10,6 +10,10 @@ class Comment < ApplicationRecord
                                         types: [Video, Move])
   )
 
+  with_options(dependent: :destroy) do |c|
+    c.has_many :notifications, as: :subject
+  end
+
   def updated?
     updated_at != created_at
   end

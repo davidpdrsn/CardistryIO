@@ -11,6 +11,7 @@ class Move < ApplicationRecord
     c.has_many :ratings, as: :rateable
     c.has_many :credits, as: :creditable
     c.has_many :activities, as: :subject
+    c.has_many :notifications, as: :subject
   end
 
   validates :name, presence: true, uniqueness: true
