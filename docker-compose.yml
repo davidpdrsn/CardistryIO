@@ -20,6 +20,9 @@ services:
       - cardistryio
     volumes_from:
       - box
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
 
   resque:
     extends:
