@@ -1,6 +1,6 @@
 # Observer that calls ::AddsCredits when models are being saved
 module Observers
-  class AddsCredit
+  class AddsCreditAndNotifies
     pattr_initialize :params, :current_user
 
     def save!(move)

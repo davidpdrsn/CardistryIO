@@ -14,7 +14,7 @@ feature "viewing video from another user spec" do
       instagram_id: "1184776464917987209_962942",
       video_type: "move_showcase",
     )
-    Observers::VideoActivity.new(Observers::Activity.new).save(video)
+    Observers::HaltUnlessPublic.new(Observers::CreatesActivities.new).save(video)
 
     alice.follow!(bob)
     visit root_path(as: alice)

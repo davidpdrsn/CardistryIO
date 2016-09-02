@@ -37,8 +37,8 @@ class MovesController < ApplicationController
       current_user.moves.new(move_params),
       CompositeObserver.new([
         Observers::NotifyMentions.new,
-        Observers::AddsCredit.new(params, current_user),
-        Observers::Activity.new,
+        Observers::AddsCreditAndNotifies.new(params, current_user),
+        Observers::CreatesActivities.new,
       ]),
     )
 
@@ -60,7 +60,7 @@ class MovesController < ApplicationController
   end
 
   def update
-    observer = Observers::AddsCredit.new(params, current_user)
+    observer = Observers::AddsCreditAndNotifies.new(params, current_user)
     @move = ObservableRecord.new(
       current_user.moves.find(params[:id]),
       observer,

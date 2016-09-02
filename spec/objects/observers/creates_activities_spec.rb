@@ -1,11 +1,11 @@
 require "rails_helper"
 
-describe Observers::Activity do
+describe Observers::CreatesActivities do
   it "creates a new activity for the model" do
     model = build_stubbed(:move)
     user = instance_double("User")
     allow(model).to receive(:user).and_return(user)
-    observer = Observers::Activity.new
+    observer = Observers::CreatesActivities.new
 
     allow(Activity).to receive(:create).with(
       subject: model,

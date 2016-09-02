@@ -34,6 +34,15 @@ describe VideosController do
       expect(response.status).to eq 302
     end
 
+    it "doesn't show private videos if signed but not shared" do
+      video = create :video, approved: true, private: true
+      sign_in_as create(:user)
+
+      get :show, params: { id: video.id }
+
+      expect(response.status).to eq 302
+    end
+
     it "shows private videos to the user who owns it" do
       video = create :video, approved: true, private: true
       sign_in_as video.user
@@ -95,19 +104,12 @@ describe VideosController do
         attributes.delete(:approved)
         bob = create :user, username: "bob"
 
-        creditor = instance_double("AddsCredits")
-        allow(creditor).to receive(:add_credits)
-          .with([bob.username]).and_return([])
-        allow(AddsCredits).to receive(:new).with(kind_of(Video))
-          .and_return(creditor)
-
         post(:create, params: {
           video: attributes,
           credits: [bob.username]
         })
 
-        expect(creditor).to have_received(:add_credits)
-          .with([bob.username])
+        expect(bob.reload.credits.count).to eq 1
       end
 
       it "only creates the credits if the video is valid" do
@@ -237,7 +239,7 @@ describe VideosController do
       sign_in_as(video.user)
       bob = create :user, username: "bob"
 
-      creditor = instance_double("AddsCredits")
+      creditor = instance_double(AddsCredits)
       allow(creditor).to receive(:update_credits)
         .with([bob.username]).and_return([])
       allow(AddsCredits).to receive(:new).with(video)
@@ -251,6 +253,54 @@ describe VideosController do
 
       expect(creditor).to have_received(:update_credits)
         .with([bob.username])
+    end
+
+    it "notifies the creditted users" do
+      video = create :video, name: "Mocking Bird"
+      sign_in_as(video.user)
+      bob = create :user, username: "bob"
+
+      patch(:update, params: {
+        id: video.id,
+        video: { name: "Sybil" },
+        credits: [bob.username],
+      })
+
+      expect(Notification.count).to eq 1
+      expect(Notification.first.user).to eq bob
+      expect(Notification.first.notification_type).to eq "new_credit"
+    end
+
+    it "doesn't notify the creditted users if the video is private" do
+      video = create :video, name: "Mocking Bird", private: true
+      sign_in_as(video.user)
+      bob = create :user, username: "bob"
+
+      patch(:update, params: {
+        id: video.id,
+        video: { name: "Sybil" },
+        credits: [bob.username],
+      })
+
+      expect(Notification.count).to eq 0
+    end
+
+    it "doesn't notify about the same video more than once" do
+      video = create :video, name: "Mocking Bird"
+      sign_in_as(video.user)
+      bob = create :user, username: "bob"
+
+      2.times do
+        patch(:update, params: {
+          id: video.id,
+          video: { name: "Sybil" },
+          credits: [bob.username],
+        })
+      end
+
+      expect(Notification.count).to eq 1
+      expect(Notification.first.user).to eq bob
+      expect(Notification.first.notification_type).to eq "new_credit"
     end
 
     it "keeps the credits if something goes wrong" do
@@ -271,6 +321,33 @@ describe VideosController do
       })
 
       expect(controller).to set_flash[:alert]
+    end
+
+    it "deletes the activities if the video goes from public to private" do
+      video = create :video, name: "Mocking Bird", private: false
+      sign_in_as(video.user)
+      bob = create :user, username: "bob"
+      Observers::CreatesActivities.new.save!(video)
+
+      expect do
+        patch(:update, params: {
+          id: video.id,
+          video: { name: "Sybil", private: true },
+        })
+      end.to change { Activity.count }.from(1).to(0)
+    end
+
+    it "creates activities if the video goes from private to public" do
+      video = create :video, name: "Mocking Bird", private: true
+      sign_in_as(video.user)
+      bob = create :user, username: "bob"
+
+      expect do
+        patch(:update, params: {
+          id: video.id,
+          video: { name: "Sybil", private: false },
+        })
+      end.to change { Activity.count }.from(0).to(1)
     end
   end
 end

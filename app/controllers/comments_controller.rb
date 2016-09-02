@@ -5,9 +5,12 @@ class CommentsController < ApplicationController
     commentable = find_commentable
     comment = commentable.comments.new(comment_params)
     comment.user = current_user
-    MentionNotifier.new(
-      MentionNotifier::CommentAdapter.new(comment)
-    ).notify_mentioned_users
+    comment = ObservableRecord.new(
+      MentionNotifier::CommentAdapter.new(comment),
+      CompositeObserver.new([
+        Observers::NotifyMentions.new,
+      ]),
+    )
 
     if comment.save
       create_notification(commentable, comment)

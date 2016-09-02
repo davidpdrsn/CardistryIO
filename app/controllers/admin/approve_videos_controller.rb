@@ -8,12 +8,20 @@ module Admin
     end
 
     def create
-      video = Video.find(params[:id])
+      video = ApprovingAlsoSaves.new(
+        ObservableRecord.new(
+          Video.find(params[:id]),
+          CompositeObserver.new([
+            Observers::HaltUnlessPublic.new(Observers::CreatesActivities.new),
+            Observers::NotifiesOfApproval.new(admin_approving: current_user),
+            Observers::HaltUnlessPublic.new(Observers::NotifyMentions.new),
+            Observers::HaltUnlessPublic.new(Observers::NotifiesCredditedUsers.new),
+          ]),
+        )
+      )
+
       video.approve!
-      Notifier.new(video.user).video_approved(video: video, admin_approving: current_user)
-      MentionNotifier.new(video).notify_mentioned_users
-      notify_users(video)
-      create_activity(video)
+
       redirect_to approve_videos_path
     end
 
@@ -24,27 +32,18 @@ module Admin
 
     private
 
-    def create_activity(video)
-      Observers::VideoActivity.new(
-        CompositeObserver.new(
-          [
-            Observers::Activity.new,
-          ]
-        )
-      ).save(video)
-    end
-
     def is_admin?
       unless current_user.admin?
         flash.alert = "Page not found"
         redirect_to root_path
       end
     end
+  end
 
-    def notify_users(video)
-      video.creditted_users.each do |user|
-        Notifier.new(user).new_credit(subject: video, actor: video.user)
-      end
+  class ApprovingAlsoSaves < ActiveRecordDecorator
+    def approve!
+      __getobj__.approve!
+      __getobj__.save!
     end
   end
 end

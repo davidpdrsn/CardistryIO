@@ -71,13 +71,23 @@ class VideosController < ApplicationController
   end
 
   def update
-    @video = current_user.videos.find(params[:id])
+    @video = ObservableRecord.new(
+      current_user.videos.find(params[:id]),
+      Observers::HaltUnlessPublic.new(
+        Observers::AddsCreditAndNotifies.new(params, current_user),
+      ),
+    )
 
     begin
       @video.transaction do
         @video.update!(strongify(update_params))
-        users = AddsCredits.new(@video).update_credits(params[:credits])
-        send_notifications(users, @video)
+
+        if @video.private
+          @video.activities.each(&:destroy!)
+        else
+          Observers::CreatesActivities.new.save!(@video)
+        end
+
         flash.notice = "Video updated"
         redirect_to @video
       end
@@ -119,12 +129,6 @@ class VideosController < ApplicationController
       :video_type,
       :thumbnail_url,
     ]
-  end
-
-  def send_notifications(users, video)
-    users.each do |user|
-      Notifier.new(user).new_credit(subject: @video, actor: @video.user)
-    end
   end
 
   def find_video

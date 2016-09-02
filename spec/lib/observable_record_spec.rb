@@ -12,6 +12,17 @@ describe ObservableRecord do
     expect(model).to have_received(:save)
   end
 
+  it "returns what the models return" do
+    observer = double("observer")
+    model = double("model", save: true)
+    allow(observer).to receive(:save).with(model)
+
+    record = ObservableRecord.new(model, observer)
+    return_value = record.save
+
+    expect(return_value).to eq true
+  end
+
   it "notifies an observer when the model is saved" do
     observer = double("observer")
     model = double("model", save: true)
