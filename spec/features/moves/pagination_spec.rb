@@ -11,12 +11,12 @@ feature "pagination" do
     expect(page).to have_content moves.last.name
     expect(page).to_not have_content moves.first.name
 
-    find("#pagination-forward").click
+    find("#pagination-forward a").click
 
     expect(page).to have_content moves.first.name
     expect(page).to_not have_content moves.last.name
 
-    find("#pagination-back").click
+    find("#pagination-back a").click
 
     expect(page).to have_content moves.last.name
     expect(page).to_not have_content moves.first.name
@@ -33,12 +33,12 @@ feature "pagination" do
     expect(page).to have_content moves.last.name
     expect(page).to_not have_content moves.first.name
 
-    find("#pagination-forward").click
+    find("#pagination-forward a").click
 
     expect(page).to have_content moves.first.name
     expect(page).to_not have_content moves.last.name
 
-    find("#pagination-back").click
+    find("#pagination-back a").click
 
     expect(page).to have_content moves.last.name
     expect(page).to_not have_content moves.first.name

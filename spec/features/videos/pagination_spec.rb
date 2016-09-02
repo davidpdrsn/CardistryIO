@@ -11,12 +11,12 @@ feature "paginating videos" do
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name
 
-    find("#pagination-forward").click
+    find("#pagination-forward a").click
 
     expect(page).to have_content videos.first.name
     expect(page).to_not have_content videos.last.name
 
-    find("#pagination-back").click
+    find("#pagination-back a").click
 
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name
@@ -28,8 +28,8 @@ feature "paginating videos" do
     end
 
     visit all_videos_path
-    find("#pagination-forward").click
-    find("#pagination-forward").click
+    find("#pagination-forward a").click
+    find("#pagination-forward a").click
 
     expect(page).to have_content videos.first.name
   end
@@ -40,7 +40,7 @@ feature "paginating videos" do
     visit all_videos_path
 
     expect(page).to have_selector(:css, "#pagination-back")
-    expect(page).to have_selector(:css, ".pagination-nav-button .back .disabled")
+    expect(page).to have_selector(:css, ".pagination-nav-button.back.disabled")
   end
 
   scenario "no next page on last page" do
@@ -49,7 +49,7 @@ feature "paginating videos" do
     visit all_videos_path
 
     expect(page).to have_selector(:css, "#pagination-forward")
-    expect(page).to have_selector(:css, ".pagination-nav-button .forward .disabled")
+    expect(page).to have_selector(:css, ".pagination-nav-button.forward.disabled")
   end
 
   scenario "sees no paging buttons when there are few videos" do
@@ -70,12 +70,12 @@ feature "paginating videos" do
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name
 
-    find("#pagination-forward").click
+    find("#pagination-forward a").click
 
     expect(page).to have_content videos.first.name
     expect(page).to_not have_content videos.last.name
 
-    find("#pagination-back").click
+    find("#pagination-back a").click
 
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name
