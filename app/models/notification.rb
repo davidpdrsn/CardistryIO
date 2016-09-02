@@ -50,6 +50,10 @@ class Notification < ApplicationRecord
     StringWithPlaceholders.new(text)
   end
 
+  def expanded_text
+    text.expand(link: subject.class.name.downcase).html_safe
+  end
+
   def subject_for_link
     if notification_type == "new_follower"
       subject.follower

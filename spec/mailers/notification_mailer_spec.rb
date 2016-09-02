@@ -44,6 +44,22 @@ describe NotificationMailer do
     expect_email_to_match_notification(mail, notification)
   end
 
+  it "mentioned" do
+    huron = create :user, username: "huron"
+    daren = create :user, username: "daren"
+    video = create :video, user: daren
+
+    notification = Notifier.new(huron).mentioned(
+      subject: video,
+      actor: daren,
+    )
+
+    mail = NotificationMailer.new_notification(notification).deliver_now
+
+    expect(mail.subject).to eq "@daren mentioned you in a video"
+    expect(mail.body.encoded).to include "@daren mentioned you in a video"
+  end
+
   def expect_email_to_match_notification(mail, notification)
     expect(mail.subject).to eq notification.text.expand
     expect(mail.body.encoded).to include notification.text.expand

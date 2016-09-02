@@ -1,9 +1,11 @@
 class NotificationMailer < ApplicationMailer
   def new_notification(notification)
     @notification = notification
+    @subject = @notification.expanded_text
+
     mail(
       to: notification.user.email,
-      subject: notification.text.expand,
+      subject: @subject,
     )
   end
 end
