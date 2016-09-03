@@ -4,4 +4,5 @@
 %p
   You have a new notification on #{link_to "cardistry.io", "http://cardistry.io"}:
 
-%p= @subject
+%p
+  = link_to @subject, @notification.subject_for_link
