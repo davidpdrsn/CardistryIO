@@ -343,10 +343,12 @@ describe VideosController do
       bob = create :user, username: "bob"
 
       expect do
-        patch(:update, params: {
-          id: video.id,
-          video: { name: "Sybil", private: false },
-        })
+        2.times do
+          patch(:update, params: {
+            id: video.id,
+            video: { name: "Sybil", private: false },
+          })
+        end
       end.to change { Activity.count }.from(0).to(1)
     end
   end

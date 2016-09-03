@@ -80,11 +80,15 @@ class VideosController < ApplicationController
 
     begin
       @video.transaction do
+        private_before = @video.private
         @video.update!(strongify(update_params))
+        private_after = @video.private
 
-        if @video.private
+        if private_after
           @video.activities.each(&:destroy!)
-        else
+        end
+
+        if private_before && !private_after
           Observers::CreatesActivities.new.save!(@video)
         end
 
