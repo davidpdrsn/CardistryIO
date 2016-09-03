@@ -5,9 +5,7 @@
         class="video-js vjs-default-skin"
         controls
         preload="auto"
-        width="<% video.width %>"
-        height="<% video.height %>"
-        poster="<%= video.image %>"
+        poster="<%= video.thumbnail_url %>"
       >
         <source src="<%= video.url %>" type='video/mp4'>
 

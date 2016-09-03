@@ -4,18 +4,9 @@ class EmbeddableVideo < SimpleDelegator
   end
 
   def initialize(model, autoplay: false, start: nil)
-    obj = if model.from_instagram?
-            instagram_module = InstagramWrapperFactory.call
-
-            client = instagram_module::Client.unauthenticated_client
-            instagram_video = instagram_module::InstagramVideo.new_from_model(model, client)
-            DelegationChain.new(model, instagram_video)
-          else
-            model
-          end
     @autoplay = autoplay
     @start = start.try(:to_i)
-    super(obj)
+    super(model)
   end
 
   def class

@@ -6,12 +6,6 @@ module InstagramIO
       )
     end
 
-    def self.unauthenticated_client
-      UnauthenticatedClient.new(
-        client_id: ENV.fetch("INSTAGRAM_CLIENT_ID")
-      )
-    end
-
     private
 
     class UnauthenticatedClient
