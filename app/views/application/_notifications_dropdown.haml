@@ -17,7 +17,7 @@
       - if current_user.new_notifications.present?
         - current_user.new_notifications.each do |notification|
           %li
-            = link_to notification.subject_for_link do
+            = link_to seen_notification_path(notification), method: :patch do
               %span.dropdown-button-title
                 = notification.text.expand(link: notification.subject.class.name.downcase).html_safe
 

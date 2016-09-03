@@ -22,6 +22,10 @@ Rails.application.routes.draw do
     collection do
       post :mark_all_read
     end
+
+    member do
+      patch :seen
+    end
   end
 
   get "/sign_in", to: "clearance/sessions#new", as: "sign_in"

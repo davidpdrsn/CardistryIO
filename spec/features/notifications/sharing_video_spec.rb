@@ -14,8 +14,6 @@ feature "notifications when sharing video" do
 
     visit root_path(as: alice)
 
-    find("a", text: /shared a video with you/).click
-
-    expect(page).to have_content "@#{bob.username} shared a video with you"
+    expect(page).to have_css("a", text: /shared a video with you/)
   end
 end

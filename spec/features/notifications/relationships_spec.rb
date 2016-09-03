@@ -10,8 +10,6 @@ feature "relationships" do
 
     visit root_path(bob, as: bob)
 
-    find("a", text: /started following you/).click
-
-    expect(page).to have_content "@alice started following you"
+    expect(page).to have_css("a", text: /started following you/)
   end
 end
