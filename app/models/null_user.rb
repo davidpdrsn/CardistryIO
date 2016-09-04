@@ -10,4 +10,8 @@ class NullUser
   def can_rate?(*)
     false
   end
+
+  def admin
+    false
+  end
 end

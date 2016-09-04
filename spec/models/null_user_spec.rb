@@ -12,4 +12,8 @@ describe NullUser do
   it "can never rate anything" do
     expect(NullUser.new.can_rate?(Object.new)).to eq false
   end
+
+  it "is not admin" do
+    expect(NullUser.new.admin).to eq false
+  end
 end
