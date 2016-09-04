@@ -34,6 +34,11 @@
     height: 200px;
     padding: 20px;
 
+    .reloading-follow-link li {
+      opacity: .5 !important;
+      pointer-events: none;
+    }
+
     .grid-items-lines {
       margin: 0;
 

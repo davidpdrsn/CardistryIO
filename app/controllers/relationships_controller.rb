@@ -6,14 +6,20 @@ class RelationshipsController < ApplicationController
 
     if current_user.follows?(user)
       flash.alert = "You're already following #{user.username}"
-      redirect_to user
     else
       relationship = current_user.follow!(user)
       if relationship.new?
         Notifier.new(user).new_follower(relationship: relationship)
       end
       flash.notice = "Now following #{user.username}"
-      redirect_to user
+    end
+
+    respond_to do |format|
+      format.html { redirect_to user }
+      format.js {
+        @user = user
+        render layout: false
+      }
     end
   end
 
@@ -21,7 +27,14 @@ class RelationshipsController < ApplicationController
     user = User.find(params[:id])
     current_user.unfollow!(user)
     flash.notice = "Unfollowed #{user.username}"
-    redirect_to user
+
+    respond_to do |format|
+      format.html { redirect_to user }
+      format.js {
+        @user = user
+        render :create, layout: false
+      }
+    end
   end
 
   def following

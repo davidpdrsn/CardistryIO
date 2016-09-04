@@ -17,3 +17,6 @@ $ ->
     e.preventDefault()
     console.log $(".add_comment_form")
     $(".add_comment_form").toggleClass "hide"
+
+  addBehavior "dim-when-clicked", (e) ->
+    $(@).addClass("reloading-follow-link")

@@ -10,58 +10,7 @@
 
     %div.overlay
 
-  %div.profile-container
-    %div.grid-items-lines
-      %div.grid-item{:style => "display: table;"}
-        %ul.user-navigation
-          - if signed_in? && @user != current_user
-            - if current_user.follows?(@user)
-              = link_to follow_user_path(@user), method: :delete, params: { user_id: @user.id } do
-                %li
-                  %i.icon.ion-minus-circled
-                  Unfollow
-            - else
-              = link_to follow_user_path(@user), method: :post, params: { user_id: @user.id } do
-                %li
-                  %i.icon.ion-person-add
-                  Follow
-          - if current_user == @user
-            = link_to edit_user_path(@user) do
-              %li
-                %i.icon.ion-edit
-                Edit
-
-          - if @user.instagram_username.present?
-            %li
-              = link_to "http://instagram.com/#{@user.instagram_username}" do
-                %i.icon.ion-social-instagram
-                Instagram
-
-          - if current_user.admin
-            %li
-              = mail_to @user.email do
-                %i.icon.ion-ios-email
-                Email
-
-      %div.grid-item{:style => "display: table;"}
-        %p.biography
-          #{@user.biography}
-
-      %div.grid-item{:style => "display: table;"}
-        %div.stats{:style => "display: table-cell; vertical-align: middle;"}
-          %ul{:style => "text-align: right;"}
-            = link_to followers_user_path(@user) do
-              %li
-                %span.number
-                  = @user.followers.length
-                %span.word
-                  followers
-            = link_to following_user_path(@user) do
-              %li
-                %span.number
-                  = @user.following.length
-                %span.word
-                  following
+  = render partial: "profile_container", locals: { user: @user }
 
   %div.profile-navigation
     %ul.profile-nav-items
