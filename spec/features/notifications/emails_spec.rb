@@ -5,7 +5,7 @@ feature "receiving notifications via email" do
 
   scenario "sends emails right away by default" do
     perform_enqueued_jobs do
-      huron = create :user, username: "huron", admin: true
+      huron = create :user, username: "huron", admin: false
       daren = create :user, username: "daren"
 
       visit user_path(huron, as: daren)
@@ -20,19 +20,7 @@ feature "receiving notifications via email" do
     end
   end
 
-  scenario "only sends emails to admins" do
-    perform_enqueued_jobs do
-      huron = create :user, username: "huron", admin: false
-      daren = create :user, username: "daren"
-
-      visit user_path(huron, as: daren)
-      click_link "Follow"
-
-      expect(ActionMailer::Base.deliveries.length).to eq 0
-    end
-  end
-
-  scenario "only sends new follower notifications" do
+  scenario "sends new follower notifications" do
     perform_enqueued_jobs do
       huron = create :user, username: "huron", admin: true
       daren = create :user, username: "daren", admin: true
@@ -47,7 +35,7 @@ feature "receiving notifications via email" do
 
   scenario "can be configured to not send emails" do
     perform_enqueued_jobs do
-      huron = create :user, username: "huron", admin: true
+      huron = create :user, username: "huron"
       daren = create :user, username: "daren"
 
       visit edit_user_path(huron, as: huron)
@@ -63,15 +51,6 @@ feature "receiving notifications via email" do
 
   scenario "normal users cannot update email frequency preferences" do
     huron = create :user, username: "huron", admin: false
-    daren = create :user, username: "daren"
-
-    visit edit_user_path(huron, as: huron)
-
-    expect(page).to_not have_select("Receive email notifications")
-  end
-
-  scenario "admins can update email frequency preferences" do
-    huron = create :user, username: "huron", admin: true
     daren = create :user, username: "daren"
 
     visit edit_user_path(huron, as: huron)

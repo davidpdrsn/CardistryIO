@@ -57,7 +57,7 @@ class Notifier
   end
 
   def deliver_notification_via_email(notification)
-    return unless notification.user.admin? && notification.deliver_mail_now?
+    return unless notification.deliver_mail_now?
     NotificationMailer.new_notification(notification).deliver_later
   end
 
