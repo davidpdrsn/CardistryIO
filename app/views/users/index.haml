@@ -5,12 +5,4 @@
   %p
     This is a list of everyone signed up so far. Will make it easier to find people to follow while we're still getting started.
 
-
-  %div.grid-items-lines
-    - @users.each do |user|
-      %div.grid-item
-        = image_tag(user.gravatar_url)
-        %h3
-          = link_to "@#{user.username}", user
-        %p
-          joined #{time_ago_in_words(user.created_at)} ago
+  = render partial: "users/grid", locals: { users: @users }

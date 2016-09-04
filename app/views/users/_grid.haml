@@ -1,0 +1,7 @@
+%div.grid-items-lines
+  - users.each do |user|
+    = link_to user do
+      %div.grid-item
+        = image_tag(user.gravatar_url)
+        %h3 @#{user.username}
+        %p joined #{time_ago_in_words(user.created_at)} ago

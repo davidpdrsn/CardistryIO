@@ -1,6 +1,7 @@
+%h1
+  @#{@user.username} is followed by
+
 - if @user.followers.present?
-  %ul
-    - @user.followers.each do |user|
-      %li= link_to user.username, user
+  = render partial: "users/grid", locals: { users: @user.followers }
 - else
-  No followers
+  No body
