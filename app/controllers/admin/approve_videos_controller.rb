@@ -4,6 +4,9 @@ module Admin
     before_action :is_admin?
 
     def new
+      @approved_video = if params[:approved_video_id]
+                          Video.find(params[:approved_video_id])
+                        end
       @videos = DecoratedCollection.new(Video.unapproved, EmbeddableVideo)
     end
 
@@ -22,7 +25,7 @@ module Admin
 
       video.approve!
 
-      redirect_to approve_videos_path
+      redirect_to approve_videos_path(approved_video_id: video.id)
     end
 
     def destroy

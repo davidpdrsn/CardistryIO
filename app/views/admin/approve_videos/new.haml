@@ -1,3 +1,9 @@
+- if @approved_video.present?
+  %p
+    Previously approved video:
+    = link_to @approved_video.name, @approved_video
+  %hr
+
 - if @videos.present?
   - @videos.each do |video|
     = render partial: "videos/embed_video", locals: { video: video }
