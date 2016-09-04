@@ -84,5 +84,29 @@ feature "making comments" do
     end
   end
 
+  include OrderExpectations
+
+  scenario "shows in the right order on moves" do
+    move = create :move
+    one = create :comment, commentable: move, content: "one", created_at: 3.days.ago
+    two = create :comment, commentable: move, content: "two", created_at: 2.days.ago
+    three = create :comment, commentable: move, content: "three", created_at: 1.day.ago
+
+    visit move_path(move)
+
+    expect_to_appear_in_order([one, two, three].map(&:content))
+  end
+
+  scenario "shows in the right order on videos" do
+    video = create :video
+    one = create :comment, commentable: video, content: "one", created_at: 3.days.ago
+    two = create :comment, commentable: video, content: "two", created_at: 2.days.ago
+    three = create :comment, commentable: video, content: "three", created_at: 1.day.ago
+
+    visit video_path(video)
+
+    expect_to_appear_in_order([one, two, three].map(&:content))
+  end
+
   let(:user) { create :user }
 end

@@ -33,7 +33,7 @@
           #{@move.comments.count} comments
 
       %div.comment-container
-        = render @move.comments.order(created_at: :desc)
+        = render @move.comments.order(:created_at)
 
         = render partial: "comments/form", locals: { commentable: @move }
 
