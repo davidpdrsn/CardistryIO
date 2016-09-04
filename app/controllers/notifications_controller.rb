@@ -2,8 +2,7 @@ class NotificationsController < ApplicationController
   before_action :require_login
 
   def index
-    # TODO: Implement this
-    render plain: "notifications"
+    @notifications = current_user.new_notifications
   end
 
   def mark_all_read
