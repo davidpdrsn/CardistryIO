@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
     if valid_beta_authentication?
       session[:beta_user] = true
       flash.clear
-      redirect_to params.fetch(:redirect_to, root_path)
+      redirect_to URI.parse(params.fetch(:redirect_to, root_path)).path
     else
       session[:beta_user] = nil
       flash.alert = "Wrong beta username or password"
