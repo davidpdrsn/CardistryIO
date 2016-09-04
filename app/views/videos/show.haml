@@ -29,12 +29,10 @@
 
     %div.comments
       %div.section-headline
-        - if @video.comments.count == 0
+        - if @video.comments.empty?
           No comments yet
-        - elsif @video.comments.count == 1
-          #{@video.comments.count} comment
         - else
-          #{@video.comments.count} comments
+          = pluralize @video.comments.count, "comment"
 
       %div.comment-container
         = render @video.comments.order(created_at: :desc)
