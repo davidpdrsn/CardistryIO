@@ -31,11 +31,17 @@
                 %i.icon.ion-edit
                 Edit
 
-          -if @user.instagram_username.present?
+          - if @user.instagram_username.present?
             %li
               = link_to "http://instagram.com/#{@user.instagram_username}" do
                 %i.icon.ion-social-instagram
                 Instagram
+
+          - if current_user.admin
+            %li
+              = mail_to @user.email do
+                %i.icon.ion-ios-email
+                Email
 
       %div.grid-item{:style => "display: table;"}
         %p.biography
