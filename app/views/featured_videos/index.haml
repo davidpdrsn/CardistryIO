@@ -1,0 +1,7 @@
+- if @videos.present?
+  %ul
+    - @videos.each do |video|
+      %li
+        = link_to video.name, video
+- else
+  %p No featured videos at the moment

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902045704) do
+ActiveRecord::Schema.define(version: 20160904190948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(version: 20160902045704) do
     t.datetime "updated_at",      null: false
     t.index ["creditable_id", "creditable_type"], name: "index_credits_on_creditable_id_and_creditable_type", using: :btree
     t.index ["user_id"], name: "index_credits_on_user_id", using: :btree
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.string   "featureable_type"
+    t.integer  "featureable_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["featureable_type", "featureable_id"], name: "index_features_on_featureable_type_and_featureable_id", using: :btree
   end
 
   create_table "moves", force: :cascade do |t|

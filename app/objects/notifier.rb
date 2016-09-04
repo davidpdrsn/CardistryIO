@@ -43,6 +43,15 @@ class Notifier
     )
   end
 
+  def video_featured(video:, admin_featuring:)
+    return if video.user == admin_featuring
+    send_notification(
+      subject: video,
+      actor: admin_featuring,
+      type: :featured,
+    )
+  end
+
   private
 
   def send_notification(subject:, actor:, type:)

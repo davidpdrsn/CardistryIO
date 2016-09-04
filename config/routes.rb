@@ -56,12 +56,15 @@ Rails.application.routes.draw do
 
     collection do
       get "all"
+      get "featured", as: :featured, to: "featured_videos#index"
     end
 
     member do
       get "edit_appearances", to: "video_appearances#edit", as: "edit_appearances"
       patch "edit_appearances", to: "video_appearances#update", as: "update_appearances"
       delete "destroy_appearances", to: "video_appearances#destroy", as: "destroy_appearances"
+      post "feature", to: "featured_videos#create", as: :feature
+      delete "unfeature", to: "featured_videos#destroy", as: :unfeature
     end
   end
   get "videos_shared_with_you", to: "sharings#index", as: "shared_videos"

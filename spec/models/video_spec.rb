@@ -329,4 +329,41 @@ describe Video do
 
     expect(Notification.find_by(id: notification.id)).to eq nil
   end
+
+  describe "featuring videos" do
+    it "features videos that are really great" do
+      video = create :video
+      create :video
+
+      video.feature!
+
+      expect(Video.featured).to eq [video]
+    end
+
+    it "doesn't feature videos more than once" do
+      video = create :video
+
+      2.times { video.feature! }
+
+      expect(Feature.all.count).to eq 1
+    end
+
+    it "unfeatures a video" do
+      video = create :video
+
+      video.feature!
+      video.unfeature!
+
+      expect(Video.featured).to eq []
+    end
+
+    it "knows if a video is featured" do
+      featured_video = create :video
+      featured_video.feature!
+      video = create :video
+
+      expect(featured_video.featured?).to eq true
+      expect(video.featured?).to eq false
+    end
+  end
 end

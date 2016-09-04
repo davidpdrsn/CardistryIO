@@ -16,6 +16,7 @@ class Notification < ApplicationRecord
         "video_shared" => [Video],
         "mentioned" => [Video, Comment, Move],
         "new_credit" => [Video, Move],
+        "featured" => [Video],
       }
     )
   )
@@ -27,6 +28,7 @@ class Notification < ApplicationRecord
     :video_shared,
     :mentioned,
     :new_credit,
+    :featured,
   ]
 
   def text
@@ -43,6 +45,8 @@ class Notification < ApplicationRecord
              "@#{actor.username} mentioned you in a {{link}}"
            when "new_credit"
              "@#{actor.username} credited you for his {{link}}"
+           when "featured"
+             "Your video #{subject.name} has been featured"
            else
              fail "No text for notifications of type #{notification_type}"
            end

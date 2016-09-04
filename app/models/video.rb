@@ -27,6 +27,7 @@ class Video < ApplicationRecord
     c.has_many :sharings
     c.has_many :views, class_name: "VideoView"
     c.has_many :notifications, as: :subject
+    c.has_many :features, as: :featureable
   end
 
   class << self
@@ -62,6 +63,16 @@ class Video < ApplicationRecord
       left_outer_joins(:views)
         .group("videos.id")
         .order("COUNT(video_views.id) #{direction}")
+    end
+
+    def featured
+      joins(<<-SQL)
+          LEFT OUTER JOIN features
+            ON features.featureable_type = 'Video'
+            AND features.featureable_id = videos.id
+      SQL
+        .group(:id)
+        .having("COUNT(features.id) >= 1")
     end
 
     private
@@ -106,6 +117,18 @@ class Video < ApplicationRecord
       .joins(:video_views)
       .where(video_views: { video: self })
       .count
+  end
+
+  def feature!
+    Feature.find_or_create_by!(featureable: self)
+  end
+
+  def unfeature!
+    Feature.where(featureable: self).destroy_all
+  end
+
+  def featured?
+    Feature.exists?(featureable: self)
   end
 
   private

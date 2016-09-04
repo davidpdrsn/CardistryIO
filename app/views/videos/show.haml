@@ -60,3 +60,9 @@
 
         - if @video.sharings.present?
           = link_to "Edit sharing", edit_video_sharings_path(@video)
+
+  - if current_user.admin
+    - if @video.featured?
+      = link_to "Unfeature video", unfeature_video_path(@video), method: :delete
+    - else
+      = link_to "Feature video", feature_video_path(@video), method: :post
