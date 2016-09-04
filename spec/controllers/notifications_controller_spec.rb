@@ -1,9 +1,9 @@
 require "rails_helper"
 
 describe NotificationsController do
-  describe "PATCH #seen" do
+  describe "GET #show" do
     it "requires authentication" do
-      patch :seen, params: { id: 1 }
+      get :show, params: { id: 1 }
 
       expect(response.status).to eq 302
     end
@@ -14,7 +14,7 @@ describe NotificationsController do
       notification = create :notification, user: huron
       sign_in_as daren
 
-      patch :seen, params: { id: notification.id }
+      get :show, params: { id: notification.id }
 
       expect(notification.reload.seen).to eq false
       expect(response).to redirect_to(root_path)

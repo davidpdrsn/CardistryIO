@@ -11,7 +11,7 @@ class NotificationsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def seen
+  def show
     notification = current_user.notifications.find(params[:id])
     notification.seen!
     redirect_to notification.subject_for_link
