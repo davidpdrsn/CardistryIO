@@ -11,6 +11,8 @@
   username and password below. Otherwise you can go to <a href="http://beta.cardistry.co">beta.cardistry.io</a> to join the waiting list.
 
 = form_tag beta_signin_url, method: :post do
+  = hidden_field_tag :redirect_to, request.url
+
   .field
     = label_tag :username
     = text_field_tag :username
