@@ -61,7 +61,7 @@ describe NotificationMailer do
   end
 
   def expect_email_to_match_notification(mail, notification)
-    expect(mail.subject).to eq notification.text.expand
-    expect(mail.body.encoded).to include notification.text.expand
+    expect(mail.subject).to eq notification.text
+    expect(mail.body.encoded).to include notification.text
   end
 end

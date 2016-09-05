@@ -4,7 +4,7 @@ class NotificationMailer < ApplicationMailer
 
     mail(
       to: notification.user.email,
-      subject: @notification.expanded_text,
+      subject: @notification.text,
     )
   end
 end

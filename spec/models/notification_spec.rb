@@ -21,7 +21,7 @@ describe Notification do
           subject: comment,
         ).text
 
-        expect(text.expand).to eq "New comment on #{video.name} by @#{bob.username}"
+        expect(text).to eq "New comment on #{video.name} by @#{bob.username}"
       end
     end
 
@@ -37,7 +37,7 @@ describe Notification do
           subject: video,
         ).text
 
-        expect(text.expand).to eq "Your video #{video.name} has been approved"
+        expect(text).to eq "Your video #{video.name} has been approved"
       end
     end
 
@@ -54,7 +54,7 @@ describe Notification do
           subject: relationship,
         ).text
 
-        expect(text.expand).to eq "@#{alice.username} started following you"
+        expect(text).to eq "@#{alice.username} started following you"
       end
     end
   end

@@ -19,7 +19,7 @@
           %li
             = link_to notification do
               %span.dropdown-button-title
-                = notification.text.expand(link: notification.subject.class.name.downcase).html_safe
+                = notification.text
 
     - if current_user.new_notifications.present?
       %li.mark-as-read-button

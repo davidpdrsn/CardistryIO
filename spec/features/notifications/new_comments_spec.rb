@@ -47,7 +47,7 @@ feature "notifications from comments" do
     )
 
     visit root_path(as: bob)
-    click_link notification.text.expand
+    click_link notification.text
 
     expect(page.current_path).to eq video_path(video)
   end

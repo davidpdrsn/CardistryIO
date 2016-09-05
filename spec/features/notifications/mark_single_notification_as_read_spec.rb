@@ -8,7 +8,7 @@ feature "marking single notification as read" do
     visit user_path(huron, as: daren)
     click_link "Follow"
     visit root_path(as: huron)
-    click_link Notification.last.text.expand
+    click_link Notification.last.text
 
     expect(page).to have_content daren.biography
     expect(huron.new_notifications.count).to eq 0

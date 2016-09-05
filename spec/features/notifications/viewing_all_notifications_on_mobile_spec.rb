@@ -10,14 +10,14 @@ feature "viewing all notifications on mobile" do
 
     expect(Notification.count).to eq 1
     within ".content-area" do
-      expect(page).to have_content(Notification.last.expanded_text)
+      expect(page).to have_content(Notification.last.text)
 
       click_link "Mark all as read"
     end
     visit notifications_path(as: huron)
 
     within ".content-area" do
-      expect(page).to_not have_content(Notification.last.expanded_text)
+      expect(page).to_not have_content(Notification.last.text)
       expect(page).to_not have_link "Mark all as read"
     end
 
@@ -25,7 +25,7 @@ feature "viewing all notifications on mobile" do
     follow_and_notify(huron, as: kevin)
     visit notifications_path(as: huron)
     within ".content-area" do
-      click_link Notification.last.expanded_text
+      click_link Notification.last.text
     end
     expect(page.current_path).to eq user_path(kevin)
     visit notifications_path(as: huron)
