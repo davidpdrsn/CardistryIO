@@ -46,6 +46,18 @@ namespace :resque do
     end
   end
 
+  task :start do
+    on roles(:app) do
+      execute "sudo start resque"
+    end
+  end
+
+  task :stop do
+    on roles(:app) do
+      execute "sudo stop resque"
+    end
+  end
+
   task :status do
     on roles(:app) do
       execute "status resque"
