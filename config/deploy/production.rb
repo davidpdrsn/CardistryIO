@@ -1,2 +1,2 @@
 set :stage, :production
-server "45.55.169.201", user: "cardistryio", roles: %w{web app db}
+server "192.155.90.133", user: "cardistryio", roles: %w{web app db}
