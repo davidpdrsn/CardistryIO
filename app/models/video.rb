@@ -31,11 +31,17 @@ class Video < ApplicationRecord
   end
 
   class << self
-    def types_for_filtering
+    def types_for_filtering(admin: false)
       other_types = video_types.keys.map do |type|
         ["Show only " + type.humanize.pluralize.downcase, type]
       end
-      [["Show all types", "all"]] + other_types
+      top_filters = [
+        ["Show all types", "all"],
+      ]
+      if admin
+        top_filters << ["Show only featured videos", "featured"]
+      end
+      top_filters + other_types
     end
 
     def all_public
@@ -73,6 +79,23 @@ class Video < ApplicationRecord
       SQL
         .group(:id)
         .having("COUNT(features.id) >= 1")
+    end
+
+    def not_viewed_by_first(user)
+      left_outer_joins(:views)
+        .order(<<-SQL)
+        CASE
+          WHEN video_views.user_id = '#{user.id}' THEN 500
+          WHEN videos.user_id = '#{user.id}' THEN 1000
+          ELSE -1
+        END
+      SQL
+    end
+
+    def featured_ordered_for(current_user:)
+      featured
+        .group("video_views.user_id")
+        .not_viewed_by_first(current_user)
     end
 
     private

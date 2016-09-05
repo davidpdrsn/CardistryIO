@@ -45,6 +45,7 @@ class Notifier
 
   def video_featured(video:, admin_featuring:)
     return if video.user == admin_featuring
+    return unless video.user.admin
     send_notification(
       subject: video,
       actor: admin_featuring,

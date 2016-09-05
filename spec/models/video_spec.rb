@@ -314,6 +314,18 @@ describe Video do
         ["Show only others", "other"],
       ])
     end
+
+    it "includes featured videos if current_user is admin" do
+      expect(Video.types_for_filtering(admin: true)).to eq([
+        ["Show all types", "all"],
+        ["Show only featured videos", "featured"],
+        ["Show only performances", "performance"],
+        ["Show only tutorials", "tutorial"],
+        ["Show only move showcases", "move_showcase"],
+        ["Show only jams", "jam"],
+        ["Show only others", "other"],
+      ])
+    end
   end
 
   it "deletes related notifications when it is delete" do
@@ -364,6 +376,30 @@ describe Video do
 
       expect(featured_video.featured?).to eq true
       expect(video.featured?).to eq false
+    end
+  end
+
+  describe ".not_viewed_by_first" do
+    it "shows the videos not viewed by the user first" do
+      huron = create :user, username: "huron"
+      daren = create :user, username: "daren"
+
+      one = create :video, name: "one"
+      one.viewed_by(huron)
+      one.viewed_by(huron)
+
+      three = create :video, name: "three"
+      three.viewed_by(daren)
+
+      two = create :video, name: "two"
+      two.viewed_by(huron)
+
+      four = create :video, name: "four", user: huron
+
+      videos = Video.not_viewed_by_first(huron)
+
+      expect(videos.first.name).to eq "three"
+      expect(videos.last(3).map(&:name)).to match_array ["one", "two", "four"]
     end
   end
 end

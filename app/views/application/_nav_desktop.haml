@@ -19,12 +19,6 @@
 
     %hr.menu-divider
 
-    %li.nav-item{:class => current_path_class('videos/featured')}
-      %i.icon.ion-ios-film
-      = link_to "Featured videos", featured_videos_path
-
-    %hr.menu-divider
-
     - if signed_in?
       %li.nav-item{:class => current_path_class('videos_shared_with_you')}
         %i.icon.ion-android-share-alt

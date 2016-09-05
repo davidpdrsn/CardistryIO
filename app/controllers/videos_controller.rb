@@ -6,6 +6,10 @@ class VideosController < ApplicationController
   def all
     @filter_submit_path = all_videos_path
     @paged_videos = filter_sort_and_paginate(Video.all_public.approved)
+    @featured_videos = Video.featured.limit(2)
+    if signed_in?
+      @featured_videos = @featured_videos.featured_ordered_for(current_user: current_user)
+    end
     title t("titles.videos.all")
   end
 

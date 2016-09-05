@@ -1,0 +1,24 @@
+.featured-videos {
+  margin-top: $content-area-top-margin;
+
+  + .search-filters {
+    margin-top: 0;
+  }
+}
+
+.featured-videos {
+  .card {
+    .card-meta,
+    .card-copy {
+      display: none;
+    }
+
+    .card-header {
+      padding-top: .2em;
+    }
+  }
+
+  hr {
+    margin-top: 0;
+  }
+}

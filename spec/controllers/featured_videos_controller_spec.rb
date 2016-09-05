@@ -35,12 +35,4 @@ describe FeaturedVideosController do
       end.to_not change { video.user.reload.notifications.count }
     end
   end
-
-  describe "GET #index" do
-    it "doesn't require authentication" do
-      get :index
-
-      expect(response.status).to eq 200
-    end
-  end
 end

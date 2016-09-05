@@ -6,6 +6,8 @@ class FiltersVideos
     case filter
     when "all"
       videos
+    when "featured"
+      videos.featured
     else
       videos.where(video_type: filter)
     end

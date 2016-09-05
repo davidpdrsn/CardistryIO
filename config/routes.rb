@@ -56,7 +56,6 @@ Rails.application.routes.draw do
 
     collection do
       get "all"
-      get "featured", as: :featured, to: "featured_videos#index"
     end
 
     member do

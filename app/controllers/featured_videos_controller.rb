@@ -2,10 +2,6 @@ class FeaturedVideosController < ApplicationController
   before_action :require_login, only: [:create, :destroy]
   around_action :require_admin, only: [:create, :destroy]
 
-  def index
-    @videos = Video.featured
-  end
-
   def create
     video = Video.find(params[:id])
     video.feature!

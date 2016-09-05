@@ -1,1 +1,9 @@
+- if current_user.admin && @featured_videos.present?
+  .featured-videos
+    %h3 Featured videos
+    .cards
+      - @featured_videos.each do |video|
+        = render partial: "videos/card", locals: { video: video }
+    %hr
+
 = render partial: "videos/videos_list", locals: { filter_submit_path: @filter_submit_path, page: @paged_videos }
