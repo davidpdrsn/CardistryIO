@@ -3,7 +3,7 @@
     %h3 Featured videos
     .cards
       - @featured_videos.each do |video|
-        = render partial: "videos/card", locals: { video: video }
+        = render partial: "videos/card", locals: { video: video, include_meta: false, include_copy: false }
     %hr
 
 = render partial: "videos/videos_list", locals: { filter_submit_path: @filter_submit_path, page: @paged_videos }

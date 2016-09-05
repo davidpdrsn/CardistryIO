@@ -4,16 +4,21 @@
       = image_tag video.thumbnail_url
     - else
       = image_tag "thumbnail-placeholder.png"
+
   %div.card-header
     = video.name
-  %div.card-copy
-    = simple_format link_mentions(video.description)
-  %div.card-meta
-    = pluralize video.views.count, "view"
-    = "| " + t("users.profile.posted", time: time_ago_in_words(video.created_at))
-    %div.rating
-      - if video.ratings.empty?
-        = t "ratings.not_rated"
-      - else
-        - WithRatingStats.new(video).average_rating.round.times do
-          %i.icon.ion-android-star
+
+  - if include_copy
+    %div.card-copy
+      = simple_format link_mentions(video.description)
+
+  - if include_meta
+    %div.card-meta
+      = pluralize video.views.count, "view"
+      = "| " + t("users.profile.posted", time: time_ago_in_words(video.created_at))
+      %div.rating
+        - if video.ratings.empty?
+          = t "ratings.not_rated"
+        - else
+          - WithRatingStats.new(video).average_rating.round.times do
+            %i.icon.ion-android-star
