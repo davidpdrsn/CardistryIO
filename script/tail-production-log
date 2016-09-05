@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-ssh cardistryio@45.55.169.201 tail -f /home/cardistryio/cardistryio/shared/log/production.log
+ssh cardistryio@192.155.90.133 tail -f /home/cardistryio/cardistryio/shared/log/production.log
