@@ -82,7 +82,7 @@ class Video < ApplicationRecord
     end
 
     def not_viewed_by_first(user)
-      left_outer_joins(:views)
+      video_ids = left_outer_joins(:views)
         .order(<<-SQL)
         CASE
           WHEN video_views.user_id = '#{user.id}' THEN 500
@@ -90,12 +90,14 @@ class Video < ApplicationRecord
           ELSE -1
         END
       SQL
+        .pluck(:id)
+        .uniq
+
+      Video.find_ordered_by_ids(video_ids)
     end
 
-    def featured_ordered_for(current_user:)
-      featured
-        .group("video_views.user_id")
-        .not_viewed_by_first(current_user)
+    def featured_ordered_for(user)
+      not_viewed_by_first(user).featured
     end
 
     private

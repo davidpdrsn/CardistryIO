@@ -18,7 +18,8 @@ describe FeaturedVideosController do
 
     it "notifies the user" do
       sign_in_as create(:user, admin: true)
-      video = create :video
+      user = create :user, admin: true
+      video = create :video, user: user
 
       expect do
         post :create, params: { id: video.id }

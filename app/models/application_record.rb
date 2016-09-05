@@ -8,4 +8,13 @@ class ApplicationRecord < ActiveRecord::Base
   def foreign_key
     self.class.foreign_key
   end
+
+  def self.find_ordered_by_ids(ids)
+    order_by = ["CASE"]
+    ids.each_with_index.map do |id, index|
+      order_by << "WHEN #{table_name}.id='#{id}' THEN #{index}"
+    end
+    order_by << "END"
+    order(order_by.join(" "))
+  end
 end

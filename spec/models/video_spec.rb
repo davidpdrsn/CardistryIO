@@ -401,5 +401,57 @@ describe Video do
       expect(videos.first.name).to eq "three"
       expect(videos.last(3).map(&:name)).to match_array ["one", "two", "four"]
     end
+
+    it "doesn't include the same video more than once" do
+      huron = create :user, username: "huron"
+
+      one = create :video, name: "one"
+      5.times { one.viewed_by(create(:user)) }
+      one.viewed_by(huron)
+      one.feature!
+
+      expect(
+        Video.not_viewed_by_first(huron).map(&:name)
+      ).to eq ["one"]
+    end
+  end
+
+  describe ".featured_ordered_for" do
+    it "returns featured videos sorted for the user" do
+      huron = create :user, username: "huron"
+      daren = create :user, username: "daren"
+
+      one = create :video, name: "one"
+      one.viewed_by(huron)
+      one.viewed_by(huron)
+
+      three = create :video, name: "three"
+      three.viewed_by(daren)
+
+      two = create :video, name: "two"
+      two.viewed_by(huron)
+
+      [one, two, three].each(&:feature!)
+
+      four = create :video, name: "four", user: huron
+
+      videos = Video.featured_ordered_for(huron)
+
+      expect(videos.first.name).to eq "three"
+      expect(videos.last(2).map(&:name)).to match_array ["one", "two"]
+    end
+
+    it "doesn't include duplicates" do
+      huron = create :user, username: "huron"
+
+      one = create :video, name: "one"
+      5.times { one.viewed_by(create(:user)) }
+      one.viewed_by(huron)
+      one.feature!
+
+      expect(
+        Video.featured_ordered_for(huron).pluck(:name)
+      ).to eq ["one"]
+    end
   end
 end
