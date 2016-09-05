@@ -52,6 +52,7 @@ group :development do
   gem "spring"
   gem "spring-commands-rspec"
   gem "web-console"
+  gem "newrelic_rpm"
 end
 
 group :development, :test do
