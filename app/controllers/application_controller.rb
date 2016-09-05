@@ -30,18 +30,27 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  around_action :require_beta_authentication
-  def require_beta_authentication
-    if Rails.env.production?
-      if signed_in_as_beta_tester? || (params[:username] && params[:password])
-        yield
-      else
-        render "welcome/beta_signin", layout: nil
-      end
-    else
-      yield
-    end
+  around_action :down_for_maintenance
+  def down_for_maintenance
+    html = <<-HTML
+      <p>CardistryIO is down for maintenance. Will be back in a few hours.</p>
+      <script>console.log(#{User.count})</script>
+    HTML
+    render html: html.html_safe
   end
+
+  # around_action :require_beta_authentication
+  # def require_beta_authentication
+  #   if Rails.env.production?
+  #     if signed_in_as_beta_tester? || (params[:username] && params[:password])
+  #       yield
+  #     else
+  #       render "welcome/beta_signin", layout: nil
+  #     end
+  #   else
+  #     yield
+  #   end
+  # end
 
   around_action :user_time_zone
   def user_time_zone(&block)
