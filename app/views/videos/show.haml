@@ -25,7 +25,8 @@
     - cache ["credits/credits", @video] do
       = render partial: "credits/credits", locals: { creditable: @video }
 
-    = render partial: "shared/show_moves_in_video", locals: { object: @video, name: "video" }
+    - cache ["videos/moves_in_video", @video] do
+      = render partial: "videos/moves_in_video", locals: { object: @video, name: "video" }
 
     - cache @video.comments do
       = render partial: "comments/comments", locals: { commentable: @video }

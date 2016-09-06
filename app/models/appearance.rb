@@ -1,6 +1,6 @@
 class Appearance < ApplicationRecord
-  belongs_to :video
-  belongs_to :move
+  belongs_to :video, touch: true
+  belongs_to :move, touch: true
 
   validates :move_id, presence: true
   validates :video_id, presence: true

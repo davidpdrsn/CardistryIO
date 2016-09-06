@@ -1,0 +1,6 @@
+- if object.appearances.present?
+  %div.grid-items-lines.appearances-list
+    %div.section-headline
+      Moves in this video
+
+    = render partial: "videos/move_in_video", collection: object.appearances.sort_by(&:value_for_sort), as: :appearance, cached: true
