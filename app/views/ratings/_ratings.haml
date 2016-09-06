@@ -5,7 +5,8 @@
   %div.interaction
     %ul.rate
       - if current_user.can_rate?(rateable)
-        = render partial: "ratings/can_rate", locals: { rateable: rateable }
+        - cache ["ratings/can_rate", rateable] do
+          = render partial: "ratings/can_rate", locals: { rateable: rateable }
       - else
         - if rateable.ratings.find_by(user: current_user).present?
           = render partial: "ratings/has_rated", locals: { rateable: rateable }
