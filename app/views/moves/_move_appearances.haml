@@ -1,9 +1,9 @@
-- if object.appearances.present?
+- if move.appearances.present?
   %div.grid-items-lines.appearances-list
     %div.section-headline
       Move appearances
 
-    - object.appearances.sort_by(&:value_for_sort).each do |appearance|
+    - move.appearances.sort_by(&:value_for_sort).each do |appearance|
       %div.grid-item
         %span.move-name
           = link_to_move_in_video appearance: appearance

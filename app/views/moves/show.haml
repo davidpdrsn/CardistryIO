@@ -16,11 +16,11 @@
     %h3.video-meta
       = "posted #{time_ago_in_words(@move.created_at)} ago"
 
-    = render partial: "shared/ratings", locals: { rateable: @move }
+    = render partial: "ratings/ratings", locals: { rateable: @move }
 
-    = render partial: "shared/show_credits", locals: { object: @move, name: "move" }
+    = render partial: "credits/credits", locals: { creditable: @move }
 
-    = render partial: "shared/show_move_appearances", locals: { object: @move, name: "move" }
+    = render partial: "moves/move_appearances", locals: { move: @move }
 
     - cache @move.comments do
       = render partial: "comments/comments", locals: { commentable: @move }

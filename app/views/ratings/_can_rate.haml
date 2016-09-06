@@ -1,0 +1,7 @@
+%div.send-ratings
+  - path = polymorphic_path([rateable, :ratings])
+
+  - Rating.ratings.each.with_index do |rating, index|
+    %li{class: "rate-button", id: "rate-#{index+1}"}
+      = button_to "", path, method: :post, form_class: "rating-widget-form", params: { rateable.foreign_key => rateable.id, "rating" => index+1 }, class: "hide-button"
+      = rating

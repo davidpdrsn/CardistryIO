@@ -1,0 +1,8 @@
+%div.send-ratings
+  - Rating.ratings.each.with_index do |rating, index|
+    - if rateable.ratings.find_by(user: current_user).rating == (index+1)
+      %li{class: "rate-button success disabled", id: "rate-#{index+1}"}
+        Rating counted
+    - else
+      %li{class: "rate-button disabled", id: "rate-#{index+1}"}
+        Delete now

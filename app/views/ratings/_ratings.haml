@@ -1,0 +1,13 @@
+%div.ratings
+  - cache ["current_ratings", rateable] do
+    = render partial: "ratings/current_ratings", locals: { rateable: rateable }
+
+  %div.interaction
+    %ul.rate
+      - if current_user.can_rate?(rateable)
+        = render partial: "ratings/can_rate", locals: { rateable: rateable }
+      - else
+        - if rateable.ratings.find_by(user: current_user).present?
+          = render partial: "ratings/has_rated", locals: { rateable: rateable }
+        - else
+          = render partial: "ratings/cannot_rate", locals: { rateable: rateable }

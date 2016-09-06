@@ -14,6 +14,16 @@ class Rating < ApplicationRecord
   }
   validate :can_rate
 
+  def self.ratings
+    [
+      "Delete now",
+      "Needs work",
+      "Good",
+      "Awesome",
+      "Inhuman",
+    ]
+  end
+
   private
 
   def can_rate

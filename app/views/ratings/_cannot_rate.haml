@@ -1,0 +1,5 @@
+%div.send-ratings.ratings-disabled
+  - if signed_in?
+    You can't rate your own #{rateable.class.name.downcase.pluralize}.
+  - else
+    = link_to "Sign in to rate", sign_in_path

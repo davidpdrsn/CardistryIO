@@ -20,7 +20,7 @@
     %h3.video-meta
       #{@video.video_type.humanize} |  posted #{time_ago_in_words(@video.created_at)} ago
 
-    = render partial: "shared/ratings", locals: { rateable: @video }
+    = render partial: "ratings/ratings", locals: { rateable: @video }
 
     - cache ["credits/credits", @video] do
       = render partial: "credits/credits", locals: { creditable: @video }
