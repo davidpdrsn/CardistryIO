@@ -2,9 +2,10 @@
   %div.section-headline
     Add credits
   %div.grid-items-lines
-    %div.add-credits{"data-json-url": polymorphic_path([object], format: :json)}
-    %label
-      Username
+    %div.input-field
+      %div.add-credits{"data-json-url": polymorphic_path([object], format: :json)}
       %input.credit-input{"data-behavior": "credit-user-search", |
         "data-creditable-users-url": creditable_users_path(params: { object.class.foreign_key => object.id }, format: :json) }
-    %div.credit-list
+      %label
+        Username
+      %div.credit-list
