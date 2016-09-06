@@ -67,11 +67,6 @@ textarea {
   &:focus {
     outline: none;
   }
-
-  &::placeholder {
-    font-size: 18px;
-    vertical-align: bottom;
-  }
 }
 
 textarea {

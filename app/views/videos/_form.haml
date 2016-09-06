@@ -1,7 +1,7 @@
 = simple_form_for video, wrapper: :material_form do |f|
   - if params[:thumbnail_url]
     = f.input :thumbnail_url, value: params[:thumbnail_url], as: :hidden
-  = f.input :name, label: "Title", wrapper_html: { class: "input-field" }
+  = f.input :name, label: "Title"
   = f.input :description
   - if video.new_record?
     = f.input :url, hint: video.url_hint, label: "URL"
