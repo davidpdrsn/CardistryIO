@@ -1,5 +1,5 @@
 class Rating < ApplicationRecord
-  belongs_to :rateable, polymorphic: true
+  belongs_to :rateable, polymorphic: true, touch: true
   belongs_to :user
 
   validates_with(

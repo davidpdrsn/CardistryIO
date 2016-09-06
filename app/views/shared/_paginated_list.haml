@@ -1,6 +1,5 @@
 %ul.object-list
-  - page.each do |object|
-    = render partial: "list_item", locals: { object: object }
+  = render partial: "list_item", collection: page, as: :object, cached: true
 
 - path = ->(options) { polymorphic_path([:all, page.detect { true }.class], options) }
 
