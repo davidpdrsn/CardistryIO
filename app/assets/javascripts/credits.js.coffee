@@ -66,26 +66,27 @@ loadExistingCredits = (f) ->
   request = new AjaxRequest(url)
   request.run (json) -> f(json.credits)
 
-$ ->
-  list = new DomList($(".credit-list"))
+list = -> new DomList($(".credit-list"))
 
+addBehavior "add-credit", (event) ->
+  event.preventDefault()
+  username = $(@).attr("data-username")
+  $(@).remove()
+  $("[data-behavior~=credit-user-search]").val("").focus()
+  credit = new Credit(username)
+  list().add(credit)
+
+addBehavior "remove-credit", () ->
+  username = $(@).parents("[data-username]").attr("data-username")
+  $list = list()
+  id = $list.findIdWhere (credit) -> credit.username == username
+  $list.remove(id)
+
+document.addEventListener "turbolinks:load", ->
   loadExistingCredits (users) ->
     for user in users
       credit = new Credit(user.username)
-      list.add(credit)
-
-  addBehavior "add-credit", (event) ->
-    event.preventDefault()
-    username = $(@).attr("data-username")
-    $(@).remove()
-    $("[data-behavior~=credit-user-search]").val("").focus()
-    credit = new Credit(username)
-    list.add(credit)
-
-  addBehavior "remove-credit", () ->
-    username = $(@).parents("[data-username]").attr("data-username")
-    id = list.findIdWhere (credit) -> credit.username == username
-    list.remove(id)
+      list().add(credit)
 
   searchUrl = $("[data-behavior~=credit-user-search]").data("creditable-users-url")
   $("[data-behavior~=credit-user-search]").sayt

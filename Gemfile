@@ -48,6 +48,7 @@ gem "skylight"
 gem "stackprof"
 gem "uglifier"
 gem "dogstatsd-ruby", require: "statsd"
+gem "turbolinks", "~> 5.0.0"
 
 group :development do
   gem "spring"

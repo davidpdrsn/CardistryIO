@@ -361,6 +361,9 @@ GEM
     tilt (2.0.5)
     timecop (0.8.1)
     tins (1.12.0)
+    turbolinks (5.0.1)
+      turbolinks-source (~> 5)
+    turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.2)
@@ -447,6 +450,7 @@ DEPENDENCIES
   spring-commands-rspec
   stackprof
   timecop
+  turbolinks (~> 5.0.0)
   uglifier
   web-console
   webmock
