@@ -30,6 +30,8 @@ class Video < ApplicationRecord
     c.has_many :features, as: :featureable
   end
 
+  touch_on_save :activities
+
   class << self
     def types_for_filtering(admin: false)
       other_types = video_types.keys.map do |type|

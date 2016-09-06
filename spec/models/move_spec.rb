@@ -41,7 +41,7 @@ describe Move do
     Activity.create!(subject: move, user: move.user)
 
     expect do
-      move.destroy!
+      move.reload.destroy!
     end.to change { Activity.count }.from(1).to(0)
   end
 

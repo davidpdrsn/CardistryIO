@@ -66,4 +66,9 @@ FactoryGirl.define do
     user
     video
   end
+
+  factory :activity do
+    user
+    association :subject, factory: :video
+  end
 end

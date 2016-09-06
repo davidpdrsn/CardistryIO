@@ -14,6 +14,8 @@ class Move < ApplicationRecord
     c.has_many :notifications, as: :subject
   end
 
+  touch_on_save :activities
+
   validates :name, presence: true, uniqueness: true
 
   class << self

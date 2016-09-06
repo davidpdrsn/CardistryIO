@@ -31,4 +31,26 @@ describe Activity do
       expect(activity).to_not be_valid
     end
   end
+
+  context "moves as subjects" do
+    it "updates when the move changes" do
+      move = create :move
+      activity = create :activity, subject: move, updated_at: 2.weeks.ago
+
+      expect do
+        move.update(name: "#{move.name}-1")
+      end.to change { activity.reload.updated_at }
+    end
+  end
+
+  context "videos as subjects" do
+    it "updates when the video changes" do
+      video = create :video
+      activity = create :activity, subject: video, updated_at: 2.weeks.ago
+
+      expect do
+        video.update(name: "#{video.name}-1")
+      end.to change { activity.reload.updated_at }
+    end
+  end
 end

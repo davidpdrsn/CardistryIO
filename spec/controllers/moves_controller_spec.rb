@@ -34,7 +34,7 @@ describe MovesController do
       end
 
       def sign_in
-        user = build_stubbed :user
+        user = create :user
         sign_in_as user
       end
     end

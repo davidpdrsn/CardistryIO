@@ -35,10 +35,12 @@ class ObservableRecord < SimpleDelegator
 
   def track_method(name, *args)
     save_worked = model.send(name, *args)
+
     if save_worked
       all_args = [model] + args
       observer.send(name, *all_args)
     end
+
     save_worked
   end
 end

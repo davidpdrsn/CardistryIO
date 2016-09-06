@@ -124,8 +124,8 @@ describe Video do
     Activity.create!(subject: video, user: video.user)
 
     expect do
-      video.destroy!
-    end.to change { Activity.count }.from(1).to(0)
+      video.reload.destroy!
+    end.to change { Activity.all.reload.count }.from(1).to(0)
   end
 
   describe "#viewed_by" do
