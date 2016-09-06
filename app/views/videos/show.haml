@@ -28,7 +28,6 @@
     - cache ["videos/moves_in_video", @video] do
       = render partial: "videos/moves_in_video", locals: { object: @video, name: "video" }
 
-    - cache @video.comments do
-      = render partial: "comments/comments", locals: { commentable: @video }
+    = render partial: "comments/comments", locals: { commentable: @video }
 
 = render partial: "owner_actions", locals: { video: @video }

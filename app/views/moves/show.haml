@@ -22,8 +22,7 @@
 
     = render partial: "moves/move_appearances", locals: { move: @move }
 
-    - cache @move.comments do
-      = render partial: "comments/comments", locals: { commentable: @move }
+    = render partial: "comments/comments", locals: { commentable: @move }
 
 - if @move.user == current_user
   %div.owner-actions
