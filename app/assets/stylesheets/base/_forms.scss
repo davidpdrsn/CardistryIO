@@ -41,6 +41,12 @@ label {
   }
 }
 
+.input-field-used ~ label {
+  top: -20px;
+  font-size: 14px;
+  color: $dark-gray;
+}
+
 #{$all-text-inputs},
 select[multiple=multiple],
 textarea {
