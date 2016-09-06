@@ -47,7 +47,7 @@ gem "country_select"
 gem "skylight"
 gem "stackprof"
 gem "uglifier"
-gem "statsd-instrument"
+gem "dogstatsd-ruby", require: "statsd"
 
 group :development do
   gem "spring"
