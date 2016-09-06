@@ -4,6 +4,7 @@
 
   %h1.video-title
     = @video.name
+
   %div.author
     %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{@video.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
     %span.username
@@ -17,54 +18,13 @@
         This video has no description...
 
     %h3.video-meta
-      = @video.video_type.humanize
-      |
-      = "posted #{time_ago_in_words(@video.created_at)} ago"
+      #{@video.video_type.humanize} |  posted #{time_ago_in_words(@video.created_at)} ago
 
     = render partial: "shared/ratings", locals: { rateable: @video }
-
     = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
-
     = render partial: "shared/show_moves_in_video", locals: { object: @video, name: "video" }
 
-    %div.comments
-      %div.section-headline
-        - if @video.comments.empty?
-          No comments yet
-        - else
-          = pluralize @video.comments.count, "comment"
+    - cache @video.comments do
+      = render partial: "comments/comments", locals: { commentable: @video }
 
-      %div.comment-container
-        = render @video.comments.order(:created_at)
-
-        = render partial: "comments/form", locals: { commentable: @video }
-
-  - if @video.user == current_user || current_user.admin
-    %div.owner-actions
-      %ul
-        - if @video.user == current_user
-          %li
-            = pluralize @video.views.count, "view"
-            |
-            = pluralize @video.unique_views_count, "unique view"
-          %li
-            = link_to "Edit move appearances", edit_appearances_video_path(@video)
-
-          -# TODO: Make this a link
-          %li
-            = button_to "Edit", edit_video_path(@video), method: :get
-          %li
-            = button_to "Delete video", video_path(@video), method: :delete, data: { confirm: "Sure?" }
-
-          - if @video.private?
-            = link_to "Share video", new_video_sharing_path(@video)
-
-          - if @video.sharings.present?
-            = link_to "Edit sharing", edit_video_sharings_path(@video)
-
-        - if current_user.admin
-          - if @video.featured?
-            %li= link_to "Unfeature video", unfeature_video_path(@video), method: :delete
-          - else
-            %li= link_to "Feature video", feature_video_path(@video), method: :post
-
+= render partial: "owner_actions", locals: { video: @video }

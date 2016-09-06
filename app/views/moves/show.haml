@@ -22,22 +22,10 @@
 
     = render partial: "shared/show_move_appearances", locals: { object: @move, name: "move" }
 
+    - cache @move.comments do
+      = render partial: "comments/comments", locals: { commentable: @move }
 
-    %div.comments
-      %div.section-headline
-        - if @move.comments.count == 0
-          No comments yet
-        - elsif @move.comments.count == 1
-          #{@move.comments.count} comment
-        - else
-          #{@move.comments.count} comments
-
-      %div.comment-container
-        = render @move.comments.order(:created_at)
-
-        = render partial: "comments/form", locals: { commentable: @move }
-
-  - if @move.user == current_user
-    %div.owner-actions
-      = button_to "Edit move", edit_move_path(@move), method: :get
-      = button_to "Delete move", @move, method: :delete, data: { confirm: "Sure?" }
+- if @move.user == current_user
+  %div.owner-actions
+    = button_to "Edit move", edit_move_path(@move), method: :get
+    = button_to "Delete move", @move, method: :delete, data: { confirm: "Sure?" }

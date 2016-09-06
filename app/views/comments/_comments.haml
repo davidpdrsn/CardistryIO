@@ -1,0 +1,11 @@
+%div.comments
+  %div.section-headline
+    - if commentable.comments.empty?
+      No comments yet
+    - else
+      = pluralize commentable.comments.count, "comment"
+
+  %div.comment-container
+    = render partial: "comments/comment", collection: commentable.comments.order(:created_at), cached: true
+
+    = render partial: "comments/form", locals: { commentable: commentable }

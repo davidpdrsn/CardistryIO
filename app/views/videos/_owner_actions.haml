@@ -1,0 +1,28 @@
+- if video.user == current_user || current_user.admin
+  %div.owner-actions
+    %ul
+      - if video.user == current_user
+        %li
+          = pluralize video.views.count, "view"
+          |
+          = pluralize video.unique_views_count, "unique view"
+        %li
+          = link_to "Edit move appearances", edit_appearances_video_path(video)
+
+        -# TODO: Make this a link
+        %li
+          = button_to "Edit", edit_video_path(video), method: :get
+        %li
+          = button_to "Delete video", video_path(video), method: :delete, data: { confirm: "Sure?" }
+
+        - if video.private?
+          = link_to "Share video", new_video_sharing_path(video)
+
+        - if video.sharings.present?
+          = link_to "Edit sharing", edit_video_sharings_path(video)
+
+      - if current_user.admin
+        - if video.featured?
+          %li= link_to "Unfeature video", unfeature_video_path(video), method: :delete
+        - else
+          %li= link_to "Feature video", feature_video_path(video), method: :post
