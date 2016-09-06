@@ -1,0 +1,6 @@
+- if creditable.creditted_users.present?
+  %div.grid-items-lines.credits-list
+    %div.section-headline
+      Credits
+
+    = render partial: "credits/credit", collection: creditable.creditted_users, as: :user, cacled: true

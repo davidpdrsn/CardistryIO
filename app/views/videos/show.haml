@@ -21,7 +21,10 @@
       #{@video.video_type.humanize} |  posted #{time_ago_in_words(@video.created_at)} ago
 
     = render partial: "shared/ratings", locals: { rateable: @video }
-    = render partial: "shared/show_credits", locals: { object: @video, name: "video" }
+
+    - cache ["credits/credits", @video] do
+      = render partial: "credits/credits", locals: { creditable: @video }
+
     = render partial: "shared/show_moves_in_video", locals: { object: @video, name: "video" }
 
     - cache @video.comments do

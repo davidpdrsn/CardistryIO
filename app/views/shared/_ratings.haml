@@ -1,5 +1,6 @@
 %div.ratings
-  = render partial: "shared/current_ratings", locals: { rateable: rateable }
+  - cache ["current_ratings", rateable] do
+    = render partial: "shared/current_ratings", locals: { rateable: rateable }
 
   %div.interaction
     %ul.rate

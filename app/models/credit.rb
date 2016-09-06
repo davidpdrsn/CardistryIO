@@ -1,5 +1,5 @@
 class Credit < ApplicationRecord
-  belongs_to :creditable, polymorphic: true
+  belongs_to :creditable, polymorphic: true, touch: true
   belongs_to :user
 
   validates_with(
