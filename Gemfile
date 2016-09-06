@@ -47,6 +47,7 @@ gem "country_select"
 gem "skylight"
 gem "stackprof"
 gem "uglifier"
+gem "statsd-instrument"
 
 group :development do
   gem "spring"
