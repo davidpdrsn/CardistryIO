@@ -39,7 +39,7 @@ module SortFilterHelper
   end
 
   def videos_filter_select(form)
-    types = Video.types_for_filtering(admin: current_user.admin)
+    types = Video.types_for_filtering
     options = options_for_select(types, current_filter_params)
     make_select(form: form, key: :type, options: options)
   end

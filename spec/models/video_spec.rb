@@ -307,17 +307,6 @@ describe Video do
     it "returns the types that can be filtered by" do
       expect(Video.types_for_filtering).to eq([
         ["Show all types", "all"],
-        ["Show only performances", "performance"],
-        ["Show only tutorials", "tutorial"],
-        ["Show only move showcases", "move_showcase"],
-        ["Show only jams", "jam"],
-        ["Show only others", "other"],
-      ])
-    end
-
-    it "includes featured videos if current_user is admin" do
-      expect(Video.types_for_filtering(admin: true)).to eq([
-        ["Show all types", "all"],
         ["Show only featured videos", "featured"],
         ["Show only performances", "performance"],
         ["Show only tutorials", "tutorial"],

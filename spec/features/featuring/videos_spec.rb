@@ -24,16 +24,6 @@ feature "featuring videos" do
     expect(page).to_not have_content another_video.name
   end
 
-  scenario "cannot filter by featured as normal user" do
-    huron = create :user, username: "huron", admin: false
-
-    visit all_videos_path(as: huron)
-
-    expect do
-      select "Show only featured videos", from: :filter_type
-    end.to raise_error(Capybara::ElementNotFound)
-  end
-
   scenario "admin unfeatures a video", :js do
     video = create :video
     huron = create :user, username: "huron", admin: true
@@ -49,7 +39,7 @@ feature "featuring videos" do
 
   scenario "notifies the user who made the video" do
     huron = create :user, username: "huron", admin: true
-    daren = create :user, username: "daren", admin: true
+    daren = create :user, username: "daren"
     video = create :video, user: daren
 
     visit video_path(video, as: huron)
@@ -61,17 +51,6 @@ feature "featuring videos" do
     end
 
     expect(page.current_path).to eq video_path(video)
-  end
-
-  scenario "only notifies admins about featured videos" do
-    huron = create :user, username: "huron", admin: true
-    daren = create :user, username: "daren", admin: false
-    video = create :video, user: daren
-
-    visit video_path(video, as: huron)
-    click_link "Feature video"
-
-    expect(daren.reload.notifications.count).to eq 0
   end
 
   scenario "shows featured videos on 'All Videos'" do
@@ -93,6 +72,6 @@ feature "featuring videos" do
 
     visit all_videos_path(as: user)
 
-    expect(page).to_not have_css(".featured-videos")
+    expect(page).to have_css(".featured-videos")
   end
 end

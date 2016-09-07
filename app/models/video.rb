@@ -33,16 +33,14 @@ class Video < ApplicationRecord
   touch_on_save :activities
 
   class << self
-    def types_for_filtering(admin: false)
+    def types_for_filtering
       other_types = video_types.keys.map do |type|
         ["Show only " + type.humanize.pluralize.downcase, type]
       end
       top_filters = [
         ["Show all types", "all"],
+        ["Show only featured videos", "featured"],
       ]
-      if admin
-        top_filters << ["Show only featured videos", "featured"]
-      end
       top_filters + other_types
     end
 
