@@ -9,7 +9,10 @@
   %div.timeline-content
     = link_to activity.subject do
       - if activity.subject.thumbnail_url.present?
-        = cached_thumbnail_image(activity.subject)
+        - if current_user.admin
+          = cached_thumbnail_image(activity.subject)
+        - else
+          %div.thumbnail{style: "background: url(#{activity.subject.thumbnail_url}) no-repeat center; background-size: cover;"}
       - elsif activity.subject.class.name.downcase == "move"
         %div
       - else
