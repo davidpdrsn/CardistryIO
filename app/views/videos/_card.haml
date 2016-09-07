@@ -15,7 +15,7 @@
   - if include_meta
     %div.card-meta
       = pluralize video.views.count, "view"
-      = "| " + t("users.profile.posted", time: time_ago_in_words(video.created_at))
+      = "| " + t("users.profile.posted", time: video.created_at.to_s(:short))
       %div.rating
         - if video.ratings.empty?
           = t "ratings.not_rated"

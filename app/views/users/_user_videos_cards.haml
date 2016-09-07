@@ -1,6 +1,0 @@
-%div.cards
-  - if @user.videos.all_public.present?
-    - @user.videos.all_public.each do |video|
-      = render partial: "videos/card", locals: { video: video, include_meta: true, include_copy: true }
-  - else
-    %h1= t "users.profile.videos.none"
