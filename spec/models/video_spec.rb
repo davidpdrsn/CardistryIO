@@ -405,42 +405,26 @@ describe Video do
     end
   end
 
-  describe ".featured_ordered_for" do
-    it "returns featured videos sorted for the user" do
-      huron = create :user, username: "huron"
-      daren = create :user, username: "daren"
+  describe ".ordered_by_featured_at" do
+    it "doesn't include videos that aren't featured" do
+      create :video
+      featured_video = create(:video).tap(&:feature!)
 
-      one = create :video, name: "one"
-      one.viewed_by(huron)
-      one.viewed_by(huron)
-
-      three = create :video, name: "three"
-      three.viewed_by(daren)
-
-      two = create :video, name: "two"
-      two.viewed_by(huron)
-
-      [one, two, three].each(&:feature!)
-
-      four = create :video, name: "four", user: huron
-
-      videos = Video.featured_ordered_for(huron)
-
-      expect(videos.first.name).to eq "three"
-      expect(videos.last(2).map(&:name)).to match_array ["one", "two"]
+      expect(Video.ordered_by_featured_at).to eq [featured_video]
     end
 
-    it "doesn't include duplicates" do
-      huron = create :user, username: "huron"
-
+    it "shows the most recently featured video first" do
+      three = create :video, name: "three"
       one = create :video, name: "one"
-      5.times { one.viewed_by(create(:user)) }
-      one.viewed_by(huron)
+      two = create :video, name: "two"
+
+      three.feature!
+      two.feature!
       one.feature!
 
-      expect(
-        Video.featured_ordered_for(huron).pluck(:name)
-      ).to eq ["one"]
+      expect(Video.ordered_by_featured_at.pluck(:name)).to eq ["one",
+                                                               "two",
+                                                               "three"]
     end
   end
 end

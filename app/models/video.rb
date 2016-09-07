@@ -72,13 +72,7 @@ class Video < ApplicationRecord
     end
 
     def featured
-      joins(<<-SQL)
-          LEFT OUTER JOIN features
-            ON features.featureable_type = 'Video'
-            AND features.featureable_id = videos.id
-      SQL
-        .group(:id)
-        .having("COUNT(features.id) >= 1")
+      joins(:features)
     end
 
     def not_viewed_by_first(user)
@@ -96,8 +90,8 @@ class Video < ApplicationRecord
       Video.find_ordered_by_ids(video_ids)
     end
 
-    def featured_ordered_for(user)
-      not_viewed_by_first(user).featured
+    def ordered_by_featured_at
+      featured.order("features.created_at DESC")
     end
 
     private
