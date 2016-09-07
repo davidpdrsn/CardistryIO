@@ -5,4 +5,5 @@
   %p
     This is a list of everyone signed up so far. Will make it easier to find people to follow while we're still getting started.
 
-  = render partial: "users/grid", locals: { users: @users }
+  %div.grid-items-lines
+    = render partial: "users/grid", collection: @users, as: :user, cached: true
