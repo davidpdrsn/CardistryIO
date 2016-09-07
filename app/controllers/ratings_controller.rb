@@ -9,6 +9,6 @@ class RatingsController < ApplicationController
                end
     rateable.ratings.create!(rating: params.require(:rating), user: current_user)
 
-    render partial: "shared/current_ratings", locals: { rateable: rateable.reload }
+    render partial: "ratings/current_ratings", locals: { rateable: rateable.reload }
   end
 end
