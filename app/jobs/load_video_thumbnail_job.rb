@@ -2,7 +2,9 @@ class LoadVideoThumbnailJob < ApplicationJob
   def perform(video)
     url = fetch_thumbnail_url(video: video)
     video.update!(thumbnail_url: url)
-    cache_image(video: video, url: url)
+    unless Rails.env.test?
+      cache_image(video: video, url: url)
+    end
   rescue JSON::ParserError
   end
 
