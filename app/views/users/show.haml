@@ -26,11 +26,11 @@
 
 %div.profile-content
   %div.content-element
-    = render partial: "user_videos_cards", locals: { videos: @user.videos.all_public }
+    = render partial: "user_videos_cards", locals: { videos: @user.videos.all_public.order(created_at: :desc) }
   %div.content-element
-    = render partial: "user_moves_cards", locals: { moves: @user.moves.ideas, type: "ideas" }
+    = render partial: "user_moves_cards", locals: { moves: @user.moves.ideas.order(created_at: :desc), type: "ideas" }
   %div.content-element
-    = render partial: "user_moves_cards", locals: { moves: @user.moves.finished, type: "moves" }
+    = render partial: "user_moves_cards", locals: { moves: @user.moves.finished.order(created_at: :desc), type: "moves" }
 
 - if current_user.admin? && !@user.admin
   %div.admin-actions
