@@ -29,4 +29,4 @@
       = simple_format link_mentions(activity.subject.description)
 
     %h3
-      = "posted #{time_ago_in_words(activity.created_at)} ago"
+      posted #{dynamic_time_tag(activity.created_at)}

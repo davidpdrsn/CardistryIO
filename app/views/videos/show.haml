@@ -18,7 +18,7 @@
         This video has no description...
 
     %h3.video-meta
-      #{@video.video_type.humanize} |  posted #{time_ago_in_words(@video.created_at)} ago
+      #{@video.video_type.humanize} | posted #{dynamic_time_tag(@video.created_at)}
 
     = render partial: "ratings/ratings", locals: { rateable: @video }
 

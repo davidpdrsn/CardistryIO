@@ -9,7 +9,7 @@
   %div.card-copy
     = simple_format link_mentions(move.description)
   %div.card-meta
-    = t "users.profile.posted", time: time_ago_in_words(move.created_at)
+    posted #{dynamic_time_tag(move.created_at)}
     %div.rating
       - if move.ratings.empty?
         = t "ratings.not_rated"

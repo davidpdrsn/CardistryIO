@@ -4,4 +4,5 @@
       %div.grid-item
         = image_tag(user.gravatar_url)
         %h3 @#{user.username}
-        %p joined #{time_ago_in_words(user.created_at)} ago
+        %p
+          joined #{dynamic_time_tag(user.created_at)}

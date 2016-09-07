@@ -14,7 +14,7 @@
         This move has no description...
 
     %h3.video-meta
-      = "posted #{time_ago_in_words(@move.created_at)} ago"
+      posted #{dynamic_time_tag(@move.created_at)}
 
     = render partial: "ratings/ratings", locals: { rateable: @move }
 
