@@ -64,4 +64,17 @@ feature "private videos" do
     visit video_path(private_video, as: bob)
     expect(page).not_to have_content "Edit sharing"
   end
+
+  scenario "doesn't show private videos on profile" do
+    huron = create :user, username: "huron"
+    daren = create :user, username: "daren"
+
+    private_video = create :video, user: huron, private: true
+    public_video = create :video, user: huron, private: false
+
+    visit user_path(huron, as: daren)
+
+    expect(page).to have_content public_video.name
+    expect(page).to_not have_content private_video.name
+  end
 end
