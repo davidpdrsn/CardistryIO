@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20160904190948) do
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.string   "subject_type", null: false
     t.integer  "subject_id",   null: false
+    t.string   "subject_type", null: false
     t.integer  "user_id",      null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20160904190948) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
-    t.string   "commentable_type", null: false
     t.integer  "commentable_id",   null: false
+    t.string   "commentable_type", null: false
     t.integer  "user_id",          null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20160904190948) do
   end
 
   create_table "credits", force: :cascade do |t|
-    t.string   "creditable_type", null: false
     t.integer  "creditable_id",   null: false
+    t.string   "creditable_type", null: false
     t.integer  "user_id",         null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 20160904190948) do
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id",                           null: false
-    t.string   "subject_type",                      null: false
     t.integer  "subject_id",                        null: false
+    t.string   "subject_type",                      null: false
     t.integer  "actor_id",                          null: false
     t.boolean  "seen",              default: false, null: false
     t.datetime "created_at",                        null: false
@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 20160904190948) do
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "rating",        null: false
-    t.string   "rateable_type", null: false
     t.integer  "rateable_id",   null: false
+    t.string   "rateable_type", null: false
     t.integer  "user_id",       null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
