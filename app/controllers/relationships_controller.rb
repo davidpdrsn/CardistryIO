@@ -4,14 +4,11 @@ class RelationshipsController < ApplicationController
   def create
     user = User.find(params[:id])
 
-    if current_user.follows?(user)
-      flash.alert = "You're already following #{user.username}"
-    else
+    unless current_user.follows?(user)
       relationship = current_user.follow!(user)
       if relationship.new?
         Notifier.new(user).new_follower(relationship: relationship)
       end
-      flash.notice = "Now following #{user.username}"
     end
 
     respond_to do |format|
