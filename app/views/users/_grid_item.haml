@@ -1,0 +1,6 @@
+= link_to user do
+  %div.grid-item
+    = image_tag(user.gravatar_url)
+    %h3 @#{user.username}
+    %p
+      joined #{dynamic_time_tag(user.created_at)}
