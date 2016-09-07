@@ -25,6 +25,5 @@ loadTimeAgoInWords = (element) ->
     .attr("title", $element.html())
     .html(timeAgo)
 
-# TODO: Update this to work with turbolinks
-$ ->
+document.addEventListener "turbolinks:load", ->
   $("[data-behavior~=dynamic-time-tag]").each -> loadTimeAgoInWords(@)
