@@ -143,10 +143,7 @@
               Germany
 
   - else
-    - if current_user.admin
-      = render partial: "feeds/list", collection: @feed, as: :activity, cached: false
-    - else
-      = render partial: "feeds/list", collection: @feed, as: :activity, cached: true
+    = render partial: "feeds/list", collection: @feed, as: :activity, cached: false
 
     %div.timeline-pagination
       %div.timeline-pagination-circle
