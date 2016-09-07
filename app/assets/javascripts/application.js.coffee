@@ -5,6 +5,7 @@
 #= require jquery-ui/widget
 #= require bootstrap-dropdown
 #= require chosen
+#= require video
 #= require jquery.sayt
 #= require helpers
 #= require ajax_request
