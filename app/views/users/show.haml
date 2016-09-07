@@ -26,15 +26,11 @@
 
 %div.profile-content
   %div.content-element
-    %div.cards
-      - if @user.videos.all_public.present?
-        = render partial: "videos/card", collection: @user.videos.all_public, as: :video, cached: true, locals: { include_meta: true, include_copy: true }
-      - else
-        %h1= t "users.profile.videos.none"
+    = render partial: "user_videos_cards", locals: { videos: @user.videos.all_public }
   %div.content-element
-    = render partial: "user_moves_cards", locals: { user: @user, moves: @user.moves.ideas, type: "ideas" }
+    = render partial: "user_moves_cards", locals: { moves: @user.moves.ideas, type: "ideas" }
   %div.content-element
-    = render partial: "user_moves_cards", locals: { user: @user, moves: @user.moves.finished, type: "moves" }
+    = render partial: "user_moves_cards", locals: { moves: @user.moves.finished, type: "moves" }
 
 - if current_user.admin? && !@user.admin
   %div.admin-actions

@@ -1,0 +1,5 @@
+%div.cards
+  - if videos.present?
+    = render partial: "videos/card", collection: videos, as: :video, cached: true, locals: { include_meta: true, include_copy: true }
+  - else
+    %h1= t "users.profile.videos.none"

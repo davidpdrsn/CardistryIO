@@ -1,23 +1,5 @@
 %div.cards
   - if moves.present?
-    - moves.each do |move|
-      = link_to move, {:class => "card"} do
-        %div.card-image
-          - if move.thumbnail_url.present?
-            = image_tag move.thumbnail_url
-          - else
-            = image_tag "thumbnail-placeholder.png"
-        %div.card-header
-          = "#{move.name}"
-        %div.card-copy
-          = simple_format link_mentions(move.description)
-        %div.card-meta
-          = t "users.profile.posted", time: time_ago_in_words(move.created_at)
-          %div.rating
-            - if move.ratings.empty?
-              = t "ratings.not_rated"
-            - else
-              - WithRatingStats.new(move).average_rating.round.times do
-                %i.icon.ion-android-star
+    = render partial: "moves/card", collection: moves, as: :move, cached: true
   - else
     %h1= t "users.profile.#{type}.none"
