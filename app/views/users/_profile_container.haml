@@ -25,6 +25,12 @@
               %i.icon.ion-social-instagram
               Instagram
 
+        - if current_user.admin
+          %li
+            = mail_to user.email do
+              %i.icon.ion-email
+              Email
+
     %div.grid-item{:style => "display: table;"}
       %p.biography
         #{user.biography}
