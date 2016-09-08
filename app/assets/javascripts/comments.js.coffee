@@ -11,7 +11,7 @@ insertValueAndFocus = (input, value) ->
 
 addBehavior "reply-to-comment", (event) ->
   event.preventDefault()
-  authorUsername = $("[data-comment-author]").attr("data-comment-author")
+  authorUsername = $(this).parents("[data-comment-author]").attr("data-comment-author")
   commentForm().removeClass("hide")
   input = commentForm().find("textarea")
   insertValueAndFocus(input, "@#{authorUsername} ")
