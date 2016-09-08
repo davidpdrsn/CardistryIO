@@ -85,3 +85,10 @@ body {
   margin-bottom: $content-area-top-margin;
   padding: 20px;
 }
+
+.waiting-on-ajax {
+  opacity: .5 !important;
+  pointer-events: none !important;
+  transition: none !important;
+  display: inline-block !important;
+}

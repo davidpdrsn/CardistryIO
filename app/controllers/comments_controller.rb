@@ -12,13 +12,25 @@ class CommentsController < ApplicationController
       ]),
     )
 
-    if comment.save
-      create_notification(commentable, comment)
-      flash.notice = "Comment added"
-      redirect_to commentable
-    else
-      flash.alert = "Comment was invalid"
-      redirect_to commentable
+    respond_to do |format|
+      if comment.save
+        create_notification(commentable, comment)
+
+        format.html do
+          flash.notice = "Comment added"
+          redirect_to commentable
+        end
+
+        format.js do
+          @comment = comment
+          render layout: false
+        end
+      else
+        format.any(:html, :js) do
+          flash.alert = "Comment was invalid"
+          redirect_to commentable
+        end
+      end
     end
   end
 

@@ -16,7 +16,7 @@ document.addEventListener "turbolinks:load", ->
   $(".dropdown-toggle").dropdown()
 
 addBehavior "dim-when-clicked", (e) ->
-  $(@).addClass("reloading-follow-link")
+  $(@).addClass("waiting-on-ajax")
 
 addBehavior "show-comment-form", (e) ->
   e.preventDefault()

@@ -3,6 +3,6 @@
     %button{ "data-behavior": "show-comment-form" } Add comment
 
     %div.add_comment_form.hide
-      = simple_form_for [commentable, Comment.new] do |f|
+      = simple_form_for [commentable, Comment.new], remote: true do |f|
         = f.input :content
-        = f.submit "Submit comment"
+        = f.submit "Submit comment", data: { behavior: "dim-when-clicked" }
