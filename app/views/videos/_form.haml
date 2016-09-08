@@ -10,7 +10,7 @@
       - if video.new_record?
         = f.input :url, hint: video.url_hint, label: "URL"
       = f.input :instagram_id, as: :hidden
-      = f.input :video_type, prompt: "Pick a type *", label_method: ->(x) { x.last.humanize }, label: false
+      = f.input :video_type, prompt: "Pick a type *", label_method: ->(video_types) { video_types.first.humanize }, label: false
       = f.input :private, hint: "A private video can only accessed by and those you share it with", inline_label: "Make video private", label: false
 
   = render partial: "shared/add_credits_fields", locals: { object: video }
