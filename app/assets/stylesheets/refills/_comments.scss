@@ -60,6 +60,18 @@
       color: $comment-detail-color;
       font-size: 0.9em;
       font-style: italic;
+      margin-bottom: 0;
+    }
+  }
+
+  .comment-actions {
+    a {
+      font-size: .8em;
+      color: $comment-detail-color;
+
+      &:hover {
+        color: $main-red-hover;
+      }
     }
   }
 }

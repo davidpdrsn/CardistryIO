@@ -1,9 +1,16 @@
-%div.comment
+%div.comment{"data-comment-author": comment.user.username}
   %div.comment-image
     = link_to comment.user do
       = image_tag comment.user.gravatar_url
   %div.comment-content
     = link_mentions(comment.content)
+
     %p.comment-detail
       = link_to "@#{comment.user.username}", comment.user
       commented on #{comment.created_at.to_s(:short)}
+
+    %p.comment-actions
+      - if signed_in? && comment.user != current_user
+        %a{href: "#", "data-behavior": "reply-to-comment"}
+          %i.icon.ion-reply
+          Reply

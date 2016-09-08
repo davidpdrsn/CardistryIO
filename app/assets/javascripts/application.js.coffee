@@ -17,7 +17,3 @@ document.addEventListener "turbolinks:load", ->
 
 addBehavior "dim-when-clicked", (e) ->
   $(@).addClass("waiting-on-ajax")
-
-addBehavior "show-comment-form", (e) ->
-  e.preventDefault()
-  $(".add_comment_form").toggleClass "hide"
