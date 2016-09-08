@@ -16,12 +16,8 @@ select {
 label {
   color: $main-text;
   font-size: 18px;
-  position: absolute;
   font-weight: normal;
-  pointer-events: none;
-  left: 5px;
-  top: 10px;
-  transition: 0.2s ease all;
+  font-family: "Prompt", sans-serif;
 
   &.required::after {
     content: "*";
@@ -33,7 +29,6 @@ label {
 }
 
 .input-field {
-  position: relative;
   margin-bottom: 40px;
 
   .help-block {
@@ -41,30 +36,19 @@ label {
   }
 }
 
-.input-field-used ~ label {
-  top: -20px;
-  font-size: 14px;
-  color: $dark-gray;
-}
-
 #{$all-text-inputs},
 select[multiple=multiple],
 textarea {
-  background-color: transparent;
+  background-color: #e7e7e7;
   border: none;
-  border-bottom: $main-red-border;
-  border-width: 1px;
+  border-left: $main-red-border;
+  border-width: 3px;
   font-size: 18px;
   margin-bottom: $base-spacing / 2;
-  padding: 10px 10px 10px 5px;
+  padding: 10px 10px 10px 10px;
   display: block;
   width: 100%;
-
-  &:focus ~ label {
-    top: -20px;
-    font-size: 14px;
-    color: $dark-gray;
-  }
+  transition: 0.4s ease all;
 
   &:hover {
     border-color: $main-red-hover;
@@ -72,6 +56,8 @@ textarea {
 
   &:focus {
     outline: none;
+    border-color: $main-blue;
+    background: #e0e0e0;
   }
 }
 
