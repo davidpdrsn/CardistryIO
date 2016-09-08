@@ -11,6 +11,11 @@
       .filter-element
         = videos_sort_direction_select(f)
 
+    - if signed_in?
+      .filter-element
+        = check_box_tag :not_viewed, true, params[:not_viewed], onchange: "this.form.submit()"
+        = label_tag :not_viewed
+
 - if page.present?
   = render partial: "shared/paginated_list", locals: { page: page }
 - else

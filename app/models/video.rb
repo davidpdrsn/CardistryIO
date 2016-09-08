@@ -94,6 +94,20 @@ class Video < ApplicationRecord
       featured.order("features.created_at DESC")
     end
 
+    def not_viewed_by(user)
+      where("videos.id NOT IN (#{select(:id).viewed_by(user).to_sql})")
+    end
+
+    def viewed_by(user)
+      joins(:views).where(video_views: { user_id: user.id })
+    end
+
+    def never_viewed
+      left_outer_joins(:views)
+        .group(:id)
+        .having("count(video_views.id) = 0")
+    end
+
     private
 
     def sanitize_sort_direction(direction)

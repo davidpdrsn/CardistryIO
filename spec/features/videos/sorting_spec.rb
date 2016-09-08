@@ -46,7 +46,7 @@ feature "filtering and sorting videos" do
     expect_to_appear_in_order([three, two, one].map(&:name))
   end
 
-  scenario "sorting by rating", :js do
+  scenario "sorting by rating and not viewed", :js do
     one = create :video, created_at: Time.zone.now
     5.times { create :rating, rateable: one, rating: 5 }
 
@@ -61,6 +61,17 @@ feature "filtering and sorting videos" do
     select "Descending", from: "sort_direction"
 
     expect_to_appear_in_order([one, two, three].map(&:name))
+
+    huron = create :user, username: "huron"
+    visit video_path(one, as: huron)
+    visit video_path(two, as: huron)
+    visit all_videos_path
+    select "Sort by rating", from: "sort_by"
+    check "not_viewed"
+
+    expect(page).to_not have_content one.name
+    expect(page).to_not have_content two.name
+    expect(page).to have_content three.name
   end
 
   scenario "sorting by rating in reverse", :js do
@@ -114,5 +125,25 @@ feature "filtering and sorting videos" do
     expect(page).to_not have_content performance.name
     expect(page).to_not have_content other_users_video.name
     expect_to_appear_in_order([old_tutorial, tutorial].map(&:name))
+  end
+
+  scenario "filtering only videos you haven't seen yet", :js do
+    huron = create :user, username: "huron"
+    one = create :video
+
+    visit video_path(one, as: huron)
+    visit all_videos_path(as: huron)
+
+    expect(page).to have_content(one.name)
+
+    check "not_viewed"
+
+    expect(page).to_not have_content(one.name)
+  end
+
+  scenario "can't filter not viewed videos if not logged in" do
+    visit all_videos_path
+
+    expect(page).to_not have_css("input[type=checkbox][name=not_viewed]")
   end
 end

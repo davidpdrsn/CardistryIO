@@ -427,4 +427,49 @@ describe Video do
                                                                "three"]
     end
   end
+
+  describe ".not_viewed_by" do
+    it "returns the videos viewed by the user" do
+      daren = create :user, username: "daren"
+      video = create :video, name: "one"
+      video.viewed_by(daren)
+
+      huron = create :user, username: "huron"
+      new_video = create :video, name: "two"
+      new_video.viewed_by(huron)
+
+      expect(Video.not_viewed_by(daren).pluck(:name)).to eq [new_video.name]
+    end
+
+    it "includes videos that have no views" do
+      daren = create :user, username: "daren"
+      video = create :video
+
+      expect(Video.not_viewed_by(daren)).to eq [video]
+    end
+  end
+
+  describe ".viewed_by" do
+    it "returns the videos the user has viewed" do
+      daren = create :user, username: "daren"
+      video = create :video, name: "one"
+      video.viewed_by(daren)
+
+      huron = create :user, username: "huron"
+      new_video = create :video, name: "two"
+      new_video.viewed_by(huron)
+
+      expect(Video.viewed_by(daren).pluck(:name)).to eq [video.name]
+    end
+  end
+
+  describe ".never_viewed" do
+    it "returns the videos that have never been viewed" do
+      video = create :video
+
+      expect do
+        video.viewed_by(create(:user))
+      end.to change { Video.never_viewed.pluck(:name) }.from([video.name]).to([])
+    end
+  end
 end

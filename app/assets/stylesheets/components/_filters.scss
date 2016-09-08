@@ -35,7 +35,7 @@
       top: 0;
       bottom: 0;
     }
-    .filter-element::after {
+    .filter-element:not(:last-child)::after {
       font-family: "Ionicons";
       content: '\f35f';
       height: 1em;
@@ -47,11 +47,25 @@
       margin-right: 25px;
     }
 
+    label,
     select {
       font-size: 1.1em;
       color: darken($light-gray, 50%);
       border-radius: 0;
+    }
+
+    label {
+      display: inline;
+      padding: 0;
+    }
+
+    select {
       padding: 0 40px 0 20px;
+    }
+
+    input[type=checkbox] {
+      display: inline-block;
+      margin-left: 20px;
     }
 
     select:last-child {

@@ -153,7 +153,10 @@ class VideosController < ApplicationController
     ListTransformer.new(
       relation: videos,
       params: params,
-      filter_with: FiltersVideos,
+      filter_with: FiltersNotViewedVideos.new(
+        FiltersVideos,
+        current_user: current_user
+      ),
       sort_with: SortsVideos,
     ).transform
   end
