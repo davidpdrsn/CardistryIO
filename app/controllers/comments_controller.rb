@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
         end
 
         format.js do
-          @comment = comment
+          @commentable = comment.commentable
           render layout: false
         end
       else

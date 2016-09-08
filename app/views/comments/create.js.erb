@@ -1,2 +1,2 @@
-var html = "<%= escape_javascript(render partial: "comments/comments", locals: { commentable: @comment.commentable.reload }) %>";
+var html = "<%= escape_javascript(render partial: "comments/comments", locals: { commentable: @commentable.reload }) %>";
 $(".comments").replaceWith(html);
