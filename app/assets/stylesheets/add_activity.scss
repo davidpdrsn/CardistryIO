@@ -1,4 +1,4 @@
-.add-video-content {
+.add-activity-content {
   background: #fff;
   width: 100%;
   @include border-top-radius($base-border-radius);
@@ -13,6 +13,10 @@
   .add-credits-container {
     background: $light-blue;
     margin: 30px -20px 0 -20px;
+  }
+
+  .submit-button {
+    margin-top: 50px;
   }
 
   .grid-items-lines {
