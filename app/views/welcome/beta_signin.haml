@@ -1,25 +1,37 @@
-- if flash.alert.present?
-  %div{style: "text-align: center;"}
-    🚨 #{flash.alert} 🚨
-  %hr
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "NOODP", :name => "ROBOTS"}/
+    %meta{:content => "initial-scale=1", :name => "viewport"}/
+    %title
+      CardistryIO beta log in
+    = csrf_meta_tags
 
-%h1
-  Welcome to CardistryIO
+  %body
+    - if flash.alert.present?
+      %div{style: "text-align: center;"}
+        🚨 #{flash.alert} 🚨
+      %hr
 
-%p
-  CardistryIO is not quite ready yet. If you are part of beta you can enter your
-  username and password below. Otherwise you can go to <a href="http://beta.cardistry.io">beta.cardistry.io</a> to join the waiting list.
+    %h1
+      Welcome to CardistryIO
 
-= form_tag beta_signin_url, method: :post do
-  = hidden_field_tag :redirect_to, request.url
+    %p
+      CardistryIO is not quite ready yet. If you are part of beta you can enter your
+      username and password below. Otherwise you can go to <a href="http://beta.cardistry.io">beta.cardistry.io</a> to join the waiting list.
 
-  .field
-    = label_tag :username
-    = text_field_tag :username
+    = form_tag beta_signin_url, method: :post do
+      = hidden_field_tag :redirect_to, request.url
 
-  .field
-    = label_tag :password
-    = password_field_tag :password
+      .field
+        = label_tag :username
+        = text_field_tag :username
 
-  .field
-    = submit_tag "Login"
+      .field
+        = label_tag :password
+        = password_field_tag :password
+
+      .field
+        = submit_tag "Login"
