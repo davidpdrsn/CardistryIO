@@ -11,7 +11,7 @@ feature "private videos" do
     fill_in "URL", with: "https://www.youtube.com/watch?v=W799NKLEz8s"
     fill_in "Description", with: "A video I made"
     select "Performance", from: "video_video_type"
-    check "Private"
+    check "Make video private"
     click_button "Submit video"
 
     admin = create :user, admin: true
