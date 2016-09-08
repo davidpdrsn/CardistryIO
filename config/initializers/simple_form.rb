@@ -10,9 +10,9 @@ SimpleForm.setup do |config|
 
     b.use :placeholder
 
-    b.use :input
-
     b.use :label
+
+    b.use :input
 
     b.use :error, wrap_with: { tag: 'p' , class: 'error-text'}
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
