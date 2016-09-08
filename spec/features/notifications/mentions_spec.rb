@@ -46,7 +46,7 @@ feature "getting notified when mentioned" do
     within "header .button-bar" do
       click_link "Move"
     end
-    fill_in "Name", with: "Sybil"
+    fill_in "Title", with: "Sybil"
     fill_in "Description", with: "This one is for you @#{alice.username} <3"
     click_button "Add move"
 
@@ -65,7 +65,7 @@ feature "getting notified when mentioned" do
     within "header .button-bar" do
       click_link "Video"
     end
-    fill_in "Name", with: "Classic"
+    fill_in "Title", with: "Classic"
     fill_in "URL", with: "https://www.youtube.com/watch?v=W799NKLEz8s"
     fill_in "Description", with: "@#{alice.username} hi there"
     select "Performance", from: "Type"

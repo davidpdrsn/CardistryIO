@@ -6,7 +6,7 @@ feature "adding video from unsupported host" do
     attributes = attributes_for :video
 
     visit new_video_path(as: bob)
-    fill_in "Name", with: attributes[:name]
+    fill_in "Title", with: attributes[:name]
     fill_in "Description", with: attributes[:description]
     fill_in "URL", with: "http://example.com"
     click_button "Submit video"
