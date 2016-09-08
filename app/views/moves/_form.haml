@@ -1,6 +1,13 @@
 = simple_form_for move, wrapper: :material_form do |f|
-  = f.input :name
-  = f.input :description
-  = f.input :idea
+  %div.add-credits-container
+    %div.section-headline
+      Details
+    %div.grid-items-lines
+      = f.input :name
+      = f.input :description
+      = f.input :idea, hint: "An idea is a move or concept that you are still working on.", inline_label: "Idea", label: false
+
   = render partial: "shared/add_credits_fields", locals: { object: move }
-  = f.button :submit, text
+
+  %div.submit-button
+    = f.button :submit, text

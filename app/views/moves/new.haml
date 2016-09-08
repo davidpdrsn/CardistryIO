@@ -1,1 +1,5 @@
-= render partial: "form", locals: { move: @move, text: "Add move" }
+%div.add-activity-content
+  %h1
+    Add a new move
+
+  = render partial: "form", locals: { move: @move, text: "Add move" }
