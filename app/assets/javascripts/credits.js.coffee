@@ -52,11 +52,13 @@ class Credit
 
   toHtml: ->
     """
-    <span data-username="#{@username}">
-      @#{@username}
-      <button type="button" data-behavior="remove-credit">Remove</button>
+    <div class="grid-item" data-username="#{@username}">
+      <a>
+        <span class="username">@#{@username}</span>
+      </a>
+      <i data-behavior="remove-credit" class="icon ion-ios-trash-outline delete-credit"></i>
       <input type="hidden" name="credits[]" value="#{@username}">
-    </span>
+    </div>
     """
 
 loadExistingCredits = (f) ->
@@ -86,7 +88,23 @@ document.addEventListener "turbolinks:load", ->
   loadExistingCredits (users) ->
     for user in users
       credit = new Credit(user.username)
-      list().add(credit)
+
+      list.add(credit)
+
+  addBehavior "add-credit", (event) ->
+    event.preventDefault()
+    username = $(@).attr("data-username")
+    $(@).parent().remove()
+    if $('.item-list > li').length == 0
+      $('.item-list').remove()
+    $("[data-behavior~=credit-user-search]").focus()
+    credit = new Credit(username)
+    list.add(credit)
+
+  addBehavior "remove-credit", () ->
+    username = $(@).parents("[data-username]").attr("data-username")
+    id = list.findIdWhere (credit) -> credit.username == username
+    list.remove(id)
 
   searchUrl = $("[data-behavior~=credit-user-search]").data("creditable-users-url")
   $("[data-behavior~=credit-user-search]").sayt
@@ -103,4 +121,4 @@ document.addEventListener "turbolinks:load", ->
           </li>
         """
       items = users.reduce(transform, "")
-      "<ul>#{items}</ul>"
+      "<ul class='item-list'>#{items}</ul>"

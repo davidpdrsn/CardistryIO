@@ -35,10 +35,11 @@ header {
     }
 
     .search-field {
+      background: $white;
       height: 44px;
       border-radius: 44px;
       border: 1px solid $main-red;
-      width: 350px;
+      width: 370px;
       padding-left: 40px;
       padding-right: 20px;
       outline: none;
@@ -46,11 +47,12 @@ header {
 
       &::placeholder {
         color: $main-red;
-        transition: color 1s;
       }
 
       &:focus {
         border-color: $main-blue;
+
+
       }
     }
     .icon {

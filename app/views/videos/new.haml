@@ -1,4 +1,8 @@
-= render partial: "form", locals: { video: @video, text: "Submit video" }
-%p
-  %small
-    Video will have to be approved by an admin before it'll appear on the site
+%div.add-activity-content
+  %h1
+    Add a new video
+
+  = render partial: "form", locals: { video: @video, text: "Submit video" }
+  %p
+    %small
+      Video will have to be approved by an admin before it'll appear on the site

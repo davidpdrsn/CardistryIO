@@ -1,0 +1,52 @@
+.add-activity-content {
+  background: #fff;
+  width: 100%;
+  @include border-top-radius($base-border-radius);
+  @include border-bottom-radius($base-border-radius);
+  @include shadow-level(1);
+  float: left;
+  height: auto;
+  margin-top: $content-area-top-margin;
+  margin-bottom: $content-area-top-margin;
+  padding: 0 40px 40px 40px;
+
+  .add-credits-container {
+    background: $light-blue;
+    margin: 30px -20px 0 -20px;
+  }
+
+  .submit-button {
+    margin-top: 30px;
+  }
+
+  .grid-items-lines {
+    margin-top: 30px;
+    padding: 0 20px 20px 20px;
+
+    .ajax-results {
+      ul {
+        @include shadow-level(1);
+        background: #fff;
+        padding: 20px;
+        border-radius: $base-border-radius;
+      }
+    }
+
+    .grid-item {
+      height: auto;
+      padding-left: 5px;
+
+      .delete-credit {
+        font-size: 1.5em;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    a {
+      display: block;
+    }
+  }
+}

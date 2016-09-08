@@ -1,7 +1,7 @@
 %div#clearance.sign-up
   %h2= t ".title"
 
-  = simple_form_for @user do |form|
+  = simple_form_for @user, wrapper: :cio_form do |form|
     = render partial: "/users/form", object: form
 
     %div.submit-field
