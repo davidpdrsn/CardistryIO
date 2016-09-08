@@ -6,7 +6,7 @@ feature "edit video" do
 
     visit video_path(video, as: video.user)
     click_button "Edit"
-    fill_in "Name", with: "Sybil"
+    fill_in "Title", with: "Sybil"
     fill_in "Description", with: "stuff goes here"
     click_button "Update video"
 
