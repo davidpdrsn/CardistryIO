@@ -1,9 +1,9 @@
 class VideoWithUrlHint < SimpleDelegator
   def url_hint
     if video.errors[:url].present?
-      "is unsupported, only videos from YouTube, and Vimeo are supported"
+      "This link is unsupported, only videos from YouTube and Vimeo are allowed."
     else
-      "Videos from YouTube, and Vimeo are supported"
+      "Videos from YouTube and Vimeo are supported."
     end
   end
 

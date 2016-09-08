@@ -5,7 +5,7 @@ SimpleForm.setup do |config|
   # wrapper, change the order or even add your own to the
   # stack. The options given below are used to wrap the
   # whole input.
-  config.wrappers :material_form, class: "input-field", hint_class: "has-hints", error_class: "has-errors" do |b|
+  config.wrappers :cio_form, class: "input-field", hint_class: "has-hints", error_class: "has-errors" do |b|
     b.use :html5
 
     b.use :placeholder

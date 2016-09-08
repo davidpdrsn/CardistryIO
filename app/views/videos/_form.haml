@@ -1,4 +1,4 @@
-= simple_form_for video, wrapper: :material_form do |f|
+= simple_form_for video, wrapper: :cio_form do |f|
   - if params[:thumbnail_url]
     = f.input :thumbnail_url, value: params[:thumbnail_url], as: :hidden
   %div.add-credits-container
