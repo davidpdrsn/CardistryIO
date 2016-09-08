@@ -60,4 +60,36 @@ describe CommentsController do
       expect(Notification.count).to eq 0
     end
   end
+
+  describe "#destroy" do
+    it "requires authentication" do
+      move = create :move
+      comment = create :comment, commentable: move
+
+      delete :destroy, params: { id: comment.id, move_id: move.id }
+
+      expect(response.status).to eq 302
+    end
+
+    it "destroys the comment" do
+      move = create :move
+      comment = create :comment, commentable: move
+      sign_in_as comment.user
+
+      expect do
+        delete :destroy, params: { id: comment.id, move_id: move.id, format: :js }
+        move.reload
+      end.to change { move.comments.count }.from(1).to(0)
+    end
+
+    it "doesn't allow destruction of other users' comments" do
+      move = create :move
+      comment = create :comment, commentable: move
+      sign_in_as create(:user)
+
+      delete :destroy, params: { id: comment.id, move_id: move.id }
+
+      expect(response.status).to eq 302
+    end
+  end
 end

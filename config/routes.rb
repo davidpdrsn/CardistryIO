@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   get "/sign_up", to: "clearance/users#new", as: "sign_up"
 
   concern :comments do
-    resources :comments, only: [:create, :edit, :update]
+    resources :comments, only: [:create, :destroy]
   end
 
   concern :ratings do

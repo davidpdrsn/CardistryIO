@@ -78,6 +78,24 @@ feature "making comments" do
 
       expect(page).not_to have_content "Updated"
     end
+
+    scenario "deletes a comment", :js do
+      text = "Really awesome dude"
+      move = create :move
+
+      visit move_path(move, as: user)
+      within ".add_comment" do
+        click_button "Add comment"
+        fill_in "Content", with: text
+        click_button "Submit comment"
+      end
+
+      expect(page).to have_css(".comments", text: text)
+
+      click_link "Delete"
+
+      expect(page).to_not have_css(".comments", text: text)
+    end
   end
 
   context "on videos" do

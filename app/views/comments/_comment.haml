@@ -14,3 +14,8 @@
         %a{href: "#", "data-behavior": "reply-to-comment"}
           %i.icon.ion-reply
           Reply
+
+      - if comment.user == current_user
+        = link_to polymorphic_path([comment.commentable, comment]), method: :delete, remote: true do
+          %i.icon.ion-trash-a
+          Delete

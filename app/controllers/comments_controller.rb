@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :require_login, only: [:create, :update, :edit]
+  before_action :require_login, only: [:create, :destroy]
 
   def create
     commentable = find_commentable
@@ -32,6 +32,14 @@ class CommentsController < ApplicationController
         end
       end
     end
+  end
+
+  def destroy
+    comment = current_user.comments.find(params[:id])
+    comment.destroy!
+    @commentable = comment.commentable
+
+    render :create, layout: false
   end
 
   private
