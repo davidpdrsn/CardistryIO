@@ -10,7 +10,7 @@ feature "private videos" do
     fill_in "Title", with: "Classic"
     fill_in "URL", with: "https://www.youtube.com/watch?v=W799NKLEz8s"
     fill_in "Description", with: "A video I made"
-    select "Performance", from: "Type"
+    select "Performance", from: "video_video_type"
     check "Private"
     click_button "Submit video"
 
