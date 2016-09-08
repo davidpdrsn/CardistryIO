@@ -16,12 +16,6 @@ class InstagramController < ApplicationController
     redirect_to instagram_path
   end
 
-  around_action :disable_instagram_integration
-  def disable_instagram_integration(&block)
-    flash.notice = "Instagram integration is coming soon"
-    redirect_to root_path
-  end
-
   private
 
   def possibly_add_instagram_username

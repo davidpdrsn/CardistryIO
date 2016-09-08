@@ -33,6 +33,10 @@ module InstagramIO
       video.images.send(resolution).url
     end
 
+    def thumbnail_url
+      image
+    end
+
     def height
       video.videos.send(resolution).height
     end

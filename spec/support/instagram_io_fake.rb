@@ -10,10 +10,6 @@ module InstagramIOFake
       new
     end
 
-    def self.unauthenticated_client(*)
-      new
-    end
-
     def user
       InstagramIOFake::InstagramUser.new
     end
@@ -40,12 +36,8 @@ module InstagramIOFake
       true
     end
 
-    def width
-      1
-    end
-
-    def height
-      1
+    def thumbnail_url
+      ""
     end
 
     def image
