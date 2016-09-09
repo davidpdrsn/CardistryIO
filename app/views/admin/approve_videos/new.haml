@@ -6,7 +6,8 @@
 
 - if @videos.present?
   - @videos.each do |video|
-    = render partial: "videos/embed_video", locals: { video: video }
+    .approve-video
+      = render partial: "videos/embed_video", locals: { video: video }
 
     %h1= video.name
 
