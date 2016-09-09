@@ -24,15 +24,11 @@ class Rating < ApplicationRecord
     ]
   end
 
-  def self.rated_by?(user)
-    exists?(user_id: user.id)
-  end
-
   private
 
   def can_rate
     return unless user.present?
-    return if UserWithRatingPermissions.new(user).can_rate?(rateable)
+    return if user.can_rate?(rateable)
 
     errors.add(
       :base,

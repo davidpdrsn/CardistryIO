@@ -56,14 +56,14 @@ describe User do
       video = create :video
       Rating.create!(rateable: video, user: bob, rating: 2)
 
-      expect(bob.already_rated?(video, type: "Video")).to eq true
+      expect(bob.already_rated?(video)).to eq true
     end
 
     it "returns false if not rated" do
       bob = create :user
       video = create :video
 
-      expect(bob.already_rated?(video, type: "Video")).to eq false
+      expect(bob.already_rated?(video)).to eq false
     end
 
     it "returns false if just rated another of the same type" do
@@ -72,7 +72,7 @@ describe User do
       Rating.create!(rateable: video, user: bob, rating: 2)
       another_video = create :video
 
-      expect(bob.already_rated?(another_video, type: "Video")).to eq false
+      expect(bob.already_rated?(another_video)).to eq false
     end
   end
 

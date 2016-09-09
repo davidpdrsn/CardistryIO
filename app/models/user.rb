@@ -59,7 +59,7 @@ class User < ApplicationRecord
   end
 
   def can_rate?(rateable)
-    UserWithRatingPermissions.new(self).can_rate?(rateable)
+    !already_rated?(rateable) && rateable.user != self
   end
 
   def link_text
@@ -74,11 +74,8 @@ class User < ApplicationRecord
     "#{id}-#{username.parameterize}"
   end
 
-  def already_rated?(rateable, type:)
-    ratings.where(
-      rateable_id: rateable.id,
-      rateable_type: type.to_s.titleize,
-    ).present?
+  def already_rated?(rateable)
+    ratings.where(rateable_id: rateable.id, rateable_type: rateable.class.name).present?
   end
 
   def new_notifications

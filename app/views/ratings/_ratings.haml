@@ -8,7 +8,7 @@
         - cache ["ratings/can_rate", rateable] do
           = render partial: "ratings/can_rate", locals: { rateable: rateable }
       - else
-        - if rateable.ratings.rated_by?(current_user)
+        - if current_user.already_rated?(rateable)
           = render partial: "ratings/has_rated", locals: { rateable: rateable }
         - else
           = render partial: "ratings/cannot_rate", locals: { rateable: rateable }

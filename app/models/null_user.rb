@@ -18,4 +18,12 @@ class NullUser
   def id
     nil
   end
+
+  def ratings
+    Rating.none
+  end
+
+  def already_rated?(_)
+    false
+  end
 end
