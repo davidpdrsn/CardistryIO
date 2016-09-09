@@ -447,6 +447,13 @@ describe Video do
 
       expect(Video.not_viewed_by(daren)).to eq [video]
     end
+
+    it "doesn't include the users own videos" do
+      daren = create :user, username: "daren"
+      video = create :video, user: daren
+
+      expect(Video.not_viewed_by(daren)).to eq []
+    end
   end
 
   describe ".viewed_by" do

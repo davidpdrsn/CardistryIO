@@ -96,6 +96,7 @@ class Video < ApplicationRecord
 
     def not_viewed_by(user)
       where("videos.id NOT IN (#{select(:id).viewed_by(user).to_sql})")
+        .where.not(user: user)
     end
 
     def viewed_by(user)
