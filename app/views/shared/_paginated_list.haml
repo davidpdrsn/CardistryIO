@@ -7,7 +7,7 @@
   %ul.pagination.with-shadow
     - if page.more_previous_pages?
       %li.pagination-nav-button.back#pagination-back
-        = link_to "<i class='icon ion-ios-arrow-back'></i>".html_safe, path.call(page: page.previous_page)
+        = link_to "<i class='icon ion-ios-arrow-back'></i>".html_safe, path.call({ page: page.previous_page }.merge(current_filter_sort_params))
     - else
       %li.pagination-nav-button.back.disabled#pagination-back
         %i.icon.ion-ios-arrow-back
@@ -17,7 +17,7 @@
 
     - if page.more_pages?
       %li.pagination-nav-button.forward#pagination-forward
-        = link_to "<i class='icon ion-ios-arrow-forward'></i>".html_safe, path.call(page: page.next_page)
+        = link_to "<i class='icon ion-ios-arrow-forward'></i>".html_safe, path.call({ page: page.next_page }.merge(current_filter_sort_params))
     - else
       %li.pagination-nav-button.forward.disabled#pagination-forward
         %i.icon.ion-ios-arrow-forward

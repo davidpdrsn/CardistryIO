@@ -1,6 +1,7 @@
 module SortFilterHelper
   def current_filter_sort_params
     {
+      not_viewed: current_not_viewed_params,
       filter: {
         type: current_filter_params,
       },
@@ -79,6 +80,10 @@ module SortFilterHelper
 
   def current_sort_direction_options
     params.fetch(:sort, {}).fetch(:direction, "DESC")
+  end
+
+  def current_not_viewed_params
+    params.fetch(:not_viewed, "false")
   end
 
   def make_select(form:, key:, options:)
