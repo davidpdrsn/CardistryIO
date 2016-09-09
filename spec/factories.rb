@@ -26,6 +26,7 @@ FactoryGirl.define do
     user
     rateable_id { |comment| create(:move).id }
     rateable_type "Move"
+    rating 4
   end
 
   factory :move do

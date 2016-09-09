@@ -24,6 +24,10 @@ class Rating < ApplicationRecord
     ]
   end
 
+  def self.rated_by?(user)
+    exists?(user_id: user.id)
+  end
+
   private
 
   def can_rate

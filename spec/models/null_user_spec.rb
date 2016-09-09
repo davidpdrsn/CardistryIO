@@ -16,4 +16,8 @@ describe NullUser do
   it "is not admin" do
     expect(NullUser.new.admin).to eq false
   end
+
+  it "has no id" do
+    expect(NullUser.new.id).to eq nil
+  end
 end

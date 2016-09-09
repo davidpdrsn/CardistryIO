@@ -26,4 +26,24 @@ describe Rating do
       expect(errors.first).to include "Cannot rate"
     end
   end
+
+  describe ".rated_by" do
+    it "returns true if the user has rated the thing" do
+      user = create :user
+      rating = create :rating, user: user
+
+      ratings = rating.rateable.ratings
+
+      expect(ratings.rated_by?(user)).to eq true
+    end
+
+    it "returns false if the user has not rated the thing" do
+      user = create :user
+      rating = create :rating
+
+      ratings = rating.rateable.ratings
+
+      expect(ratings.rated_by?(user)).to eq false
+    end
+  end
 end
