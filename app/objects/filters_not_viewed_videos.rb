@@ -9,7 +9,7 @@ class FiltersNotViewedVideos
   def filter(params)
     query = base_filter.new(videos).filter(params)
 
-    if params[:not_viewed]
+    if params[:not_viewed] == "true"
       query.not_viewed_by(current_user)
     else
       query

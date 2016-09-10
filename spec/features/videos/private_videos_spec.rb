@@ -20,7 +20,7 @@ feature "private videos" do
     click_button "Approve"
 
     alice = create :user
-    visit all_videos_path(as: alice)
+    visit videos_path(as: alice)
 
     expect(page).not_to have_content "Classic"
   end

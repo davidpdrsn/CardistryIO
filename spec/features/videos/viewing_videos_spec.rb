@@ -30,7 +30,7 @@ feature "viewing videos" do
   scenario "doesn't see unapproved videos" do
     video = create :video, approved: false
 
-    visit root_path
+    visit root_path(as: video.user)
     click_link "My Videos"
 
     expect(page).not_to have_content video.name

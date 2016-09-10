@@ -3,19 +3,20 @@
     %li.nav-item{:class => current_path_class('users')}
       %i.icon.ion-person-stalker
       = link_to "All Users", users_path
-    %li.nav-item{:class => current_path_class('moves/all')}
-      %i.icon.ion-android-hand
-      = link_to "All Moves", all_moves_path
-    %li.nav-item{:class => current_path_class('videos/all')}
-      %i.icon.ion-ios-film
-      = link_to "All Videos", all_videos_path
-
     %li.nav-item{:class => current_path_class('moves')}
       %i.icon.ion-android-hand
-      = link_to "My Moves", moves_path
+      = link_to "All Moves", moves_path
     %li.nav-item{:class => current_path_class('videos')}
       %i.icon.ion-ios-film
-      = link_to "My Videos", videos_path
+      = link_to "All Videos", videos_path
+
+    - if signed_in?
+      %li.nav-item{:class => current_path_class("users/#{current_user.to_param}/moves")}
+        %i.icon.ion-android-hand
+        = link_to "My Moves", user_moves_path(current_user)
+      %li.nav-item{:class => current_path_class("users/#{current_user.to_param}/videos")}
+        %i.icon.ion-ios-film
+        = link_to "My Videos", user_videos_path(current_user)
 
     %hr.menu-divider
 

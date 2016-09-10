@@ -20,17 +20,19 @@ en:
     users:
       edit: Update profile
       index: All users
+      moves:
+        index: My moves
+      videos:
+        index: My moves
     relationships:
       followers: "@%{username}'s followers"
       following: "@%{username} following"
     moves:
-      all: Moves
-      index: My moves
+      index: Moves
       new: Add new move
       edit: Update move
     videos:
-      all: Videos
-      index: My videos
+      index: Videos
       new: Add new video
       edit: Update video
     pages:

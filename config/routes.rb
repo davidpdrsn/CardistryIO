@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   resource :session, controller: "clearance/sessions", only: [:create]
 
   resources :users, only: [:index, :show, :edit, :update, :create] do
-    resource :password,
-      controller: "clearance/passwords",
-      only: [:create, :edit, :update]
+    resource :password, controller: "clearance/passwords", only: [:create, :edit, :update]
+
+    resources :moves, only: [:index], controller: "users_controller/moves"
+    resources :videos, only: [:index], controller: "users_controller/videos"
 
     member do
       post :make_admin
@@ -38,24 +39,13 @@ Rails.application.routes.draw do
 
   resources :creditable_users, only: [:index]
 
-  resources(
-    :moves,
-    only: [:index, :show, :new, :create, :destroy, :edit, :update],
-    concerns: [:comments, :ratings]) do
-      collection do
-        get "all"
-      end
-    end
+  resources(:moves, only: [:index, :show, :new, :create, :destroy, :edit, :update], concerns: [:comments, :ratings])
 
   resources :videos, concerns: [:comments, :ratings] do
     resources :sharings, only: [:new, :create, :destroy] do
       collection do
         get "edit", to: "sharings#edit", as: "edit"
       end
-    end
-
-    collection do
-      get "all"
     end
 
     member do

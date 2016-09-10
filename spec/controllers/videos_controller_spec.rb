@@ -1,14 +1,6 @@
 require "rails_helper"
 
 describe VideosController do
-  describe "#index" do
-    it "requires authentication" do
-      get :index
-
-      expect(response.status).to eq 302
-    end
-  end
-
   describe "#show" do
     it "shows the video" do
       video = create :video, approved: true

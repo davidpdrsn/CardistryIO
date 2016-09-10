@@ -12,6 +12,6 @@
         = moves_sort_direction_select(form)
 
 - if page.present?
-  = render partial: "shared/paginated_list", locals: { page: page }
+  = render partial: "shared/paginated_list", locals: { type: "moves", page: page }
 - else
   = t "moves.list.empty"

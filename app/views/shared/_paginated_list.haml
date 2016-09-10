@@ -1,7 +1,7 @@
 %ul.object-list
-  = render partial: "list_item", collection: page, as: :object, cached: true
+  = render partial: "#{type}/list_item", collection: page, as: :object, cached: true
 
-- path = ->(options) { polymorphic_path([:all, page.detect { true }.class], options) }
+- path = ->(options) { polymorphic_path([page.detect { true }.class], options) }
 
 %div.pagination-container
   %ul.pagination.with-shadow

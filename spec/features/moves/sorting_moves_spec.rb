@@ -8,7 +8,7 @@ feature "sorting moves" do
     two = create :move, created_at: 1.day.ago
     three = create :move, created_at: 3.weeks.ago
 
-    visit all_moves_path
+    visit moves_path
 
     expect_to_appear_in_order([one, two, three].map(&:name))
   end
@@ -18,7 +18,7 @@ feature "sorting moves" do
     two = create :move, created_at: 1.day.ago
     three = create :move, created_at: 3.weeks.ago
 
-    visit all_moves_path
+    visit moves_path
     select "Sort by date", from: "sort_by"
     select "Descending", from: "sort_direction"
 
@@ -30,7 +30,7 @@ feature "sorting moves" do
     two = create :move, created_at: 1.day.ago
     three = create :move, created_at: 3.weeks.ago
 
-    visit all_moves_path
+    visit moves_path
     select "Sort by date", from: "sort_by"
     select "Ascending", from: "sort_direction"
 
@@ -47,7 +47,7 @@ feature "sorting moves" do
     lowest_rated = create :move, created_at: 10.weeks.ago, name: "lowest_rated"
     5.times { create :rating, rateable: lowest_rated, rating: 1 }
 
-    visit all_moves_path
+    visit moves_path
     select "Sort by rating", from: "sort_by"
     select "Descending", from: "sort_direction"
 
@@ -66,7 +66,7 @@ feature "sorting moves" do
     lowest_rated = create :move, created_at: 10.weeks.ago, name: "lowest_rated"
     5.times { create :rating, rateable: lowest_rated, rating: 1 }
 
-    visit all_moves_path
+    visit moves_path
     select "Sort by rating", from: "sort_by"
     select "Ascending", from: "sort_direction"
 
@@ -87,7 +87,7 @@ feature "sorting moves" do
     three = create :move, created_at: 10.weeks.ago, user: user
     5.times { create :rating, rateable: three, rating: 5 }
 
-    visit moves_path(as: user)
+    visit user_moves_path(user, as: user)
     select "Sort by rating", from: "sort_by"
     select "Descending", from: "sort_direction"
 

@@ -6,13 +6,13 @@
         Stream
 
   %li.mobile-nav-button{:class => current_path_class('videos/all')}
-    = link_to all_videos_path do
+    = link_to videos_path do
       %i.icon.ion-ios-film
       %span.icon-text
         Videos
 
-  %li.mobile-nav-button{:class => current_path_class('moves/all')}
-    = link_to all_moves_path do
+  %li.mobile-nav-button{:class => current_path_class('moves')}
+    = link_to moves_path do
       %i.icon.ion-android-hand
       %span.icon-text
         Moves

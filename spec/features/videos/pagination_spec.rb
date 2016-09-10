@@ -6,7 +6,7 @@ feature "paginating videos" do
       create :video
     end
 
-    visit all_videos_path
+    visit videos_path
 
     expect(page).to have_content videos.last.name
     expect(page).to_not have_content videos.first.name
@@ -27,7 +27,7 @@ feature "paginating videos" do
       create :video
     end
 
-    visit all_videos_path
+    visit videos_path
     find("#pagination-forward a").click
     find("#pagination-forward a").click
 
@@ -37,7 +37,7 @@ feature "paginating videos" do
   scenario "no previous page on first page" do
     create :video
 
-    visit all_videos_path
+    visit videos_path
 
     expect(page).to have_selector(:css, "#pagination-back")
     expect(page).to have_selector(:css, ".pagination-nav-button.back.disabled")
@@ -46,14 +46,14 @@ feature "paginating videos" do
   scenario "no next page on last page" do
     create :video
 
-    visit all_videos_path
+    visit videos_path
 
     expect(page).to have_selector(:css, "#pagination-forward")
     expect(page).to have_selector(:css, ".pagination-nav-button.forward.disabled")
   end
 
   scenario "sees no paging buttons when there are few videos" do
-    visit all_videos_path
+    visit videos_path
 
     expect(page).to_not have_content "Next"
     expect(page).to_not have_content "Prev"

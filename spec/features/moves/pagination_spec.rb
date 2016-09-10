@@ -6,7 +6,7 @@ feature "pagination" do
       create :move
     end
 
-    visit all_moves_path
+    visit moves_path
 
     expect(page).to have_content moves.last.name
     expect(page).to_not have_content moves.first.name
@@ -28,7 +28,7 @@ feature "pagination" do
       create :move, user: user
     end
 
-    visit moves_path(as: user)
+    visit user_moves_path(user, as: user)
 
     expect(page).to have_content moves.last.name
     expect(page).to_not have_content moves.first.name

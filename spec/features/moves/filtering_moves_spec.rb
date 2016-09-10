@@ -5,7 +5,7 @@ feature "filtering moves" do
     move = create :move, idea: false
     idea = create :move, idea: true
 
-    visit all_moves_path
+    visit moves_path
 
     expect(page).to have_content move.name
     expect(page).to have_content idea.name
@@ -15,7 +15,7 @@ feature "filtering moves" do
     move = create :move, idea: false
     idea = create :move, idea: true
 
-    visit all_moves_path
+    visit moves_path
     select "idea", from: "filter_type"
 
     expect(page).to_not have_content move.name
@@ -26,7 +26,7 @@ feature "filtering moves" do
     move = create :move, idea: false
     idea = create :move, idea: true
 
-    visit all_moves_path
+    visit moves_path
     # TODO: Come up with a better name for this
     select "finished", from: "filter_type"
 
@@ -39,7 +39,7 @@ feature "filtering moves" do
     move = create :move, idea: false, user: user
     idea = create :move, idea: true, user: user
 
-    visit moves_path(as: user)
+    visit user_moves_path(user, as: user)
     # TODO: Come up with a better name for this
     select "finished", from: "filter_type"
 

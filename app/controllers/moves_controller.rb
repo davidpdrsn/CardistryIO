@@ -1,16 +1,9 @@
 class MovesController < ApplicationController
-  before_action :require_login, only: [:new, :create, :index,
-                                       :destroy, :edit, :update]
-
-  def all
-    @filter_submit_path = all_moves_path
-    @paged_moves = filter_sort_and_paginate(Move.all)
-    title t("titles.moves.all")
-  end
+  before_action :require_login, only: [:new, :create, :destroy, :edit, :update]
 
   def index
     @filter_submit_path = moves_path
-    @paged_moves = filter_sort_and_paginate(current_user.moves)
+    @paged_moves = filter_sort_and_paginate(Move.all)
     title t("titles.moves.index")
   end
 

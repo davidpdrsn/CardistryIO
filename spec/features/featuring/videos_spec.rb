@@ -58,7 +58,7 @@ feature "featuring videos" do
     video.feature!
     admin = create :user, admin: true
 
-    visit all_videos_path(as: admin)
+    visit videos_path(as: admin)
 
     within ".featured-videos" do
       expect(page).to have_content video.name
@@ -70,7 +70,7 @@ feature "featuring videos" do
     video.feature!
     user = create :user, admin: false
 
-    visit all_videos_path(as: user)
+    visit videos_path(as: user)
 
     expect(page).to have_css(".featured-videos")
   end

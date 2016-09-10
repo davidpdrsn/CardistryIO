@@ -7,7 +7,7 @@ feature "filtering and sorting videos" do
     tutorial = create :video, video_type: :tutorial
     performance = create :video, video_type: :performance
 
-    visit all_videos_path
+    visit videos_path
     select "Show only tutorials", from: "filter_type"
 
     expect(page).to have_content tutorial.name
@@ -18,7 +18,7 @@ feature "filtering and sorting videos" do
     jam = create :video, video_type: :jam
     performance = create :video, video_type: :performance
 
-    visit all_videos_path
+    visit videos_path
     select "Show only jams", from: "filter_type"
 
     expect(page).to have_content jam.name
@@ -30,7 +30,7 @@ feature "filtering and sorting videos" do
     two = create :video, created_at: 2.days.ago
     three = create :video, created_at: 2.weeks.ago
 
-    visit all_videos_path
+    visit videos_path
 
     expect_to_appear_in_order([one, two, three].map(&:name))
   end
@@ -40,7 +40,7 @@ feature "filtering and sorting videos" do
     two = create :video, created_at: 2.days.ago
     three = create :video, created_at: 10.weeks.ago
 
-    visit all_videos_path
+    visit videos_path
     select "Ascending", from: "sort_direction"
 
     expect_to_appear_in_order([three, two, one].map(&:name))
@@ -56,7 +56,7 @@ feature "filtering and sorting videos" do
     three = create :video, created_at: 10.weeks.ago
     5.times { create :rating, rateable: three, rating: 1 }
 
-    visit all_videos_path
+    visit videos_path
     select "Sort by rating", from: "sort_by"
     select "Descending", from: "sort_direction"
 
@@ -65,7 +65,7 @@ feature "filtering and sorting videos" do
     huron = create :user, username: "huron"
     visit video_path(one, as: huron)
     visit video_path(two, as: huron)
-    visit all_videos_path
+    visit videos_path
     select "Sort by rating", from: "sort_by"
     check "not_viewed"
 
@@ -84,7 +84,7 @@ feature "filtering and sorting videos" do
     three = create :video, created_at: 10.weeks.ago
     5.times { create :rating, rateable: three, rating: 1 }
 
-    visit all_videos_path
+    visit videos_path
     select "Sort by rating", from: "sort_by"
     select "Ascending", from: "sort_direction"
 
@@ -103,7 +103,7 @@ feature "filtering and sorting videos" do
     three = create :video, name: "three"
     11.times { create :video_view, video: three, user: user }
 
-    visit all_videos_path
+    visit videos_path
     select "Sort by views", from: "sort_by"
     select "Descending", from: "sort_direction"
 
@@ -132,7 +132,7 @@ feature "filtering and sorting videos" do
     one = create :video
 
     visit video_path(one, as: huron)
-    visit all_videos_path(as: huron)
+    visit videos_path(as: huron)
 
     expect(page).to have_content(one.name)
 
@@ -142,7 +142,7 @@ feature "filtering and sorting videos" do
   end
 
   scenario "can't filter not viewed videos if not logged in" do
-    visit all_videos_path
+    visit videos_path
 
     expect(page).to_not have_css("input[type=checkbox][name=not_viewed]")
   end
