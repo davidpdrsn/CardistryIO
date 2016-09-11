@@ -1,36 +1,21 @@
 %div.main-nav
   %ul
-    %li.nav-item{:class => current_path_class('users')}
-      %i.icon.ion-person-stalker
-      = link_to "All Users", users_path
-    %li.nav-item{:class => current_path_class('moves')}
-      %i.icon.ion-android-hand
-      = link_to "All Moves", moves_path
-    %li.nav-item{:class => current_path_class('videos')}
-      %i.icon.ion-ios-film
-      = link_to "All Videos", videos_path
+    = nav_link "All Users", users_path, icon: "person-stalker"
+    = nav_link "All Moves", moves_path, icon: "android-hand"
+    = nav_link "All Videos", videos_path, icon: "ios-film"
 
     - if signed_in?
-      %li.nav-item{:class => current_path_class("users/#{current_user.to_param}/moves")}
-        %i.icon.ion-android-hand
-        = link_to "My Moves", user_moves_path(current_user)
-      %li.nav-item{:class => current_path_class("users/#{current_user.to_param}/videos")}
-        %i.icon.ion-ios-film
-        = link_to "My Videos", user_videos_path(current_user)
+      = nav_link "My Moves", user_moves_path(current_user), icon: "android-hand"
+      = nav_link "My Videos", user_videos_path(current_user), icon: "ios-film"
 
     %hr.menu-divider
 
     - if signed_in?
-      %li.nav-item{:class => current_path_class('videos_shared_with_you')}
-        %i.icon.ion-android-share-alt
-        = link_to "Videos shared with you", shared_videos_path
+      = nav_link "Videos shared with you", shared_videos_path, icon: "android-share-alt"
 
       - if current_user.admin?
-        %li.nav-item{:class => current_path_class('/admin/approve_videos')}
-          = link_to "Approve videos (#{Video.unapproved.count})", approve_videos_path, {:id => "approve-videos"}
+        = nav_link "Approve videos (#{Video.unapproved.count})", approve_videos_path, icon: "thumbsup"
 
       %hr.menu-divider
 
-    %li.nav-item{:class => current_path_class('pages/contact')}
-      %i.icon.ion-paper-airplane
-      = link_to "Contact", page_path("contact")
+    = nav_link "Contact", page_path("contact"), icon: "paper-airplane"
