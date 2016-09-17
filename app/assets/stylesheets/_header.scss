@@ -1,4 +1,4 @@
-header {
+header.main-header {
   @include span-columns(12);
   height: 95px;
   border-bottom: 1px solid $layout-border-color;
@@ -160,6 +160,17 @@ header {
           background-color: $medium-blue;
         }
       }
+    }
+  }
+
+  @include media($mobile-large) {
+    text-align: center;
+
+    .main-logo {
+      float: none;
+    }
+    .button-bar {
+      display: none;
     }
   }
 }

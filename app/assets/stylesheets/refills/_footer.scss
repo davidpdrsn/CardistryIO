@@ -10,4 +10,8 @@ footer {
   border-width: 7px 0 0 0;
   line-height: 135px;
   color: #a4a4a4;
+
+  @include media($mobile-large) {
+    display: none;
+  }
 }

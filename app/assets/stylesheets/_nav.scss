@@ -50,3 +50,77 @@ nav.desktop {
     }
   }
 }
+
+@include media($mobile-large) {
+  nav.desktop {
+    display: none;
+  }
+
+  nav.mobile {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    height: 58px;
+    background-color: #fff;
+    border-top: 1px solid $layout-border-color;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    a {
+      color: #1A1A1A;
+    }
+
+    .mobile-nav {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+
+      .nav-item {
+        position: relative;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .icon {
+        height: 33px;
+        position: relative;
+        top: -3px;
+      }
+
+      a {
+        position: absolute;
+        display: flex;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        align-items: flex-end;
+        justify-content: center;
+      }
+    }
+    .active-nav-item {
+      a, .icon {
+        color: $main-red;
+      }
+    }
+    i.icon {
+      font-size: 2em;
+    }
+    span.icon-text {
+      font-size: 0.8em;
+      font-weight: 400;
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      text-align: center;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 5px;
+    }
+  }
+}

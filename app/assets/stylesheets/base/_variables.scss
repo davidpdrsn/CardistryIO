@@ -24,6 +24,9 @@ $pill-border-radius: 44px;
 $pill-border-radius: 44px;
 $nav-width: 280px;
 
+// Breakpoints
+$mobile-large: new-breakpoint(max-width 1000px 4);
+
 // Margins
 $content-area-top-margin: 75px;
 
