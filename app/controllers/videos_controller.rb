@@ -49,7 +49,7 @@ class VideosController < ApplicationController
     @video.transaction do
       @video.save!
       AddsCredits.new(@video).add_credits(params[:credits])
-      LoadVideoThumbnailJob.perform_later(@video)
+      # LoadVideoThumbnailJob.perform_later(@video)
       flash.notice = "Video created, will appear once it was been approved"
       redirect_to root_path
     end

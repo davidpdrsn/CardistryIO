@@ -1,31 +1,12 @@
-%ul
-  %li.mobile-nav-button{:class => current_path_class('/')}
-    = link_to root_path do
-      %i.icon.ion-ios-list
-      %span.icon-text
-        Stream
+%ul.mobile-nav
+  - if signed_in?
+    = nav_link "Feed", users_path, icon: "ios-list"
+  - else
+    = nav_link "Sign up", sign_up_path, icon: "star"
+    = nav_link "Log in", sign_in_path, icon: "log-in"
 
-  %li.mobile-nav-button{:class => current_path_class('videos/all')}
-    = link_to videos_path do
-      %i.icon.ion-ios-film
-      %span.icon-text
-        Videos
+  = nav_link "Videos", videos_path, icon: "ios-film"
+  = nav_link "Moves", moves_path, icon: "android-hand"
 
-  %li.mobile-nav-button{:class => current_path_class('moves')}
-    = link_to moves_path do
-      %i.icon.ion-android-hand
-      %span.icon-text
-        Moves
-
-  // TODO: Add screens for more and notifications
-  %li.mobile-nav-button
-    %a
-      %i.icon.ion-android-notifications
-      %span.icon-text
-        Notifications
-
-  %li.mobile-nav-button
-    = link_to users_path do
-      %i.icon.ion-person-stalker
-      %span.icon-text
-        All users
+  - if signed_in?
+    = nav_link "Me", user_path(current_user), icon: "person"

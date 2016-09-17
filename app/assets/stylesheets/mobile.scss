@@ -16,14 +16,8 @@ $mobile-large: new-breakpoint(max-width 1000px 4);
     }
   }
 
-  section {
-    @include span-columns(4);
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
   nav.mobile {
-    display: block;
+    display: flex;
     position: fixed;
     bottom: 0;
     height: 58px;
@@ -34,25 +28,43 @@ $mobile-large: new-breakpoint(max-width 1000px 4);
     overflow: hidden;
 
     a {
-      display: inline-block;
-      position: relative;
-      top: 0px;
-      bottom: 2px;
-      width: 100%;
-      height: 58px;
-      vertical-align: top;
       color: #1A1A1A;
     }
-    li.mobile-nav-button {
-      width: 20%;
-      height: auto;
-      display: block;
-      float: left;
-      min-width: 3.33333em;
-      text-align: center;
+
+    .mobile-nav {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+
+      .nav-item {
+        position: relative;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .icon {
+        height: 33px;
+        position: relative;
+        top: -3px;
+      }
+
+      a {
+        position: absolute;
+        display: flex;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        align-items: flex-end;
+        justify-content: center;
+      }
     }
-    .active-nav-item a {
-      color: $main-red;
+    .active-nav-item {
+      a, .icon {
+        color: $main-red;
+      }
     }
     i.icon {
       font-size: 2em;

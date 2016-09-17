@@ -1,8 +1,8 @@
 %div.main-nav
   %ul
     = nav_link "All Users", users_path, icon: "person-stalker"
-    = nav_link "All Moves", moves_path, icon: "android-hand"
     = nav_link "All Videos", videos_path, icon: "ios-film"
+    = nav_link "All Moves", moves_path, icon: "android-hand"
 
     - if signed_in?
       = nav_link "My Moves", user_moves_path(current_user), icon: "android-hand"
