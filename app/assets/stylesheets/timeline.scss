@@ -103,6 +103,7 @@
         margin: 0;
         padding: 1em;
         border-left: none;
+        overflow: hidden;
       }
 
       @include shadow-level(1);

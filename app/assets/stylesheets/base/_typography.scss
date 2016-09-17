@@ -55,7 +55,7 @@ h1 {
   width: calc(100% - 450px);
 
   @include media($mobile-large) {
-    font-size: 2em;
+    font-size: 1.5em;
     width: auto;
     padding: 0;
     margin-top: .2em;
