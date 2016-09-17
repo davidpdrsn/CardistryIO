@@ -1,6 +1,6 @@
 %ul.mobile-nav
   - if signed_in?
-    = nav_link "Feed", users_path, icon: "ios-list"
+    = nav_link "Feed", root_path, icon: "ios-list"
   - else
     = nav_link "Sign up", sign_up_path, icon: "star"
     = nav_link "Log in", sign_in_path, icon: "log-in"
