@@ -94,6 +94,7 @@
       @include media($mobile-large) {
         margin: 0;
         padding: 1em;
+        border-left: none;
       }
 
       @include shadow-level(1);
@@ -115,7 +116,7 @@
         font-size: 1.3em;
 
         @include media($mobile-large) {
-          font-size: .9em;
+          font-size: .8em;
         }
       }
 

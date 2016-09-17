@@ -96,9 +96,10 @@ nav.desktop {
         top: 0;
         right: 0;
         left: 0;
-        bottom: 0;
+        bottom: 2px;
         align-items: flex-end;
         justify-content: center;
+        font-size: .8em;
       }
     }
     .active-nav-item {
