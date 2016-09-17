@@ -14,13 +14,14 @@
         %div
       - else
         %div.thumbnail{:style => "background: url(#{image_path('thumbnail-placeholder.png')}) no-repeat center center;"}
+
     %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{activity.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
     %span.username
       = link_to activity.user.username, activity.user
     %span
       posted a new
     %span.type
-      = "#{activity.subject.class.name.downcase}"
+      = activity.subject.class.name.downcase
 
     %h1.activity-title
       = link_to activity.text, activity.subject

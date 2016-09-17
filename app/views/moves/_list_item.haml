@@ -1,18 +1,21 @@
-%li.list-item.-move
-  %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{object.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
-  %span.username
-    = link_to object.user.username, object.user
+.timeline-block
+  .timeline-content
+    %span{class: "mini-circle-avatar with-username", style: "background: url(#{object.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
+    %span.username
+      = link_to object.user.username, object.user
+    %span
+      posted a new
+    %span.type
+      = object.class.name.downcase
 
-  %h1.list-title= link_to object.name, object
+    %h1.activity-title
+      = link_to object.name, object
 
-  - if object.description?
-    .description= simple_format link_mentions(object.description)
-  - else
-    %p.no-description
-      There is no description for this move.
+    - if object.description.present?
+      .description
+        = simple_format link_mentions(object.description)
 
-  %ul.attributes
-    %li{class: "average-ratings"}
-      %h3 #{object.average_rating} average ratings
-    %li{class: "total-ratings"}
-      %h3 #{object.ratings.count} total ratings
+    %h3.published-at
+      #{object.average_rating} average rating \
+      #{object.ratings.count} total ratings \
+      posted #{dynamic_time_tag(object.created_at)}

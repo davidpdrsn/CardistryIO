@@ -1,4 +1,4 @@
-%ul.object-list
+.timeline
   = render partial: "#{type}/list_item", collection: page, as: :object, cached: true
 
 - path = ->(options) { polymorphic_path([page.detect { true }.class], options) }

@@ -5,9 +5,12 @@ header.main-header {
   background: white;
 
   @include media($mobile-large) {
-    height: 57px;
+    height: $mobile-header-height;
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
   }
 
   .header-mobile-link {

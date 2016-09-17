@@ -2,14 +2,13 @@
   position: relative;
   padding: 3.5em 0 4em 0;
   display: table;
-  height: 100%;
   width: 100%;
 
   @include media($mobile-large) {
     padding: 0;
   }
 
-  &:before {
+  .feed &:before {
     /* this is the vertical line */
     content: '';
     position: absolute;
@@ -92,7 +91,9 @@
 
     .timeline-content {
       position: relative;
-      margin-left: 60px;
+      .feed & {
+        margin: 0 0 0 60px;
+      }
       background: #fff;
       padding: 25px 15px 25px 30px;
       border-radius: $base-border-radius;
@@ -100,7 +101,7 @@
       color: #373737;
 
       @include media($mobile-large) {
-        margin: 0;
+        margin: 0 !important;
         padding: 1em;
         border-left: none;
         overflow: hidden;
@@ -116,6 +117,12 @@
         width: 32px;
         height: 1px;
         background: $main-red;
+        display: none;
+
+        .feed & {
+          display: block;
+        }
+
         @include media($mobile-large) {
           display: none;
         }

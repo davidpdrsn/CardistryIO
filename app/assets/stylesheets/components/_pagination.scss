@@ -1,15 +1,28 @@
 .pagination-container {
-  background: $main-blue;
-  padding: 11px;
-  border-radius: $base-border-radius;
-  text-align: center;
-  color: #fff;
-  display: inline-block;
-  position: relative;
-  margin-bottom: 100px;
-  margin-top: 1em;
+  @include media($mobile-large) {
+    display: flex;
+    justify-content: center;
+    margin-bottom: .5em;
+  }
 
-  @include shadow-level(1);
+  > .pagination {
+    background: $main-blue;
+    padding: 11px;
+    border-radius: $base-border-radius;
+    text-align: center;
+    color: #fff;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 100px;
+    margin-top: 1em;
+
+    @include shadow-level(1);
+
+    @include media($mobile-large) {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+  }
 }
 
 .pagination {

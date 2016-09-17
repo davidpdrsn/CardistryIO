@@ -1,25 +1,26 @@
-%li.list-item.-video
-  %div.video-thumbnail{:style => "background: url(#{object.thumbnail_url}) no-repeat center; background-size: cover;"}
+.timeline-block
+  .timeline-content
+    = link_to object do
+      .thumbnail{:style => "background: url(#{object.thumbnail_url}) no-repeat center; background-size: cover;"}
 
-  %div.video-data
-    %span{:class => "mini-circle-avatar with-username", :style => "background: url(#{object.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
+    %span{class: "mini-circle-avatar with-username", style: "background: url(#{object.user.gravatar_url}) no-repeat 0 0;  background-size: contain"}
     %span.username
       = link_to object.user.username, object.user
+    %span
+      posted a new
+    %span.type
+      = object.class.name.downcase
 
-    %h1.list-title= link_to object.name, object
+    %h1.activity-title
+      = link_to object.name, object
 
-    - if object.description?
-      .description= simple_format link_mentions(object.description)
-    - else
-      %p.no-description
-        There is no description for this video.
+    - if object.description.present?
+      .description
+        = simple_format link_mentions(object.description)
 
-    %ul.attributes
-      %li{class: "views"}
-        %h3 #{object.views.count} views
-      %li{class: "comments"}
-        %h3 #{object.comments.count} comments
-      %li{class: "average-ratings"}
-        %h3 #{object.average_rating} average rating
-      %li{class: "total-ratings"}
-        %h3 #{object.ratings.count} total ratings
+    %h3.published-at
+      #{object.views.count} views \
+      #{object.comments.count} comments \
+      #{object.average_rating} average rating \
+      #{object.ratings.count} total ratings \
+      posted #{dynamic_time_tag(object.created_at)}

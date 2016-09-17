@@ -39,8 +39,10 @@ html {
 body {
   height: 100%;
   font-family: $base-font-family;
+  @include media($mobile-large) {
+    margin-top: $mobile-header-height;
+  }
 }
-
 
 .outer-container {
   @include outer-container(100%);

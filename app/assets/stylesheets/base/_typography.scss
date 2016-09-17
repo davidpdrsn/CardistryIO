@@ -48,20 +48,21 @@ h1 {
   font-weight: $thin;
   color: $main-red;
 }
+
+.featured-videos .card .card-header,
 .activity-title {
   font-size: 2.8em;
   font-weight: 300;
   margin-bottom: 20px;
-  width: calc(100% - 450px);
 
   @include media($mobile-large) {
     font-size: 1.5em;
-    width: auto;
     padding: 0;
     margin-top: .2em;
     margin-bottom: 0;
   }
 }
+
 .video-title {
   text-align: center;
   margin-bottom: 0.2em;

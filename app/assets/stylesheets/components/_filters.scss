@@ -8,6 +8,14 @@
   line-height: 45px;
   @include shadow-level(1);
 
+  @include media($mobile-large) {
+    height: auto;
+    line-height: 29px;
+    padding: .3em .75em;
+    margin-bottom: 1em;
+    margin-top: 0;
+  }
+
   @include media($medium-screen-up) {
 
   }
@@ -19,9 +27,19 @@
   .filter-form {
     .filter-element {
       display: inline-block;
+
       border-right: 1px solid darken($light-gray, 50%);
       height: 46px;
       position: relative;
+
+      @include media($mobile-large) {
+        display: block;
+        height: auto;
+      }
+
+      @include media($mobile-large) {
+        border-right: none;
+      }
     }
     .filter-element:last-child {
       border-right: none;
@@ -45,6 +63,10 @@
       top: 0;
       right: -10px;
       margin-right: 25px;
+
+      @include media($mobile-large) {
+        right: -20px;
+      }
     }
 
     label,
@@ -61,11 +83,22 @@
 
     select {
       padding: 0 40px 0 20px;
+
+      @include media($mobile-large) {
+        padding: 0;
+        margin: 0;
+        display: block;
+        width: 100%;
+      }
     }
 
     input[type=checkbox] {
       display: inline-block;
       margin-left: 20px;
+
+      @include media($mobile-large) {
+        margin-left: 0;
+      }
     }
 
     select:last-child {
@@ -98,5 +131,9 @@
     border: none;
     margin-bottom: 1rem;
     -webkit-appearance: button;
+
+    @include media($mobile-large) {
+      height: auto;
+    }
   }
 }

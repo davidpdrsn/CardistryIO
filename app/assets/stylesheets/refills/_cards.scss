@@ -38,14 +38,15 @@
     background-image: url("thumbnail-placeholder.png");
     border-top-left-radius: $base-border-radius;
     border-top-right-radius: $base-border-radius;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     img {
       @include border-top-radius($base-border-radius);
       opacity: 1;
       transition: all 0.2s ease-in-out;
       width: 100%;
-      position: relative;
-      top: -80px;
     }
   }
 
