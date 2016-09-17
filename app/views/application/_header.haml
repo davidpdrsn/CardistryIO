@@ -1,1 +1,12 @@
-= link_to image_tag("logo.svg", :class => "main-logo"), root_path
+= link_to root_path, class: "main-logo-container" do
+  = image_tag("logo.svg", class: "main-logo")
+
+= link_to notifications_path, class: "header-mobile-link" do
+  = icon "search"
+
+- if signed_in?
+  = link_to notifications_path, class: "header-mobile-link" do
+    - if current_user.new_notifications.present?
+      = icon "android-notifications", class: "new-notifications"
+    - else
+      = icon "android-notifications"

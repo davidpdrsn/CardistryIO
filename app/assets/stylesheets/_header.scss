@@ -4,8 +4,43 @@ header.main-header {
   border-bottom: 1px solid $layout-border-color;
   background: white;
 
+  @include media($mobile-large) {
+    height: 57px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header-mobile-link {
+    display: none;
+
+    @include media($mobile-large) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      width: 2em;
+      color: black;
+    }
+
+    .new-notifications {
+      color: $main-red;
+    }
+  }
+
+  .main-logo-container {
+    @include media($mobile-large) {
+      width: 75%;
+      display: flex;
+    }
+  }
+
   .main-logo {
     float: left;
+
+    @include media($mobile-large) {
+      float: none;
+      width: 11.5em;
+    }
   }
 
   @mixin vertical-center-container($float-direction) {
@@ -164,11 +199,6 @@ header.main-header {
   }
 
   @include media($mobile-large) {
-    text-align: center;
-
-    .main-logo {
-      float: none;
-    }
     .button-bar {
       display: none;
     }
