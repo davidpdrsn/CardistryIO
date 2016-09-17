@@ -5,7 +5,9 @@
   height: 100%;
   width: 100%;
 
-
+  @include media($mobile-large) {
+    padding: 0;
+  }
 
   &:before {
     /* this is the vertical line */
@@ -16,6 +18,10 @@
     height: 100%;
     width: 1px;
     background: $main-blue;
+
+    @include media($mobile-large) {
+      display: none;
+    }
   }
 
   .timeline-separator {
@@ -45,6 +51,10 @@
     position: relative;
     margin: 0 0 4em 0;
 
+    @include media($mobile-large) {
+      margin-bottom: 1em;
+    }
+
     .timeline-block-image-border {
       background: $main-red;
       position: absolute;
@@ -53,6 +63,10 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
+
+      @include media($mobile-large) {
+        display: none;
+      }
 
       .timeline-block-image {
         background: $main-red;
@@ -77,8 +91,12 @@
       border-left: 3px solid $main-red;
       color: #373737;
 
-      @include shadow-level(1);
+      @include media($mobile-large) {
+        margin: 0;
+        padding: 1em;
+      }
 
+      @include shadow-level(1);
 
       &:before {
         content: '';
@@ -88,10 +106,17 @@
         width: 32px;
         height: 1px;
         background: $main-red;
+        @include media($mobile-large) {
+          display: none;
+        }
       }
 
       span {
         font-size: 1.3em;
+
+        @include media($mobile-large) {
+          font-size: .9em;
+        }
       }
 
       .thumbnail {
@@ -103,6 +128,16 @@
         border-top-right-radius: $base-border-radius;
         border-bottom-right-radius: $base-border-radius;
 
+        @include media($mobile-large) {
+          position: relative;
+          top: -1em;
+          left: -1em;
+          float: none;
+          width: calc(100% + 2em);
+          height: 12em;
+          // margin-bottom: .75em;
+        }
+
         &:before {
           font-family: 'Ionicons';
           content: image-url("thumbnail-play-button.png");
@@ -112,7 +147,7 @@
           line-height: 50%;
           display: block;
           height: 100%;
-          width: 400px;
+          width: 100%;
           background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6-15 */
           background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
           background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -155,6 +190,12 @@
       .description {
         margin-bottom: 50px;
         padding-right: 450px;
+
+        @include media($mobile-large) {
+          margin-bottom: 1em;
+          padding-right: 0;
+          margin-top: .5em;
+        }
       }
 
       .type {
@@ -183,6 +224,12 @@
       visibility: visible;
       animation: fadeIn 0.7s;
     }
+  }
+
+  .published-at {
+    font-size: .8em;
+    margin: 0;
+    padding: 0;
   }
 
   .timeline-pagination {

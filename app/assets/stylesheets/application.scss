@@ -53,7 +53,7 @@ body {
   &:after {
     content: "";
     display: block;
-    height: 135px;
+    height: $mobile-nav-height;
   }
 }
 

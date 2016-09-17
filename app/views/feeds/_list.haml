@@ -25,8 +25,9 @@
     %h1.activity-title
       = link_to activity.text, activity.subject
 
-    %p.description
-      = simple_format link_mentions(activity.subject.description)
+    - if activity.subject.description.present?
+      .description
+        = simple_format link_mentions(activity.subject.description)
 
-    %h3
+    %h3.published-at
       posted #{dynamic_time_tag(activity.created_at)}

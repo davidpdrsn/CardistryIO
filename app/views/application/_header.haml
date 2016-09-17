@@ -1,8 +1,8 @@
 = link_to root_path, class: "main-logo-container" do
   = image_tag("logo.svg", class: "main-logo")
 
-= link_to notifications_path, class: "header-mobile-link" do
-  = icon "search"
+-# = link_to notifications_path, class: "header-mobile-link" do
+-#   = icon "search"
 
 - if signed_in?
   = link_to notifications_path, class: "header-mobile-link" do

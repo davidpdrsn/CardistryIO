@@ -1,4 +1,4 @@
-section {
+section.content-area {
   @include span-columns(9);
   margin: 0;
   background: $layout-content-bg-color;
@@ -6,6 +6,12 @@ section {
   padding: 0px 50px 0px 65px;
   @include calc(width, "100% - #{$nav-width}");
   display: table;
+
+  @include media($mobile-large) {
+    padding: .5em;
+    margin: 0;
+    width: 100%;
+  }
 
   .profile-box {
     background: #fff;

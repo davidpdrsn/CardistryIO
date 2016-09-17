@@ -60,7 +60,7 @@ nav.desktop {
     display: flex;
     position: fixed;
     bottom: 0;
-    height: 58px;
+    height: $mobile-nav-height;
     background-color: #fff;
     border-top: 1px solid $layout-border-color;
     width: 100%;

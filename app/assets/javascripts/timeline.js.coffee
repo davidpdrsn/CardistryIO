@@ -24,17 +24,17 @@ showBlocks = (blocks, headlines, offset) ->
     return
   return
 
-document.addEventListener "turbolinks:load", ->
-  hideBlocks timelineBlocks(), timelinePagination(), offset
+# document.addEventListener "turbolinks:load", ->
+#   hideBlocks timelineBlocks(), timelinePagination(), offset
 
-#on scolling, show/animate timeline blocks when enter the viewport
-$(window).on 'scroll', ->
-  if !window.requestAnimationFrame then setTimeout((->
-    showBlocks timelineBlocks(), timelinePagination(), offset
-    return
-  ), 100) else window.requestAnimationFrame((->
-    showBlocks timelineBlocks(), timelinePagination(), offset
-    return
-  ))
-  return
-return
+# #on scolling, show/animate timeline blocks when enter the viewport
+# $(window).on 'scroll', ->
+#   if !window.requestAnimationFrame then setTimeout((->
+#     showBlocks timelineBlocks(), timelinePagination(), offset
+#     return
+#   ), 100) else window.requestAnimationFrame((->
+#     showBlocks timelineBlocks(), timelinePagination(), offset
+#     return
+#   ))
+#   return
+# return
