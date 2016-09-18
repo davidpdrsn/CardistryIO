@@ -1,5 +1,5 @@
 %div.search-field-container
   = form_tag searches_path, class: "search-form", method: :get do
     %i.icon.ion-search
-    = text_field_tag "query", nil, placeholder: "Search for users, moves, and videos", class: "search-field"
+    = text_field_tag "query", params[:query], placeholder: "Search for users, moves, and videos", class: "search-field"
     = submit_tag "Search", class: "search-submit-button"

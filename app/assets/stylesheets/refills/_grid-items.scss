@@ -35,6 +35,10 @@
     @include media($large-screen) {
       @include grid-item-columns($grid-item-columns);
     }
+
+    @include media($mobile-large) {
+      padding: 1em;
+    }
   }
 
   .grid-item img {

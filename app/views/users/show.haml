@@ -3,10 +3,11 @@
     = image_tag(@user.gravatar_url, :class => "backdrop-gravatar")
     %div.user-information
       = image_tag(@user.gravatar_url, :class => "gravatar")
-      %h3
-        = @user.username
-      %p.location
-        #{@user.country_name} (#{@user.time_zone})
+      %div.user-information-text
+        %h3
+          = @user.username
+        %p.location
+          #{@user.country_name} (#{@user.time_zone})
 
     %div.overlay
 

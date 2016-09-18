@@ -30,9 +30,18 @@
   height: auto;
   margin-top: $content-area-top-margin;
 
+  @include media($mobile-large) {
+    margin-top: 0;
+  }
+
   .profile-container {
     height: 200px;
     padding: 20px;
+
+    @include media($mobile-large) {
+      height: auto;
+      padding: 0;
+    }
 
     .grid-items-lines {
       margin: 0;
@@ -40,6 +49,10 @@
       .grid-item {
         cursor: default;
         height: 17em;
+
+        @include media($mobile-large) {
+          height: auto;
+        }
 
         p {
           max-width: 100%;
@@ -80,6 +93,16 @@
             }
           }
 
+          @include media($mobile-large) {
+            display: flex;
+            justify-content: space-between;
+
+            li {
+              padding: 0;
+              font-size: 1em;
+            }
+          }
+
           a {
             color: $main-blue;
           }
@@ -92,6 +115,7 @@
     height: 325px;
     width: calc(100% + 40px);
     margin: -20px;
+    margin-bottom: 0;
     position: relative;
     top: 0;
     left: 0;
@@ -99,6 +123,10 @@
     border-top-left-radius: $base-border-radius;
     overflow: hidden;
     border-bottom: 3px solid $main-red;
+
+    @include media($mobile-large) {
+      height: 135px;
+    }
 
     .user-information {
       position: absolute;
@@ -111,6 +139,13 @@
       text-align: center;
       height: 215px;
 
+      @include media($mobile-large) {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: auto;
+      }
+
       h3 {
         font-family: "Prompt", sans-serif;
         font-size: 2em;
@@ -118,6 +153,11 @@
         margin-top: 0.75em;
         color: #fff;
         text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+        @include media($mobile-large) {
+          font-size: 1.5em;
+          margin: 0;
+        }
       }
 
       .profile-action-button {
@@ -142,6 +182,10 @@
           margin-right: 5px;
           padding-top: 3px;
         }
+
+        @include media($mobile-large) {
+          font-size: .8em;
+        }
       }
 
       .gravatar {
@@ -151,6 +195,12 @@
         @include border-bottom-radius(100%);
         @include shadow-level(2);
         border: 3px solid $main-blue;
+
+        @include media($mobile-large) {
+          height: 75px;
+          width: 75px;
+          border: 2px solid $main-blue;
+        }
       }
     }
   }

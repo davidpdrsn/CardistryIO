@@ -4,13 +4,54 @@ header.main-header {
   border-bottom: 1px solid $layout-border-color;
   background: white;
 
+  .header-search {
+    display: none;
+
+    form,
+    input.search-field {
+      width: 100%;
+      display: block;
+    }
+
+    .search-field-container {
+      position: fixed;
+      top: $mobile-header-height;
+      margin: 0;
+      padding: .5em;
+      height: auto;
+      left: 0;
+      right: 0;
+      background: white;
+      border-bottom: 1px solid $layout-border-color;
+    }
+
+    form.search-form {
+      height: auto;
+    }
+
+    form .icon {
+      left: auto;
+      padding-top: 7px;
+      padding-bottom: 7px;
+    }
+
+    .search-field {
+      font-size: .8em;
+      height: 37px !important;
+      margin-bottom: 0;
+    }
+  }
+
   @include media($mobile-large) {
     height: $mobile-header-height;
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
     top: 0;
-    z-index: 9999;
+    z-index: 99999;
+    position: fixed;
+
+    .header-navigation {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   .header-mobile-link {

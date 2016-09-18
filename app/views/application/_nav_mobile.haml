@@ -9,7 +9,7 @@
   = nav_link "Moves", moves_path, icon: "android-hand"
 
   - if signed_in?
-    = nav_link "Me", (pp user_path(current_user)), icon: "person"
+    = nav_link "Me", user_path(current_user), icon: "person"
 
     - if current_user.admin?
       = nav_link "Approve (#{Video.unapproved.count})", approve_videos_path, icon: "thumbsup"

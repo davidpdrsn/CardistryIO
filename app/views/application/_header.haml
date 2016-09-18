@@ -1,12 +1,16 @@
-= link_to root_path, class: "main-logo-container" do
-  = image_tag("logo.svg", class: "main-logo")
+.header-navigation
+  = link_to root_path, class: "main-logo-container" do
+    = image_tag("logo.svg", class: "main-logo")
 
--# = link_to notifications_path, class: "header-mobile-link" do
--#   = icon "search"
+  = link_to "#", class: "header-mobile-link", data: { behavior: "toggle-search" } do
+    = icon "search"
 
-- if signed_in?
-  = link_to notifications_path, class: "header-mobile-link" do
-    - if current_user.new_notifications.present?
-      = icon "android-notifications", class: "new-notifications"
-    - else
-      = icon "android-notifications"
+  - if signed_in?
+    = link_to notifications_path, class: "header-mobile-link" do
+      - if current_user.new_notifications.present?
+        = icon "android-notifications", class: "new-notifications"
+      - else
+        = icon "android-notifications"
+
+.header-search
+  = render "search_field"
