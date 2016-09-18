@@ -10,8 +10,19 @@
   text-align: right;
   width: 100%;
 
+  @include media($mobile-large) {
+    text-align: start;
+    padding: 0;
+  }
+
   ul {
     padding: 0;
+
+    @include media($mobile-large) {
+      text-align: left !important;
+      display: flex;
+      justify-content: space-around;
+    }
   }
 
   li {
@@ -20,6 +31,12 @@
     display: inline;
     font-size: 1.2em;
     line-height: 2.5em;
+
+    @include media($mobile-large) {
+      display: block;
+      font-size: 1rem;
+      line-height: normal;
+    }
 
     &:first-child {
       padding-left: 0;
@@ -33,6 +50,10 @@
   .number {
     font-size: 3.7em;
     color: $main-red;
+
+    @include media($mobile-large) {
+      font-size: 1em;
+    }
   }
 
   .word {
@@ -45,5 +66,9 @@
     display: block;
     font-size: 0.7em;
     font-weight: normal;
+
+    @include media($mobile-large) {
+      display: inline-block;
+    }
   }
 }

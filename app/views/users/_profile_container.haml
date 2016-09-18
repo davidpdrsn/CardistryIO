@@ -35,9 +35,9 @@
       %p.biography
         #{user.biography}
 
-    %div.grid-item{:style => "display: table;"}
-      %div.stats{:style => "display: table-cell; vertical-align: middle;"}
-        %ul{:style => "text-align: right;"}
+    %div.grid-item
+      %div.stats
+        %ul
           = link_to followers_user_path(user) do
             %li
               %span.number
