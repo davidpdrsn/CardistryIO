@@ -8,7 +8,7 @@
   %div.card-header
     = video.name
 
-  - if include_copy
+  - if include_copy && video.description.present?
     %div.card-copy
       = simple_format link_mentions(video.description)
 

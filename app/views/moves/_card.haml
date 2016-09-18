@@ -4,10 +4,14 @@
       = image_tag move.thumbnail_url
     - else
       = image_tag "thumbnail-placeholder.png"
+
   %div.card-header
     = "#{move.name}"
-  %div.card-copy
-    = simple_format link_mentions(move.description)
+
+  - if move.description.present?
+    %div.card-copy
+      = simple_format link_mentions(move.description)
+
   %div.card-meta
     posted #{dynamic_time_tag(move.created_at)}
     %div.rating

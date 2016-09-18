@@ -298,6 +298,11 @@
   .content-element {
     display: none;
     padding: 50px 0 300px 0;
+
+    @include media($mobile-large) {
+      padding-top: $base-spacing*2;
+      padding-bottom: 0;
+    }
   }
 }
 
