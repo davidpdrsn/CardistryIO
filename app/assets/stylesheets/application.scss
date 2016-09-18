@@ -94,3 +94,20 @@ body {
   transition: none !important;
   display: inline-block !important;
 }
+
+.add-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  position: absolute;
+  top: 20%;
+  right: 0;
+  left: 0;
+  bottom: 20%;
+
+  a {
+    font-size: 1.8em;
+    padding: 2em;
+  }
+}

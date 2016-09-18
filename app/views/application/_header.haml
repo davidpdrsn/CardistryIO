@@ -12,5 +12,9 @@
       - else
         = icon "android-notifications"
 
+    - if current_user.admin?
+      = link_to approve_videos_path, class: "header-mobile-link" do
+        = icon "thumbsup"
+
 .header-search
   = render "search_field"

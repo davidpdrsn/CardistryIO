@@ -6,10 +6,9 @@
     = nav_link "Log in", sign_in_path, icon: "log-in"
 
   = nav_link "Videos", videos_path, icon: "ios-film"
+  - if signed_in?
+    = nav_link nil, page_path("add"), icon: "plus-round"
   = nav_link "Moves", moves_path, icon: "android-hand"
 
   - if signed_in?
     = nav_link "Me", user_path(current_user), icon: "person"
-
-    - if current_user.admin?
-      = nav_link "Approve (#{Video.unapproved.count})", approve_videos_path, icon: "thumbsup"

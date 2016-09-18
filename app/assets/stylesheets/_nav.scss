@@ -102,14 +102,21 @@ nav.desktop {
         font-size: .8em;
       }
     }
+
     .active-nav-item {
       a, .icon {
         color: $main-red;
       }
     }
+
     i.icon {
       font-size: 2em;
     }
+
+    .nav-link-just-icon i.icon {
+      font-size: 2.6em;
+    }
+
     span.icon-text {
       font-size: 0.8em;
       font-weight: 400;
