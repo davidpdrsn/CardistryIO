@@ -31,7 +31,10 @@
     color: #fff;
     display: inline-block;
     position: relative;
-    margin: 0 0 0 60px;
+
+    .feed & {
+      margin: 0 0 0 60px;
+    }
 
     @include shadow-level(1);
 
@@ -47,9 +50,16 @@
       width: 38px;
       height: 1px;
       background: $main-blue;
+      display: none;
+
+      .feed & {
+        display: block;
+      }
 
       @include media($mobile-large) {
-        display: none;
+        .feed &, & {
+          display: none;
+        }
       }
     }
   }
@@ -125,7 +135,9 @@
         }
 
         @include media($mobile-large) {
-          display: none;
+          .feed &, & {
+            display: none;
+          }
         }
       }
 
@@ -272,9 +284,16 @@
       top: calc(50% - 10px);
       left: 8px;
       border-radius: 50%;
+      display: none;
+
+      .feed & {
+        display: block;
+      }
 
       @include media($mobile-large) {
-        display: none;
+        .feed &, & {
+          display: none;
+        }
       }
     }
   }

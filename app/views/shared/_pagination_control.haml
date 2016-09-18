@@ -1,0 +1,22 @@
+.timeline-pagination
+  .timeline-pagination-circle
+  %span.timeline-separator
+    %ul.pagination
+      - if page.more_previous_pages?
+        %li.pagination-nav-button.back
+          = link_to root_path(page: page.previous_page) do
+            = icon "ios-arrow-back"
+      - else
+        %li.pagination-nav-button.back.disabled
+          %i.icon.ion-ios-arrow-back
+
+      %li.pagination-text
+        Page #{page.current_page} of #{page.number_of_pages}
+
+      - if page.more_pages?
+        %li.pagination-nav-button.forward
+          = link_to root_path(page: page.next_page) do
+            = icon "ios-arrow-forward"
+      - else
+        %li.pagination-nav-button.forward.disabled
+          %i.icon.ion-ios-arrow-forward

@@ -4,26 +4,4 @@
       = render partial: "feeds/fallback"
     - else
       = render partial: "feeds/list", collection: @feed, as: :activity, cached: true
-
-      %div.timeline-pagination
-        %div.timeline-pagination-circle
-        %span.timeline-separator
-          %ul.pagination
-            - if @feed.more_previous_pages?
-              %li.pagination-nav-button.back
-                = link_to root_path(page: @feed.previous_page) do
-                  = icon "ios-arrow-back"
-            - else
-              %li.pagination-nav-button.back.disabled
-                %i.icon.ion-ios-arrow-back
-
-            %li.pagination-text
-              Page #{@feed.current_page} of #{@feed.number_of_pages}
-
-            - if @feed.more_pages?
-              %li.pagination-nav-button.forward
-                = link_to root_path(page: @feed.next_page) do
-                  = icon "ios-arrow-forward"
-            - else
-              %li.pagination-nav-button.forward.disabled
-                %i.icon.ion-ios-arrow-forward
+      = render partial: "shared/pagination_control", locals: { page: @feed }

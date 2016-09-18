@@ -104,7 +104,7 @@
 
           @include media($mobile-large) {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
 
             li {
               padding: 0;
