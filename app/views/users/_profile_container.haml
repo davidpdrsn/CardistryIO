@@ -31,9 +31,10 @@
               %i.icon.ion-email
               Email
 
-    %div.grid-item{:style => "display: table;"}
-      %p.biography
-        #{user.biography}
+    - if user.biography.present?
+      %div.grid-item{:style => "display: table;"}
+        %p.biography
+          #{user.biography}
 
     %div.grid-item
       %div.stats
