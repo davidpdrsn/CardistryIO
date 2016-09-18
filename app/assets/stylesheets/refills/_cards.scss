@@ -32,6 +32,8 @@
 
   @include media($mobile-large) {
     margin-bottom: $base-spacing * 2;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .card-image {
@@ -63,6 +65,7 @@
     @include media($mobile-large) {
       padding-top: .5em;
       padding-bottom: .5em;
+      margin: 0 .8rem;
     }
   }
 
@@ -77,7 +80,7 @@
     @include media($mobile-large) {
       font-size: 1em;
       line-height: normal;
-      padding: 0 1em;
+      padding: 0 1rem;
       margin-bottom: 1em;
     }
 

@@ -2,6 +2,11 @@
   margin-left: -16px;
   margin-right: -16px;
 
+  @include media($mobile-large) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   a {
     color: inherit;
   }
@@ -41,6 +46,10 @@
     @include media($mobile-large) {
       height: auto;
       padding: 0;
+    }
+
+    p.biography {
+      padding: 1em 0;
     }
 
     .grid-items-lines {
