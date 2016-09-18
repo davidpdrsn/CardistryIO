@@ -1,14 +1,14 @@
 .search-filters
   = form_tag filter_submit_path, method: :get, class: "filter-form" do
     = fields_for :filter do |form|
-      .filter-element
+      .filter-element.filter-select
         = videos_filter_select(form)
 
     = fields_for :sort do |f|
-      .filter-element
+      .filter-element.filter-select
         = videos_sort_by_select(f)
 
-      .filter-element
+      .filter-element.filter-select
         = videos_sort_direction_select(f)
 
     - if signed_in? && request.path == videos_path

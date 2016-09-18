@@ -1,14 +1,14 @@
 .search-filters
   = form_tag filter_submit_path, method: :get, class: "filter-form" do
     = fields_for :filter do |form|
-      .filter-element
+      .filter-element.filter-select
         = moves_filter_select(form)
 
     = fields_for :sort do |form|
-      .filter-element
+      .filter-element.filter-select
         = moves_sort_by_select(form)
 
-      .filter-element
+      .filter-element.filter-select
         = moves_sort_direction_select(form)
 
 - if page.present?

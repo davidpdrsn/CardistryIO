@@ -68,48 +68,22 @@ loadExistingCredits = (f) ->
   request = new AjaxRequest(url)
   request.run (json) -> f(json.credits)
 
-list = -> new DomList($(".credit-list"))
-
-addBehavior "add-credit", (event) ->
-  event.preventDefault()
-  username = $(@).attr("data-username")
-  $(@).remove()
-  $("[data-behavior~=credit-user-search]").val("").focus()
-  credit = new Credit(username)
-  list().add(credit)
-
-addBehavior "remove-credit", () ->
-  username = $(@).parents("[data-username]").attr("data-username")
-  $list = list()
-  id = $list.findIdWhere (credit) -> credit.username == username
-  $list.remove(id)
+list = undefined
 
 document.addEventListener "turbolinks:load", ->
+  list = new DomList($(".credit-list"))
+
   loadExistingCredits (users) ->
     for user in users
       credit = new Credit(user.username)
-
       list.add(credit)
-
-  addBehavior "add-credit", (event) ->
-    event.preventDefault()
-    username = $(@).attr("data-username")
-    $(@).parent().remove()
-    if $('.item-list > li').length == 0
-      $('.item-list').remove()
-    $("[data-behavior~=credit-user-search]").focus()
-    credit = new Credit(username)
-    list.add(credit)
-
-  addBehavior "remove-credit", () ->
-    username = $(@).parents("[data-username]").attr("data-username")
-    id = list.findIdWhere (credit) -> credit.username == username
-    list.remove(id)
 
   searchUrl = $("[data-behavior~=credit-user-search]").data("creditable-users-url")
   $("[data-behavior~=credit-user-search]").sayt
     url: searchUrl
     markup: (users) ->
+      if users.length == 0
+        return "<ul class='item-list'><li>No matching users</li></ul>"
       transform = (acc, user) ->
         acc + """
           <li>
@@ -122,3 +96,19 @@ document.addEventListener "turbolinks:load", ->
         """
       items = users.reduce(transform, "")
       "<ul class='item-list'>#{items}</ul>"
+
+addBehavior "add-credit", (event) ->
+  event.preventDefault()
+  username = $(@).attr("data-username")
+  $(@).parent().remove()
+  if $(".item-list > li").length == 0
+    $(".item-list").remove()
+  $("[data-behavior~=credit-user-search]").focus()
+  credit = new Credit(username)
+  list.add(credit)
+
+addBehavior "remove-credit", () ->
+  username = $(@).parents("[data-username]").attr("data-username")
+  id = list.findIdWhere (credit) -> credit.username == username
+  list.remove(id)
+

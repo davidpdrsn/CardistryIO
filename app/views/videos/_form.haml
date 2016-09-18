@@ -1,6 +1,7 @@
 = simple_form_for video, wrapper: :cio_form do |f|
   - if params[:thumbnail_url]
     = f.input :thumbnail_url, value: params[:thumbnail_url], as: :hidden
+
   %div.add-credits-container
     %div.section-headline
       Details
@@ -10,8 +11,8 @@
       - if video.new_record?
         = f.input :url, hint: video.url_hint, label: "URL"
       = f.input :instagram_id, as: :hidden
-      = f.input :video_type, prompt: "Pick a type *", label_method: ->(video_types) { video_types.first.humanize }, label: false
-      = f.input :private, hint: "A private video can only be accessed by you and those you share it with", inline_label: "Make video private", label: false
+      = f.input :video_type, prompt: "Pick a type *", label_method: ->(video_types) { video_types.first.humanize }
+      = f.input :private, hint: "A private video can only be accessed by you and those you share it with", inline_label: "Private", label: false
 
   = render partial: "shared/add_credits_fields", locals: { object: video }
 

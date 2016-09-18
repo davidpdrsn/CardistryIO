@@ -1,4 +1,4 @@
-- if Rails.env.production?
+- if Rails.env.production? || Rails.env.development?
   %h1= t("beta.landing_page.welcome_heading")
 
   %p= t "beta.landing_page.welcome_text"

@@ -42,7 +42,7 @@ en:
 
   general:
     authentication:
-      sign_in: Sign in
+      sign_in: Log in
       sign_up: Sign up
     single_words:
       or: or

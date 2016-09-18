@@ -16,5 +16,8 @@
       = link_to approve_videos_path, class: "header-mobile-link" do
         = icon "thumbsup"
 
+    = link_to sign_out_path, method: :delete, class: "header-mobile-link" do
+      = icon "log-out"
+
 .header-search
   = render "search_field"

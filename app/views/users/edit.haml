@@ -1,26 +1,14 @@
-%h1 Update profile
+%div.add-activity-content
+  %h1 Update profile
 
-= simple_form_for @user, wrapper: :cio_form do |f|
-  %div.field
-    = f.input :biography
-
-  %div.field
-    = f.input :email
-
-  %div.field
-    = f.input :email_frequency, label: "Receive email notifications", include_blank: false
-
-  %div.field
-    = f.input :time_zone
-
-  %div.field
-    = f.input :country_code, label: "Country"
-
-  %div.field
-    = f.button :submit
-
-%p
-  You can change your password #{link_to "here", edit_user_password_path(current_user) }
-
-%p
-  Change your profile picture with <a href="https://gravatar.com">Gravatar</a>
+  %div.add-credits-container
+    = simple_form_for @user, wrapper: :cio_form do |f|
+      %div.grid-items-lines
+        = f.input :biography
+        = f.input :email
+        = f.input :email_frequency, label: "Receive email notifications", include_blank: false
+        = f.input :time_zone
+        = f.input :country_code, label: "Country"
+        = f.button :submit
+        %p You can change your password #{link_to "here", edit_user_password_path(current_user) }
+        %p Change your profile picture with <a href="https://gravatar.com">Gravatar</a>
